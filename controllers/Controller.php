@@ -22,7 +22,6 @@
          }
        }
 
-
                    public function showView() {
                      if ($this->view) {
                        extract($this->sanitize($this->data));
@@ -62,6 +61,12 @@
                        $this->addMessage("Nedostatečná oprávnění.");
                        $this->redir('login');
                      }
+                   }
+
+                   public function log() {
+                     $logMan = new LogManager();
+                     $logMan->log();
+
                    }
 
 

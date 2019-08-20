@@ -22,6 +22,7 @@
           $this->data['title'] = $this->controller->header['page_title'];
           $this->data['desc'] = $this->controller->header['page_desc'];
           $this->data['keywords'] = $this->controller->header['page_keywords'];
+          $this->data['messages'] = $this->returnMessages();
           $this->view = "layout";
         }
 
