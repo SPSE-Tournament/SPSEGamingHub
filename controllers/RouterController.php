@@ -19,10 +19,16 @@
 
 
           $this->controller->parse($parsedU);
+          if ($this->checkLogged()) {
+            $this->data['usrname'] = $_SESSION['user']['name'];
+          }
+          $this->checkAdmin();
           $this->data['title'] = $this->controller->header['page_title'];
           $this->data['desc'] = $this->controller->header['page_desc'];
           $this->data['keywords'] = $this->controller->header['page_keywords'];
           $this->data['messages'] = $this->returnMessages();
+          $this->data['logged'] = $_SESSION['logged'];
+          $this->data['admin'] = $_SESSION['admin'];
           $this->view = "layout";
         }
 

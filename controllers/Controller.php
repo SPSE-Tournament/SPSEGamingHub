@@ -36,19 +36,19 @@
                      exit;
                    }
 
-                   public function addMessage($zprava) {
-                       if (isset($_SESSION['zpravy'])) {
-                         $_SESSION['zpravy'][] = $zprava;
+                   public function addMessage($message) {
+                       if (isset($_SESSION['messages'])) {
+                         $_SESSION['messages'][] = $message;
                        } else {
-                         $_SESSION['zpravy'] = array($zprava);
+                         $_SESSION['messages'] = array($message);
                        }
                      }
 
                    public static function returnMessages() {
-                     if (isset($_SESSION['zpravy'])) {
-                       $zpravy = $_SESSION['zpravy'];
-                       unset($_SESSION['zpravy']);
-                       return $zpravy;
+                     if (isset($_SESSION['messages'])) {
+                       $messages = $_SESSION['messages'];
+                       unset($_SESSION['messages']);
+                       return $messages;
                      } else {
                        return array();
                      }
@@ -63,10 +63,28 @@
                      }
                    }
 
-                   public function log() {
+                   public function log($msg, $type) {
                      $logMan = new LogManager();
-                     $logMan->log();
+                     $date = new DateTime();
+                     $logMan->log($_SESSION['user']['user_id'], $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
+                   }
 
+                   public function checkLogged() {
+                     if (isset($_SESSION['user'])) {
+                       $_SESSION['logged'] = true;
+                       return true;
+                     } else {
+                       $_SESSION['logged'] = false;
+                       return false;
+                     }
+                   }
+
+                   public function checkAdmin() {
+                     if (isset($_SESSION['user']) && $_SESSION['user']['admin'] == 1) {
+                       $_SESSION['admin'] = true;
+                     } else {
+                       $_SESSION['admin'] = false;
+                     }
                    }
 
 

@@ -21,3 +21,16 @@ color: #fff;
     background-color: rgba(255,255,255,.7) !important;
     transition: all .2s ease-out;
 }
+.nav-link-alone {
+  color: #fff;
+  text-decoration: none;
+}
+.nav-item-alone {
+  list-style-type: none;
+}
+.toast {
+  position: absolute; top: 8vh; right: 10px; z-index:6;
+}
+.toast-wrapper {
+  position:absolute;top:0;right:0; z-index:5;
+}

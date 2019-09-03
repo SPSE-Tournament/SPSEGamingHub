@@ -14,13 +14,12 @@
          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
          <script src="public/js/main.js"></script>
-         <script src="public/js/live.js"></script>
   </head>
   <body>
 
-    <div style="position:absolute;top:0;right:0; z-index:5;">
+    <div class="toast-wrapper">
   <?php foreach($messages as $msg) : ?>
-  <div class="toast bg-dark" style="position: absolute; top: 8vh; right: 10px; z-index:6;" data-autohide='false'>
+  <div class="toast bg-dark" data-autohide='false'>
     <div class="toast-header">
       <strong class="mr-auto">Upozornění</strong>
       <small class="mx-2"><?= date('G:i') ?></small>
@@ -40,7 +39,7 @@
       <?php $this->controller->showView(); ?>
     </article>
     <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Logo</a>
+  <a class="navbar-brand" href="home">Logo</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -50,16 +49,29 @@
         <a class="nav-link ml-5" href="home">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link ml-5" href="#">Events</a>
+        <a class="nav-link ml-5" href="events">Events</a>
       </li>
+      <?php if($admin) : ?>
       <li class="nav-item">
-        <a class="nav-link ml-5" href="#">Admin</a>
+        <a class="nav-link ml-5" href="administration">Admin</a>
       </li>
+    <?php endif ?>
+      <?php if (!$logged): ?>
       <li class="nav-item">
         <a class="nav-link ml-5" href="login">Login</a>
       </li>
+    <?php endif ?>
     </ul>
+    <?php if ($logged): ?>
+    <li class="nav-item-alone ml-auto">
+      <a class="nav-link-alone" href="profile"> <img class="mr-2" src="public/images/user.png" alt="" width="32" height="32"> <?= $usrname ?> &#9650;</a>
+    </li>
+  <?php endif ?>
   </div>
 </nav>
+
+  <script>
+      $('.toast').toast('show');
+  </script>
   </body>
 </html>
