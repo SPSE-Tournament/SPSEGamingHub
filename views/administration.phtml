@@ -1,1 +1,128 @@
-<h1>administration</h1>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-events">Add event</button>
+<button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-games">Add games</button>
+<button type="button" class="btn btn-danger">Remove</button>
+
+<div class="modal fade modal-events" tabindex="-1" role="dialog" aria-labelledby="..." aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title" style="color:#000;" id="exampleModalCenterTitle">Add an Esport event</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form method="post">
+    <input type="hidden" name="event-add">
+<div class="form-group">
+<label for="exampleInputEmail1">Event name</label>
+<input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
+    </div>
+    <select class="custom-select" id="inputGroupSelect01">
+      <?php foreach($games as $game) ?>
+      <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
+    </select>
+  </div>
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
+      <input class="form-control date-picker mx-1" type="datetime-local" name="" placeholder="Enter date...">
+      <input class="form-control" type="time" name="" value="">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
+        <input class="form-control" type="text" name="" value="">
+      </div>
+    </div>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary">Add event</button>
+  </form>
+</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="modal fade modal-games" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title" style="color:#000;" id="exampleModalCenterTitle">Add an official event game</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form method="post">
+    <input type="hidden" name="game-add">
+<div class="form-group">
+<label for="exampleInputEmail1">Game name</label>
+<input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" name="mod-gameadd-name">
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text bg-success" style="color:#Fff;" id="inputGroupFileAddon01">Ruleset</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text bg-success" style="color:#Fff;" id="inputGroupFileAddon01">Game background</span>
+  </div>
+  <div class="custom-file">
+    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+  </div>
+</div>
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
+    </div>
+    <select class="custom-select" name="mod-gameadd-playerlimit">
+      <option selected value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+</div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary">Add event</button>
+  </form>
+</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.date-picker').flatpickr();
+</script>
