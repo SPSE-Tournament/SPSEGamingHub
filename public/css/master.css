@@ -51,3 +51,11 @@ color: #fff;
 .event-wrapper {
   height: 100vh;
 }
+.log-wrapper {
+  height: 70vh;
+  overflow-y: auto;
+  border: 1px solid gray;
+}
+.table {
+  height: 70vh;
+}

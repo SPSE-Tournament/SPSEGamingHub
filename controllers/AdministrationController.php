@@ -3,6 +3,7 @@
     public function parse($params) {
       $gameManager = new GameManager();
       $eventManager = new EventManager();
+      $logManager = new LogManager();
       if ($_POST) {
         if (isset($_POST['event-add'])) {
           try {
@@ -24,6 +25,7 @@
             }
         }
       }
+      $this->data['logs'] = $logManager->returnLogs();
       $this->data['games'] = $gameManager->returnGames();
       $this->view = "administration";
     }
