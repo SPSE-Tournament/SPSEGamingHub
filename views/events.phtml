@@ -1,1 +1,17 @@
-<h1>events</h1>
+<?php foreach($events as $event): ?>
+  <article class="event-wrapper pb-5 d-flex justify-content-center align-items-center">
+
+    <section class="eventcard p-5 mx-auto w-75 text-center">
+      <h1><?= $event['event_name'] ?></h1>
+      <h2>Game id: <?= $event['game_id'] ?></h2>
+      <h3>Timestamp: <?= $event['event_timestamp'] ?></h3>
+      <h4>Playerlimit: <?= $event['event_playerlimit'] ?></h4>
+      <h5>Playerlimit per team: <?= $event['game_playerlimitperteam'] ?></h5>
+      <button class="btn btn-success" type="button" name="button">Zaregistrovat tým</button>
+      <button class="btn btn-success" type="button" name="button">Připojit se k týmu</button>
+    </section>
+
+  </article>
+
+
+<?php endforeach; ?>

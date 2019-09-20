@@ -9,7 +9,7 @@
       $game = array(
         'game_name' => $gameName,
         'game_rules' => $gameRules,
-        'game_teamlimit' => $gameTL,
+        'game_playerlimitperteam' => $gameTL,
         'game_background' => $gameBck,
       );
       try {

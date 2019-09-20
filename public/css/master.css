@@ -1,5 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 
+
+::-webkit-scrollbar {
+  height: 90vh;
+  display: none;
+}
 .content {
   min-height: 90vh;
   background: #FDC830;  /* fallback for old browsers */
@@ -11,6 +16,9 @@ color: #fff;
 }
 .mainnav {
   height: 10vh;
+  position: fixed !important;
+  bottom: 0;
+  width: 100vw;
 }
 .login-input{
 
@@ -33,4 +41,13 @@ color: #fff;
 }
 .toast-wrapper {
   position:absolute;top:0;right:0; z-index:5;
+}
+.eventcard {
+  border: 1px solid black;
+  background-color: rgba(255,255,255,.5);
+  border-radius: 15px;
+  color: #000;
+}
+.event-wrapper {
+  height: 100vh;
 }
