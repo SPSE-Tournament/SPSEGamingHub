@@ -19,13 +19,14 @@
                                 order by event_timestamp", array($url));
       }
 
-      public function createEvent($name, $game, $timestamp, $eventPL, $gamePL) {
+      public function createEvent($name, $game, $timestamp, $eventPL, $gamePL, $eventUrl) {
         $event = array(
           'event_name' => $name,
           'game_id' => $game,
           'event_timestamp' => $timestamp,
           'event_playerlimit' => $eventPL,
-          'game_playerlimitperteam' => $gamePL
+          'game_playerlimitperteam' => $gamePL,
+          'event_url' => $eventUrl
         );
         try {
           Db::insert('events', $event);

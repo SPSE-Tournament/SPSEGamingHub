@@ -12,7 +12,7 @@
         if (isset($_POST['event-add'])) {
           try {
           $gamePL = $eventManager->getGameLimit($_POST['eventGame']);
-          $eventManager->createEvent($_POST['eventName'], $_POST['eventGame'], $_POST['eventDate'] . " " .  $_POST['eventTime'], $_POST['eventPL'], $gamePL[0]);
+          $eventManager->createEvent($_POST['eventName'], $_POST['eventGame'], $_POST['eventDate'] . " " .  $_POST['eventTime'], $_POST['eventPL'], $gamePL[0], $_POST['$eventUrl']);
           $this->log("Global event has been created", "event_register");
           $this->addMessage("Global event has been created");
           $this->redir('events');
