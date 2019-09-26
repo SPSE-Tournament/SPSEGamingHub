@@ -56,6 +56,17 @@
             return null;
           }
 
+          public static function authAdmin() {
+            if (!isset($_SESSION['user'])) {
+              return false;
+            } else {
+              $admin = Db::singleQuery("Select admin from users where user_id = ?", array($_SESSION['user']['user_id']));
+              $auth = ($admin[0] == 1) ? true : false;
+              return $auth;
+            }
+
+          }
+
     }
 
 

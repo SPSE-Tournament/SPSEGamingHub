@@ -10,7 +10,7 @@
           $userMan->login($_POST['name'], $_POST['pw']);
           $this->addMessage("Byl jste úspěšně přihlášen.");
           $this->log("User log.", "login");
-          $this->redir('administration');
+          $this->redir('home');
         } catch (UserError $e) {
           $this->addMessage($e->getMessage());
         }

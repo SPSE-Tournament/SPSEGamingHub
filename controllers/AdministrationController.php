@@ -4,6 +4,10 @@
       $gameManager = new GameManager();
       $eventManager = new EventManager();
       $logManager = new LogManager();
+       if (!UserManager::authAdmin()) {
+         $this->addMessage("Admin rights needed.");
+         $this->redir("home");
+       }
       if ($_POST) {
         if (isset($_POST['event-add'])) {
           try {

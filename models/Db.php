@@ -52,7 +52,7 @@
     }
 
     public static function getLastId() {
-        return self::$connection->lsatInsertId();
+        return self::$connection->lastInsertId();
     }
 
 
