@@ -13,7 +13,4 @@ Db::connect("127.0.0.1", "root", "", "spsegaminghub");
 $router = new RouterController();
 $router->parse(array($_SERVER['REQUEST_URI']));
 $router->showView();
-
-
-
 ?>

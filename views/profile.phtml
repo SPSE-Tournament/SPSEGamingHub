@@ -1,5 +1,41 @@
-<h1>profile</h1>
-<h2>username: <?= $usrname ?></h2>
-<h2>email: <?= $email ?></h2>
-<h3><?= $admin ?></h3>
-<a class="btn btn-primary" href="profile/logout" role="button">Logout</a>
+<section class="profile-wrapper p-5 text-center justify-content-center align-items-center">
+  <div class="">
+
+    <h2>username: <?= $usrname ?></h2>
+    <h2>email: <?= $email ?></h2>
+    <?php if ($admin): ?>
+      <div class="my-3">
+        <span class="admin-tag p-2 ">Admin</span>
+      </div>
+    <?php endif; ?>
+  </div>
+
+  <section class="navevent-wrapper py-2 w-75 mx-auto">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Awards</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-contact" aria-selected="false">Messages</a>
+      </div>
+    </nav>
+    <div class="tab-content p-3" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab"> Jednicka </div>
+      <div class="tab-pane fade" id="nav-friends" role="tabpanel" aria-labelledby="nav-profile-tab">Dvojecka</div>
+      <div class="tab-pane fade" id="nav-messages" role="tabpanel" aria-labelledby="nav-contact-tab"><img src="public/images/loading.gif" alt=""></div>
+    </div>
+  </section>
+</section>
+
+<script>
+function loadDoc() {
+var xhttp = new XMLHttpRequest();
+xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+   document.getElementById("nav-messages").innerHTML = this.responseText;
+  }
+};
+xhttp.open("GET", "profile/messages", true);
+xhttp.send();
+}
+loadDoc();
+</script>

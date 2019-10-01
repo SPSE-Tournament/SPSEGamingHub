@@ -8,12 +8,15 @@
             $this->addMessage("Byl jste úspěšně odhlášen.");
             $this->redir("login");
 
+        } if (!empty($params[0]) && $params[0] == 'messages') {
+            $this->data['ahoj'] = "ahoj";
+            $this->view = 'messages';
+        } else {
+          $this->data['usrname'] = $_SESSION['user']['name'];
+          $this->data['email'] = $_SESSION['user']['email'];
+          $this->data['admin'] = $_SESSION['user']['admin'];
+          $this->view = 'profile';
         }
-
-        $this->data['usrname'] = $_SESSION['user']['name'];
-        $this->data['email'] = $_SESSION['user']['email'];
-        $this->data['admin'] = $_SESSION['user']['admin'];
-        $this->view = 'profile';
       }
 
 

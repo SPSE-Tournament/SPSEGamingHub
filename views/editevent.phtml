@@ -3,15 +3,15 @@
     <input type="hidden" name="event-edit">
   <div class="form-group">
   <label for="exampleInputEmail1">Event name</label>
-  <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name" value="<?= $event['event_name'] ?>">
+  <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name" value="<?= $event['event_name'] ?>" required>
   </div>
   <div class="form-group">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
     </div>
-    <select class="custom-select" name="eventGame">
-      <option value="<?=$event['game_id']?>" selected ><?= $event['game_name'] ?></option>
+    <select class="custom-select" name="eventGame" required>
+      <option value="<?=$event['game_id']?>" selected><?= $event['game_name'] ?></option>
       <?php foreach($games as $game) : ?>
           <option value="<?= $game['game_id']?>"><?= $game['game_name']; ?></option>
         <?php endforeach; ?>
@@ -22,15 +22,15 @@
   <div class="input-group mb-3">
     <div class="input-group-prepend">
       <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
-      <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date..." value="<?= $event['event_timestamp'] ?>">
-      <input class="form-control" type="time" name="eventTime" value="">
+      <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date..." value="<?= $event['event_timestamp'] ?>" required>
+      <input class="form-control" type="time" name="eventTime" value="" required>
     </div>
   </div>
   <div class="form-group">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
-        <input class="form-control" type="text" name="eventPL" value="<?= $event['event_playerlimit'] ?>">
+        <input class="form-control" type="text" name="eventPL" value="<?= $event['event_playerlimit'] ?>" required>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
     <div class="input-group mb-3">
       <div class="input-group-prepend">
         <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Url</label>
-        <input class="form-control" type="text" name="eventUrl" value="<?= $event['event_url'] ?>">
+        <input class="form-control" type="text" name="eventUrl" value="<?= $event['event_url'] ?>" required>
       </div>
     </div>
   </div>

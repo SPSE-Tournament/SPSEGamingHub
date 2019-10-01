@@ -5,6 +5,12 @@
   height: 90vh;
   display: none;
 }
+.nav-link {
+  text-decoration: none;
+  color: #000;
+}
+.nav-link:hover {
+  color: rgba(255,255,255,.6);}
 .content {
   min-height: 90vh;
   background: #FDC830;  /* fallback for old browsers */
@@ -58,4 +64,8 @@ color: #fff;
 }
 .table {
   height: 70vh;
+}
+.admin-tag {
+  border-radius: 5px;
+  background-color: red;
 }

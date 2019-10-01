@@ -43,7 +43,7 @@
     </article>
 
 
-    <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark pr-5">
   <a class="navbar-brand" href="home">Logo</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -68,9 +68,17 @@
     <?php endif ?>
     </ul>
     <?php if ($logged): ?>
-    <li class="nav-item-alone ml-auto">
-      <a class="nav-link-alone" href="profile"> <img class="mr-2" src="public/images/user.png" alt="" width="32" height="32"> <?= $usrname ?> &#9650;</a>
-    </li>
+    <div class="btn-group dropup ml-auto">
+  <a class="btn btn-secondary" href="profile">
+      <?= $usrname ?>
+  </a>
+  <button type="button" class="btn btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+  <div class="dropdown-menu bg-dark p-2">
+    <a class="btn btn-primary btn-sm" href="profile/logout" role="button">Logout</a>
+  </div>
+</div>
   <?php endif ?>
   </div>
 </nav>
