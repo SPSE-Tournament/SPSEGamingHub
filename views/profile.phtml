@@ -10,7 +10,7 @@
     <?php endif; ?>
   </div>
 
-  <section class="navevent-wrapper py-2 w-75 mx-auto">
+  <section class="navevent-wrapper py-2 w-90 mx-auto">
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Awards</a>
@@ -31,11 +31,25 @@ function loadDoc() {
 var xhttp = new XMLHttpRequest();
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-   document.getElementById("nav-messages").innerHTML = this.responseText;
+    let start = this.responseText.indexOf('<header');
+    let end = this.responseText.indexOf("</header>") + "</header>".length;
+   document.getElementById("nav-messages").innerHTML = this.responseText.slice(start,end);
   }
 };
 xhttp.open("GET", "profile/messages", true);
 xhttp.send();
+}
+
+function showNewMessage(id) {
+  if (document.querySelector(id).style.display == "none") {
+    document.querySelector(id).style.display = "block";
+  } else {
+    document.querySelector(id).style.display = "none";
+  }
+}
+
+function close(id) {
+  document.querySelector(id).style.display = "none";
 }
 loadDoc();
 </script>

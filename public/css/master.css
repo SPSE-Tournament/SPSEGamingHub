@@ -69,3 +69,10 @@ color: #fff;
   border-radius: 5px;
   background-color: red;
 }
+.new-message {
+  background-color: rgba(255,255,255,.75);
+  display: none;
+  position: absolute;
+  bottom: -25%;
+  right: 0;
+}
