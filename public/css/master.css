@@ -12,7 +12,7 @@
 .nav-link:hover {
   color: rgba(255,255,255,.6);}
 .content {
-  min-height: 90vh;
+  min-height: 100vh;
   background: #FDC830;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #F37335, #FDC830);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #F37335, #FDC830); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -21,13 +21,12 @@ color: #fff;
   font-weight: 600;
 }
 .mainnav {
-  height: 10vh;
+  height: 8vh;
   position: fixed !important;
   bottom: 0;
   width: 100vw;
 }
 .login-input{
-
   height: 6vh !important;
 }
 .login-input:focus {
@@ -71,8 +70,12 @@ color: #fff;
 }
 .new-message {
   background-color: rgba(255,255,255,.75);
-  display: none;
-  position: absolute;
-  bottom: -25%;
-  right: 0;
+  color: #000;
+  position: fixed;
+  bottom: 9vh;
+  right: 25%;
+  left: 25%;
+}
+.profile-img {
+  border-radius: 20px;
 }

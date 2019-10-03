@@ -6,7 +6,7 @@
 
         try {
             $userManager = new UserManager();
-            $userManager->register($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
+            $userManager->register($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam'], $userManager->generateHexId());
             $userManager->login($_POST['usrname'], $_POST['pw']);
             $this->addMessage("Byl jste úspěšně zaregistrován");
             $this->log("User registered.", "register");

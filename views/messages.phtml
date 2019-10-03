@@ -1,4 +1,4 @@
-<header class="content-messages">
+<header class="content-messages px-2 pb-5">
   <section class="messages-wrapper py-1">
       <div class="message">
         <table class="table table-messages table-striped">
@@ -27,28 +27,36 @@
   </section>
   <section class="messages-footer justify-content-center align-items-center py-1">
     <hr>
-      <button type="button" class="btn btn-danger" onclick="showNewMessage('#new_message')" id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/48/000000/new-message.png"></button>
+      <button type="button" class="btn btn-danger" onclick='showNewMessage("#new_message")' id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/48/000000/new-message.png"></button>
   </section>
 
-  <div class="new-message p-5 w-50" id="new_message">
-      <form method="post">
+  <div class="new-message p-5 w-50 mx-auto" id='new_message' style="display:none;">
+      <button class="close" type="button" name="button" onclick='closeNewMessage("#new_message")'>
+        <span>&times;</span>
+      </button>
+      <form method="post" name="send_message">
         <input type="hidden" name="event-add">
-        <button class="btn" type="button" name="button" onclick="close('#new-message')">&times;</button>
-    <div class="form-group">
-    <label for="exampleInputEmail1">Receiver</label>
-    <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name">
-    </div>
+        <div class="form-group w-50">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text bg-success" style="color:#FFF;">Receiver</label>
+            </div>
+            <input class="form-control" id="newMessage_username" onkeyup="showUsers(this.value)" type="text" name="" value="" placeholder="Username#HexId">
+            
+          </div>
+        </div>
     <div class="form-group">
       <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Message</label>
-        </div>
-        <textarea class="input-group" name="name" rows="8" cols="80"></textarea>
+        <textarea class="form-control" name="name" rows="8" cols="80"></textarea>
       </div>
     </div>
     <button type="submit" class="btn btn-secondary" name="button">Send</button>
   </form>
     </div>
 
-
+<script>
+  if (typeof profile == 'undefined') {
+    window.location.replace('profile');
+  }
+</script>
 </header>

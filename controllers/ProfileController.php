@@ -8,19 +8,23 @@
             $userMan->logout();
             $this->addMessage("Byl jste úspěšně odhlášen.");
             $this->redir("login");
-
         } if (!empty($params[0]) && $params[0] == 'messages') {
-          #  $this->data['messages'] = $mesMan->returnMessages($_SESSION['user_id']); 
+        //  if ($_POST['send_message']) {}
+           #$this->data['messages'] = $mesMan->returnMessages($_SESSION['user_id']);
             $this->view = 'messages';
+        } else if (!empty($params[0]) && $params[0] == 'getusers') {
+          if (!empty($params[1])) {
+            $str = $params[1];
+          } else {
+            $str = "";
+          }
+          $users = $userMan->liveSearchUsers($str);
+          $this->view = 'userlist';
         } else {
-          $this->data['usrname'] = $_SESSION['user']['name'];
-          $this->data['email'] = $_SESSION['user']['email'];
-          $this->data['admin'] = $_SESSION['user']['admin'];
+          $this->data['user'] = $_SESSION['user'];
+          $this->data['profile'] = "";
           $this->view = 'profile';
         }
       }
-
-
   }
-
 ?>
