@@ -79,3 +79,14 @@ color: #fff;
 .profile-img {
   border-radius: 20px;
 }
+.user-livetext {
+  cursor: pointer;
+}
+.livesearch {
+  position: absolute;
+  top: 5vh;
+  left: 30%;
+  z-index: 100;
+  background-color: #fff;
+  border-radius: 20px;
+}

@@ -2,7 +2,7 @@
     class UserManager {
 
           public function returnUsers() {
-            return Db::multiQuery("select user_id, name, email, name_r, surname, admin, user_hexid from users");
+            return Db::multiQuery("select user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid from users");
           }
 
           public function returnHash($pw) {
@@ -52,7 +52,7 @@
 
 
           public function selectUser($name) {
-            $user = Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, password, user_hexid FROM users where name = ?', array($name));
+            $user = Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid FROM users where name = ?', array($name));
             return $user;
           }
 
@@ -84,21 +84,40 @@
             if (!isset($_SESSION['user'])) {
               return false;
             } else {
-              $admin = Db::singleQuery("Select admin from users where user_id = ?", array($_SESSION['user']['user_id']));
-              $auth = ($admin[0] == 1) ? true : false;
+              $admin = Db::singleQuery("SELECT admin, watchman, rootmaster from users where user_id = ?", array($_SESSION['user']['user_id']));
+              $auth = ($admin['admin'] == 1 or $admin['rootmaster'] == 1) ? true : false;
               return $auth;
             }
 
           }
-          //to be done when I get some fucking sleep
-          /*
+
           public function liveSearchUsers($str) {
-
-              if (strlen($str) > 0) {
+              if (strlen($str) >= 3) {
                   $users = $this->returnUsers();
-
+                  $usersToReturn = array();
+                  foreach ($users as $user) {
+                    if (substr($user['name'], 0, strlen($str)) == $str)
+                        $usersToReturn[] = $user['name']."#".$user['user_hexid'];
+                  }
+                  if (count($usersToReturn) > 0)
+                    return $usersToReturn;
+                    else {
+                    $usersToReturn[] = "No hint suggested";
+                    return $usersToReturn;
+                }
+              } else {
+                $usersToReturn[] = " ";
+                return $usersToReturn;
               }
-          } */
+          }
+
+          public function parseHexname($hexName) {
+              $parsedName = explode("#", $hexName);
+              return array(
+                'name' => $parsedName[0],
+                'hexid' => $parsedName[1]
+              );
+          }
 
     }
 

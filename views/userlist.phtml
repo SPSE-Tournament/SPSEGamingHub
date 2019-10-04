@@ -1,0 +1,5 @@
+<footer>
+  <?php for ($i = 0; $i < count($response); $i++): ?>
+    <p class="user-livetext" onclick='selectUser("<?=$response[$i]?>")'><?= $response[$i]; ?></p>
+  <?php endfor; ?>
+</footer>

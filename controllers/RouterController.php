@@ -28,8 +28,11 @@
           $this->data['keywords'] = $this->controller->header['page_keywords'];
           $this->data['messages'] = $this->returnMessages();
           $this->data['logged'] = $_SESSION['logged'];
-          $this->data['admin'] = $_SESSION['admin'];
-          $this->view = "layout";
+          if (isset($_SESSION['user'])) {
+            $this->data['user'] = $_SESSION['user'];
+
+          }
+            $this->view = "layout";
         }
 
         private function parseURL($url) {
