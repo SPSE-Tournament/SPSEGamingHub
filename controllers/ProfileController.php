@@ -14,32 +14,53 @@
           $this->redir("profile");
       }
 
-        if (!empty($params[0]) && $params[0] == 'logout') {
+        if (!empty($params[0])) {
 
-            $this->log("User logout.", "login");
-            $userMan->logout();
-            $this->addMessage("Byl jste úspěšně odhlášen.");
-            $this->redir("login");
+          if ($params[0] == 'logout') {
 
-        } if (!empty($params[0]) && $params[0] == 'messages') {
+              $this->log("User logout.", "login");
+              $userMan->logout();
+              $this->addMessage("Byl jste úspěšně odhlášen.");
+              $this->redir("login");
 
-           $this->data['messages'] = $mesMan->returnMessages($_SESSION['user_id']);
+          } if ($params[0] == 'messages') {
+            $messages = $mesMan->returnMessages($_SESSION['user']['user_id']);
+            $messageIds = array();
+            for ($i=0; $i < count($messages); $i++) {
+                  $messageIds[] = $messages[$i]['message_id'];
+            }
+            $this->data['messages'] = $messages;
             $this->view = 'messages';
-        }
-        else if (!empty($params[0]) && $params[0] == 'getusers') {
-          if (!empty($params[1])) {
-            $str = $params[1];
-          } else {
-            $str = "";
           }
-          $response = $userMan->liveSearchUsers($str);
-          $this->data['response'] = $response;
-          $this->view = 'userlist';
+          else if($params[0] == 'getmessage') {
+            $messages = $mesMan->returnMessages($_SESSION['user']['user_id']);
+            $messageIds = array();
+            for ($i=0; $i < count($messages); $i++) {
+                  $messageIds[] = $messages[$i]['message_id'];
+            }
+            if (!empty($params[1]) && in_array($params[1], $messageIds)) {
+              $this->data['message'] = $mesMan->returnMessageById($params[1]);
+              $this->view = 'message';
+            }
+
+          }
+          else if ($params[0] == 'getusers') {
+            if (!empty($params[1])) {
+              $str = $params[1];
+            } else {
+              $str = "";
+            }
+            $response = $userMan->liveSearchUsers($str);
+            $this->data['response'] = $response;
+            $this->view = 'userlist';
+          }
         } else {
           $this->data['user'] = $_SESSION['user'];
           $this->data['profile'] = "";
           $this->view = 'profile';
         }
+
+
       }
   }
 ?>

@@ -1,22 +1,13 @@
-<header class="content-messages px-2 pb-5">
+<header class="content-messages px-2 pb-5" id="msgContent">
   <section class="messages-wrapper py-1">
-      <div class="message">
-        <table class="table table-messages table-striped">
-<tbody class="table-messages_body">
-  <?php foreach ($messages as $msg): ?>
-  <tr>
-    <th scope="row"><?= $msg['user_sendername'] ?></th>
-    <td><?= $msg['message'] ?></td>
-    <td><?= $msg['message_timestamp'] ?></td>
-    <td>@mdo</td>
-  </tr>
-  <?php endforeach; ?>
-</tbody>
-</table>
-      </div>
+        <?php foreach($messages as $msg): ?>
+          <a class="message-a">
+          <div class="message row p-5" onclick='loadMessage("<?=$msg['message_id']?>")'>
+            <div class="col-3"><?= $msg['user_sendername'] ?></div><div class="col-4"><?= $msg['message'] ?></div><div class="col-3"><?= $msg['message_timestamp'] ?></div><div class="col-2"><img src="https://img.icons8.com/windows/50/000000/reply-arrow.png"></div>
+        </div></a><hr>
+      <?php endforeach; ?>
   </section>
   <section class="messages-footer justify-content-center align-items-center py-1">
-    <hr>
       <button type="button" class="btn btn-danger" onclick='showNewMessage("#new_message")' id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/48/000000/new-message.png"></button>
   </section>
 
@@ -45,6 +36,7 @@
     <button type="submit" class="btn btn-secondary" name="button">Send</button>
   </form>
     </div>
+
 
 <script>
   if (typeof profile == 'undefined') {

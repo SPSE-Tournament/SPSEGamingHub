@@ -1,6 +1,6 @@
 <section class="profile-wrapper p-5 text-center justify-content-center align-items-center">
   <div class="profile-img">
-    <img src="public/images/bernie.jpg" alt="" style="border-radius: 10rem;">
+    <img src="public/images/bernie.jpg" alt="" style="border-radius: 10rem;" height="250">
   </div>
   <div class="py-3">
     <h2><?= $user['name'] ?><span style="color:rgba(255,255,255,.7);">#<?= $user['user_hexid']; ?></span></h2>
@@ -27,7 +27,7 @@
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Awards</a>
         <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a>
-        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-contact" aria-selected="false">Messages</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" onclick="loadMessages()" data-toggle="tab" href="#nav-messages" role="tab" aria-controls="nav-contact" aria-selected="false">Messages</a>
       </div>
     </nav>
     <div class="tab-content p-3" id="nav-tabContent">
