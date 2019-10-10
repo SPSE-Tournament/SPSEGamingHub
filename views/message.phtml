@@ -1,6 +1,15 @@
 <!-- MessageStart -->
-  <article class="message">
-    <?= $message['user_sendername'] ?>
-    <?= $message['message'] ?>
+  <article class="message-wrapper p-5 mx-auto w-75 text-center justify-content-center align-items-center">
+    <section class="row mx-auto text-center">
+      <button class="btn btn-primary mr-2" onclick="loadMessages()" type="btn" name="button"><</button>
+      <p class="mx-auto"><?= $message['user_sendername'] ?></p>
+    </section>
+    <hr style="background-color:#fff;">
+    <p><?= $message['message'] ?></p>
+    <section class="row justify-content-center align-items-center">
+      <button class="btn btn-primary mx-1" type="button" name="button">Reply</button>
+      <button class="btn btn-primary mx-1" type="button" name="button">Mark as read</button>
+      <button class="btn btn-danger mx-1" type="button" name="button">Remove</button>
+    </section>
   </article>
 <!-- MessageEnd -->

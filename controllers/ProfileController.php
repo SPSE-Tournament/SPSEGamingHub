@@ -30,6 +30,7 @@
                   $messageIds[] = $messages[$i]['message_id'];
             }
             $this->data['messages'] = $messages;
+            $this->data['date'] = new DateTime("now");
             $this->view = 'messages';
           }
           else if($params[0] == 'getmessage') {

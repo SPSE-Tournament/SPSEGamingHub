@@ -34,13 +34,22 @@
       <?= $msg ?>
     </div>
   </div>
-
   <?php endforeach ?>
     </div>
 
     <article class="content">
       <?php $this->controller->showView(); ?>
     </article>
+
+    <?php if($logged): ?>
+    <article class="messages-button text-center p-2" onclick="toggleMessageNav();loadMessages();" style="visibility:visible;">
+      <img src="https://img.icons8.com/color/48/000000/communication.png">
+    </article>
+    <article class="messages-wrapp bg-dark" style="width:0px;">
+      <section class="messages-content">
+      </section>
+    </article>
+  <?php endif; ?>
 
 
     <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark pr-5">
@@ -83,8 +92,6 @@
   </div>
 </nav>
 
-  <script>
-      $('.toast').toast('show');
-  </script>
+  <script src="public/js/layoutmodel.js"></script>
   </body>
 </html>

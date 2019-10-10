@@ -4,7 +4,7 @@
     public function returnMessages($userId) {
       return Db::multiQuery("SELECT message_id, message, message_timestamp, user_senderid, user_receiverid,
         user_sendername, user_receivername from
-        messages where user_receiverid = ? order by message_timestamp", array($userId));
+        messages where user_receiverid = ? order by message_timestamp desc", array($userId));
     }
 
     public function returnMessageById($mesId) {
