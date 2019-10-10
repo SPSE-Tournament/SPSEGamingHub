@@ -26,7 +26,7 @@
           <?php endforeach; ?>
       </section>
       <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn btn-danger" onclick='showNewMessage("#new_message")' id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/24/000000/new-message.png"></button>
+          <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
       </section>
     </article>
 
@@ -45,7 +45,7 @@
           <?php endforeach; ?>
       </section>
       <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn btn-danger" onclick='showNewMessage("#new_message")' id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/24/000000/new-message.png"></button>
+          <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
       </section>
     </article>
   </div>
@@ -63,14 +63,14 @@
           <?php endforeach; ?>
       </section>
       <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn btn-danger" onclick='showNewMessage("#new_message")' id="newMessage" name="button" style="border-radius: 25px;"><img src="https://img.icons8.com/color/24/000000/new-message.png"></button>
+          <button type="button" class="btn message-show-button" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
       </section>
     </article>
   </div>
 </div>
 
 
-  <div class="new-message p-5 w-50 mx-auto" id='new_message' style="display:none;">
+  <div class="new-message bg-dark p-5 w-50 mx-auto" style="opacity:.97;" id='new_message' style="display:none;">
       <button class="close" type="button" name="button" onclick='closeNewMessage("#new_message")'>
         <span>&times;</span>
       </button>
@@ -79,7 +79,7 @@
         <div class="form-group w-50">
           <div class="input-group mb-3">
               <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value)' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
-                <div class="livesearch p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
+                <div class="livesearch bg-dark p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
                   <p>Hint:</p>
                   <hr>
                   <div class="hint">

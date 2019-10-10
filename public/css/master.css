@@ -71,8 +71,7 @@ color: #fff;
   background-color: red;
 }
 .new-message {
-  background-color: rgba(255,255,255,.75);
-  color: #000;
+  color: #fff;
   position: fixed;
   bottom: 9vh;
   right: 25%;
@@ -91,7 +90,6 @@ color: #fff;
   width: 15vw;
   left: calc(25% - 15vw);
   z-index: 100;
-  background-color: rgba(255,255,255,.75);
   border-radius: 20px;
   transition: all 1s ease-out;
 }
@@ -130,6 +128,7 @@ color: #fff;
   overflow-y: scroll;
   transition: all 0.3s ease-out;
   color:#fff;
+  border-left: 3px solid orange;
 }
 .messages-wrapper {
   width: 18vw;
@@ -138,6 +137,17 @@ color: #fff;
 .eachMessage{
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.message-show-button {
+  background: #fc4a1a;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-size: contain;
+  border-radius: 30px !important;
+}
+.message-show-button:hover{
+  opacity: 0.8;
+  transition: all 0.3s ease-out;
 }
 .closeSideNav {
   cursor: pointer;
