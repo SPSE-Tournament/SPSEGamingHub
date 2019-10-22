@@ -3,16 +3,7 @@
       public function parse($params) {
         $userMan = new UserManager();
         $mesMan = new MessageManager();
-        $date = new DateTime();
-
-        if (isset($_POST['message-add'])) {
-          $parsedHexName = $userMan->parseHexname($_POST['receiver']);
-          $receiverId = $userMan->selectUser($parsedHexName['name']);
-          $mesMan->sendMessage($_POST['message'], $date->format('Y-m-d H:i:s'),$_SESSION['user']['user_id'],$_SESSION['user']['name'],$receiverId['user_id'],$parsedHexName['name']);
-          $this->addMessage("Your message has been sent.");
-          $this->log("Message sent. Sender: ".$_SESSION['user']['user_id'].', Receiver: '. $_POST['receiver'] . ", Message: ". $_POST['message'] ,'message_sent');
-          $this->redir("profile");
-      }
+        $messageTypes = array('message','invite','trash');
 
         if (!empty($params[0])) {
 
@@ -23,13 +14,10 @@
               $this->addMessage("Byl jste úspěšně odhlášen.");
               $this->redir("login");
 
-          } if ($params[0] == 'messages') {
-            $messages = $mesMan->returnMessages($_SESSION['user']['user_id']);
-            $messageIds = array();
-            for ($i=0; $i < count($messages); $i++) {
-                  $messageIds[] = $messages[$i]['message_id'];
-            }
+          } if ($params[0] == 'messages' && !empty($params[1]) && in_array($params[1], $messageTypes)) {
+            $messages = $mesMan->returnMessagesByType($_SESSION['user']['user_id'], $params[1]);
             $this->data['messages'] = $messages;
+            $this->data['mesDump'] = var_dump($messages);
             $this->data['date'] = new DateTime("now");
             $this->view = 'messages';
           }

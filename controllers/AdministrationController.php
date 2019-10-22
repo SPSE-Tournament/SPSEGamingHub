@@ -4,10 +4,31 @@
       $gameManager = new GameManager();
       $eventManager = new EventManager();
       $logManager = new LogManager();
-       if (!UserManager::authAdmin()) {
-         $this->addMessage("Admin rights needed.");
-         $this->redir("home");
-       }
+
+      //Admin validation
+      if (!UserManager::authAdmin()) {
+        $this->addMessage("Admin rights needed.");
+        $this->redir("home");
+      }
+
+      //Routing
+      if (!empty($params[0]) && $params[0] == 'getlog') {
+        $logs = $logManager->returnLogs();
+        $logIds = array();
+        for ($i=0; $i < count($logs); $i++) {
+              $logIds[] = $logs[$i]['log_id'];
+        }
+        if (!empty($params[1]) && in_array($params[1], $logIds)) {
+          $this->data['log'] = $logManager->returnLogById($params[1]);
+          $this->view = 'logpreview';
+          }
+      } else {
+        $this->data['logs'] = $logManager->returnLogs();
+        $this->data['games'] = $gameManager->returnGames();
+        $this->view = "administration";
+      }
+
+      //Handling POST requests
       if ($_POST) {
         if (isset($_POST['event-add'])) {
           try {
@@ -29,12 +50,9 @@
             }
         }
       }
-      $this->data['logs'] = $logManager->returnLogs();
-      $this->data['games'] = $gameManager->returnGames();
-      $this->view = "administration";
+
+
     }
-
-
   }
 
  ?>

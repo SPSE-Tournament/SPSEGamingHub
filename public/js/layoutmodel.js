@@ -1,15 +1,21 @@
-function loadMessages() {
-var xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    let start = this.responseText.indexOf('<!-- MessagesStart -->');
-    let end = this.responseText.indexOf("<!-- MessagesEnd -->") + "<!-- MessagesEnd -->".length;
-     document.querySelector('.messages-content').innerHTML = this.responseText.slice(start,end);
-  }
-};
-xhttp.open("GET", "profile/messages", true);
-xhttp.send();
+function loadMessages(msgType) {
+      showInbox(msgType);
 }
+
+  function showInbox(msgType) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        let start = this.responseText.indexOf('<!-- MessagesStart -->');
+        let end = this.responseText.indexOf("<!-- MessagesEnd -->") + "<!-- MessagesEnd -->".length;
+        let response = this.responseText.slice(start,end);
+          document.querySelector('.messages-content').innerHTML = response;
+      }
+    };
+    xhttp.open("GET", "profile/messages/"+msgType, true);
+    xhttp.send();
+  }
+
   function toggleMessageNav() {
     if (document.querySelector('.messages-wrapp').style.width == '0px') {
       document.querySelector('.messages-button').style.visibility = "hidden";

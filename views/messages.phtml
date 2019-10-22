@@ -1,107 +1,30 @@
 <!-- MessagesStart -->
 <header class="content-messages" id="msgContent">
-  <ul class="nav nav-pills d-flex justify-content-center" id="myTab" role="tablist">
-  <li class="nav-item">
-    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true"><img src="https://img.icons8.com/cotton/48/000000/communication--v1.png"></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false"><img src="https://img.icons8.com/cotton/48/000000/new-message.png"></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false"><img src="https://img.icons8.com/cotton/48/000000/delete-shield.png"></a>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+<div class="tab-content">
+  <div class="tab-pane fade show active" role="tabpanel">
     <article>
-      <section class="messages-wrapper mx-auto text-center px-3">
+      <section class="messages-wrapper mx-auto text-center px-3 my-1">
             <?php foreach($messages as $msg): ?>
-              <section class="eachMessage py-3">
-                <div>
-                  <p style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png" class="mr-1"><?= $date->diff(date_create($msg['message_timestamp']))->format('%a days ago') ?></p>
+              <section class="eachMessage py-2">
+                <div class="row justify-content-center">
+                  <p class="mr-1" style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png"><?= $date->diff(date_create($msg['message_timestamp']))->format('%a days ago') ?></p>
+                  <p class="ml-1" style="color:rgba(255,255,255,.8)"><?= $msg['user_sendername'] ?></p>
                 </div>
-                  <p style="color:rgba(255,255,255,.8)">From: <?= $msg['user_sendername'] ?></p>
-                  <p><?= $msg['message'] ?></p>
+                <div class="row justify-content-center align-items-center">
+                  <button type="button" class="btn btn-sm mr-1 mb-3 message-preview-button" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="https://img.icons8.com/cotton/24/000000/message-preview.png"></button>
+                  <p><?= $msg['message_perex'] ?></p>
+                </div>
               </section>
           <?php endforeach; ?>
       </section>
       <section class="messages-footer row justify-content-center align-items-center p-3">
           <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
-      </section>
-    </article>
-
-  </div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-    <article>
-      <section class="messages-wrapper mx-auto text-center px-3">
-            <?php foreach($messages as $msg): ?>
-              <section class="eachMessage py-3">
-                <div>
-                  <p style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png" class="mr-1"><?= $date->diff(date_create($msg['message_timestamp']))->format('%a days ago') ?></p>
-                </div>
-                  <p style="color:rgba(255,255,255,.8)">From: <?= $msg['user_sendername'] ?></p>
-                  <p><?= $msg['message'] ?></p>
-              </section>
-          <?php endforeach; ?>
-      </section>
-      <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
-      </section>
-    </article>
-  </div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-    <article>
-      <section class="messages-wrapper mx-auto text-center px-3">
-            <?php foreach($messages as $msg): ?>
-              <section class="eachMessage py-3">
-                <div>
-                  <p style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png" class="mr-1"><?= $date->diff(date_create($msg['message_timestamp']))->format('%a days ago') ?></p>
-                </div>
-                  <p style="color:rgba(255,255,255,.8)">From: <?= $msg['user_sendername'] ?></p>
-                  <p><?= $msg['message'] ?></p>
-              </section>
-          <?php endforeach; ?>
-      </section>
-      <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn message-show-button" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
       </section>
     </article>
   </div>
 </div>
-
-
-  <div class="new-message bg-dark p-5 w-50 mx-auto" style="opacity:.97;" id='new_message' style="display:none;">
-      <button class="close" type="button" name="button" onclick='closeNewMessage("#new_message")'>
-        <span>&times;</span>
-      </button>
-      <form method="post">
-        <input type="hidden" name="message-add">
-        <div class="form-group w-50">
-          <div class="input-group mb-3">
-              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value)' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
-                <div class="livesearch bg-dark p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
-                  <p>Hint:</p>
-                  <hr>
-                  <div class="hint">
-
-                  </div>
-                </div>
-          </div>
-        </div>
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <textarea class="form-control" id="textA" name="message" rows="8" cols="80"></textarea>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-secondary" name="button">Send</button>
-  </form>
-    </div>
-
-
 <script>
-  if (typeof profile == 'undefined') {
-    window.location.replace('profile');
-  }
+  window.location.replace("home");
 </script>
 </header>
 <!-- MessagesEnd -->

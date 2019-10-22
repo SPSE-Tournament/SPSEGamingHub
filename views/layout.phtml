@@ -20,6 +20,22 @@
   </head>
   <body>
 
+    <div class="modal modal-message-detail" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+      <h5 class="modal-title">Zprava</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body modal-message-detail-body">
+      ...
+    </div>
+        </div>
+      </div>
+    </div>
+
     <div class="toast-wrapper">
   <?php foreach($messages as $msg) : ?>
   <div class="toast bg-dark" data-autohide='false'>
@@ -42,14 +58,55 @@
     </article>
 
     <?php if($logged): ?>
-    <article class="messages-button text-center p-2" onclick="toggleMessageNav();loadMessages();" style="visibility:visible;">
+    <article class="messages-button text-center p-2" onclick="toggleMessageNav();loadMessages('message');" style="visibility:visible;">
       <img src="https://img.icons8.com/color/48/000000/communication.png">
     </article>
-    <article class="messages-wrapp bg-dark" style="width:0px;">
+    <article class="messages-wrapp" style="width:0px;">
+      <ul class="nav nav-pills d-flex justify-content-center"role="tablist">
+      <li class="nav-item nav-item-messages">
+        <a class="nav-link nav-link-messages active" data-toggle="tab" role="tab" aria-selected="true" id="message"onclick="loadMessages('message')"><img src="https://img.icons8.com/cotton/40/000000/communication--v1.png"></a>
+      </li>
+      <li class="nav-item nav-item-messages">
+        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="invite" onclick="loadMessages('invite')"><img src="https://img.icons8.com/cotton/40/000000/new-message.png"></a>
+      </li>
+      <li class="nav-item nav-item-messages">
+        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="trash" onclick="loadMessages('trash')"><img src="https://img.icons8.com/plasticine/40/000000/delete.png"></a>
+      </li>
+    </ul>
       <section class="messages-content">
+        <div class="">
+          <img src="public/images/loading.gif" alt="">
+        </div>
       </section>
     </article>
   <?php endif; ?>
+
+  <div class="new-message p-5 w-50 mx-auto" id='new_message' style="display:none;opacity:.97;">
+      <button class="close" type="button" name="button" onclick='closeNewMessage("#new_message")'>
+        <span>&times;</span>
+      </button>
+      <form method="post">
+        <input type="hidden" name="message-add">
+        <div class="form-group w-50">
+          <div class="input-group mb-3">
+              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value)' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
+                <div class="livesearch p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
+                  <p>Hint:</p>
+                  <hr>
+                  <div class="hint">
+
+                  </div>
+                </div>
+          </div>
+        </div>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <textarea class="form-control" id="textA" name="message" rows="8" cols="80"></textarea>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-secondary" name="button">Send</button>
+  </form>
+    </div>
 
 
     <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark pr-5">
@@ -69,12 +126,12 @@
       <li class="nav-item">
         <a class="nav-link ml-5" href="administration">Admin</a>
       </li>
-    <?php endif ?>
+    <?php endif; ?>
       <?php if (!$logged): ?>
       <li class="nav-item">
         <a class="nav-link ml-5" href="login">Login</a>
       </li>
-    <?php endif ?>
+    <?php endif; ?>
     </ul>
     <?php if ($logged): ?>
     <div class="btn-group dropup ml-auto">
@@ -88,10 +145,12 @@
     <a class="btn btn-primary btn-sm" href="profile/logout" role="button">Logout</a>
   </div>
 </div>
-  <?php endif ?>
+<?php endif; ?>
   </div>
 </nav>
 
-  <script src="public/js/layoutmodel.js"></script>
+  <script type="text/javascript" src="public/js/getmessagedetail.js">
+  </script>
+  <script type="text/javascript" src="public/js/layoutmodel.js"></script>
   </body>
 </html>

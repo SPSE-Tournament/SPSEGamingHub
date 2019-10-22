@@ -87,6 +87,14 @@
                      }
                    }
 
+                   public function isParam($paramIndex, $paramQuery) {
+                     if (!empty($params[$paramIndex]) && $params[$paramIndex] == "$paramQuery") {
+                       return true;
+                     } else {
+                       return false;
+                     }
+                   }
+
   }
 
 

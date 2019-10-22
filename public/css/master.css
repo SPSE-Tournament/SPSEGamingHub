@@ -8,6 +8,10 @@
 .nav-link {
   text-decoration: none;
   color: #000;
+  cursor: pointer;
+}
+.log-row {
+  cursor: pointer;
 }
 .nav-link:hover {
   color: rgba(255,255,255,.6);}
@@ -44,10 +48,10 @@ color: #fff;
   list-style-type: none;
 }
 .toast {
-  position: absolute; top: 8vh; right: 10px; z-index:6;
+  position: absolute; top: 8vh; right: 10px; z-index:13;
 }
 .toast-wrapper {
-  position:absolute;top:0;right:0; z-index:5;
+  position:absolute;top:0;right:0; z-index:12;
 }
 .eventcard {
   border: 1px solid black;
@@ -77,6 +81,11 @@ color: #fff;
   right: 25%;
   left: 25%;
   border-radius: 20px;
+  border: 3px solid orange;
+  background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .profile-img {
   border-radius: 20px;
@@ -88,10 +97,15 @@ color: #fff;
   position: fixed;
   bottom: 40vh;
   width: 15vw;
-  left: calc(25% - 15vw);
-  z-index: 100;
+  left: calc(25% - 15.5vw);
+  z-index: 10;
   border-radius: 20px;
   transition: all 1s ease-out;
+  border: 3px solid orange;
+  background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 .message {
   cursor: pointer;
@@ -108,7 +122,6 @@ color: #fff;
   background: #fc4a1a;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
   color:#fff;
   border-radius: 1rem 0 0 1rem;
 }
@@ -122,13 +135,16 @@ color: #fff;
   position: fixed;
   right: 0;
   top: 0;
-  z-index: 99;
-  height: 92vh;
+  z-index: 9;
+  height: 100vh;
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   transition: all 0.3s ease-out;
   color:#fff;
   border-left: 3px solid orange;
+  background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .messages-wrapper {
   width: 18vw;
@@ -137,17 +153,8 @@ color: #fff;
 .eachMessage{
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
-}
-.message-show-button {
-  background: #fc4a1a;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background-size: contain;
-  border-radius: 30px !important;
-}
-.message-show-button:hover{
-  opacity: 0.8;
-  transition: all 0.3s ease-out;
+  font-size: 1rem;
+  height: 15vh;
 }
 .closeSideNav {
   cursor: pointer;
@@ -162,3 +169,53 @@ color: #fff;
   background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color:#fff !important;
 }
+.nav-item:hover {
+  background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+transition: all 0.5s ease-out;
+}
+.messages-footer > .btn {
+    border-radius: 1.5rem;
+}
+.messages-footer > .btn:hover {
+  transition: all .5s ease-out;
+  border-bottom: 4px solid orange;
+  border-top: 4px solid orange;
+  transform: translateX(3px);
+  transition: all 0.3s ease-out;
+
+  }
+  .messages-footer > .btn:active, .messages-footer > .btn:focus {
+    outline: none !important;
+    box-shadow: none;
+  }
+  .close {
+    color:#fff !important;
+  }
+  .modal-content {
+    background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  }
+  .modal-title {
+    color:rgba(255,255,255,.6);
+  }
+  .modal-body {
+    color:rgba(255,255,255,.8);
+  }
+  .message-preview-button {
+    border-radius: 15px;
+  }
+  .message-preview-button:hover {
+    border-bottom: 3px solid orange;
+    transition: all 0.5s ease-out;
+  }
+    .message-preview-button:active,   .message-preview-button:focus {
+      outline: none;
+      box-shadow: none;
+    }
+  .loginform {
+    height: 100vh;
+  }
