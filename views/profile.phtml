@@ -30,10 +30,65 @@
       </div>
     </nav>
     <div class="tab-content p-5 bg-dark" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">Teamy</div>
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <?php if (!$hasTeams): ?>
+          <p>User has no teams...</p>
+          <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+        <?php endif; ?>
+        <?php if ($hasTeams): ?>
+          <section class="team-wrapper justify-content-center">
+          <?php foreach ($userTeams as $team): ?>
+            <div class="row ">
+              <p><?= $team['team_name'] ?></p>
+              <p class="ml-3"><?= $team['game_id'] ?></p>
+            </div>
+          <?php endforeach; ?>
+            <hr style="background-color:orange;">
+            <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+          </section>
+        <?php endif; ?>
+      </div>
       <div class="tab-pane fade" id="nav-friends" role="tabpanel" aria-labelledby="nav-profile-tab">Kamaradi</div>
     </div>
   </section>
 </section>
+
+<div class="modal modal-team-add" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title">Create a team</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body p-5">
+  <form method="post">
+    <input type="hidden" name="team-add">
+<div class="form-group">
+<label for="exampleInputEmail1">Team name</label>
+<input type="text" class="form-control" name="teamName" placeholder="Hustaci">
+</div>
+<div class="form-group">
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
+    </div>
+    <select class="custom-select" name="teamGame">
+      <?php foreach($games as $game): ?>
+      <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
+    <?php endforeach; ?>
+    </select>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+  <button type="submit" class="btn btn-primary">Create a team</button>
+  </form>
+</div>
+    </div>
+    </div>
+  </div>
+</div>
 
 <script src="public/js/profilemodel.js"></script>

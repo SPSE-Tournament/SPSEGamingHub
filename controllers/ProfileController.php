@@ -3,7 +3,21 @@
       public function parse($params) {
         $userMan = new UserManager();
         $mesMan = new MessageManager();
+        $teamMan = new TeamManager();
+        $gameMan = new GameManager();
         $messageTypes = array('message','invite','trash');
+
+        if(isset($_POST['team-add'])) {
+          try {
+            $teamMan->insertTeam($_POST['teamName'], $_SESSION['user']['user_id'], $_POST['teamGame']);
+            $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], Db::getLastId());
+            $this->addMessage("Your team has been created.");
+            $this->log("Team has been created", "team_creation");
+            $this->redir("profile");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
 
         if (!empty($params[0])) {
 
@@ -44,12 +58,14 @@
             $this->view = 'userlist';
           }
         } else {
+          $hasTeams = ($teamMan->returnUserTeamsCount($_SESSION['user']['user_id']) > 0 ? true : false);
+          $games = $gameMan->returnGames();
           $this->data['user'] = $_SESSION['user'];
-          $this->data['profile'] = "";
+          $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
+          $this->data['hasTeams'] = $hasTeams;
+          $this->data['games'] = $games;
           $this->view = 'profile';
         }
-
-
       }
   }
 ?>

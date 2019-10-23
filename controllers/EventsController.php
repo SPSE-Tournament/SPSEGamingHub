@@ -3,6 +3,7 @@
     public function parse($params) {
       $eventManager = new EventManager();
       $gameManager = new GameManager();
+      $teamMan = new TeamManager();
       $events = $eventManager->returnEvents();
       $eventUrls = array();
       for ($i=0; $i < count($events); $i++) {
@@ -37,17 +38,12 @@
           $this->redir("events");
         }
       } else {
-
         $this->data['events'] = $events;
+        $this->data['user'] = $_SESSION['user'];
+        $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
         $this->view = "events";
       }
-
-
-
-
     }
-
-
   }
 
 ?>
