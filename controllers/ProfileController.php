@@ -61,7 +61,7 @@
           $hasTeams = ($teamMan->returnUserTeamsCount($_SESSION['user']['user_id']) > 0 ? true : false);
           $games = $gameMan->returnGames();
           $this->data['user'] = $_SESSION['user'];
-          $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
+          $this->data['userTeams'] = $teamMan->returnUserTeamsWithPlayers($_SESSION['user']['user_id']);
           $this->data['hasTeams'] = $hasTeams;
           $this->data['games'] = $games;
           $this->view = 'profile';

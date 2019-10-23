@@ -38,10 +38,13 @@
         <?php if ($hasTeams): ?>
           <section class="team-wrapper justify-content-center">
           <?php foreach ($userTeams as $team): ?>
-            <div class="row ">
-              <p><?= $team['team_name'] ?></p>
-              <p class="ml-3"><?= $team['game_id'] ?></p>
+            <div class="">
+              <p style="color:orange;"><?= $team['name'] ?>  <span style="color:#fff;">(<?= $team['game'] ?>)</span></p>
             </div>
+              <?php for ($i = 0; $i < count($team['players']); $i++): ?>
+                <p><?= $team['players'][$i]  ?></p>
+              <?php endfor; ?>
+
           <?php endforeach; ?>
             <hr style="background-color:orange;">
             <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>

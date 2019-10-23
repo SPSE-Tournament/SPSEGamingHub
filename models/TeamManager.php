@@ -12,6 +12,26 @@
         teamparticipation.team_id = teams.team_id where teamparticipation.user_id = ?", array($userId));
     }
 
+    public function returnUsersInATeam($teamId){
+      return Db::multiQuery("SELECT users.user_id, users.name as uname from teamparticipation
+        join users on users.user_id = teamparticipation.user_id
+      where team_id = ?", array($teamId));
+    }
+
+    public function returnUserTeamsWithPlayers($userId) {
+      $userTeams = $this->returnUserTeams($userId);
+      $userTeamsWithPlayers = array();
+      foreach ($userTeams as $team) {
+        $usersInATeam = $this->returnUsersInATeam($team['team_id']);
+        $users = array();
+        foreach ($usersInATeam as $user) {
+            $users[] = $user['uname'];
+          }
+          $userTeamsWithPlayers[] = array('name' => $team['team_name'], 'game' => $team['game_name'], 'players' => $users);
+      }
+      return $userTeamsWithPlayers;
+    }
+
 
     public function insertTeam($teamName, $captainId, $gameId) {
       $team = array(
