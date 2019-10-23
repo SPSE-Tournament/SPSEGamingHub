@@ -148,9 +148,8 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
 }
 .messages-wrapper {
   width: 18vw;
-
 }
-.eachMessage{
+.eachMessage {
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
   font-size: 1rem;
@@ -168,12 +167,25 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color:#fff !important;
+
 }
 .nav-item:hover {
   background: #3C3B3F;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-transition: all 0.5s ease-out;
+transform: translateX(3px);
+transition: all 0.3s ease-out;
+}
+.tab-content-profile {
+  background: #3C3B3F;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.each-team:hover {
+  border: 3px solid orange;
+  cursor: pointer;
+  opacity: 0.75;
+  transition: all 0.3s ease-out;
 }
 .messages-footer > .btn {
     border-radius: 1.5rem;
@@ -184,7 +196,6 @@ transition: all 0.5s ease-out;
   border-top: 4px solid orange;
   transform: translateX(3px);
   transition: all 0.3s ease-out;
-
   }
   .messages-footer > .btn:active, .messages-footer > .btn:focus {
     outline: none !important;
@@ -197,7 +208,6 @@ transition: all 0.5s ease-out;
     background: #3C3B3F;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
   }
   .modal-title {
     color:rgba(255,255,255,.6);
@@ -218,4 +228,20 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     }
   .loginform {
     height: 100vh;
+  }
+  .tab-content-profile {
+    border-top: 3px solid orange;
+  }
+  .nav-pills > .active {
+    background: #fc4a1a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:#fff !important;
+  }
+  .each-team, .profile-info {
+    background: #fc4a1a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:#fff !important;
+    border-radius: 0 2rem 0 2rem;
   }

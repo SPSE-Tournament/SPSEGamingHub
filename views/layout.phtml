@@ -29,9 +29,7 @@
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body modal-message-detail-body">
-      ...
-    </div>
+    <div class="modal-body modal-message-detail-body"></div>
         </div>
       </div>
     </div>
@@ -62,7 +60,7 @@
       <img src="https://img.icons8.com/color/48/000000/communication.png">
     </article>
     <article class="messages-wrapp" style="width:0px;">
-      <ul class="nav nav-pills d-flex justify-content-center"role="tablist">
+      <ul class="nav nav-pills d-flex justify-content-center" role="tablist" style="border-bottom:2px solid orange;">
       <li class="nav-item nav-item-messages">
         <a class="nav-link nav-link-messages active" data-toggle="tab" role="tab" aria-selected="true" id="message"onclick="loadMessages('message')"><img src="https://img.icons8.com/cotton/40/000000/communication--v1.png"></a>
       </li>
@@ -73,7 +71,7 @@
         <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="trash" onclick="loadMessages('trash')"><img src="https://img.icons8.com/plasticine/40/000000/delete.png"></a>
       </li>
     </ul>
-      <section class="messages-content">
+      <section class="messages-content py-2">
         <div class="">
           <img src="public/images/loading.gif" alt="">
         </div>
@@ -110,7 +108,7 @@
 
 
     <nav class="mainnav navbar navbar-expand-lg navbar-dark bg-dark pr-5">
-  <a class="navbar-brand" href="home">Logo</a>
+  <a class="navbar-brand" href="home"><img src="public/images/logo_spse.svg" alt="" width="50"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

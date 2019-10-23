@@ -11,26 +11,54 @@
       }
       $this->data['admin'] = $_SESSION['admin'];
 
+      if (isset($_POST['event-join'])) {
+        try {
+          //Validate event join, compare playerlimit vs numplayers in team, compare games
+            $game = $gameManager->returnGameById($_POST['game-id']);
+            $numPlayers = $teamMan->returnUsersInATeamCount($_POST['team-id']);
+            $team = $teamMan->returnTeamById($_POST['team-id']);
+            $event = $eventManager->returnEventById($_POST['event-id']);
+            if ($numPlayers >= $game['game_playerlimitperteam'] && $team['game_id'] == $_POST['game-id']) {
+              $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
+              foreach ($usersInATeam as $user) {
+                $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                $this->logDifferentUser($user['user_id'],
+                'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                ,'event_join');
+              }
+              $this->addMessage("Event joined succesfully!");
+              $this->redir("events/".$_POST['event-url']);
+            } else {
+              $this->addMessage("Insufficient team!" . "numPl: $numPlayers" . " gamePL: " . $game['game_playerlimitperteam'] . " gameId: " . $team['game_id'] . " postGameId: " . $_POST['game-id'] . " teamIdPOST: " . $_POST['team-id']);
+              $this->redir("events");
+            }
+        } catch (PDOException $e) {
+          $this->addMessage($e);
+        }
+      }
+      if (isset($_POST['event-edit'])) {
+          $eventManager->updateEvent($_POST['eventName'], $_POST['eventGame'], $_POST['eventDate'], $_POST['eventTime'], $_POST['eventPL'], $_POST['eventUrl'], $params[1]);
+          $this->addMessage("Event has been updated");
+          $this->log("Event has been updated", 'event_edit');
+          $this->redir("events");
+      }
+
       if (!empty($params[0])) {
 
         if (in_array($params[0], $eventUrls)) {
-          $this->data['event'] = $eventManager->returnEventByUrl($params[0]);
-
+          $event = $eventManager->returnEventByUrl($params[0]);
+          $eventTeamIds = $eventManager->returnTeamIdsInEvent($event['event_id']);
+          $eventTeams = $teamMan->returnTeamsInEvent($eventTeamIds);
+          $this->data['event'] = $event;
+          $this->data['teams'] = $eventTeams;
+          $this->data['eid'] = $event['event_id'];
+          $this->data['eventIds'] = $eventTeamIds;
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
-
               if (!UserManager::authAdmin()) {
                 $this->addMessage("Admin rights needed.");
                 $this->redir("home");
               }
-
-              if ($_POST && isset($_POST['event-edit'])) {
-                  $eventManager->updateEvent($_POST['eventName'], $_POST['eventGame'], $_POST['eventDate'], $_POST['eventTime'], $_POST['eventPL'], $_POST['eventUrl'], $params[1]);
-                  $this->addMessage("Event has been updated");
-                  $this->log("Event has been updated", 'event_edit');
-                  $this->redir("events");
-              }
-
               $this->data['event'] = $eventManager->returnEventByUrl($params[1]);
               $this->data['games'] = $gameManager->returnGames();
               $this->view = "editevent";

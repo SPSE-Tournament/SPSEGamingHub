@@ -69,6 +69,12 @@
                      $logMan->log($_SESSION['user']['user_id'], $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
                    }
 
+                   public function logDifferentUser($userId,$msg, $type) {
+                     $logMan = new LogManager();
+                     $date = new DateTime();
+                     $logMan->log($userId, $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
+                   }
+
                    public function checkLogged() {
                      if (isset($_SESSION['user'])) {
                        $_SESSION['logged'] = true;

@@ -15,8 +15,20 @@
          event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url
                                 from events
                                 join games on events.game_id = games.game_id
-                                where event_url = ?
-                                order by event_timestamp", array($url));
+                                where event_url = ?", array($url));
+      }
+
+      public function returnEventById($eventId) {
+        return Db::singleQuery("SELECT event_id, event_name, games.game_name as game_name, games.game_id as game_id,
+         concat(substr(event_timestamp,9,2), '.', substr(event_timestamp,6,2), '.', substr(event_timestamp,1,4), ' ', substr(event_timestamp,12,5)) as event_parseddate,
+         event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url
+                                from events
+                                join games on events.game_id = games.game_id
+                                where event_id = ?", array($eventId));
+      }
+
+      public function returnTeamIdsInEvent($eventId) {
+        return Db::multiQuery("SELECT distinct team_id from eventparticipation where event_id = ?", array($eventId));
       }
 
       public function createEvent($name, $game, $timestamp, $eventPL, $gamePL, $eventUrl) {
@@ -30,6 +42,19 @@
         );
         try {
           Db::insert('events', $event);
+        } catch (PDOException $e) {
+          throw new UserError($e);
+        }
+      }
+
+      public function insertEventParticipation($userId, $eventId, $teamId) {
+        $eventParticipation = array(
+          'user_id' => $userId,
+          'event_id' => $eventId,
+          'team_id' => $teamId
+        );
+        try {
+            Db::insert('eventparticipation', $eventParticipation);
         } catch (PDOException $e) {
           throw new UserError($e);
         }

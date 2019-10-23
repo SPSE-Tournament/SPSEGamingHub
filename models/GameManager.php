@@ -2,7 +2,11 @@
   class GameManager {
 
     public function returnGames() {
-      return Db::multiQuery("select game_id, game_name, game_rules, game_playerlimitperteam from games order by game_id");
+      return Db::multiQuery("SELECT game_id, game_name, game_rules, game_playerlimitperteam from games order by game_id");
+    }
+
+    public function returnGameById($gameId) {
+      return Db::singleQuery("SELECT game_id, game_name, game_rules, game_playerlimitperteam from games order by game_id");
     }
 
     public function addGame($gameName, $gameTL, $gameRules = null, $gameBck = null) {
