@@ -2,7 +2,25 @@
     class UserManager {
 
           public function returnUsers() {
-            return Db::multiQuery("select user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid from users");
+            return Db::multiQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid from users");
+          }
+
+          public function returnEmails(){
+            $emails = Db::multiQuery("SELECT email from users");
+            $realEmails = array();
+            foreach ($emails as $uname) {
+              $realEmails[] = $uname['email'];
+            }
+            return $realEnames;
+          }
+
+          public function returnUsernames(){
+            $unames = Db::multiQuery("SELECT name from users");
+            $realUnames = array();
+            foreach ($unames as $uname) {
+              $realUnames[] = $uname['name'];
+            }
+            return $realUnames;
           }
 
           public function returnHash($pw) {

@@ -7,10 +7,16 @@
       }
       if ($_POST) {
         try {
-          $userMan->login($_POST['name'], $_POST['pw']);
-          $this->addMessage("Byl jste úspěšně přihlášen.");
-          $this->log("User log.", "login");
-          $this->redir('home');
+          if (strlen($_POST['name']) > 0 && strlen($_POST['pw']) > 0) {
+            $userMan->login($_POST['name'], $_POST['pw']);
+            $this->addMessage("Byl jste úspěšně přihlášen.");
+            $this->log("User log.", "login");
+            $this->redir('home');
+          } else {
+            $this->addMessage("Fields can't be empty!");
+            $this->redir("login");
+          }
+
         } catch (UserError $e) {
           $this->addMessage($e->getMessage());
         }

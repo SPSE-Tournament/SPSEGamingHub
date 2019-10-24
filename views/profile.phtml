@@ -41,10 +41,10 @@
         <?php if ($hasTeams): ?>
           <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
           <?php foreach ($userTeams as $team): ?>
-            <div class="col-4 mb-3" data-toggle="modal" data-target=".modal-team-detail" onclick="loadTeamDetail('<?=$team['id']?>')">
-              <section class="each-team col-12 mx-auto p-4">
+            <div class="col-4 mb-3">
+              <section class="each-team col-12 mx-auto p-4"data-toggle="modal" data-target=".modal-team-detail" onclick="loadTeamDetail('<?=$team['id']?>')">
               <div>
-                <p><?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<?= $team['game'] ?>)</span></p>
+                <p><?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<img class="mx-1" src="public/images/download.png" alt="" height="20"><?= $team['game'] ?>)</span></p>
                 <hr style="background-color:orange;">
               </div>
               <ul>

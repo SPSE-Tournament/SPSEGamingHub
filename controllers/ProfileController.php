@@ -36,7 +36,6 @@
       }
 
         if (!empty($params[0])) {
-
           if ($params[0] == 'logout') {
 
               $this->log("User logout.", "login");
