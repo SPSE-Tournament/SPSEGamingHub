@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 
-
 ::-webkit-scrollbar {
   height: 90vh;
   display: none;
@@ -13,8 +12,6 @@
 .log-row {
   cursor: pointer;
 }
-.nav-link:hover {
-  color: rgba(255,255,255,.6);}
 .content {
   min-height: 100vh;
 background-image: url("../images/bckg2.png");
@@ -54,10 +51,16 @@ color: #fff;
   position:absolute;top:0;right:0; z-index:12;
 }
 .eventcard {
-  border: 1px solid black;
-  background-color: rgba(255,255,255,.5);
-  border-radius: 15px;
-  color: #000;
+  background: #fc4a1a;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border-radius: 0 2rem 0 2rem;
+}
+.eventcard:hover {
+  opacity: 0.75;
+  border: 3px solid orange;
+  transform:translateX(3px);
+  transition: all 0.5s ease-out;
 }
 .event-wrapper {
   height: 100vh;
@@ -93,7 +96,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
 .user-livetext {
   cursor: pointer;
 }
-.livesearch {
+.livehint-layout {
   position: fixed;
   bottom: 40vh;
   width: 15vw;
@@ -105,7 +108,13 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   background: #3C3B3F;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
+}
+.livehint-invite {
+  background: #fc4a1a;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color:#fff !important;
+  border-radius: 0 2rem 0 2rem;
 }
 .message {
   cursor: pointer;
@@ -170,11 +179,9 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
 
 }
 .nav-item:hover {
-  background: #3C3B3F;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 transform: translateX(3px);
 transition: all 0.3s ease-out;
+opacity: 0.35;
 }
 .tab-content-profile {
   background: #3C3B3F;  /* fallback for old browsers */

@@ -2,10 +2,10 @@
   class TeamManager {
 
     public function returnUserTeams($userId) {
-      return Db::multiQuery("SELECT teams.team_id, team_name, team_captain_id, teams.game_id, games.game_name from teams
+      return Db::multiQuery("SELECT teams.team_id, team_name, team_captain_id, teams.game_id, games.game_name, (select count(*) from teamparticipation where teamparticipation.team_id = teams.team_id) as team_usercount from teams
          join teamparticipation on teamparticipation.team_id = teams.team_id
          join games on games.game_id = teams.game_id
-          where teamparticipation.user_id = ?", array($userId));
+          where teamparticipation.user_id = ? order by team_usercount desc", array($userId));
     }
 
     public function returnUserTeamsCount($userId) {
@@ -33,13 +33,19 @@
         foreach ($usersInATeam as $user) {
             $users[] = $user['uname'];
           }
-          $userTeamsWithPlayers[] = array('name' => $team['team_name'], 'game' => $team['game_name'], 'players' => $users);
+          $userTeamsWithPlayers[] = array('id' => $team['team_id'],'name' => $team['team_name'], 'game' => $team['game_name'], 'players' => $users);
       }
       return $userTeamsWithPlayers;
     }
 
     public function returnTeamById($teamId){
-      return Db::singleQuery("SELECT team_id, team_name, team_captain_id, game_id from teams
+      return Db::singleQuery("SELECT team_id, team_name, team_captain_id, teams.game_id as game_id, games.game_name as game_name from teams
+        join games on games.game_id = teams.game_id
+      where team_id = ?", array($teamId));
+    }
+
+    public function teamExists($teamId){
+      return Db::query("SELECT team_id, team_name, team_captain_id, game_id from teams
       where team_id = ?", array($teamId));
     }
 

@@ -18,7 +18,11 @@
       user_sendername, user_receivername from messages where message_id = ?", array($mesId));
     }
 
-    public function sendMessage($message,$messageType,$timestamp,$senderId,$senderName,$receiverId,$receiverName) {
+    public function deleteMessageById($messId) {
+      Db::query("DELETE from messages where message_id = ?", array($messId));
+    }
+
+    public function sendMessage($message,$messageType,$timestamp,$senderId,$senderName,$receiverId,$receiverName, $teamId = null) {
       $messagePerex = substr($message, 0, 15) . "...";
       try {
         $message = array(
@@ -29,7 +33,8 @@
           'user_senderid' => $senderId,
           'user_sendername' => $senderName,
           'user_receiverid' => $receiverId,
-          'user_receivername' => $receiverName
+          'user_receivername' => $receiverName,
+          'invite_team_id' => $teamId
         );
         Db::insert('messages', $message);
       } catch (PDOException $e) {

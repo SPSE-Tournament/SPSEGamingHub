@@ -25,6 +25,7 @@
       } else {
         $this->data['logs'] = $logManager->returnLogs();
         $this->data['games'] = $gameManager->returnGames();
+        $this->header['page_title'] = "Admin Dashboard";
         $this->view = "administration";
       }
 

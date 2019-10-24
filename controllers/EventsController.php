@@ -53,6 +53,7 @@
           $this->data['teams'] = $eventTeams;
           $this->data['eid'] = $event['event_id'];
           $this->data['eventIds'] = $eventTeamIds;
+          $this->header['page_title'] = $event['event_name'];
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
               if (!UserManager::authAdmin()) {
@@ -69,6 +70,7 @@
         $this->data['events'] = $events;
         $this->data['user'] = $_SESSION['user'];
         $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
+        $this->header['page_title'] = "Events";
         $this->view = "events";
       }
     }
