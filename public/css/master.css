@@ -263,6 +263,6 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   .card {
     border: 1px solid orange !important;
   }
-  .nav-item {
+  .nav-item, .hodziny {
     user-select:none;
     }

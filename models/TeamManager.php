@@ -49,7 +49,7 @@
       where team_id = ?", array($teamId));
     }
 
-    public function returnTeamsInEvent($teamIds) {
+    public function returnTeamsInEvent(array $teamIds) {
         $teams = array();
         foreach ($teamIds as $teamId) {
           $team = $this->returnTeamById($teamId['team_id']);
@@ -58,7 +58,7 @@
           foreach ($usersInATeam as $user) {
             $players[] = $user['uname'];
           }
-          $teams[] = array('name' => $team['team_name'], 'players' => $players);
+          $teams[] = array('name' => $team['team_name'], 'players' => $players, 'teamCaptain' => $team['team_captain_id']);
         }
         return $teams;
     }

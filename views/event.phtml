@@ -28,9 +28,9 @@
             <hr style="background-color:orange;">
           </div>
           <ul>
-            <?php for ($i = 0; $i < count($team['players']); $i++): ?>
-            <li><?= $team['players'][$i] ?></li>
-          <?php endfor; ?>
+            <?php foreach ($team['players'] as $player): ?>
+              <li><?= $player ?></li>
+            <?php endforeach; ?>
           </ul>
           </section>
         </div>
