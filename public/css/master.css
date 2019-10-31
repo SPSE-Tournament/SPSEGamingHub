@@ -188,7 +188,7 @@ opacity: 0.35;
 background: -webkit-linear-gradient(to right, #605C3C, #3C3B3F);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-.each-team:hover {
+.each-team:hover, .card-header:hover {
   border: 3px solid orange;
   cursor: pointer;
   opacity: 0.75;
@@ -229,7 +229,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     border-bottom: 3px solid orange;
     transition: all 0.5s ease-out;
   }
-    .message-preview-button:active,   .message-preview-button:focus {
+    .message-preview-button:active, .message-preview-button:focus {
       outline: none;
       box-shadow: none;
     }
@@ -251,4 +251,14 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color:#fff !important;
     border-radius: 0 2rem 0 2rem;
+  }
+  .card-header {
+    background: #fc4a1a;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color:#fff !important;
+    border: none !important;
+  }
+  .card {
+    border: 1px solid orange !important;
   }

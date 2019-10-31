@@ -49,7 +49,9 @@
         }
         if(isset($_POST['decline-invite'])) {
           try {
-            //delete invite
+            $mesMan->deleteMessageById($_POST['message-id']);
+            $this->addMessage("Invite declined");
+            $this->redir("profile");
           } catch (PDOException $e) {
             $this->addMessage($e);
           }
