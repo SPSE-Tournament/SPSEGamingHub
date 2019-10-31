@@ -10,8 +10,8 @@
 <section class="navevent-wrapper py-2 w-90 mx-auto mb-5">
   <nav>
     <div class="nav nav-pills" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false">Bracket</a>
+      <a draggable="false" class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+      <a draggable="false" class="nav-item nav-link disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false">Bracket</a>
       <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
         <a class="nav-item nav-link" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
       <?php endif; ?>
@@ -41,7 +41,100 @@
     </div>
     <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">Brackets</div>
     <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
-      <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">Admin spechtle mechtle</div>
+      <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="accordion bg-dark" id="accordionExample">
+    <div class="card">
+      <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <h5 class="mb-0">Settings</h5>
+      </div>
+
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+        <div class="card-body bg-dark">
+          <form method="post">
+            <input type="hidden" name="event-add">
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Status</label>
+            </div>
+            <select class="custom-select" name="eventGame">
+                <option value="scheduled">Scheduled</option>
+                <option value="live">Live</option>
+                <option value="finished">Finished</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text bg-warning mr-1 text-dark" style="color:#FFF;" for="inputGroupSelect01">Postpone (m)</label>
+              <button class="btn btn-small btn-warning" type="button" name="button">+5</button><button class="btn btn-small btn-warning" type="button" name="button">+10</button><button class="btn btn-small btn-warning" type="button" name="button">+15</button><button class="btn btn-small btn-warning" type="button" name="button">+20</button>
+              <button class="btn btn-small btn-warning" type="button" name="button">+25</button><button class="btn btn-small btn-warning" type="button" name="button">+30</button>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Bracket format</label>
+                <select class="custom-select" name="eventGame">
+                    <option value="scheduled">Single-elimination</option>
+                    <option value="live">Double-elimination</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Basic matches format</label>
+                <select class="custom-select" name="eventGame">
+                    <option value="scheduled">BO1</option>
+                    <option value="live">BO3</option>
+                    <option value="live">BO5</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Elimination matches format</label>
+                <select class="custom-select" name="eventGame">
+                    <option value="scheduled">BO1</option>
+                    <option value="live">BO3</option>
+                    <option value="live">BO5</option>
+                </select>
+              </div>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Final format</label>
+                <select class="custom-select" name="eventGame">
+                    <option value="scheduled">BO1</option>
+                    <option value="live">BO3</option>
+                    <option value="live">BO5</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-primary">Update</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <h5 class="mb-0">Bracket</h5>
+      </div>
+      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+        <div class="card-body bg-dark">
+          <span class="bg-danger p-1">Status</span>
+          <hr>
+          <button class="btn btn-primary" type="button" name="button">Generate</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+      </div>
     <?php endif; ?>
   </div>
 </section>
