@@ -10,8 +10,8 @@
 <section class="navevent-wrapper py-2 w-90 mx-auto mb-5">
   <nav>
     <div class="nav nav-pills" id="nav-tab" role="tablist">
-      <a draggable="false" class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-      <a draggable="false" class="nav-item nav-link disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false">Bracket</a>
+      <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false">Bracket</a>
       <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
         <a class="nav-item nav-link" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
       <?php endif; ?>
@@ -21,7 +21,7 @@
     <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
       <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
                   <?php foreach ($teams as $team): ?>
-        <div class="col-6">
+        <div class="col-6 my-2">
           <section class="each-team col-12 mx-auto p-4">
           <div>
             <p><?= $team['name'] ?></p>
@@ -39,7 +39,19 @@
 
       </section>
     </div>
-    <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">Brackets</div>
+    <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <?php if ($hasBrackets): ?>
+        <section class="bracket-wrapper text-center d-flex flex-row align-items-center">
+          <?php for($i = 0; $i < count($matches); $i++): ?>
+            <div class="first-round col-3">
+            <?php foreach ($matches[$i] as $match): ?>
+                    <div class="eachmatch p-3 my-1"><?=$match['match_first_team'] . " vs " . $match['match_second_team']?></div>
+            <?php endforeach; ?>
+          </div>
+        <?php endfor; ?>
+        </section>
+      <?php endif; ?>
+    </div>
     <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
       <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="accordion bg-dark" id="accordionExample">
@@ -128,7 +140,12 @@
         <div class="card-body bg-dark">
           <span class="bg-danger p-1">Status</span>
           <hr>
-          <button class="btn btn-primary" type="button" name="button">Generate</button>
+          <form method="post">
+            <input type="hidden" name="bracket-generate">
+            <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
+          <button class="btn btn-primary" type="submit" name="button">Generate</button>
+          </form>
+
         </div>
       </div>
     </div>
