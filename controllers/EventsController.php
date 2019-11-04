@@ -47,7 +47,7 @@
       if (isset($_POST['bracket-generate'])) {
         try {
           $eventTeams = $teamMan->returnTeamsInEvent($eventManager->returnTeamIdsInEvent($_POST['event-id']));
-          $bracketManager->insertMatches($bracketManager->generateMatches($eventTeams,0),$_POST['event-id']);
+          $bracketManager->insertMatches($bracketManager->generateMatches($eventTeams,0),$_POST['event-id'],$eventTeams);
           $eventManager->setLiveBracketStatus($_POST['event-id']);
           $this->addMessage("Bracket generated!");
           $this->log("Bracket has been generated", 'bracket_creation');

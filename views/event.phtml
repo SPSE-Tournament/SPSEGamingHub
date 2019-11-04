@@ -41,11 +41,21 @@
     </div>
     <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
       <?php if ($hasBrackets): ?>
-        <section class="bracket-wrapper text-center d-flex flex-row align-items-center">
+        <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
           <?php for($i = 0; $i < count($matches); $i++): ?>
             <div class="first-round col-3">
             <?php foreach ($matches[$i] as $match): ?>
-                    <div class="eachmatch p-3 my-1"><?=$match['match_first_team'] . " vs " . $match['match_second_team']?></div>
+                  <div class="eachmatch py-2 m-1 row justify-content-center align-items-center">
+                    <div class="col-9 d-flex flex-column" style="border-right:1px solid orange;">
+                      <p>(<?= $match['match_first_team_seed'] ?>) <?=$match['match_first_team']?> </p>
+                      <p>vs</p>
+                      <p>(<?= $match['match_second_team_seed'] ?>) <?=$match['match_second_team'] ?></p>
+                    </div>
+                    <div class="col-3 row justify-content-center">
+                      <h2 class="pl-3 py-2 col-12"><?= $match['match_first_team_score'] ?></h2>
+                      <h2 class="pl-3 p-2 col-12"><?= $match['match_second_team_score'] ?></h2>
+                    </div>
+                  </div>
             <?php endforeach; ?>
           </div>
         <?php endfor; ?>
@@ -143,7 +153,11 @@
           <form method="post">
             <input type="hidden" name="bracket-generate">
             <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
-          <button class="btn btn-primary" type="submit" name="button">Generate</button>
+            <div class="row justify-content-around">
+              <button class="btn btn-primary" type="submit" name="button">Generate</button>
+              <button class="btn btn-danger" type="submit" name="button">Drop</button>
+            </div>
+
           </form>
 
         </div>
