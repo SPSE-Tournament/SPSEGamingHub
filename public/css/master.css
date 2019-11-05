@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
-
+@import url('https://fonts.googleapis.com/css?family=McLaren&display=swap');
 ::-webkit-scrollbar {
   height: 90vh;
   display: none;
@@ -265,4 +265,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   }
   .nav-item, .hodziny {
     user-select:none;
+    }
+    .matchScore {
+      font-family: 'McLaren', cursive;
     }

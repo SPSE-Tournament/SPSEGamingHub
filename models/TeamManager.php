@@ -58,7 +58,7 @@
           foreach ($usersInATeam as $user) {
             $players[] = $user['uname'];
           }
-          $teams[] = array('name' => $team['team_name'], 'players' => $players, 'teamCaptain' => $team['team_captain_id']);
+          $teams[] = array('id'=>$team['team_id'],'name' => $team['team_name'], 'players' => $players, 'teamCaptain' => $team['team_captain_id']);
         }
         return $teams;
     }

@@ -11,10 +11,10 @@
          $teamsToPlay = array_slice($teams, 0,(2*$firstRoundMatches));
          $teamsToWait = array_slice($teams,(2*$firstRoundMatches));
         for($i = 0; $i < count($teamsToPlay); $i+=2) {
-             $matches[] = array('match_first_team' => $teamsToPlay[$i]['name'], 'match_second_team' => $teamsToPlay[$i+1]['name'], 'match_round' => 'B1', 'match_first_team_score'=>'0', 'match_second_team_score'=>'0');
+             $matches[] = array('match_first_team' => $teamsToPlay[$i]['id'], 'match_second_team' => $teamsToPlay[$i+1]['id'], 'match_round' => 'B1', 'match_first_team_score'=>'0', 'match_second_team_score'=>'0');
           }
-          foreach($teamsToWait as $teamName) {
-             $matches[] = array('match_first_team'=>$teamName['name'], 'match_second_team' => 'freewin', 'match_round' => 'B1','match_first_team_score'=>'1', 'match_second_team_score'=>'0');
+          foreach($teamsToWait as $teamId) {
+             $matches[] = array('match_first_team'=>$teamId['id'], 'match_second_team' => 'freewin', 'match_round' => 'B1','match_first_team_score'=>'1', 'match_second_team_score'=>'0');
            }
         $curNumTeams = $closestExponentOf2/2;
         for($i = 0; $i < log($closestExponentOf2, 2); $i++) {
@@ -62,11 +62,13 @@
 
       public function returnParsedMatchesInEvent($eventId) {
         $parsedMatches = array();
-        $matches = Db::multiQuery("SELECT match_id, match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
+        $matches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
+        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
         where event_id = ? order by match_id asc", array($eventId));
         $numOfRounds = Db::query("SELECT match_round from matches where event_id = ? group by match_round", array($eventId));
         for ($i=0; $i < $numOfRounds; $i++) {
-          $roundMatches = Db::multiQuery("SELECT match_id, match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
+          $roundMatches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
+          match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
           where event_id = ? and match_round = ? order by match_id asc", array($eventId,"B".($i+1)));
           foreach ($roundMatches as $roundMatch) {
             $parsedMatches[$i][] = $roundMatch;
