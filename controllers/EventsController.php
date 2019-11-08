@@ -49,7 +49,7 @@
           $eventTeams = $teamMan->returnTeamsInEvent($eventManager->returnTeamIdsInEvent($_POST['event-id']));
           $bracketManager->insertMatches($bracketManager->generateMatches($eventTeams,0),$_POST['event-id'],$eventTeams);
           $eventManager->setLiveBracketStatus($_POST['event-id']);
-          $this->addMessage("Bracket generated!");
+          $this->addMessage("Bracket created!");
           $this->log("Bracket has been generated", 'bracket_creation');
           $this->redir("events/".$params[0]);
         } catch (PDOException $e) {
@@ -70,6 +70,7 @@
           if ($event['bracket_status'] == 'live') {
             $this->data['hasBrackets'] = true;
             $this->data['matches'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
+            $bracketManager->checkMatches($event['event_id']);
           }
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {

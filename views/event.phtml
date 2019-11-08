@@ -43,17 +43,16 @@
       <?php if ($hasBrackets): ?>
         <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
           <?php for($i = 0; $i < count($matches); $i++): ?>
-            <div class="first-round col-3">
+            <div class="each-round col-3">
             <?php foreach ($matches[$i] as $match): ?>
                   <div class="eachmatch py-2 mx-1 my-2 row justify-content-center align-items-center">
                     <div class="col-9 d-flex flex-column" style="border-right:1px solid orange;">
-                      <p><?php if (isset($match['match_first_team_seed'])):?><?= "(s" . $match['match_first_team_seed'] . ")"?><?php endif; ?> <?=$match['match_first_team']?> </p>
-                      <p>vs</p>
-                      <p><?php if (isset($match['match_second_team_seed'])):?><?="(s" . $match['match_second_team_seed'] . ")"?><?php endif; ?> <?=$match['match_second_team'] ?></p>
+                      <p><?php if (isset($match['match_first_team_seed'])):?><?= "(m" . $match['match_first_team_seed'] . ")"?><?php endif; ?> <?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
+                      <p><?php if (isset($match['match_second_team_seed'])):?><?="(m" . $match['match_second_team_seed'] . ")"?><?php endif; ?> <?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
                     </div>
                     <div class="matchScore col-3 row justify-content-center">
-                      <h2 class="pl-3 py-2 col-12"><?= $match['match_first_team_score'] ?></h2>
-                      <h2 class="pl-3 py-2 col-12"><?= $match['match_second_team_score'] ?></h2>
+                      <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
+                      <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
                     </div>
                   </div>
             <?php endforeach; ?>
