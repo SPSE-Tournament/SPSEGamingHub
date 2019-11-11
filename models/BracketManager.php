@@ -42,16 +42,13 @@
             if ($match['match_first_team'] == 'TBD' || $match['match_second_team'] == 'TBD') {
 
               if ($match['match_first_team'] == 'TBD') {
-
                   $firstSeed = Db::singleQuery("SELECT match_id, match_status, match_bracket_seed,
                   match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
                   where event_id = ? and match_bracket_seed = ?", array($eventId,$match['match_first_team_seed']));
-
                   if ($firstSeed['match_status'] == 'finished') {
                     $winner = ($firstSeed['match_first_team_score'] > $firstSeed['match_second_team_score']) ? $firstSeed['match_first_team']:$firstSeed['match_second_team'];
                     try {
                       Db::edit('matches', array('match_first_team'=>$winner), 'where event_id = ? and match_bracket_seed = ?', array($eventId,$match['match_bracket_seed']));
-                      #Db::query("UPDATE matches set match_first_team = $winner where event_id = ? and match_bracket_seed = ?", array($eventId, $match['match_bracket_seed']));
                     } catch (PDOException $e) {
                       throw new UserError($e);
                     }
@@ -67,14 +64,11 @@
                   $winner = ($secondSeed['match_first_team_score'] > $secondSeed['match_second_team_score']) ? $secondSeed['match_first_team']:$secondSeed['match_second_team'];
                   try {
                     Db::edit('matches', array('match_second_team'=>$winner), 'where event_id = ? and match_bracket_seed = ?', array($eventId,$match['match_bracket_seed']));
-                  #Db::query("UPDATE matches set match_second_team = $winner where event_id = ? and match_bracket_seed = ?", array($eventId, $match['match_bracket_seed']));
                 } catch (PDOException $e) {
                   throw new UserError($e);
                 }
                 }
-
               }
-
             }
           }
       }
@@ -105,12 +99,12 @@
       public function returnParsedMatchesInEvent($eventId) {
         $parsedMatches = array();
         $matches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
-        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
+        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
         where event_id = ? order by match_id asc", array($eventId));
         $numOfRounds = Db::query("SELECT match_round from matches where event_id = ? group by match_round", array($eventId));
         for ($i=0; $i < $numOfRounds; $i++) {
           $roundMatches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
-          match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
+          match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
           where event_id = ? and match_round = ? order by match_id asc", array($eventId,"B".($i+1)));
           foreach ($roundMatches as $roundMatch) {
             $parsedMatches[$i][] = $roundMatch;
@@ -119,6 +113,12 @@
         return $parsedMatches;
       }
 
+      public function dropBracket($eventId) {
+        Db::query("DELETE from matches where event_id = ?", array($eventId));
+      }
 
+      public function bracketInEvent($eventId) {
+        return (Db::query("SELECT match_id from matches where event_id = ?", array($eventId)) > 0) ? true:false;
+      }
   }
 ?>

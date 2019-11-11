@@ -45,8 +45,43 @@
           <?php for($i = 0; $i < count($matches); $i++): ?>
             <div class="each-round col-3">
             <?php foreach ($matches[$i] as $match): ?>
+              <?php if ($match['match_status'] == 'finished'): ?>
+                <div class="match-finished">
+              <?php endif; ?>
                   <div class="eachmatch py-2 mx-1 my-2 row justify-content-center align-items-center">
-                    <div class="col-9 d-flex flex-column" style="border-right:1px solid orange;">
+                    <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && $match['match_status'] == 'live'): ?>
+                      <div class="col-1" style="z-index:99;">
+                      <button class="btn btn-warning btn-sm" type="button" data-toggle="modal" data-target=".modal-match-settings"><img src="https://img.icons8.com/ios-filled/32/000000/settings.png"></button>
+                      </div>
+
+                      <div class="modal modal-match-settings" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                        <h5 class="modal-title">Match settings</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body modal-message-detail-body">
+                        <form method="post">
+                          <div class="p-2 mx-1 my-3">
+                            <label for="match-status">Match status</label>
+                            <select class="form-control" name="match-status">
+                              <option value="" selected>Scheduled</option>
+                              <option value="">Live</option>
+                              <option value="">Finished</option>
+                            </select>
+                          </div>
+
+                          <button class="btn btn-primary" type="button" name="button">Submit</button>
+                        </form>
+                      </div>
+                          </div>
+                        </div>
+                      </div>
+                    <?php endif; ?>
+                    <div class="col-7 d-flex flex-column" style="border-right:1px solid orange;">
                       <p><?php if (isset($match['match_first_team_seed'])):?><?= "(m" . $match['match_first_team_seed'] . ")"?><?php endif; ?> <?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
                       <p><?php if (isset($match['match_second_team_seed'])):?><?="(m" . $match['match_second_team_seed'] . ")"?><?php endif; ?> <?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
                     </div>
@@ -54,7 +89,50 @@
                       <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
                       <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
                     </div>
+                    <?php if ($match['match_status'] == 'finished'): ?>
+                      <div class="col-1">
+                        <img src="https://img.icons8.com/color/48/000000/ok.png">
+                      </div>
+                    <?php endif; ?>
+                    <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && $match['match_status'] == 'live'): ?>
+                      <div class="col-1">
+                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write"><img src="https://img.icons8.com/windows/32/000000/-scoreboard-.png"></button>
+                      </div>
+
+                      <div class="modal modal-score-write" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                        <h5 class="modal-title">Write a score</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body modal-message-detail-body">
+                        <form method="post">
+                          <input type="hidden" name="match-score-write">
+                          <div class="row justify-content-center p-1 m-1">
+                            <h2>Team1</h2>
+                            <div class="col-2">
+                              <input class="form-control" type="number" name="" min="0" max="3">
+                            </div>
+                            <h2>:</h2>
+                            <div class="col-2">
+                              <input  class="form-control" type="number" name="" min="0" max="3">
+                            </div>
+                            <h2>Team2</h2>
+                          </div>
+                          <button class="btn btn-primary" type="submit" name="button">Submit</button>
+                        </form>
+                      </div>
+                          </div>
+                        </div>
+                      </div>
+                    <?php endif; ?>
                   </div>
+                  <?php if ($match['match_status'] == 'finished'): ?>
+                  </div>
+                  <?php endif; ?>
             <?php endforeach; ?>
           </div>
         <?php endfor; ?>
@@ -149,16 +227,10 @@
         <div class="card-body bg-dark">
           <span class="bg-danger p-1">Status</span>
           <hr>
-          <form method="post">
-            <input type="hidden" name="bracket-generate">
-            <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
-            <div class="row justify-content-around">
-              <button class="btn btn-primary" type="submit" name="button">Generate</button>
-              <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
-            </div>
-
-          </form>
-
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
+          </div>
         </div>
       </div>
     </div>
@@ -170,19 +242,43 @@
 </section>
 </section>
 <div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-  <h5 class="modal-title">Confirmation</h5>
+  <h5 class="modal-title">Are you sure you want to drop the bracket?</h5>
   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body modal-log-detail-body">
-  <p>Are you sure?</p>
+<div class="modal-body modal-message-detail-body">
   <form method="post">
-    <button type="submit" name="button">Yes</button>
+    <input type="hidden" name="bracket-drop">
+    <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
+    <button class="btn btn-danger" type="submit" name="button">Yes</button>
   </form>
+</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal generateConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title">Are you sure you want to generate the bracket?</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modal-message-detail-body">
+  <form method="post">
+    <input type="hidden" name="bracket-generate">
+    <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
+    <div class="row justify-content-around">
+      <button class="btn btn-danger" type="submit" name="button">Yes</button>
+    </div>
+  </form>
+
 </div>
     </div>
   </div>

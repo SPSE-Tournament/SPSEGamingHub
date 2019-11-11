@@ -269,3 +269,6 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     .matchScore {
       font-family: 'McLaren', cursive;
     }
+    .match-finished > div {
+      opacity: 0.7;
+    }
