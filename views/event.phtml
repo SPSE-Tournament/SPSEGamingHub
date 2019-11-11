@@ -85,7 +85,7 @@
                       <p><?php if (isset($match['match_first_team_seed'])):?><?= "(m" . $match['match_first_team_seed'] . ")"?><?php endif; ?> <?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
                       <p><?php if (isset($match['match_second_team_seed'])):?><?="(m" . $match['match_second_team_seed'] . ")"?><?php endif; ?> <?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
                     </div>
-                    <div class="matchScore col-3 row justify-content-center">
+                    <div class="matchScore col-2 row justify-content-center">
                       <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
                       <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
                     </div>
@@ -240,7 +240,6 @@
     <?php endif; ?>
   </div>
 </section>
-</section>
 <div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -285,21 +284,4 @@
 </div>
 
 
-<script>
-let countDownDate = new Date(document.querySelector('.event-timestamp').value).getTime();
-setInterval(function() {
-  let now = new Date().getTime();
-  let distance = countDownDate - now;
-  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  let response = "<span class='bg-dark p-2'>" + days + " d : " + hours + " h : " + minutes + " m : " + seconds + " s</span>";
-  document.querySelector(".timer-countdown").innerHTML = response;
-  if (distance < 0) {
-    clearInterval();
-    document.querySelector(".timer-countdown").innerHTML = "FINISHED";
-  }
-}, 1000);
-
-</script>
+<script src="public/js/eventmodel.js"></script>
