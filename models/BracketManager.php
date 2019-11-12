@@ -120,5 +120,25 @@
       public function bracketInEvent($eventId) {
         return (Db::query("SELECT match_id from matches where event_id = ?", array($eventId)) > 0) ? true:false;
       }
+
+      public function returnMatchIds() {
+        $realMatchIds = array();
+        $matchIds = Db::multiQuery("SELECT match_id from matches");
+        foreach ($matchIds as $match) {
+          $realMatchIds[] = $match['match_id'];
+        }
+        return $realMatchIds;
+      }
+
+      public function returnMatchById($matchId) {
+        return Db::singleQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
+        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
+        where match_id = ?", array($matchId));
+      }
+
+      public function editMatch($matchId, $matchFirstTeamScore, $matchSecondTeamScore, $matchStatus) {
+        Db::edit('matches', array('match_first_team_score'=>$matchFirstTeamScore,'match_second_team_score'=>$matchSecondTeamScore,'match_status'=>$matchStatus),'where match_id = ?', array($matchId));
+      }
+
   }
 ?>

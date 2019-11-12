@@ -4,6 +4,9 @@
   height: 90vh;
   display: none;
 }
+body {
+  word-wrap: break-word;
+}
 .nav-link {
   text-decoration: none;
   color: #000;

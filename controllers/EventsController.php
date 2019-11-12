@@ -73,6 +73,15 @@
             $this->addMessage($e);
           }
         }
+        if (isset($_POST['match-score-write'])) {
+          try {
+            $bracketManager->editMatch($_POST['match-id'],$_POST['first-score'],$_POST['second-score'],$_POST['match-status']);
+            $this->addMessage("Match edited.");
+            $this->redir("events/".$params[0]);
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
       }
 
 
@@ -100,6 +109,17 @@
               $this->data['event'] = $eventManager->returnEventByUrl($params[1]);
               $this->data['games'] = $gameManager->returnGames();
               $this->view = "editevent";
+        } else if ($params[0] == "getmatch") {
+          $matchIds = $bracketManager->returnMatchIds();
+            if (!empty($params[1]) && in_array($params[1],$matchIds)) {
+              if (!UserManager::authAdmin()) {
+                $this->addMessage("Admin rights needed.");
+                $this->redir("home");
+              }
+              $match = $bracketManager->returnMatchById($params[1]);
+              $this->data['match'] = $match;
+              $this->view = 'matchpreview';
+            }
         } else {
           $this->redir("events");
         }
