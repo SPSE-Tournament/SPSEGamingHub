@@ -75,9 +75,10 @@
         }
         if (isset($_POST['match-score-write'])) {
           try {
-            $bracketManager->editMatch($_POST['match-id'],$_POST['first-score'],$_POST['second-score'],$_POST['match-status']);
-            $this->addMessage("Match edited.");
-            $this->redir("events/".$params[0]);
+            $match = $bracketManager->returnMatchById($_POST['match-id']);
+              $bracketManager->editMatch($_POST['match-id'],$_POST['first-score'],$_POST['second-score'],$_POST['match-status']);
+              $this->addMessage("Match edited.");
+              $this->redir("events/".$params[0]);
           } catch (PDOException $e) {
             $this->addMessage($e);
           }
@@ -95,11 +96,6 @@
           $this->data['teams'] = $eventTeams;
           $this->data['eventIds'] = $eventTeamIds;
           $this->header['page_title'] = $event['event_name'];
-          if ($event['bracket_status'] == 'live') {
-            $this->data['hasBrackets'] = true;
-            $this->data['matches'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
-            $bracketManager->checkMatches($event['event_id']);
-          }
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
               if (!UserManager::authAdmin()) {
@@ -119,6 +115,23 @@
               $match = $bracketManager->returnMatchById($params[1]);
               $this->data['match'] = $match;
               $this->view = 'matchpreview';
+            }
+        } else if ($params[0] == "refreshmatches") {
+            if (!empty($params[1])) {
+              $match = $bracketManager->checkMatches($params[1]);
+            }
+        } else if ($params[0] == "getbracket") {
+            if (!empty($params[1])) {
+              if (!UserManager::authAdmin()) {
+                $this->redir("events");
+              }
+              $event = $eventManager->returnEventById($params[1]);
+              $this->data['event'] = $event;
+              if ($event['bracket_status'] == 'live') {
+                $this->data['hasBrackets'] = true;
+                $this->data['matches'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
+                $this->view = "bracket";
+              }
             }
         } else {
           $this->redir("events");

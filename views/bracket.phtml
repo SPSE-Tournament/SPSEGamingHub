@@ -1,0 +1,38 @@
+<!-- BracketStart -->
+<?php for($i = 0; $i < count($matches); $i++): ?>
+  <div class="each-round col-3">
+    <?php if (isset($matches[$i][0]['match_description'])): ?>
+      <h2 class="p-2"><?=$matches[$i][0]['match_description'] ?></h2>
+    <?php endif; ?>
+  <?php foreach ($matches[$i] as $match): ?>
+    <?php if ($match['match_status'] == 'finished'): ?>
+      <div class="match-finished">
+    <?php endif; ?>
+        <div class="eachmatch py-2 mx-1 my-2 row justify-content-center align-items-center">
+          <div class="col-7 d-flex flex-column" style="border-right:1px solid orange;">
+            <p><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
+            <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
+          </div>
+          <div class="matchScore col-2 row justify-content-center">
+            <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
+            <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
+          </div>
+          <?php if ($match['match_status'] == 'finished'): ?>
+            <div class="col-1">
+              <img src="https://img.icons8.com/color/32/000000/ok.png">
+            </div>
+          <?php endif; ?>
+          <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && ($match['match_status'] == 'live' || $match['match_status'] == 'scheduled') ): ?>
+            <div class="col-1">
+              <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="https://img.icons8.com/windows/24/000000/-scoreboard-.png"></button>
+            </div>
+          <?php endif; ?>
+        </div>
+        <?php if ($match['match_status'] == 'finished'): ?>
+        </div>
+        <?php endif; ?>
+  <?php endforeach; ?>
+</div>
+<?php endfor; ?>
+
+<!-- BracketEnd -->

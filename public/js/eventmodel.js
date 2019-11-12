@@ -13,3 +13,44 @@ setInterval(function() {
     document.querySelector(".timer-countdown").innerHTML = "Live";
   }
 }, 1000);
+
+function toggleBracketFullscreen() {
+  if (!document.fullscreenElement) {
+    document.querySelector(".tab-content-profile").requestFullscreen();
+    document.querySelector(".fullscreenEventName").innerHTML = document.querySelector(".eventName").innerHTML;
+} else {
+  if (document.exitFullscreen) {
+    document.exitFullscreen();
+    document.querySelector(".fullscreenEventName").innerHTML = "";
+  }
+}
+}
+
+function refreshMatches() {
+  let eventId = document.querySelector(".refreshbutton").dataset.eventid;
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+  }
+  };
+  xhttp.open("GET", "events/refreshmatches/" + eventId, true);
+  xhttp.send();
+}
+
+function getBracket() {
+  let eventId = document.querySelector(".refreshbutton").dataset.eventid;
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+  if (this.readyState == 4 && this.status == 200) {
+    let start = this.responseText.indexOf('<!-- BracketStart -->');
+    let end = this.responseText.indexOf("<!-- BracketEnd -->") + "<!-- BracketEnd -->".length;
+     document.querySelector(".bracket-wrapper").innerHTML=this.responseText.slice(start,end);
+  }
+  };
+  xhttp.open("GET", "events/getbracket/" + eventId, true);
+  xhttp.send();
+}
+
+$('#nav-tab a[href="#nav-bracket"]').tab('show')
+getBracket();
+setInterval(function(){refreshMatches();getBracket();}, 1000)

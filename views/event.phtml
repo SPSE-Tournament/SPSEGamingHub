@@ -1,6 +1,6 @@
 <section class="p-5">
   <div class="event-title p-5 text-center">
-    <h1><?= $event['event_name'] ?></h1>
+    <h1 class="eventName"><?= $event['event_name'] ?></h1>
     <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
     <div class="hodziny py-4">
       <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"> </h2>
@@ -11,7 +11,7 @@
   <nav>
     <div class="nav nav-pills" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false">Bracket</a>
+      <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
       <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
         <a class="nav-item nav-link" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
       <?php endif; ?>
@@ -19,6 +19,10 @@
   </nav>
   <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
+      <?php if (isset($event['event_winner'])): ?>
+        <h1>Winner: <?=$event['event_winner_name']?></h1>
+        <hr>
+      <?php endif; ?>
       <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
                   <?php foreach ($teams as $team): ?>
         <div class="col-6 my-2">
@@ -35,66 +39,17 @@
           </section>
         </div>
       <?php endforeach; ?>
-
-
       </section>
     </div>
     <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <h1 class="fullscreenEventName"></h1>
       <div class="row justify-content-end">
-        <button class="btn btn-warning" type="button" name="button"><img src="https://img.icons8.com/windows/32/000000/refresh.png"></button>
-        <button class="btn btn-warning" type="button" name="button"><img src="https://img.icons8.com/ios/32/000000/full-screen.png"></button>
+        <button class="btn btn-warning refreshbutton" type="button" name="button" data-eventId="<?=$event['event_id']?>" onclick="refreshMatches()"><img src="https://img.icons8.com/windows/32/000000/refresh.png"></button>
+        <button class="btn btn-warning" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="https://img.icons8.com/ios/32/000000/full-screen.png"></button>
       </div>
       <hr>
-      <?php if ($hasBrackets): ?>
         <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
-          <?php for($i = 0; $i < count($matches); $i++): ?>
-            <div class="each-round col-3">
-            <?php foreach ($matches[$i] as $match): ?>
-              <?php if ($match['match_status'] == 'finished'): ?>
-                <div class="match-finished">
-              <?php endif; ?>
-                  <div class="eachmatch py-2 mx-1 my-2 row justify-content-center align-items-center">
-                    <div class="col-7 d-flex flex-column" style="border-right:1px solid orange;">
-                      <p><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
-                      <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
-                    </div>
-                    <div class="matchScore col-2 row justify-content-center">
-                      <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
-                      <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
-                    </div>
-                    <?php if ($match['match_status'] == 'finished'): ?>
-                      <div class="col-1">
-                        <img src="https://img.icons8.com/color/32/000000/ok.png">
-                      </div>
-                    <?php endif; ?>
-                    <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && ($match['match_status'] == 'live' || $match['match_status'] == 'scheduled') ): ?>
-                      <div class="col-1">
-                        <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="https://img.icons8.com/windows/24/000000/-scoreboard-.png"></button>
-                      </div>
-
-                      <div class="modal modal-score-write" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                        <h5 class="modal-title">Write a score</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body modal-match-detail-body"></div>
-                          </div>
-                        </div>
-                      </div>
-                    <?php endif; ?>
-                  </div>
-                  <?php if ($match['match_status'] == 'finished'): ?>
-                  </div>
-                  <?php endif; ?>
-            <?php endforeach; ?>
-          </div>
-        <?php endfor; ?>
         </section>
-      <?php endif; ?>
     </div>
     <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
       <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
@@ -197,6 +152,9 @@
     <?php endif; ?>
   </div>
 </section>
+<?php if ($_SESSION['user']['admin'] || $_SESSION['user']['rootmaster'] || $_SESSION['user']['watchman']): ?>
+
+<?php endif; ?>
 <div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -216,7 +174,6 @@
     </div>
   </div>
 </div>
-
 <div class="modal generateConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -234,12 +191,22 @@
       <button class="btn btn-danger" type="submit" name="button">Yes</button>
     </div>
   </form>
-
 </div>
     </div>
   </div>
 </div>
-
-
+<div class="modal fade modal-score-write" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+  <h5 class="modal-title">Write a score</h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body modal-match-detail-body"></div>
+    </div>
+  </div>
+</div>
 <script src="public/js/eventmodel.js"></script>
 <script src="public/js/getmatchdetail.js"></script>

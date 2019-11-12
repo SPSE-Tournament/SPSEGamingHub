@@ -26,7 +26,20 @@
 
          for($i = 0; $i < log($closestExponentOf2, 2); $i++) {
           for ($j = 0; $j < $curNumTeams; $j++) {
-            $matches[] = array('match_first_team'=>'TBD', 'match_second_team' => 'TBD', 'match_round' => 'B' . ($i+2), 'match_first_team_score'=>'0', 'match_second_team_score'=>'0', 'match_bracket_seed'=>($bracketSeed+1),'match_status'=>'scheduled');
+            if ($curNumTeams == 1 || $curNumTeams == 2 || $curNumTeams == 4) {
+              if ($curNumTeams == 4) {
+                $matches[] = array('match_first_team'=>'TBD', 'match_second_team' => 'TBD', 'match_round' => 'B' . ($i+2), 'match_first_team_score'=>'0', 'match_second_team_score'=>'0', 'match_bracket_seed'=>($bracketSeed+1),'match_status'=>'scheduled','match_description' => 'Quarterfinal');
+              }
+              if ($curNumTeams == 2) {
+                $matches[] = array('match_first_team'=>'TBD', 'match_second_team' => 'TBD', 'match_round' => 'B' . ($i+2), 'match_first_team_score'=>'0', 'match_second_team_score'=>'0', 'match_bracket_seed'=>($bracketSeed+1),'match_status'=>'scheduled','match_description' => 'Semifinal');
+              }
+              if ($curNumTeams == 1) {
+                $matches[] = array('match_first_team'=>'TBD', 'match_second_team' => 'TBD', 'match_round' => 'B' . ($i+2), 'match_first_team_score'=>'0', 'match_second_team_score'=>'0', 'match_bracket_seed'=>($bracketSeed+1),'match_status'=>'scheduled','match_description' => 'Final');
+              }
+            } else {
+              $matches[] = array('match_first_team'=>'TBD', 'match_second_team' => 'TBD', 'match_round' => 'B' . ($i+2), 'match_first_team_score'=>'0', 'match_second_team_score'=>'0', 'match_bracket_seed'=>($bracketSeed+1),'match_status'=>'scheduled');
+            }
+
             $bracketSeed++;
           }
            $curNumTeams /= 2;
@@ -36,7 +49,7 @@
       }
 
       public function checkMatches($eventId) {
-        $matches = Db::multiQuery("SELECT match_id, match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id, match_bracket_seed from matches
+        $matches = Db::multiQuery("SELECT match_id, match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id, match_bracket_seed, match_description, match_status from matches
         where event_id = ? order by match_id asc", array($eventId));
           foreach ($matches as $match) {
             if ($match['match_first_team'] == 'TBD' || $match['match_second_team'] == 'TBD') {
@@ -69,6 +82,17 @@
                 }
                 }
               }
+            } else if ($match['match_description'] == "Final" && $match['match_status'] == 'finished') {
+              $winner = ($match['match_first_team_score'] > $match['match_second_team_score']) ? $match['match_first_team']:$secondSeed['match_second_team'];
+              $event = Db::singleQuery("SELECT event_timestamp, event_winner from events where event_id = ?", array($eventId));
+              if (!isset($event['event_winner'])) {
+                try {
+                Db::edit("events", array("event_winner"=>$winner, "event_timestamp"=>$event['event_timestamp']), 'where event_id = ?', array($eventId));
+              } catch (PDOException $e) {
+                throw new UserError($e);
+              }
+              }
+
             }
           }
       }
@@ -83,12 +107,12 @@
           foreach ($matches as $match) {
             if (!in_array($match['match_first_team'],$teamsInEventParsed) && !in_array($match['match_second_team'],$teamsInEventParsed)) {
               Db::insert('matches', array('match_first_team' => $match['match_first_team'],'match_second_team' => $match['match_second_team'],'match_round' => $match['match_round'],'match_status' => $match['match_status'],
-              'event_id' => $eventId, 'match_first_team_score'=>$match['match_first_team_score'],'match_second_team_score'=>$match['match_second_team_score'],'match_bracket_seed'=>$match['match_bracket_seed'],
+              'event_id' => $eventId, 'match_first_team_score'=>$match['match_first_team_score'],'match_second_team_score'=>$match['match_second_team_score'],'match_bracket_seed'=>$match['match_bracket_seed'],'match_description'=>$match['match_description'],
               'match_first_team_seed'=>$seedIncrement, 'match_second_team_seed'=>($seedIncrement+1)));
               $seedIncrement+=2;
             } else {
               Db::insert('matches', array('match_first_team' => $match['match_first_team'],'match_second_team' => $match['match_second_team'],'match_round' => $match['match_round'],'match_bracket_seed'=>$match['match_bracket_seed'],'match_round' => $match['match_round'],'match_status' => $match['match_status'],
-              'event_id' => $eventId, 'match_first_team_score'=>$match['match_first_team_score'],'match_second_team_score'=>$match['match_second_team_score']));
+              'match_description'=>$match['match_description'],'event_id' => $eventId, 'match_first_team_score'=>$match['match_first_team_score'],'match_second_team_score'=>$match['match_second_team_score']));
             }
           }
         } catch (PDOException $e) {
@@ -99,12 +123,12 @@
       public function returnParsedMatchesInEvent($eventId) {
         $parsedMatches = array();
         $matches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
-        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
+        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id, match_description from matches
         where event_id = ? order by match_id asc", array($eventId));
         $numOfRounds = Db::query("SELECT match_round from matches where event_id = ? group by match_round", array($eventId));
         for ($i=0; $i < $numOfRounds; $i++) {
           $roundMatches = Db::multiQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
-          match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
+          match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id, match_description from matches
           where event_id = ? and match_round = ? order by match_id asc", array($eventId,"B".($i+1)));
           foreach ($roundMatches as $roundMatch) {
             $parsedMatches[$i][] = $roundMatch;
@@ -132,12 +156,16 @@
 
       public function returnMatchById($matchId) {
         return Db::singleQuery("SELECT match_id, (select team_name from teams where team_id = match_first_team) as match_first_team_name,(select team_name from teams where team_id = match_second_team) as match_second_team_name,
-        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id from matches
+        match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, match_status, event_id, match_description from matches
         where match_id = ?", array($matchId));
       }
 
       public function editMatch($matchId, $matchFirstTeamScore, $matchSecondTeamScore, $matchStatus) {
         Db::edit('matches', array('match_first_team_score'=>$matchFirstTeamScore,'match_second_team_score'=>$matchSecondTeamScore,'match_status'=>$matchStatus),'where match_id = ?', array($matchId));
+      }
+
+      public function concludeWinner($eventId, $winnerId) {
+        Db::edit('events',array('event_winner'=>$winnerId), 'where event_id = ?', array($eventId));
       }
 
   }
