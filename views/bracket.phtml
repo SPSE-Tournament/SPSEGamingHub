@@ -8,12 +8,12 @@
     <?php if ($match['match_status'] == 'finished'): ?>
       <div class="match-finished">
     <?php endif; ?>
-        <div class="eachmatch py-2 mx-1 my-2 row justify-content-center align-items-center">
-          <div class="col-7 d-flex flex-column" style="border-right:1px solid orange;">
+        <div class="eachmatch mx-1 my-2 row justify-content-center align-items-center">
+          <div class="col-7 d-flex flex-column">
             <p><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
             <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
           </div>
-          <div class="matchScore col-2 row justify-content-center">
+          <div class="matchScore col-2 d-flex flex-column justify-content-center">
             <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
             <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
           </div>
