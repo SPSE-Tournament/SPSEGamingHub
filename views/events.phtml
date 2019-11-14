@@ -1,10 +1,12 @@
 <?php foreach($events as $event): ?>
-  <article class="event-wrapper pb-5 d-flex justify-content-center align-items-center">
+  <article class="event-wrapper pb-5 d-flex justify-content-center align-items-center" style="background-image:url(<?=$event['game_background']?>)!important;">
+
     <section class="eventcard p-5 mx-auto col-9 text-center">
       <a href="events/<?=$event['event_url']?>" style="text-decoration: none; color:#fff;">
       <h1><?= $event['event_name'] ?></h1>
       <h2><img src="https://img.icons8.com/color/48/000000/league-of-legends.png"><?= $event['game_name'] ?></h2>
       <h3><?= $event['event_parseddate'] ?></h3>
+      <h3> <a href="<?=$event['game_rules']?>" target="_blank">Rules</a> </h3>
       <h4>Players: <?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h4>
       </a>
       <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">Join with your team</button>
@@ -13,6 +15,7 @@
       <?php endif; ?>
     </section>
   </article>
+
 <?php endforeach; ?>
 
 <div class="modal fade modal-editevent" tabindex="-1" role="dialog" aria-labelledby="..." aria-hidden="true">

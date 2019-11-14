@@ -22,6 +22,7 @@ background-image: url("../images/bckg2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+
 color: #fff;
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
@@ -67,6 +68,12 @@ color: #fff;
 }
 .event-wrapper {
   height: 100vh;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-top: 1px solid orange;
+  border-bottom: 1px solid orange;
+
 }
 .log-wrapper {
   height: 70vh;
@@ -277,5 +284,5 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     }
     .tab-content-profile {
       overflow: auto;
-      
+
     }

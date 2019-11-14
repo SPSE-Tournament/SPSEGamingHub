@@ -5,7 +5,6 @@
       $userMan = new UserManager();
       if ($_POST) {
         try {
-
           if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             $year = date("Y");
             $emails = $userMan->returnEmails();

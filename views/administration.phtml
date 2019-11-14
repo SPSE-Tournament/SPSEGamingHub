@@ -16,6 +16,16 @@
     </div>
   </div>
   <div class="card">
+    <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+      <h5 class="mb-0">Edit</h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div class="card-body bg-dark d-flex flex-row justify-content-around">
+        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-edit-games">Edit games</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
     <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
       <h5 class="mb-0">Remove</h5>
     </div>
@@ -25,6 +35,7 @@
       </div>
     </div>
   </div>
+
 
 </div>
     </div>
@@ -137,11 +148,15 @@
     </button>
   </div>
   <div class="modal-body">
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
       <input type="hidden" name="game-add">
   <div class="form-group">
   <label for="exampleInputEmail1">Game name</label>
   <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" name="mod-gameadd-name">
+  </div>
+  <div class="form-group">
+  <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
+  <input type="text" class="form-control" placeholder="Enter name" name="mod-gameadd-shortname">
   </div>
   <div class="form-group">
     <div class="input-group mb-3">
@@ -149,7 +164,7 @@
       <span class="input-group-text bg-success" style="color:#Fff;">Ruleset</span>
     </div>
     <div class="custom-file">
-      <input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+      <input type="file" class="custom-file-input" name="file-ruleset" aria-describedby="inputGroupFileAddon01">
       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
     </div>
   </div>
@@ -160,7 +175,7 @@
       <span class="input-group-text bg-success" style="color:#Fff;">Game background</span>
     </div>
     <div class="custom-file">
-      <input type="file" class="custom-file-input" aria-describedby="inputGroupFileAddon01">
+      <input type="file" class="custom-file-input" name="file-background" aria-describedby="inputGroupFileAddon01">
       <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
     </div>
   </div>
@@ -188,6 +203,43 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">Add event</button>
+    </form>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-edit-games" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title" style="color:#000;">Edit a game</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="game-edit">
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
+      </div>
+      <select class="custom-select" name="edit-game-id" onchange="getGameForm(this.value)">
+        <option selected>Choose a game...</option>
+        <?php foreach ($games as $game): ?>
+          <option value="<?=$game['game_id']?>"><?=$game['game_name']?></option>
+        <?php endforeach; ?>
+      </select>
+
+    </div>
+  </div>
+        <div class="live-form-game-update"></div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Edit game</button>
     </form>
   </div>
       </div>
