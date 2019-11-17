@@ -46,6 +46,10 @@
       Db::edit('games', $game, 'where game_id = ?', array($gameId));
     }
 
+    public function deleteGame($gameId){
+      Db::query("DELETE from games where game_id = ?", array($gameId));
+    }
+
     public function getGameIds() {
       $games = $this->returnGames();
       $gameIds = array();

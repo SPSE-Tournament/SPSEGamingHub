@@ -84,6 +84,10 @@
         }
       }
 
+      public function deleteEvent($eventId) {
+        Db::query("DELETE from events where event_id = ?", array($eventId));
+      }
+
       public function getGameLimit($gameid) {
         return Db::singleQuery("select game_playerlimitperteam from games where game_id = ?", array($gameid));
       }

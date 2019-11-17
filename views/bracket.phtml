@@ -23,8 +23,8 @@
             </div>
           <?php endif; ?>
           <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && ($match['match_status'] == 'live' || $match['match_status'] == 'scheduled') ): ?>
-            <div class="col-1">
-              <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="https://img.icons8.com/windows/24/000000/-scoreboard-.png"></button>
+            <div class="scorewrite col-1">
+              <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="https://img.icons8.com/cotton/24/000000/-scoreboard-.png"></button>
             </div>
           <?php endif; ?>
         </div>

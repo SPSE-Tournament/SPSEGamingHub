@@ -33,6 +33,7 @@
       } else {
         $this->data['logs'] = $logManager->returnLogs();
         $this->data['games'] = $gameManager->returnGames();
+        $this->data['events'] = $eventManager->returnEvents();
         $this->header['page_title'] = "Admin Dashboard";
         $this->view = "administration";
       }
@@ -95,6 +96,26 @@
             } catch (PDOException $e) {
               $this->addMessage($e);
             }
+        }
+        if (isset($_POST['event-remove'])) {
+          try {
+            $eventManager->deleteEvent($_POST['remove-event-id']);
+            $this->addMessage("Event deleted");
+            $this->log("Event (".$_POST['remove-event-id'].") removed.", "event_drop");
+            $this->redir("administration");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
+        if (isset($_POST['game-remove'])) {
+          try {
+            $gameManager->deleteGame($_POST['remove-game-id']);
+            $this->addMessage("Game deleted");
+            $this->log("Game (".$_POST['remove-game-id'].") removed.", "game_drop");
+            $this->redir("administration");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
         }
       }
 

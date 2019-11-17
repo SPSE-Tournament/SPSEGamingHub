@@ -5,6 +5,8 @@
       if ($userMan->returnUser()) {
         $this->redir("profile");
       }
+      
+      //Handling POST
       if ($_POST) {
         try {
           if (strlen($_POST['name']) > 0 && strlen($_POST['pw']) > 0) {

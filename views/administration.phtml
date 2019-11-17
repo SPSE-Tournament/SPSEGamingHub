@@ -20,8 +20,8 @@
       <h5 class="mb-0">Edit</h5>
     </div>
     <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body bg-dark d-flex flex-row justify-content-around">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-edit-games">Edit games</button>
+      <div class="card-body bg-dark row justify-content-around">
+        <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modal-edit-games">Edit games</button>
       </div>
     </div>
   </div>
@@ -30,8 +30,10 @@
       <h5 class="mb-0">Remove</h5>
     </div>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body bg-dark">
-        <button type="button" class="btn btn-danger">Remove</button>
+      <div class="card-body bg-dark row justify-content-around">
+        <button type="button" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Remove event</button>
+        <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-game">Remove game</button>
+        <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-bracket">Remove bracket</button>
       </div>
     </div>
   </div>
@@ -79,7 +81,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title" style="color:#000;">Add an Esport event</h5>
+    <h5 class="modal-title">Add an Esport event</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -142,7 +144,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title" style="color:#000;">Add an official event game</h5>
+    <h5 class="modal-title">Add an official event game</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -213,7 +215,7 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title" style="color:#000;">Edit a game</h5>
+    <h5 class="modal-title">Edit a game</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -240,6 +242,76 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     <button type="submit" class="btn btn-primary">Edit game</button>
+    </form>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-remove-event" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title">Remove event</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="event-remove">
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success" style="color:#FFF;">Event</label>
+      </div>
+      <select class="custom-select" name="remove-event-id">
+        <option selected>Choose an event...</option>
+        <?php foreach ($events as $event): ?>
+          <option value="<?=$event['event_id']?>"><?=$event['event_name']?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-danger">Remove event</button>
+    </form>
+  </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-remove-game" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title">Remove game</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post" enctype="multipart/form-data">
+      <input type="hidden" name="game-remove">
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success">Game</label>
+      </div>
+      <select class="custom-select" name="remove-game-id">
+        <option selected>Choose a game...</option>
+        <?php foreach ($games as $game): ?>
+          <option value="<?=$game['game_id']?>"><?=$game['game_name']?></option>
+        <?php endforeach; ?>
+      </select>
+    </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-danger">Remove game</button>
     </form>
   </div>
       </div>

@@ -3,6 +3,8 @@
     public function parse($params) {
       $this->header['page_title'] = 'Registration';
       $userMan = new UserManager();
+
+      //Handling POST
       if ($_POST) {
         try {
           if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {

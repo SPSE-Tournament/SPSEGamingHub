@@ -2,6 +2,7 @@
   <div class="event-title p-5 text-center">
     <h1 class="eventName"><?= $event['event_name'] ?></h1>
     <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
+    <h3><a href="<?=$event['game_rules']?>" target="_blank">Rules</a></h3>
     <div class="hodziny py-4">
       <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"> </h2>
     </div>
@@ -11,7 +12,12 @@
   <nav>
     <div class="nav nav-pills" id="nav-tab" role="tablist">
       <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-      <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+      <?php if ($hasBrackets): ?>
+        <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+      <?php endif; ?>
+      <?php if (!$hasBrackets): ?>
+        <a class="nav-item nav-link disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+      <?php endif; ?>
       <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
         <a class="nav-item nav-link" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
       <?php endif; ?>
@@ -41,16 +47,18 @@
       <?php endforeach; ?>
       </section>
     </div>
-    <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <h1 class="fullscreenEventName"></h1>
-      <div class="row justify-content-end">
-        <button class="btn btn-warning refreshbutton" type="button" name="button" data-eventId="<?=$event['event_id']?>" onclick="refreshMatches()"><img src="https://img.icons8.com/windows/32/000000/refresh.png"></button>
-        <button class="btn btn-warning" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="https://img.icons8.com/ios/32/000000/full-screen.png"></button>
+    <?php if ($hasBrackets): ?>
+      <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <h1 class="fullscreenEventName"></h1>
+        <div class="row justify-content-end">
+          <button class="btn btn-warning refreshbutton" type="button" name="button" data-eventId="<?=$event['event_id']?>" onclick="refreshMatches()"><img src="https://img.icons8.com/windows/32/000000/refresh.png"></button>
+          <button class="btn btn-warning" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="https://img.icons8.com/wired/32/000000/full-screen.png"></button>
+        </div>
+        <hr>
+          <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
+          </section>
       </div>
-      <hr>
-        <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
-        </section>
-    </div>
+    <?php endif; ?>
     <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
       <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
         <div class="accordion bg-dark" id="accordionExample">

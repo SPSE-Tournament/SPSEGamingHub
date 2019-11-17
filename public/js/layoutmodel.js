@@ -72,4 +72,5 @@ function loadMessages(msgType) {
     }
 
 
+
     $('.toast').toast('show');

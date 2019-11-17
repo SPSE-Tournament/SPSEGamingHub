@@ -18,10 +18,14 @@ function toggleBracketFullscreen() {
   if (!document.fullscreenElement) {
     document.querySelector(".tab-content-profile").requestFullscreen();
     document.querySelector(".fullscreenEventName").innerHTML = document.querySelector(".eventName").innerHTML;
+    for (let i of document.querySelectorAll(".scorewrite"))
+      i.style.display = "none";
 } else {
   if (document.exitFullscreen) {
     document.exitFullscreen();
     document.querySelector(".fullscreenEventName").innerHTML = "";
+    for (let i of document.querySelectorAll(".scorewrite"))
+      i.style.display = "block";
   }
 }
 }
