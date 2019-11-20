@@ -7,7 +7,9 @@
         $gameMan = new GameManager();
         $date = new DateTime("now");
         $messageTypes = array('message','invite','trash');
-
+        if (!$_SESSION['logged']) {
+          $this->redir("login");
+        }
         //Routing
         if (!empty($params[0])) {
           if ($params[0] == 'logout') {
@@ -50,6 +52,21 @@
               $this->data['team'] = $teamMan->returnTeamById($params[1]);
               $this->data['users'] = $teamMan->returnUsersInATeam($params[1]);
               $this->view = 'team';
+          }
+          else if ($params[0] == 'verify') {
+            $registrationHashes = $userManager->returnRegistrationHashes();
+            if (!empty($params[1]) && in_array($params[1], $registrationHashes)) {
+              $reg = $userManager->returnRegistration($params[1]);
+              try {
+                $userManager->register($reg['user_name'],$reg['user_email'],$reg['user_password'],$userManager->generateHexId());
+                Db::query("DELETE from registrations where user_hash = ?", array($params[1]));
+                $userManager->login($_POST['usrname'], $_POST['pw']);
+                $this->addMessage("Your email has been verified");
+                $this->redir("home");
+              } catch (PDOException $e) {
+
+              }
+            }
           }
         } else {
           $hasTeams = ($teamMan->returnUserTeamsCount($_SESSION['user']['user_id']) > 0 ? true : false);

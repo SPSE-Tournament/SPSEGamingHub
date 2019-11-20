@@ -15,7 +15,6 @@
 
       //Routing
       if (!empty($params[0])) {
-
         if (in_array($params[0], $eventUrls)) {
           $event = $eventManager->returnEventByUrl($params[0]);
           $eventTeamIds = $eventManager->returnTeamIdsInEvent($event['event_id']);
@@ -25,9 +24,8 @@
           $this->data['eventIds'] = $eventTeamIds;
           if ($event['bracket_status'] == 'live')
             $this->data['hasBrackets'] = true;
-            else
+          else
             $this->data['hasBrackets'] = false;
-
           $this->header['page_title'] = $event['event_name'];
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
@@ -89,10 +87,16 @@
               if ($numPlayers >= $game['game_playerlimitperteam'] && $team['game_id'] == $_POST['game-id']) {
                 $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
                 foreach ($usersInATeam as $user) {
-                  $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                  $this->logDifferentUser($user['user_id'],
-                  'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
-                  ,'event_join');
+                  if ($user['user_verified'] == 1) {
+                    $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                    $this->logDifferentUser($user['user_id'],
+                    'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                    ,'event_join');
+                  } else {
+                    $this->addMessage("User not verified.");
+                    $this->redir("events");
+                  }
+
                 }
                 $this->addMessage("Event joined succesfully!");
                 $this->redir("events/".$_POST['event-url']);

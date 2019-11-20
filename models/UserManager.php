@@ -2,7 +2,7 @@
     class UserManager {
 
           public function returnUsers() {
-            return Db::multiQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid from users");
+            return Db::multiQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid, user_verified from users");
           }
 
           public function returnEmails(){
@@ -27,24 +27,23 @@
             return password_hash($pw, PASSWORD_DEFAULT);
           }
 
-          public function register($name, $email, $pw, $pwA, $yr, $hexId) {
-              if ($name == "" or $name == " ") {
-                throw new UserError("Přezdívka je povinné pole!");
-              }
-              if ($yr != date("Y")) {
-                throw new UserError("Chybně vyplněn antispam!");
-              }
-              if ($pw != $pwA) {
-                throw new UserError("Hesla se neshodují!");
-              }
-              if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                throw new UserError("Email nebyl zadán ve správném formátu!");
-              }
+          public function returnRegistrationByHash($hash) {
+            return Db::singleQuery("SELECT * from registrations where user_hash = ?", array($hash));
+          }
+
+          public function returnRegistrationHashes() {
+            $regs = Db::multiQuery("SELECT * from registrations");
+            $regHashes = array();
+            foreach ($regs as $reg) {
+              $regHashes[] = $reg['user_hash'];
+            }
+            return $regHashes;
+          }
+
+          public function register($name, $email, $pw, $hexId) {
               $user = array(
                 'name' => $name,
                 'email' => $email,
-                'name_r' => "",
-                'surname' => "",
                 'password' => $this->returnHash($pw),
                 'admin' => 0,
                 'user_hexid' => $hexId
@@ -56,10 +55,36 @@
               }
           }
 
+          public function requestRegister($name, $email, $pw, $pwA, $yr) {
+              $hash = strtoupper(bin2hex(random_bytes(64)));
+              if ($name == "" or $name == " ") {
+                throw new UserError("Username empty!");
+              }
+              if ($yr != date("Y")) {
+                throw new UserError("Current year doesn't match!");
+              }
+              if ($pw != $pwA) {
+                throw new UserError("Passwords don't match.");
+              }
+              $user = array(
+                'user_name' => $name,
+                'user_email' => $email,
+                'user_password' => $this->returnHash($pw),
+                'user_hash'=> $hash
+              );
+              try {
+                Db::insert('registrations', $user);
+                mb_send_mail($email, "SPSEGameHub email verification", "Hello fellow gamer! To verify your account created on
+                our website, <a href='https://www.game.spse.cz/profile/verify/$hash'>Click here<a/>");
+              } catch (PDOException $e) {
+                throw new UserError("Username already exists.");
+              }
+          }
+
           public function login($name, $password) {
             $user = $this->selectUser($name);
-            if (!$user or !password_verify($password, $user['password'])) {
-              throw new UserError("Neplatné údaje!");
+            if (!$user || !password_verify($password, $user['password'])) {
+              throw new UserError("Invalid combination.");
             }
             $_SESSION['user'] = $user;
           }
@@ -70,7 +95,7 @@
 
 
           public function selectUser($name) {
-            $user = Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid FROM users where name = ?', array($name));
+            $user = Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ?', array($name));
             return $user;
           }
 
@@ -103,8 +128,7 @@
               return false;
             } else {
               $admin = Db::singleQuery("SELECT admin, watchman, rootmaster from users where user_id = ?", array($_SESSION['user']['user_id']));
-              $auth = ($admin['admin'] == 1 or $admin['rootmaster'] == 1) ? true : false;
-              return $auth;
+              return ($admin['admin'] == 1 or $admin['rootmaster'] == 1) ? true : false;
             }
 
           }
