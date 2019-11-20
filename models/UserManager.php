@@ -11,7 +11,7 @@
             foreach ($emails as $uname) {
               $realEmails[] = $uname['email'];
             }
-            return $realEnames;
+            return $realEmails;
           }
 
           public function returnUsernames(){
@@ -40,13 +40,14 @@
             return $regHashes;
           }
 
-          public function register($name, $email, $pw, $hexId) {
+          public function register($name, $email, $pw, $hexId, $verification) {
               $user = array(
                 'name' => $name,
                 'email' => $email,
-                'password' => $this->returnHash($pw),
+                'password' => $pw,
                 'admin' => 0,
-                'user_hexid' => $hexId
+                'user_hexid' => $hexId,
+                'user_verified'=>$verification
               );
               try {
                 Db::insert('users', $user);
@@ -72,11 +73,38 @@
                 'user_password' => $this->returnHash($pw),
                 'user_hash'=> $hash
               );
+              $html ="
+              <html>
+              <head>
+              <title>SPSEGameHub Email verification</title>
+              </head>
+              <body>
+              <p>Hello fellow gamer! To verify your account created on
+              our website,
+              <a href='https://www.domasoftware.tk/register/verify/".$hash."'>Click here</a>
+              </p>
+              </body>
+              </html>";
               try {
                 Db::insert('registrations', $user);
-                mb_send_mail($email, "SPSEGameHub email verification", "Hello fellow gamer! To verify your account created on
-                our website, <a href='https://www.game.spse.cz/profile/verify/$hash'>Click here<a/>");
-              } catch (PDOException $e) {
+                $mail = new PHPMailer(true);
+                $mail->isSMTP();                                            // Send using SMTP
+                $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
+                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                $mail->Username   = 'roudnydo@zaci.spse.cz';                     // SMTP username
+                $mail->Password   = '0Pice123';                               // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                $mail->Port       = 587;                                    // TCP port to connect to
+                //Recipients
+                $mail->setFrom('roudnydo@zaci.spse.cz');
+                $mail->addAddress($email);
+                // Content
+                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->Subject = 'SPSEGameHub Email verification';
+                $mail->Body    = $html;
+                $mail->AltBody = $html;
+                $mail->send();
+              } catch (Exception $e) {
                 throw new UserError("Username already exists.");
               }
           }
@@ -93,10 +121,9 @@
               unset($_SESSION['user']);
           }
 
-
           public function selectUser($name) {
-            $user = Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ?', array($name));
-            return $user;
+            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ?', array($name));
+
           }
 
           public function generateHexId() {

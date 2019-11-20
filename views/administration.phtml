@@ -3,6 +3,8 @@
   <section class="row">
     <div class="col-5 bg-dark px-5 py-2">
       <h2>Dashboard</h2>
+      <h3>Server time: <?php $time = new DateTime("now");
+      echo $time->format("H:i:s");?></h3>
       <div class="accordion bg-dark" id="accordionExample">
   <div class="card">
     <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -34,6 +36,16 @@
         <button type="button" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Remove event</button>
         <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-game">Remove game</button>
         <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-bracket">Remove bracket</button>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
+      <h5 class="mb-0">Tools</h5>
+    </div>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body bg-dark row justify-content-around">
+        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Verification tool</button>
       </div>
     </div>
   </div>

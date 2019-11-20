@@ -5,13 +5,13 @@
       if ($userMan->returnUser()) {
         $this->redir("profile");
       }
-      
+
       //Handling POST
       if ($_POST) {
         try {
           if (strlen($_POST['name']) > 0 && strlen($_POST['pw']) > 0) {
             $userMan->login($_POST['name'], $_POST['pw']);
-            $this->addMessage("Byl jste úspěšně přihlášen.");
+            $this->addMessage("Logged in.");
             $this->log("User log.", "login");
             $this->redir('home');
           } else {
@@ -27,7 +27,5 @@
     $this->view = 'login';
   }
   }
-
-
-
+  
 ?>

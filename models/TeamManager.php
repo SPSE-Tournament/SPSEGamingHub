@@ -14,7 +14,7 @@
     }
 
     public function returnUsersInATeam($teamId){
-      return Db::multiQuery("SELECT users.user_id, users.name as uname from teamparticipation
+      return Db::multiQuery("SELECT users.user_id, users.name as uname, users.user_verified as user_verified from teamparticipation
         join users on users.user_id = teamparticipation.user_id
       where team_id = ?", array($teamId));
     }

@@ -86,18 +86,24 @@
               $event = $eventManager->returnEventById($_POST['event-id']);
               if ($numPlayers >= $game['game_playerlimitperteam'] && $team['game_id'] == $_POST['game-id']) {
                 $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
+                $verifiedPlayers = 0;
                 foreach ($usersInATeam as $user) {
                   if ($user['user_verified'] == 1) {
-                    $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                    $this->logDifferentUser($user['user_id'],
-                    'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
-                    ,'event_join');
-                  } else {
-                    $this->addMessage("User not verified.");
-                    $this->redir("events");
+                    $verifiedPlayers++;
                   }
-
                 }
+                if ($verifiedPlayers == $game['game_playerlimitperteam']) {
+                  foreach ($usersInATeam as $user) {
+                      $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                      $this->logDifferentUser($user['user_id'],
+                      'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                      ,'event_join');
+                  }
+                } else {
+                  $this->addMessage("Users in that team are not verified.");
+                  $this->redir("events");
+                }
+
                 $this->addMessage("Event joined succesfully!");
                 $this->redir("events/".$_POST['event-url']);
               } else {
