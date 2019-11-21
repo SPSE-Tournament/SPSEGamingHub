@@ -161,11 +161,12 @@
           }
 
           public function liveSearchUsers($str) {
-              if (strlen($str) >= 3) {
+              $strL = mb_strtolower($str);
+              if (strlen($strL) >= 3) {
                   $users = $this->returnUsers();
                   $usersToReturn = array();
                   foreach ($users as $user) {
-                    if (substr($user['name'], 0, strlen($str)) == $str)
+                    if (mb_strtolower(substr($user['name'], 0, strlen($strL))) == $strL)
                         $usersToReturn[] = $user['name']."#".$user['user_hexid'];
                   }
                   if (count($usersToReturn) > 0)

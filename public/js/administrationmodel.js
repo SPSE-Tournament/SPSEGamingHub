@@ -27,3 +27,7 @@ function getGameForm(value) {
   xhttp.open("GET", "administration/getgameform/"+value, true);
   xhttp.send();
 }
+
+function addUserInput() {
+  document.querySelector('.user-input-group')
+}

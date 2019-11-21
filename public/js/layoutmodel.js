@@ -43,10 +43,10 @@ function loadMessages(msgType) {
       document.querySelector(id).style.display = "none";
     }
 
-    function loadUserLiveText(str) {
+    function loadUserLiveText(str, livesearchelem, hintelem) {
       if (str.length < 3) {
-        document.querySelector(".hint").innerHTML ="";
-        document.querySelector('.livesearch').style.display = "none";
+        document.querySelector("."+hintelem).innerHTML ="";
+        document.querySelector('.'+livesearchelem).style.display = "none";
         return;
       }
       if (window.XMLHttpRequest) {
@@ -58,8 +58,8 @@ function loadMessages(msgType) {
         if (this.readyState==4 && this.status==200) {
           let start = this.responseText.indexOf('<!-- UserLiveTextStart -->');
           let end = this.responseText.indexOf("<!-- UserLiveTextEnd -->") + "<!-- UserLiveTextEnd -->".length;
-          document.querySelector(".hint").innerHTML = this.responseText.slice(start,end);
-          document.querySelector('.livesearch').style.display = "block";
+          document.querySelector("."+hintelem).innerHTML = this.responseText.slice(start,end);
+          document.querySelector('.'+livesearchelem).style.display = "block";
         }
       }
       xmlhttp.open("GET","profile/getusers/"+str,true);
@@ -69,6 +69,7 @@ function loadMessages(msgType) {
     function selectUser(str) {
       document.getElementById('newMessage_username').value = str;
       document.querySelector('.livesearch').style.display = "none";
+      document.querySelector('.livesearch-verify').style.display = "none";
     }
 
 

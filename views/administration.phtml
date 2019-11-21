@@ -3,6 +3,7 @@
   <section class="row">
     <div class="col-5 bg-dark px-5 py-2">
       <h2>Dashboard</h2>
+      <hr style="background-color:#fff;">
       <h3>Server time: <?php $time = new DateTime("now");
       echo $time->format("H:i:s");?></h3>
       <div class="accordion bg-dark" id="accordionExample">
@@ -45,7 +46,7 @@
     </div>
     <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
       <div class="card-body bg-dark row justify-content-around">
-        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Verification tool</button>
+        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-verification">Verification tool</button>
       </div>
     </div>
   </div>
@@ -340,6 +341,38 @@
     </button>
   </div>
   <div class="modal-body modal-log-detail-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade modal-verification" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title">Verification tool</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post">
+      <input type="hidden" name="user-verification">
+      <section class="d-flex flex-row p-2">
+        <button class="btn btn-warning" type="button" name="button" onclick="addUserInput()">+</button>
+      </section>
+      <div class="form-group w-50 mx-auto">
+        <div class="user-input-group p-3 mb-3 row">
+            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch-verify","hint-verify")' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
+        </div>
+        <div class="livesearch-verify livehint-layout p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
+          <p>Hint:</p>
+          <hr>
+          <div class="hint-verify"></div>
+        </div>
+      </div>
+  <button type="submit" class="btn btn-secondary" name="button">Verify</button>
+</form>
+  </div>
       </div>
     </div>
   </div>

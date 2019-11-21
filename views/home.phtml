@@ -1,5 +1,24 @@
-<section class="home d-flex justify-content-center align-items-center" style="height:100vh;">
-  <div class="bg-dark pr-5" style="border-radius: 0 2rem 0 2rem">
-    <img src="public/images/logo_spse_text.png" alt="" width="600" style="border-radius: 0 2rem 0 2rem">
-  </div>
+<section class="home d-flex flex-column justify-content-center align-items-center">
+  <section class="d-flex align-items-center" style="height:100vh;">
+    <div class="pr-5 homesign" style="border-radius: 0 2rem 0 2rem;">
+      <img src="public/images/logo_spse_text.png" alt="" width="600" style="border-radius: 0 2rem 0 2rem">
+    </div>
+  </section>
+  <section class="d-flex align-items-center" style="height:100vh;">
+    <section id="twitch-embed"></section>
+  </section>
 </section>
+
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+<script type="text/javascript">
+   let embed = new Twitch.Embed("twitch-embed", {
+     width: 854,
+     height: 480,
+     channel: "spsegaming",
+     layout: "video"
+   });
+   embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+  var player = embed.getPlayer();
+  player.play();
+});
+</script>

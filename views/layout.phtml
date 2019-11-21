@@ -89,13 +89,11 @@
         <input type="hidden" name="message-add">
         <div class="form-group w-50">
           <div class="input-group mb-3">
-              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value)' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
+              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hint")' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
                 <div class="livesearch livehint-layout p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
                   <p>Hint:</p>
                   <hr>
-                  <div class="hint">
-
-                  </div>
+                  <div class="hint"></div>
                 </div>
           </div>
         </div>
