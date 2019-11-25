@@ -46,7 +46,7 @@
             <div class="col-4 mb-3">
               <section class="each-team col-12 mx-auto p-4"data-toggle="modal" data-target=".modal-team-detail" onclick="loadTeamDetail('<?=$team['id']?>')">
               <div>
-                <p><?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<img class="mx-1" src="public/images/download.png" alt="" height="20"><?= $team['game'] ?>)</span></p>
+                <p><?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<img class="mx-1" src="<?=$team['game_icon']?>" alt="" height="20">)</span></p>
                 <hr style="background-color:orange;">
               </div>
               <ul>
@@ -60,7 +60,9 @@
           <?php endforeach; ?>
           </section>
           <hr>
-          <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+          <?php if (count($userTeams) < 5): ?>
+            <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+          <?php endif; ?>
         <?php endif; ?>
       </div>
       <div class="tab-pane fade" id="nav-friends" role="tabpanel">Kamaradi</div>
@@ -74,43 +76,46 @@
     </div>
   </div>
 
-  <div class="modal modal-team-add" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-    <h5 class="modal-title">Create a team</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body p-5">
-    <form method="post">
-      <input type="hidden" name="team-add">
-  <div class="form-group">
-  <label for="exampleInputEmail1">Team name</label>
-  <input type="text" class="form-control" name="teamName" placeholder="Hustaci">
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
-      </div>
-      <select class="custom-select" name="teamGame">
-        <?php foreach($games as $game): ?>
-        <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
-      <?php endforeach; ?>
-      </select>
+  <?php if (count($userTeams) < 5): ?>
+    <div class="modal modal-team-add" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+      <h5 class="modal-title">Create a team</h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Create a team</button>
-    </form>
-  </div>
-      </div>
+    <div class="modal-body p-5">
+      <form method="post">
+        <input type="hidden" name="team-add">
+    <div class="form-group">
+    <label for="exampleInputEmail1">Team name</label>
+    <input type="text" class="form-control" name="teamName" placeholder="Hustaci">
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
+        </div>
+        <select class="custom-select" name="teamGame">
+          <?php foreach($games as $game): ?>
+          <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
+        <?php endforeach; ?>
+        </select>
       </div>
     </div>
-  </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary">Create a team</button>
+      </form>
+    </div>
+        </div>
+        </div>
+      </div>
+    </div>    
+  <?php endif; ?>
+
 
 
 <script src="public/js/profilemodel.js"></script>

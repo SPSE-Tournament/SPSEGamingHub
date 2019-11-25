@@ -181,7 +181,11 @@
               }
           }
 
-          public function parseHexname($hexName) {
+          public function verifyUser($hexId):void {
+            Db::edit("users",array("user_verified"=>1), "where user_hexid = ?", array($hexId));
+          }
+
+          public function parseHexname($hexName):array {
               $parsedName = explode("#", $hexName);
               return array(
                 'name' => $parsedName[0],

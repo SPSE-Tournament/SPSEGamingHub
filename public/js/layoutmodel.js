@@ -66,8 +66,31 @@ function loadMessages(msgType) {
       xmlhttp.send();
     }
 
-    function selectUser(str) {
-      document.getElementById('newMessage_username').value = str;
+    function loadTeamLiveText(str, livesearchelem, hintelem) {
+      if (str.length < 3) {
+        document.querySelector("."+hintelem).innerHTML ="";
+        document.querySelector('.'+livesearchelem).style.display = "none";
+        return;
+      }
+      if (window.XMLHttpRequest) {
+        xmlhttp=new XMLHttpRequest();
+      } else {
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+      }
+      xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+          let start = this.responseText.indexOf('<!-- TeamLiveTextStart -->');
+          let end = this.responseText.indexOf("<!-- TeamLiveTextEnd -->") + "<!-- TeamLiveTextEnd -->".length;
+          document.querySelector("."+hintelem).innerHTML = this.responseText.slice(start,end);
+          document.querySelector('.'+livesearchelem).style.display = "block";
+        }
+      }
+      xmlhttp.open("GET","profile/getteamhint/"+str,true);
+      xmlhttp.send();
+    }
+
+    function selectUser(elem,str) {
+      document.getElementById(elem).value = str;
       document.querySelector('.livesearch').style.display = "none";
       document.querySelector('.livesearch-verify').style.display = "none";
     }

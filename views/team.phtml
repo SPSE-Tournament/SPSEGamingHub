@@ -11,28 +11,37 @@
       <li><?=$user['uname']?></li>
     <?php endforeach; ?>
   </ul>
-<button class="btn btn-primary invite-button" type="button" name="button" onclick="showInvitePlayerBox()" style="display:block;">Invite players</button>
-<section class="invite-player p-2 m-1" style="display:none;">
-  <form method="post">
-    <input type="hidden" name="user-invite">
-    <input type="hidden" name="team-name" value="<?=$team['team_name']?>">
-    <input type="hidden" name="team-id" value="<?=$team['team_id']?>">
-    <input type="hidden" name="team-game" value="<?=$team['game_name']?>">
-    <div class="input-group d-flex flex-wrap">
-      <div class="col-12">
-        <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value)' type="text" name="user-to-invite" value="" placeholder="Username#HexId" autocomplete="off">
-      </div>
-          <div class="livesearch livehint-invite col-10 p-3 my-2 text-center mx-auto" style="display: none;">
-            <p>Hint:</p>
-            <hr>
-            <div class="hint">
-            </div>
+  <div class="row justify-content-center">
+    <button class="btn btn-primary invite-button" type="button" name="button" onclick="showInvitePlayerBox()" style="display:block;">Invite players</button>
+    <section class="invite-player p-2 m-1" style="display:none;">
+      <form method="post">
+        <input type="hidden" name="user-invite">
+        <input type="hidden" name="team-name" value="<?=$team['team_name']?>">
+        <input type="hidden" name="team-id" value="<?=$team['team_id']?>">
+        <input type="hidden" name="team-game" value="<?=$team['game_name']?>">
+        <div class="input-group d-flex flex-wrap">
+          <div class="col-12">
+            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch","hint")' type="text" name="user-to-invite" value="" placeholder="Username#HexId" autocomplete="off">
           </div>
-    </div>
-    <div class="input-group p-3">
-      <button class="btn btn-primary" type="submit" name="button">Invite</button>
-    </div>
-  </form>
-</section>
+              <div class="livesearch livehint-invite col-10 p-3 my-2 text-center mx-auto" style="display: none;">
+                <p>Hint:</p>
+                <hr>
+                <div class="hint">
+                </div>
+              </div>
+        </div>
+        <div class="input-group p-3">
+          <button class="btn btn-primary" type="submit" name="button">Invite</button>
+        </div>
+      </form>
+    </section>
+    <form method="post">
+      <input type="hidden" name="team-removal">
+      <input type="hidden" name="team-id" value="<?=$team['team_id']?>">
+      <?php if ($_SESSION['user']['user_id'] == $team['team_captain_id']): ?>
+        <button class="btn btn-danger ml-2" type="submit" name="button">Remove team</button>
+      <?php endif; ?>
+    </form>
+  </div>
 </div>
 <!-- TeamEnd -->

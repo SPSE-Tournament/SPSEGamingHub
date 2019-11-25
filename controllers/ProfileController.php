@@ -46,6 +46,15 @@
             $response = $userMan->liveSearchUsers($str);
             $this->data['response'] = $response;
             $this->view = 'userlist';
+          } else if ($params[0] == 'getteamhint') {
+            if (!empty($params[1])) {
+              $str = $params[1];
+            } else {
+              $str = "";
+            }
+            $response = $teamMan->liveSearchTeams($str);;
+            $this->data['response'] = $response;
+            $this->view = "teamlist";
           }
           else if ($params[0] == 'getteam' && !empty($params[1]) && $teamMan->teamExists($params[1])) {
               $this->data['team'] = $teamMan->returnTeamById($params[1]);
@@ -90,6 +99,16 @@
             } catch (PDOException $e) {
               $this->addMessage($e);
             }
+        }
+        if (isset($_POST['team-removal'])) {
+          try {
+            $teamMan->removeTeam($_POST['team-id']);
+            $this->addMessage("Team removed.");
+            $this->log("Team (".$_POST['team-id'].") removed","team_removal");
+            $this->redir("profile");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
         }
         }
 

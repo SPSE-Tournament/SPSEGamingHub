@@ -1,7 +1,7 @@
 <?php
   class EventManager {
       public function returnEvents() {
-        return Db::multiQuery("SELECT event_id, event_name, games.game_name as game_name, games.game_id as game_id,games.game_background as game_background, games.game_rules as game_rules, bracket_status,event_winner,
+        return Db::multiQuery("SELECT event_id, event_name, games.game_name as game_name, games.game_id as game_id,games.game_background as game_background, games.game_rules as game_rules,games.game_icon as game_icon, bracket_status,event_winner,
          concat(substr(event_timestamp,9,2), '.', substr(event_timestamp,6,2), '.', substr(event_timestamp,1,4), ' ', substr(event_timestamp,12,5)) as event_parseddate,
          event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url, (select count(*) from eventparticipation where eventparticipation.event_id = events.event_id) as player_count
                                 from events

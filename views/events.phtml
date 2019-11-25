@@ -13,7 +13,7 @@
         <h1><?= $event['event_name'] ?></h1>
         <hr style="background-color:#fff">
         <div class="row justify-content-center">
-          <h3 class="col-11 m-1"><img src="https://img.icons8.com/ios/50/000000/league-of-legends.png">  <?= $event['game_name'] ?></h3>
+          <h3 class="col-11 m-1"><img src="<?=$event['game_icon']?>" height="50" width="50">  <?= $event['game_name'] ?></h3>
           <h3 class="col-5 m-1"><img src="https://img.icons8.com/pastel-glyph/48/000000/time.png">  <?= $event['event_parseddate'] ?></h3>
           <h3 class="col-5 m-1"><img src="https://img.icons8.com/wired/48/000000/conference-call.png">  Players: <?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h3>
         </div>

@@ -2,20 +2,21 @@
   class GameManager {
 
     public function returnGames() {
-      return Db::multiQuery("SELECT game_id, game_name,game_short_name, game_rules, game_playerlimitperteam,game_background from games order by game_id");
+      return Db::multiQuery("SELECT game_id, game_name,game_short_name, game_rules, game_playerlimitperteam,game_background,game_icon from games order by game_id");
     }
 
     public function returnGameById($gameId) {
-      return Db::singleQuery("SELECT game_id, game_name,game_short_name, game_rules, game_playerlimitperteam,game_background from games where game_id = ?", array($gameId));
+      return Db::singleQuery("SELECT game_id, game_name,game_short_name, game_rules, game_playerlimitperteam,game_background,game_icon from games where game_id = ?", array($gameId));
     }
 
-    public function addGame($gameName,$shortName, $gameTL, $gameBck = null, $gameRules = null) {
+    public function addGame($gameName,$shortName, $gameTL, $gameBck = null, $gameRules = null, $gameIcon = null) {
       $game = array(
         'game_name' => $gameName,
         'game_short_name' => $shortName,
         'game_rules' => $gameRules,
         'game_playerlimitperteam' => $gameTL,
         'game_background' => $gameBck,
+        'game_icon'=>$gameIcon
       );
       try {
       Db::insert('games', $game);
@@ -24,7 +25,7 @@
     }
     }
 
-    public function editGame($gameName,$shortName, $gameTL, $gameBck = null, $gameRules = null, $gameId) {
+    public function editGame($gameName,$shortName, $gameTL, $gameBck = null, $gameRules = null,$gameIcon = null, $gameId) {
       $curGame = $this->returnGameById($gameId);
       $game = array(
         'game_name' => $gameName,
@@ -32,6 +33,7 @@
         'game_rules' => $gameRules,
         'game_playerlimitperteam' => $gameTL,
         'game_background' => $gameBck,
+        'game_icon'=>$gameIcon
       );
       if (!isset($gameBck)) {
         $game['game_background'] = $curGame['game_background'];
@@ -42,6 +44,11 @@
         $game['game_rules'] = $curGame['game_rules'];
       } else {
         $game['game_rules'] = $gameRules;
+      }
+      if (!isset($gameIcon)) {
+        $game['game_icon'] = $curGame['game_icon'];
+      } else {
+        $game['game_icon'] = $gameIcon;
       }
       Db::edit('games', $game, 'where game_id = ?', array($gameId));
     }

@@ -357,20 +357,19 @@
   <div class="modal-body">
     <form method="post">
       <input type="hidden" name="user-verification">
-      <section class="d-flex flex-row p-2">
-        <button class="btn btn-warning" type="button" name="button" onclick="addUserInput()">+</button>
-      </section>
+      <select class="form-control" name="UserOrTeam" onchange="changeVerificationSelect(this.value)">
+        <option selected>Choose format...</option>
+        <option value="usr">User</option>
+        <option value="team">Team</option>
+      </select>
       <div class="form-group w-50 mx-auto">
-        <div class="user-input-group p-3 mb-3 row">
-            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch-verify","hint-verify")' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
-        </div>
-        <div class="livesearch-verify livehint-layout p-3 my-5 text-center justify-content-center align-items-center" style="display: none;">
-          <p>Hint:</p>
-          <hr>
+        <div class="user-input-group p-1 mb-3"></div>
+        <div class="livesearch-verify livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
+          <p>Hint:</p><hr>
           <div class="hint-verify"></div>
         </div>
       </div>
-  <button type="submit" class="btn btn-secondary" name="button">Verify</button>
+  <button type="submit" class="btn btn-warning" name="button">Verify</button>
 </form>
   </div>
       </div>
