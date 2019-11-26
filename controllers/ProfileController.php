@@ -76,26 +76,63 @@
         if ($_POST) {
           if(isset($_POST['team-add'])) {
             try {
-              $teamMan->insertTeam($_POST['teamName'], $_SESSION['user']['user_id'], $_POST['teamGame']);
-              $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], Db::getLastId());
-              $this->addMessage("Your team has been created.");
-              $this->log("Team has been created", "team_creation");
-              $this->redir("profile");
+              if (strlen($_POST['teamName']) > 3) {
+                if (!$teamMan->teamExists($_POST['teamName'])) {
+                  $teamMan->insertTeam($_POST['teamName'], $_SESSION['user']['user_id'], $_POST['teamGame']);
+                  $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], Db::getLastId());
+                  $this->addMessage("Your team has been created.");
+                  $this->log("Team has been created", "team_creation");
+                  $this->redir("profile");
+                } else {
+                  $this->addMessage("Team name taken.");
+                  $this->redir("profile");
+                }
+              } else {
+                $this->addMessage("Team name must be atleast 4 characters long.");
+                $this->redir("profile");
+              }
             } catch (PDOException $e) {
               $this->addMessage($e);
             }
           }
           if (isset($_POST['user-invite'])) {
             try {
-              $parsedHexName = $userMan->parseHexname($_POST['user-to-invite']);
-              $receiverId = $userMan->selectUser($parsedHexName['name']);
-              $inviteMessage = 'You have been invited to join a team: <span style="color:orange;">' . $_POST['team-name'] . '</span> in a game: <span style="color:orange;">' . $_POST['team-game'] . '</span>';
-              $mesMan->sendMessage($inviteMessage,'invite',
-               $date->format('Y-m-d H:i:s'),
-               $_SESSION['user']['user_id'],$_SESSION['user']['name'],$receiverId['user_id'],$parsedHexName['name'], $_POST['team-id']);
-              $this->addMessage("Your invite has been sent.");
-              $this->log("Invite sent. Sender: ".$_SESSION['user']['name']."#".$_SESSION['user']['user_hexid'].', Receiver: '. $_POST['user-to-invite'] . ", Message: ". $_POST['message'] ,'message_sent');
-              $this->redir("profile");
+              if (strlen($_POST['user-to-invite']) > 0) {
+                $parsedHexName = $userMan->parseHexname($_POST['user-to-invite']);
+                if ($parsedHexName['name'] != $_SESSION['user']['name']) {
+                  if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['user-to-invite']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['user-to-invite'])) {
+                    $realUsers = $teamMan->formatUsersInATeam($teamMan->returnUsersInATeam($_POST['team-id']));
+                    if (!in_array($parsedHexName['name'],$realUsers['names']) && !in_array(mb_strtoupper($parsedHexName['hexid']),$realUsers['hexids'])) {
+                      if ($userMan->userExistsHex($parsedHexName['hexid'])) {
+                        $receiverId = $userMan->selectUserHex($parsedHexName['hexid']);
+                        $inviteMessage = 'You have been invited to join a team: <span style="color:orange;">' . $_POST['team-name'] . '</span> in a game: <span style="color:orange;">' . $_POST['team-game'] . '</span>';
+                        $mesMan->sendMessage($inviteMessage,'invite',
+                        $date->format('Y-m-d H:i:s'),
+                        $_SESSION['user']['user_id'],$_SESSION['user']['name'],$receiverId['user_id'],$parsedHexName['name'], $_POST['team-id']);
+                        $this->addMessage("Your invite has been sent.");
+                        $this->log("Invite sent. Sender: ".$_SESSION['user']['name']."#".$_SESSION['user']['user_hexid'].', Receiver: '. $_POST['user-to-invite'] . ", Message: ". $_POST['message'] ,'message_sent');
+                        $this->redir("profile");
+                      } else {
+                        $this->addMessage("User doesn't exist");
+                        $this->redir("profile");
+                    }
+                    } else {
+                      $this->addMessage("User already in the team, are you actually blind?");
+                      $this->redir("profile");
+                    }
+                  } else {
+                    $this->addMessage("User format invalid");
+                    $this->redir("profile");
+                  }
+                } else {
+                  $this->addMessage("Can't invite yourself, can you mate?");
+                  $this->redir("profile");
+                }
+              } else {
+                $this->addMessage("Come on now, you have to type something.");
+                $this->redir("profile");
+              }
+
             } catch (PDOException $e) {
               $this->addMessage($e);
             }

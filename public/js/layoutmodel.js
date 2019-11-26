@@ -96,5 +96,14 @@ function loadMessages(msgType) {
     }
 
 
+    function openNav() {
+      document.getElementById("slide-navigation").style.width = "100%";
+    }
+
+    function closeNav() {
+      document.getElementById("slide-navigation").style.width = "0%";
+    }
+
+
 
     $('.toast').toast('show');

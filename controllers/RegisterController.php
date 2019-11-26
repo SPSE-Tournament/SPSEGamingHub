@@ -11,7 +11,7 @@
               try {
                 $email = explode("@",$reg['user_email']);
                 $verification = 0;
-                if ($email[1] = 'zaci.spse.cz' || $email[1] == 'spse.cz') {
+                if ($email[1] == 'zaci.spse.cz' || $email[1] == 'spse.cz') {
                   $verification = 1;
                 }
               $userMan->register($reg['user_name'],$reg['user_email'],$reg['user_password'],$userMan->generateHexId(), $verification);
@@ -35,22 +35,27 @@
               $unames = $userMan->returnUsernames();
                   if ($_POST['agreement-tos']) {
                     if (!in_array($_POST['usrname'], $unames) && !in_array($_POST['email'], $emails)) {
-                      $userManager = new UserManager();
-                      $userManager->requestRegister($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
-                      $this->addMessage("Your request noted, we have sent you a verification email just to really know it's you.");
-                      $this->redir('register/verify');
+                      if (strlen($_POST['usrname']) > 3) {
+                        if (strlen($_POST['pw']) > 4) {
+                          $userManager = new UserManager();
+                          $userManager->requestRegister($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
+                          $this->addMessage("Your request noted, we have sent you a verification email just to really know it's you.");
+                          $this->redir('register/verify');
+                        } else {
+                          $this->addMessage("Password must be atleast 5 characters long");
+                        }
+                      } else {
+                        $this->addMessage("Username must be atleast 4 characters long");
+                      }
+
                     } else {
                       $this->addMessage("Email or username already exists");
-                      $this->redir("register");
                     }
-
                   } else {
                     $this->addMessage("You must agree with the terms of service.");
-                    $this->redir("register");
                   }
             } else {
               $this->addMessage("Invalid email!");
-              $this->redir("register");
             }
 
           } catch (UserError $e) {

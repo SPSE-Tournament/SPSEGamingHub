@@ -31,14 +31,14 @@
     <nav>
       <div class="nav nav-pills" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-        <a class="nav-item nav-link" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a>
+        <!--<a class="nav-item nav-link" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a> -->
       </div>
     </nav>
     <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-teams" role="tabpanel">
         <?php if (!$hasTeams): ?>
           <p>User has no teams...</p>
-          <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+          <button class="btn btn-warning" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
         <?php endif; ?>
         <?php if ($hasTeams): ?>
           <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
@@ -61,7 +61,7 @@
           </section>
           <hr>
           <?php if (count($userTeams) < 5): ?>
-            <button class="btn btn-primary" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+            <button class="btn btn-warning" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
           <?php endif; ?>
         <?php endif; ?>
       </div>
@@ -77,7 +77,7 @@
   </div>
 
   <?php if (count($userTeams) < 5): ?>
-    <div class="modal modal-team-add" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal modal-team-add fade" tabindex="-1" role="dialog" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
@@ -107,13 +107,13 @@
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary">Create a team</button>
+      <button type="submit" class="btn btn-warning">Create a team</button>
       </form>
     </div>
         </div>
         </div>
       </div>
-    </div>    
+    </div>
   <?php endif; ?>
 
 

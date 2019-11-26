@@ -21,7 +21,6 @@
            return $x;
          }
        }
-
                    public function showView() {
                      if ($this->view) {
                        extract($this->sanitize($this->data));

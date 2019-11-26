@@ -20,9 +20,18 @@
     }
 
     public function returnUsersInATeam($teamId):array{
-      return Db::multiQuery("SELECT users.user_id, users.name as uname, users.user_verified as user_verified from teamparticipation
+      return Db::multiQuery("SELECT users.user_id, users.name as uname, users.user_verified as user_verified, user_hexid from teamparticipation
         join users on users.user_id = teamparticipation.user_id
       where team_id = ?", array($teamId));
+    }
+
+    public function formatUsersInATeam(array $users):array {
+      $rUsers = array('names'=>array(),'hexids'=>array());
+      foreach ($users as $u) {
+        $rUsers['names'][] = $u['uname'];
+        $rUsers['hexids'][] = $u['user_hexid'];
+      }
+      return $rUsers;
     }
 
     public function returnUsersInATeamCount($teamId):int{
@@ -50,9 +59,15 @@
       where team_id = ?", array($teamId));
     }
 
-    public function teamExists($teamId):int{
-      return Db::query("SELECT team_id, team_name, team_captain_id, game_id from teams
-      where team_id = ?", array($teamId));
+    public function teamExists($teamId):int {
+      if (Db::query("SELECT team_id, team_name, team_captain_id, game_id from teams
+      where team_name = ?", array($teamId)))
+        return 1;
+       else if (Db::query("SELECT team_id, team_name, team_captain_id, game_id from teams
+      where team_id = ?", array($teamId)))
+        return 1;
+      else
+        return 0;
     }
 
     public function returnTeamsInEvent(array $teamIds):array {
@@ -125,7 +140,10 @@
 
     public function removeTeam($teamId):void {
       Db::query("DELETE from teams where team_id = ?", array($teamId));
+      Db::query("DELETE from eventparticipation where team_id = ?", array($teamId));
+      Db::query("DELETE from messages where invite_team_id = ?", array($teamId));
     }
+
 
 
   }

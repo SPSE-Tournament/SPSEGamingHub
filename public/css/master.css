@@ -172,7 +172,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
   font-size: 1rem;
-  height: 15vh;
+  
 }
 .closeSideNav {
   cursor: pointer;

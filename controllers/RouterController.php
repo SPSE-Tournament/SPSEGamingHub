@@ -20,18 +20,22 @@
             $this->redir('error');
           }
 
-
-
           $this->controller->parse($parsedU);
 
           if (isset($_POST['message-add'])) {
             try {
               $parsedHexName = $userMan->parseHexname($_POST['receiver']);
-              $receiverId = $userMan->selectUser($parsedHexName['name']);
-              $mesMan->sendMessage($_POST['message'],'message', $date->format('Y-m-d H:i:s'),$_SESSION['user']['user_id'],$_SESSION['user']['name'],$receiverId['user_id'],$parsedHexName['name']);
-              $this->addMessage("Your message has been sent.");
-              $this->log("Message sent. Sender: ".$_SESSION['user']['name']."#".$_SESSION['user']['user_hexid'].', Receiver: '. $_POST['receiver'] . ", Message: ". $_POST['message'] ,'message_sent');
-              $this->redir("profile");
+              if ($userMan->userExistsHex($parsedHexName['hexid'])) {
+                $receiverId = $userMan->selectUserHex($parsedHexName['hexid']);
+                $mesMan->sendMessage($_POST['message'],'message', $date->format('Y-m-d H:i:s'),$_SESSION['user']['user_id'],$_SESSION['user']['name'],$receiverId['user_id'],$parsedHexName['name']);
+                $this->addMessage("Your message has been sent.");
+                $this->log("Message sent. Sender: ".$_SESSION['user']['name']."#".$_SESSION['user']['user_hexid'].', Receiver: '. $_POST['receiver'] . ", Message: ". $_POST['message'] ,'message_sent');
+                $this->redir("profile");
+              } else {
+                $this->addMessage("User doesn't exist.");
+              }
+
+
             } catch (PDOException $e) {
               $this->addMessage($e);
             }

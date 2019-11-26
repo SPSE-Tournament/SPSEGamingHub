@@ -96,41 +96,13 @@
               <div class="input-group-prepend">
                 <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Bracket format</label>
                 <select class="custom-select" name="eventGame">
-                    <option value="scheduled">Single-elimination</option>
-                    <option value="live">Double-elimination</option>
+                    <option value="<?= $event['bracket_format'] ?>"><?= $event['bracket_format'] ?></option>
+                    <option value="single">Single-elimination</option>
+                    <option value="double">Double-elimination</option>
                 </select>
               </div>
             </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Basic matches format</label>
-                <select class="custom-select" name="eventGame">
-                    <option value="scheduled">BO1</option>
-                    <option value="live">BO3</option>
-                    <option value="live">BO5</option>
-                </select>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Elimination matches format</label>
-                <select class="custom-select" name="eventGame">
-                    <option value="scheduled">BO1</option>
-                    <option value="live">BO3</option>
-                    <option value="live">BO5</option>
-                </select>
-              </div>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Final format</label>
-                <select class="custom-select" name="eventGame">
-                    <option value="scheduled">BO1</option>
-                    <option value="live">BO3</option>
-                    <option value="live">BO5</option>
-                </select>
-              </div>
-            </div>
+
         </div>
         </div>
         <div class="modal-footer">

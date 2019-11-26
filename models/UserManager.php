@@ -88,18 +88,18 @@
               try {
                 Db::insert('registrations', $user);
                 $mail = new PHPMailer(true);
-                $mail->isSMTP();                                            // Send using SMTP
-                $mail->Host       = 'smtp.office365.com';                    // Set the SMTP server to send through
-                $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
-                $mail->Username   = 'roudnydo@zaci.spse.cz';                     // SMTP username
-                $mail->Password   = '0Pice123';                               // SMTP password
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;         // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                $mail->Port       = 587;                                    // TCP port to connect to
+                $mail->isSMTP(); // Send using SMTP
+                $mail->Host       = 'smtp.office365.com'; // Set the SMTP server to send through
+                $mail->SMTPAuth   = true; // Enable SMTP authentication
+                $mail->Username   = 'roudnydo@zaci.spse.cz'; // SMTP username
+                $mail->Password   = '0Pice123';  // SMTP password
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+                $mail->Port       = 587; // TCP port to connect to
                 //Recipients
                 $mail->setFrom('roudnydo@zaci.spse.cz');
                 $mail->addAddress($email);
                 // Content
-                $mail->isHTML(true);                                  // Set email format to HTML
+                $mail->isHTML(true); // Set email format to HTML
                 $mail->Subject = 'SPSEGameHub Email verification';
                 $mail->Body    = $html;
                 $mail->AltBody = $html;
@@ -107,6 +107,10 @@
               } catch (Exception $e) {
                 throw new UserError("Username already exists.");
               }
+          }
+
+          public function userExistsHex($hexId):bool {
+            return Db::query("SELECT user_id from users where user_hexid = ?", array(mb_strtoupper($hexId)));
           }
 
           public function login($name, $password) {
@@ -123,7 +127,10 @@
 
           public function selectUser($name) {
             return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ?', array($name));
+          }
 
+          public function selectUserHex($hex) {
+            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where user_hexid = ?', array($hex));
           }
 
           public function generateHexId() {
@@ -157,7 +164,6 @@
               $admin = Db::singleQuery("SELECT admin, watchman, rootmaster from users where user_id = ?", array($_SESSION['user']['user_id']));
               return ($admin['admin'] == 1 or $admin['rootmaster'] == 1) ? true : false;
             }
-
           }
 
           public function liveSearchUsers($str) {
