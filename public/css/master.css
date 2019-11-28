@@ -172,7 +172,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
   font-size: 1rem;
-  
+
 }
 .closeSideNav {
   cursor: pointer;
@@ -237,7 +237,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   }
   .message-preview-button:hover {
     border-bottom: 3px solid orange;
-    transition: all 0.5s ease-out;
+    transition: all 0.2s ease-out;
   }
     .message-preview-button:active, .message-preview-button:focus {
       outline: none;

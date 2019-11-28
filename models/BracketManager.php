@@ -53,7 +53,6 @@
         where event_id = ? order by match_id asc", array($eventId));
           foreach ($matches as $match) {
             if ($match['match_first_team'] == 'TBD' || $match['match_second_team'] == 'TBD') {
-
               if ($match['match_first_team'] == 'TBD') {
                   $firstSeed = Db::singleQuery("SELECT match_id, match_status, match_bracket_seed,
                   match_first_team, match_second_team, match_round, match_first_team_score, match_second_team_score,match_first_team_seed, match_second_team_seed, event_id from matches
@@ -66,7 +65,6 @@
                       throw new UserError($e);
                     }
                   }
-
               } if ($match['match_second_team'] == 'TBD') {
 
                 $secondSeed = Db::singleQuery("SELECT match_id, match_status, match_bracket_seed,
@@ -92,7 +90,6 @@
                 throw new UserError($e);
               }
               }
-
             }
           }
       }

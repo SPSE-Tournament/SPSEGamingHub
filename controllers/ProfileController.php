@@ -21,7 +21,6 @@
           } if ($params[0] == 'messages' && !empty($params[1]) && in_array($params[1], $messageTypes)) {
             $messages = $mesMan->returnMessagesByType($_SESSION['user']['user_id'], $params[1]);
             $this->data['messages'] = $messages;
-            $this->data['mesDump'] = var_dump($messages);
             $this->data['date'] = new DateTime("now");
             $this->view = 'messages';
           }

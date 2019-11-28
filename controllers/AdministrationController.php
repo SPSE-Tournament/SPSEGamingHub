@@ -57,9 +57,9 @@
             } else {
               $this->addMessage("Event name must be atleast 5 characters long.");
             }
-        } catch (PDOException $e) {
+          } catch (PDOException $e) {
           $this->addMessage($e);
-        }
+          }
         }
         if (isset($_POST['game-add'])) {
             try {
@@ -156,26 +156,34 @@
         if (isset($_POST['user-verification'])) {
           try {
             if (isset($_POST['verification_username'])) {
-              $fullName = $userManager->parseHexname($_POST['verification_username']);
-              try {
-                $userManager->verifyUser($fullName['hexid']);
-              } catch (PDOException $e) {
-                $this->addMessage($e);
+              if ($_POST['verification_username'] > 0) {
+                if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['user-to-invite']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['user-to-invite'])) {
+                $fullName = $userManager->parseHexname($_POST['verification_username']);
+                try {
+                  $userManager->verifyUser($fullName['hexid']);
+                } catch (PDOException $e) {
+                  $this->addMessage($e);
+                }
+                $this->addMessage("User verified");
+                $this->log("User verified"."//".$_POST['verification_username'], "user_verify");
+                $this->redir("administration");
               }
-              $this->addMessage("User verified");
-              $this->log("User verified"."//".$_POST['verification_username'], "user_verify");
-              $this->redir("administration");
+            } else
+                $this->addMessage("Field empty");
             }
             if (isset($_POST['verification_teamname'])) {
-              $fullName = $userManager->parseHexname($_POST['verification_teamname']);
-              try {
-              $teamManager->verifyTeam($fullName['hexid']);
-              } catch (PDOException $e) {
-                $this->addMessage($e);
-              }
-              $this->addMessage("Team verified");
-              $this->log("Team verify"."//".$_POST['verification_teamname'], "team_verify");
-              $this->redir("administration");
+              if (strlen($_POST['verification_teamname']) > 0) {
+                $fullName = $userManager->parseHexname($_POST['verification_teamname']);
+                try {
+                $teamManager->verifyTeam($fullName['hexid']);
+                } catch (PDOException $e) {
+                  $this->addMessage($e);
+                }
+                $this->addMessage("Team verified");
+                $this->log("Team verify"."//".$_POST['verification_teamname'], "team_verify");
+                $this->redir("administration");
+              } else
+                $this->addMessage("Field empty");
             }
 
           } catch (PDOException $e) {
