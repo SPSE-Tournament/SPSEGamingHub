@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-133561856-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-133561856-2');
+      </script>
         <base href="/spsegamehub.local" />
     <meta charset="utf-8">
     <meta name="keywords" content="<?= $keywords ?>">
@@ -58,19 +67,19 @@
     </article>
 
     <?php if($logged): ?>
-    <article class="messages-button text-center p-2 d-none d-lg-block" onclick="toggleMessageNav();loadMessages('message');" style="visibility:visible;">
-      <img src="https://img.icons8.com/windows/56/000000/chat-messages--v1.png">
+    <article class="messages-button text-center p-2 d-none d-lg-block" onclick="toggleMessageNav();loadMessages('message','1');" style="visibility:visible;">
+      <img src="public/images/i-chat.png">
     </article>
     <article class="messages-wrapp" style="width:0px;">
       <ul class="nav nav-pills d-flex justify-content-center" role="tablist" style="border-bottom:2px solid orange;">
       <li class="nav-item nav-item-messages">
-        <a class="nav-link nav-link-messages active" data-toggle="tab" role="tab" aria-selected="true" id="message"onclick="loadMessages('message')"><img src="https://img.icons8.com/cotton/40/000000/communication--v1.png"></a>
+        <a class="nav-link nav-link-messages active" data-toggle="tab" role="tab" aria-selected="true" id="message"onclick="loadMessages('message','1')"><img src="public/images/i-typemes.png"></a>
       </li>
       <li class="nav-item nav-item-messages">
-        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="invite" onclick="loadMessages('invite')"><img src="https://img.icons8.com/ios/40/000000/invite.png"></a>
+        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="invite" onclick="loadMessages('invite','1')"><img src="public/images/i-typeinv.png"></a>
       </li>
       <li class="nav-item nav-item-messages">
-        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="trash" onclick="loadMessages('trash')"><img src="https://img.icons8.com/plasticine/40/000000/delete.png"></a>
+        <a class="nav-link nav-link-messages" data-toggle="tab" role="tab" aria-selected="false" id="trash" onclick="loadMessages('trash','1')"><img src="public/images/i-typetrash.png"></a>
       </li>
     </ul>
       <section class="messages-content py-2">

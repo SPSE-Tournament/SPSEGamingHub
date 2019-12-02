@@ -10,9 +10,18 @@
 
       <section class="row justify-content-center align-items-center">
         <?php if ($message['message_type'] == "message"): ?>
-          <button class="btn btn-primary mx-1" type="button" name="button">Reply</button>
-          <button class="btn btn-primary mx-1" type="button" name="button">Mark as read</button>
-          <button class="btn btn-danger mx-1" type="button" name="button">Remove</button>
+          <?php if ($message['message_status'] == "unread"): ?>
+            <form method="post">
+            <input type="hidden" name="mark-message-read">
+            <input type="hidden" name="message-id" value="<?=$message['message_id']?>">
+            <button class="btn btn-primary mx-1" type="submit" name="button">Mark as read</button>
+            </form>
+          <?php endif; ?>
+          <form method="post">
+          <input type="hidden" name="message-delete">
+          <input type="hidden" name="message-id" value="<?=$message['message_id']?>">
+          <button class="btn btn-danger mx-1" type="submit" name="button">Remove</button>
+          </form>
         <?php endif; ?>
         <?php if ($message['message_type'] == "invite"): ?>
           <form method="post">
@@ -28,7 +37,11 @@
           </form>
         <?php endif; ?>
         <?php if ($message['message_type'] == "trash"): ?>
+          <form method="post">
+          <input type="hidden" name="message-delete-complete">
+          <input type="hidden" name="message-id" value="<?=$message['message_id']?>">
           <button class="btn btn-danger mx-1" type="submit" name="button">Remove completely</button>
+          </form>
         <?php endif; ?>
       </section>
     </article>

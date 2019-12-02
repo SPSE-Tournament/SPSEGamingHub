@@ -19,10 +19,21 @@
               $this->redir("login");
 
           } if ($params[0] == 'messages' && !empty($params[1]) && in_array($params[1], $messageTypes)) {
-            $messages = $mesMan->returnMessagesByType($_SESSION['user']['user_id'], $params[1]);
+
+            if (empty($params[2]))
+              $messages = $mesMan->returnMessagesByType($_SESSION['user']['user_id'], $params[1], 0,5);
+             else if (!empty($params[2]))
+              $messages = $mesMan->returnMessagesByType($_SESSION['user']['user_id'], $params[1], (int)$params[2]*5-5,(int)$params[2]*5);
+
+            if (ceil((int)$mesMan->returnMessagesByTypeCount($_SESSION['user']['user_id'],$params[1])/5) > 1)
+              $this->data['numOfPages'] = ceil((int)$mesMan->returnMessagesByTypeCount($_SESSION['user']['user_id'],$params[1])/5);
+            else
+              $this->data['numOfPages'] = 0;
+
             $this->data['messages'] = $messages;
             $this->data['date'] = new DateTime("now");
             $this->view = 'messages';
+
           }
           else if($params[0] == 'getmessage') {
             $messages = $mesMan->returnMessages($_SESSION['user']['user_id']);
@@ -68,6 +79,7 @@
           $this->data['hasTeams'] = $hasTeams;
           $this->data['games'] = $games;
           $this->header['page_title'] = "Profile";
+          $this->header['page_desc'] = "SPSE Gaming Hub - Profile page";
           $this->view = 'profile';
         }
 

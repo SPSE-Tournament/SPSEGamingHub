@@ -1,8 +1,13 @@
-function loadMessages(msgType) {
-      showInbox(msgType);
+$(function () {
+$('[data-toggle="tooltip"]').tooltip()
+})
+let curPageMes;
+function loadMessages(msgType,page) {
+      showInbox(msgType,page);
+        curPageMes = parseInt(page);
 }
 
-  function showInbox(msgType) {
+  function showInbox(msgType,page) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -12,7 +17,7 @@ function loadMessages(msgType) {
           document.querySelector('.messages-content').innerHTML = response;
       }
     };
-    xhttp.open("GET", "profile/messages/"+msgType, true);
+    xhttp.open("GET", "profile/messages/"+msgType+"/"+page, true);
     xhttp.send();
   }
 

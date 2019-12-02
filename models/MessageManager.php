@@ -4,13 +4,19 @@
     public function returnMessages($userId):array {
       return Db::multiQuery("SELECT message_id, message, message_perex, message_type, message_status, message_timestamp, user_senderid, user_receiverid,
         user_sendername, user_receivername, invite_team_id from
-        messages where user_receiverid = ? order by message_timestamp desc limit 5", array($userId));
+        messages where user_receiverid = ? order by message_timestamp desc", array($userId));
     }
 
-    public function returnMessagesByType($userId, $messageType):array {
+    public function returnMessagesByTypeCount($userId,$mesType):int {
+      return Db::query("SELECT message_id, message, message_perex, message_type, message_status, message_timestamp, user_senderid, user_receiverid,
+        user_sendername, user_receivername, invite_team_id from
+        messages where user_receiverid = ? and message_type = ? order by message_timestamp desc", array($userId,$mesType));
+    }
+
+    public function returnMessagesByType($userId, $messageType, $limitD,$limitT):array {
       $msgs =  Db::multiQuery("SELECT message_id, message, message_perex, message_type, message_status, message_timestamp, timediff(NOW(),message_timestamp) as time_ago, user_senderid, user_receiverid,
         user_sendername, user_receivername, invite_team_id from
-        messages where user_receiverid = ? and message_type = ? order by message_timestamp desc limit 5", array($userId, $messageType));
+        messages where user_receiverid = ? and message_type = ? order by message_timestamp desc limit ?,?", array($userId, $messageType, $limitD,$limitT));
       $realMsgs = array();
         foreach ($msgs as $m) {
           $e = explode(":", (String)$m['time_ago']);
@@ -41,7 +47,7 @@
     }
 
     public function returnMessageById($mesId):array {
-      return Db::singleQuery("SELECT message_id, message, message_perex,message_type, message_status message_timestamp, user_senderid, user_receiverid,
+      return Db::singleQuery("SELECT message_id, message, message_perex,message_type, message_status, message_timestamp, user_senderid, user_receiverid,
       user_sendername, user_receivername, invite_team_id from messages where message_id = ?", array($mesId));
     }
 
@@ -68,5 +74,18 @@
         throw new UserError($e);
       }
     }
+
+    public function markMessageAsRead($mesId) {
+      $mes = $this->returnMessageById($mesId);
+      Db::edit("messages", array("message_status"=>"read","message_timestamp"=>$mes['message_timestamp']),"where message_id = ?", array($mesId));
+    }
+
+    public function moveMessageToTrash($mesId) {
+      $mes = $this->returnMessageById($mesId);
+      Db::edit("messages", array("message_type"=>"trash","message_timestamp"=>$mes['message_timestamp']),"where message_id = ?", array($mesId));
+    }
+
+
+
   }
 ?>

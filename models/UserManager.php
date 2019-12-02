@@ -191,6 +191,15 @@
             Db::edit("users",array("user_verified"=>1), "where user_hexid = ?", array($hexId));
           }
 
+          public function adminUser($hexId,$adminType):void {
+            if ($adminType == "watchman")
+              Db::edit("users",array("watchman"=>1, "admin"=>"0"), "where user_hexid = ?", array($hexId));
+            else if ($adminType == "admin")
+            Db::edit("users",array("admin"=>1, "watchman"=>"0"), "where user_hexid = ?", array($hexId));
+            else
+            throw new UserError("Wrong admin type.");
+          }
+
           public function parseHexname($hexName):array {
               $parsedName = explode("#", $hexName);
               return array(

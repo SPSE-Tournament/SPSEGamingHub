@@ -8,6 +8,7 @@
       $stringManager = new StringManager();
       $userManager = new UserManager();
       $teamManager = new TeamManager();
+      $matchesManager = new MatchesManager();
 
       //Admin validation
       if (!UserManager::authAdmin()) {
@@ -143,6 +144,16 @@
             $this->addMessage($e);
           }
         }
+        if (isset($_POST['bracket-remove'])) {
+          try {
+            $matchesManager->dropMatches($_POST['remove-event-id']);
+            $this->addMessage("Bracket deleted");
+            $this->log("Bracket of event (".$_POST['remove-event-id'].") removed.", "bracket_drop");
+            $this->redir("administration");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
         if (isset($_POST['game-remove'])) {
           try {
             $gameManager->deleteGame($_POST['remove-game-id']);
@@ -190,10 +201,27 @@
             $this->addMessage($e);
           }
         }
+        if (isset($_POST['user-admin-tool'])) {
+          if (strlen($_POST['user-to-admin']) > 0) {
+            if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['user-to-admin']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['user-to-admin'])) {
+            $fullName = $userManager->parseHexname($_POST['user-to-admin']);
+            try {
+              $userManager->adminUser($fullName['hexid'], $_POST['admin-type']);
+            } catch (PDOException $e) {
+              $this->addMessage($e);
+            }
+            $this->addMessage("User given admin rights");
+            $this->log("User given admin rights"."//".$_POST['user-to-admin'], "user_admin");
+            $this->redir("administration");
+          }
+        } else
+            $this->addMessage("Field empty");
+        }
+        }
       }
 
 
     }
-  }
+
 
  ?>

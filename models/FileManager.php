@@ -1,6 +1,6 @@
 <?php
     class FileManager {
-      public function uploadFile(array $file,bool $image, array $allowedExtensions, $name) {
+      public function uploadFile(array $file,bool $image, array $allowedExtensions, $name):string {
         $uploads = "../SPSEGamingHub/public/uploads/";
         $ext = strtolower(pathinfo(basename($file['name']), PATHINFO_EXTENSION));
         $targetFile = $uploads . $name . ".".$ext;

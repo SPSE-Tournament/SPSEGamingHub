@@ -7,6 +7,8 @@
       $bracketManager = new BracketManager();
       $events = $eventManager->returnEvents();
       $eventUrls = array();
+      $this->header['page_desc'] = "SPSE Gaming Hub - Events";
+      $this->header['page_keywords'] = "SPSE Gaming, SPSE Esport, SPSE Gaming Events, SPSE Esport Events, SPŠE Esport, SPŠE Gaming, SPŠE Gaming Events, SPŠE Esport Events,";
 
       for ($i=0; $i < count($events); $i++) {
             $eventUrls[] = $events[$i]['event_url'];

@@ -7,10 +7,13 @@
             <?php foreach($messages as $msg): ?>
               <section class="eachMessage py-2 col-10" style="font-size:0.8rem;">
                 <div class="row col-12 justify-content-center align-items-center">
-                  <p class="" style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png"><?= $msg['time_ago']?></p>
+                  <?php if ($msg['message_status'] == "unread"): ?>
+                  <img class="mb-2" src="public/images/i-unread.png">
+                  <?php endif; ?>
+                  <p class="" style="color:rgba(255,255,255,.5)"><img src="public/images/i-time-small.png"><?= $msg['time_ago']?></p>
                 </div>
                 <div class="row col-12 justify-content-center align-items-center">
-                  <button type="button" class="btn btn-sm message-preview-button mb-2 d-flex justify-content-center" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="https://img.icons8.com/cotton/40/000000/message-preview.png"></button>
+                  <button type="button" class="btn btn-sm message-preview-button mb-2 d-flex justify-content-center" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="public/images/i-mespw.png"></button>
                   <p class="" style="color:rgba(255,255,255,.8)"><?= $msg['user_sendername'] ?></p>
                 </div>
                 <div class="col-12 d-flex flex-row justify-content-center">
@@ -18,8 +21,16 @@
                 </div>
               </section>
           <?php endforeach; ?>
+          <nav>
+            <ul class="pagination pagination my-2">
+              <?php for($i = 0; $i < $numOfPages; $i++): ?>
+              <li class="page-item text-dark" style="cursor:pointer;"><a class="page-link" onclick="loadMessages('message','<?=$i+1?>')"><?=$i+1?></a></li>
+            <?php endfor; ?>
+            </ul>
+          </nav>
+
           <section class="messages-footer p-3 bg-dark mx-auto" style="width:19vw; border: 2px solid orange">
-              <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
+              <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="public/images/i-newmes.png"></button>
           </section>
       </section>
     </article>

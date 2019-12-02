@@ -9,6 +9,7 @@
           $date = new DateTime();
           $teamMan = new TeamManager();
           $parsedU = $this->parseURL($params[0]);
+          $this->header['page_keywords'] = "SPSE Gaming, SPSE Esport, SPSE Gaming Events, SPSE Esport Events, SPŠE Esport, SPŠE Gaming, SPŠE Gaming Events, SPŠE Esport Events,";
           if (empty($parsedU[0])) {
             $this->redir('home');
           }
@@ -62,6 +63,32 @@
             $mesMan->deleteMessageById($_POST['message-id']);
             $this->addMessage("Invite declined");
             $this->redir("profile");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
+        if (isset($_POST['mark-message-read'])) {
+          try {
+              $mesMan->markMessageAsRead($_POST['message-id']);
+              $this->redir(substr($_SERVER['REQUEST_URI'],1));
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
+        if (isset($_POST['message-delete'])) {
+          try {
+              $mesMan->moveMessageToTrash($_POST['message-id']);
+              $this->addMessage("Message moved to trash.");
+              $this->redir(substr($_SERVER['REQUEST_URI'],1));
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
+        if (isset($_POST['message-delete-complete'])) {
+          try {
+              $mesMan->deleteMessageById($_POST['message-id']);
+              $this->addMessage("Message deleted.");
+              $this->redir(substr($_SERVER['REQUEST_URI'],1));
           } catch (PDOException $e) {
             $this->addMessage($e);
           }

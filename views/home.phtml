@@ -1,8 +1,10 @@
 <section class="home d-flex flex-column justify-content-center align-items-center">
   <section class="d-flex align-items-center" style="height:100vh;">
+
     <div class="pr-5 homesign" style="border-radius: 0 2rem 0 2rem;">
       <img src="public/images/logo_spse_text.png" alt="" width="600" style="border-radius: 0 2rem 0 2rem">
     </div>
+
   </section>
   <section class="d-none d-lg-flex d-lg-flex align-items-center my-5" style="height:100vh;">
     <section id="twitch-embed"></section>
@@ -12,8 +14,8 @@
 <script src="https://embed.twitch.tv/embed/v1.js"></script>
 <script type="text/javascript">
    let embed = new Twitch.Embed("twitch-embed", {
-     width: 800,
-     height: 600,
+     width: window.screen.availWidth - 200,
+     height: window.screen.availHeight - 200,
      channel: "spsegaming",
      layout: "video"
    });
