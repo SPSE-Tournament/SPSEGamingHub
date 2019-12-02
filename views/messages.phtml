@@ -2,27 +2,28 @@
 <header class="content-messages" id="msgContent">
 <div class="tab-content">
   <div class="tab-pane fade show active" role="tabpanel">
-    <article>
-      <section class="messages-wrapper mx-auto text-center d-flex justify-content-center  flex-wrap">
+    <article class="d-flex justify-content-center align-items-center">
+      <section class="messages-wrapper mx-auto text-center d-flex justify-content-center flex-wrap" style="margin-bottom:10%;">
             <?php foreach($messages as $msg): ?>
-              <section class="eachMessage py-2 col-10">
+              <section class="eachMessage py-2 col-10" style="font-size:0.8rem;">
                 <div class="row col-12 justify-content-center align-items-center">
-                  <p class="col-12" style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png"><?= $msg['time_ago']?></p>
-                  <p class="col-12" style="color:rgba(255,255,255,.8)"><?= $msg['user_sendername'] ?></p>
-                  <button type="button" class="btn btn-sm col-2 message-preview-button mb-2 d-flex justify-content-center" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="https://img.icons8.com/cotton/40/000000/message-preview.png"></button>
-                  <p class="d-none d-lg-inline col-6"><?= $msg['message_perex'] ?></p>
+                  <p class="" style="color:rgba(255,255,255,.5)"><img src="https://img.icons8.com/small/25/000000/time.png"><?= $msg['time_ago']?></p>
+                </div>
+                <div class="row col-12 justify-content-center align-items-center">
+                  <button type="button" class="btn btn-sm message-preview-button mb-2 d-flex justify-content-center" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="https://img.icons8.com/cotton/40/000000/message-preview.png"></button>
+                  <p class="" style="color:rgba(255,255,255,.8)"><?= $msg['user_sendername'] ?></p>
+                </div>
+                <div class="col-12 d-flex flex-row justify-content-center">
+                  <p class="d-none d-lg-inline"><?= $msg['message_perex'] ?></p>
                 </div>
               </section>
           <?php endforeach; ?>
-      </section>
-      <section class="messages-footer row justify-content-center align-items-center p-3">
-          <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
+          <section class="messages-footer p-3 bg-dark mx-auto" style="width:19vw; border: 2px solid orange">
+              <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="https://img.icons8.com/cotton/48/000000/add-to-chat.png"></button>
+          </section>
       </section>
     </article>
   </div>
 </div>
-<script>
-  window.location.replace("home");
-</script>
 </header>
 <!-- MessagesEnd -->

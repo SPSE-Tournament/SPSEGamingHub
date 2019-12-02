@@ -35,19 +35,23 @@
               $unames = $userMan->returnUsernames();
                   if ($_POST['agreement-tos']) {
                     if (!in_array($_POST['usrname'], $unames) && !in_array($_POST['email'], $emails)) {
-                      if (strlen($_POST['usrname']) > 3) {
-                        if (strlen($_POST['pw']) > 4) {
-                          $userManager = new UserManager();
-                          $userManager->requestRegister($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
-                          $this->addMessage("Your request noted, we have sent you a verification email just to really know it's you.");
-                          $this->redir('register/verify');
+                      if (preg_match("/^[a-zA-Z0-9]{4,30}$/", $_POST['usrname'])) {
+                        if (strlen($_POST['usrname']) > 3) {
+                          if (strlen($_POST['pw']) > 4) {
+                            $userManager = new UserManager();
+                            $userManager->requestRegister($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
+                            $this->addMessage("Your request noted, we have sent you a verification email just to really know it's you.");
+                            $this->redir('register/verify');
+                          } else {
+                            $this->addMessage("Password must be atleast 5 characters long");
+                          }
                         } else {
-                          $this->addMessage("Password must be atleast 5 characters long");
+                          $this->addMessage("Username must be atleast 4 characters long");
                         }
-                      } else {
-                        $this->addMessage("Username must be atleast 4 characters long");
-                      }
 
+                      } else {
+                        $this->addMessage("Username in a wrong format.");
+                      }
                     } else {
                       $this->addMessage("Email or username already exists");
                     }

@@ -28,7 +28,6 @@ function loadMessages(msgType) {
     document.querySelector('.messages-button').style.right = document.querySelector('.messages-wrapp').style.width;
     setTimeout(function() {
       document.querySelector('.messages-button').style.visibility = "visible";
-
     }, 500)
     }
 

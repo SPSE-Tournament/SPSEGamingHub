@@ -77,11 +77,16 @@
             try {
               if (strlen($_POST['teamName']) > 3) {
                 if (!$teamMan->teamExists($_POST['teamName'])) {
-                  $teamMan->insertTeam($_POST['teamName'], $_SESSION['user']['user_id'], $_POST['teamGame']);
-                  $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], Db::getLastId());
-                  $this->addMessage("Your team has been created.");
-                  $this->log("Team has been created", "team_creation");
-                  $this->redir("profile");
+                  if (preg_match("/^[a-zA-Z0-9]{4,30}$/", $_POST['teamName'])) {
+                    $teamMan->insertTeam($_POST['teamName'], $_SESSION['user']['user_id'], $_POST['teamGame']);
+                    $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], Db::getLastId());
+                    $this->addMessage("Your team has been created.");
+                    $this->log("Team has been created", "team_creation");
+                    $this->redir("profile");
+                  } else {
+                    $this->addMessage("Team name in a wrong format.");
+                    $this->redir("profile");
+                  }
                 } else {
                   $this->addMessage("Team name taken.");
                   $this->redir("profile");

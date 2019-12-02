@@ -156,8 +156,8 @@
         if (isset($_POST['user-verification'])) {
           try {
             if (isset($_POST['verification_username'])) {
-              if ($_POST['verification_username'] > 0) {
-                if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['user-to-invite']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['user-to-invite'])) {
+              if (strlen($_POST['verification_username']) > 0) {
+                if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['verification_username']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['verification_username'])) {
                 $fullName = $userManager->parseHexname($_POST['verification_username']);
                 try {
                   $userManager->verifyUser($fullName['hexid']);

@@ -1,34 +1,39 @@
-<section class="loginform d-flex justify-content-center align-items-center">
-  <form class="w-50" method="POST">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" name="email" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if(isset($_POST['email'])) : ?><?=$_POST['email']?><?php endif; ?>">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputEmail1">Username</label>
-      <input type="text" name="usrname" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter username" value="<?php if(isset($_POST['usrname'])) : ?><?=$_POST['usrname']?><?php endif; ?>">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" name="pw" class="form-control login-input" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password again</label>
-      <input type="password" name="pwA" class="form-control login-input" placeholder="Password">
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Please enter the current year</label>
-      <input type="text" name="antispam" class="form-control login-input" placeholder="2035">
-    </div>
-    <div class="form-group">
-      <label for="">Already have an account? <a href="login">Login</a>.</label>
-    </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" name="agreement-tos">
-      <label class="form-check-label">I agree with the <a href="tos">terms of service</a></label>
-    </div>
+<div class="d-flex align-items-center justify-content-center">
+  <section class="loginform d-flex justify-content-center w-50" style="height:80vh;">
+    <form method="POST">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" name="email" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if(isset($_POST['email'])) : ?><?=$_POST['email']?><?php endif; ?>">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" name="usrname" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter username (no special characters)" value="<?php if(isset($_POST['usrname'])) : ?><?=$_POST['usrname']?><?php endif; ?>">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="pw" class="form-control login-input" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password again</label>
+        <input type="password" name="pwA" class="form-control login-input" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Please enter the current year</label>
+        <input type="text" name="antispam" class="form-control login-input" placeholder="2035">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="agreement-tos">
+        <label class="form-check-label">I agree with the <a href="tos">terms of service.</a></label>
+        <label for="">Already have an account? <a href="login">Login</a>.</label>
+      </div>
+      <div class="form-group">
 
-    <button type="submit" class="btn btn-warning">Submit</button>
-  </form>
+      </div>
 
-</section>
+
+      <button type="submit" class="btn btn-warning">Submit</button>
+    </form>
+
+  </section>
+
+</div>

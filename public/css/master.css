@@ -157,7 +157,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   z-index: 9;
   height: 100vh;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: scroll;
   transition: all 0.3s ease-out;
   color:#fff;
   border-left: 3px solid orange;
@@ -172,7 +172,6 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   border-top: 1px solid rgba(255,255,255,.05);
   border-bottom: 1px solid rgba(255,255,255,.05);
   font-size: 1rem;
-
 }
 .closeSideNav {
   cursor: pointer;

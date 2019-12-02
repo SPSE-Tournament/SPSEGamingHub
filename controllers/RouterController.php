@@ -42,11 +42,17 @@
         }
         if(isset($_POST['accept-invite'])) {
           try {
-            $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], $_POST['team-id']);
-            $mesMan->deleteMessageById($_POST['message-id']);
-            $this->addMessage("Team joined.");
-            $this->log("Team joined. Team: " . $_POST['team_name'],'team_join');
-            $this->redir("profile");
+            if ($teamMan->returnUserTeamsCount($_SESSION['user']['user_id']) < 5) {
+              $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], $_POST['team-id']);
+              $mesMan->deleteMessageById($_POST['message-id']);
+              $this->addMessage("Team joined.");
+              $this->log("Team joined. Team: " . $_POST['team_name'],'team_join');
+              $this->redir("profile");
+            } else {
+              $this->addMessage("Maximum number of teams reached.");
+              $this->redir("profile");
+            }
+
           } catch (PDOException $e) {
             $this->addMessage($e);
           }
