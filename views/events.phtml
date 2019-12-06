@@ -27,7 +27,9 @@
           <h3 class="col-5 m-1"><img src="public/images/i-players.png">  Players: <?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h3>
         </div>
         </a>
-        <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">Join with your team</button>
+        <?php if ($event['event_status'] == "scheduled"): ?>
+          <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">Join with your team</button>
+        <?php endif; ?>
         <?php if ($user['admin'] || $user['watchman'] || $user['rootmaster']): ?>
           <a class="btn btn-danger" href="events/edit/<?=$event['event_url']?>" role="button">Edit event</a>
         <?php endif; ?>

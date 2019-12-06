@@ -1,7 +1,6 @@
 <?php
   class Db {
     private static $connection;
-
     private static $settings = array(
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
       PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
@@ -9,9 +8,9 @@
     );
 
     public static function connect($host, $user, $pw, $db) {
-          if (!isset(self::$connection)) {
+          if (!isset(self::$connection)) 
             self::$connection = @new PDO("mysql:dbname=$db;host=$host",$user,$pw,self::$settings);
-          }
+
     }
 
     public static function singleQuery($query, $params = array()) {
