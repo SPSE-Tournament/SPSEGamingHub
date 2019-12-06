@@ -66,12 +66,44 @@
                      $logMan = new LogManager();
                      $date = new DateTime();
                      $logMan->log($_SESSION['user']['user_id'], $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
+                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
+                       $this->logDiscord($_SESSION['user']['user_id'],$_SESSION['user']['name'],$msg,$type);
+                     }
                    }
 
                    public function logDifferentUser($userId,$msg, $type) {
                      $logMan = new LogManager();
                      $date = new DateTime();
                      $logMan->log($userId, $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
+                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
+                       $this->logDiscord($userId,$msg,$type);
+                     }
+                   }
+
+                   public function logDiscord($userId,$usrName,$msg,$type) {
+                     $disCid = "518187176941453361";
+                     $disToken = "_JnUkmYNdw-IAif1GNhsujRSKobCgnWljdcJH2_uE5ygHVR4PdwFK5K_DxFiKlvOOrql";
+                     $disUsername = "WebLog";
+                     $URL = "https://discordapp.com/api/webhooks/". $disCid ."/". $disToken;
+                      $PD = array();
+                      $PD["username"] = $disUsername;
+                      $PD["content"] = "```\n".date('D M d, Y G:i:s a')."\n".
+                      "User: ".$userId." ($usrName)"."\n".
+                      "Log_type: ".$type."\n".
+                      "Message: ".$msg."\n".
+                      "User_ip: ".$_SERVER['REMOTE_ADDR']."\n".
+                      "```";
+                      $PD = json_encode($PD);
+                      $HTTP = array(
+                          'http' =>
+                              array(
+                                  'method'  => 'POST',
+                                  'header'  => 'Content-type: application/json; charset=UTF-8',
+                                  'content' => $PD
+                          )
+                      );
+                      $context = stream_context_create($HTTP);
+                      file_get_contents($URL, false, $context);
                    }
 
                    public function checkLogged() {

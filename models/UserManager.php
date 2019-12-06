@@ -81,7 +81,7 @@
               <body>
               <p>Hello fellow gamer! To verify your account created on
               our website,
-              <a href='https://www.domasoftware.tk/register/verify/".$hash."'>Click here</a>
+              <a href='https://www.game.spse.cz/register/verify/".$hash."'>Click here</a>
               </p>
               </body>
               </html>";
