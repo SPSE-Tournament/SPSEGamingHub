@@ -10,7 +10,7 @@ setInterval(function() {
   document.querySelector(".timer-countdown").innerHTML = response;
   if (distance < 0) {
     clearInterval();
-    document.querySelector(".timer-countdown").innerHTML = "Live";
+    document.querySelector(".timer-countdown").innerHTML = "";
   }
 }, 1000);
 

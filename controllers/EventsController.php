@@ -28,6 +28,11 @@
             $this->data['hasBrackets'] = true;
           else
             $this->data['hasBrackets'] = false;
+          if (isset($event['event_winner']))
+            $this->data['hasWinner'] = true;
+          else
+            $this->data['hasWinner'] = false;
+
           $this->header['page_title'] = $event['event_name'];
           $this->view = "event";
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
@@ -86,34 +91,44 @@
               $numPlayers = $teamMan->returnUsersInATeamCount($_POST['team-id']);
               $team = $teamMan->returnTeamById($_POST['team-id']);
               $event = $eventManager->returnEventById($_POST['event-id']);
+              $eventTeamIds = $eventManager->returnTeamIdsInEvent($event['event_id']);
+              $realTeamIds = array();
+              foreach ($eventTeamIds as $ids) {
+                $realTeamIds[] = $ids['team_id'];
+              }
+              if (!in_array($_POST['team-id'],$realTeamIds)) {
               if ($numPlayers == $game['game_playerlimitperteam']) {
-                if ($team['game_id'] == $_POST['game-id']) {
-                  $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
-                  $verifiedPlayers = 0;
-                  foreach ($usersInATeam as $user) {
-                    if ($user['user_verified'] == 1) {
-                      $verifiedPlayers++;
-                    }
-                  }
-                  if ($verifiedPlayers == $game['game_playerlimitperteam']) {
+                  if ($team['game_id'] == $_POST['game-id']) {
+                    $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
+                    $verifiedPlayers = 0;
                     foreach ($usersInATeam as $user) {
-                        $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                        $this->logDifferentUser($user['user_id'],
-                        'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
-                        ,'event_join');
+                      if ($user['user_verified'] == 1) {
+                        $verifiedPlayers++;
+                      }
                     }
+                  if ($verifiedPlayers == $game['game_playerlimitperteam']) {
+                      foreach ($usersInATeam as $user) {
+                          $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                          $this->logDifferentUser($user['user_id'],
+                          'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                          ,'event_join');
+                      }
+                    } else {
+                      $this->addMessage("Users in that team are not verified.");
+                      $this->redir("events");
+                    }
+                    $this->addMessage("Event joined succesfully!");
+                    $this->redir("events/".$_POST['event-url']);
                   } else {
-                    $this->addMessage("Users in that team are not verified.");
+                    $this->addMessage("Wrong game!");
                     $this->redir("events");
                   }
-                  $this->addMessage("Event joined succesfully!");
-                  $this->redir("events/".$_POST['event-url']);
                 } else {
-                  $this->addMessage("Wrong game!");
+                  $this->addMessage("Team has a wrong amount of players!");
                   $this->redir("events");
                 }
               } else {
-                $this->addMessage("Team has a wrong amount of players!");
+                $this->addMessage("Team already in event.");
                 $this->redir("events");
               }
           } catch (PDOException $e) {
@@ -131,7 +146,7 @@
             if (!$bracketManager->bracketInEvent($_POST['event-id'])) {
               $eventTeams = $teamMan->returnTeamsInEvent($eventManager->returnTeamIdsInEvent($_POST['event-id']));
               $bracketManager->insertMatches($bracketManager->generateMatches($eventTeams,0),$_POST['event-id'],$eventTeams);
-              $eventManager->setLiveBracketStatus($_POST['event-id']);
+              $eventManager->setBracketStatus($_POST['event-id'],'live');
               $this->addMessage("Bracket created!");
               $this->log("Bracket has been generated", 'bracket_creation');
               $this->redir("events/".$params[0]);
@@ -144,9 +159,17 @@
             $this->addMessage($e);
           }
         }
+        if (isset($_POST['event-settings'])) {
+          try {
+            $eventManager->setEventStatus($_POST['event-id'], $_POST['event-status']);
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
         if (isset($_POST['bracket-drop'])) {
           try {
             $bracketManager->dropBracket($_POST['event-id']);
+            $eventManager->setBracketStatus($_POST['event-id'],'dead');
             $this->addMessage("Bracket dropped!");
             $this->log("Bracket has been dropped", 'bracket_drop');
             $this->redir("events/".$params[0]);

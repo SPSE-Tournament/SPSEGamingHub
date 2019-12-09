@@ -61,12 +61,16 @@
         }
       }
 
-      public function setLiveBracketStatus($eventId) {
+      public function setBracketStatus($eventId, $status) {
         try {
-          Db::query("UPDATE events set bracket_status = 'live', event_timestamp = event_timestamp where event_id = ?", array($eventId));
+          Db::query("UPDATE events set bracket_status = ?, event_timestamp = event_timestamp where event_id = ?", array($status,$eventId));
         } catch (PDOException $e) {
           throw new UserError($e);
         }
+      }
+
+      public function setEventStatus($eventId, $status) {
+          Db::query("UPDATE events set event_status = ?, event_timestamp = event_timestamp where event_id = ?", array($status,$eventId));
       }
 
       public function updateEvent($eventName,$eventGame,$eventDate,$eventTime,$eventPL,$eventUrl,$currentUrl) {
