@@ -71,12 +71,12 @@
                      }
                    }
 
-                   public function logDifferentUser($userId,$msg, $type) {
+                   public function logDifferentUser($userId,$usrname,$msg, $type) {
                      $logMan = new LogManager();
                      $date = new DateTime();
                      $logMan->log($userId, $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
                      if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
-                       $this->logDiscord($userId,$msg,$type);
+                       $this->logDiscord($userId,$usrname,$msg,$type);
                      }
                    }
 
