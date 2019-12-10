@@ -106,16 +106,19 @@
                         $verifiedPlayers++;
                       }
                     }
-                  }
-                  if ($verifiedPlayers >= $game['game_playerlimitperteam']) {
-                    foreach ($usersInATeam as $user) {
-                        $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                        $this->logDifferentUser($user['user_id'],
-                        'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
-                        ,'event_join');
+                    if ($verifiedPlayers >= $game['game_playerlimitperteam']) {
+                      foreach ($usersInATeam as $user) {
+                          $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                          $this->logDifferentUser($user['user_id'],
+                          'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                          ,'event_join');
+                      }
+                      $this->addMessage("Event joined succesfully!");
+                      $this->redir("events/".$_POST['event-url']);
+                    } else {
+                      $this->addMessage("Users in the team not verified!");
+                      $this->redir("events");
                     }
-                    $this->addMessage("Event joined succesfully!");
-                    $this->redir("events/".$_POST['event-url']);
                   } else {
                     $this->addMessage("Wrong game!");
                     $this->redir("events");
