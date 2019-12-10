@@ -109,7 +109,7 @@
                     if ($verifiedPlayers >= $game['game_playerlimitperteam']) {
                       foreach ($usersInATeam as $user) {
                           $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                          $this->logDifferentUser($user['user_id'],
+                          $this->logDifferentUser($user['user_id'],$user['user_name'],
                           'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
                           ,'event_join');
                       }
