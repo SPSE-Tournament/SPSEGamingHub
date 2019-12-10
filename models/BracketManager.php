@@ -85,7 +85,7 @@
               $event = Db::singleQuery("SELECT event_timestamp, event_winner from events where event_id = ?", array($eventId));
               if (!isset($event['event_winner'])) {
                 try {
-                Db::edit("events", array("event_winner"=>$winner, "event_timestamp"=>$event['event_timestamp']), 'where event_id = ?', array($eventId));
+                Db::edit("events", array("event_winner"=>$winner, "event_timestamp"=>$event['event_timestamp'], "event_status"=>"finished"), 'where event_id = ?', array($eventId));
               } catch (PDOException $e) {
                 throw new UserError($e);
               }

@@ -1,10 +1,19 @@
 <section class="p-5">
   <div class="event-title p-5 text-center">
+    <?php if ($event['event_status'] == "live"): ?>
+        <span class="p-1" style="background-color:red;">Live</span>
+    <?php endif; ?>
+    <?php if ($event['event_status'] == "scheduled"): ?>
+        <span class="p-1" style="background-color:orange;">Scheduled</span>
+    <?php endif; ?>
+    <?php if ($event['event_status'] == "finished"): ?>
+        <span class="p-1" style="background-color:blue;">Finished</span>
+    <?php endif; ?>
     <h1 class="eventName"><?= $event['event_name'] ?></h1>
     <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
     <h3><a href="<?=$event['game_rules']?>" target="_blank">Rules</a></h3>
     <div class="hodziny py-4">
-      <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"> </h2>
+      <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"></h2>
     </div>
   </div>
 
@@ -26,7 +35,7 @@
   <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
       <?php if (isset($event['event_winner'])): ?>
-        <h1>Winner: <?=$event['event_winner_name']?></h1>
+        <h1><img src="public/images/i-crown.png"> Event winner: <?=$event['event_winner_name']?></h1>
         <hr>
       <?php endif; ?>
       <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
@@ -70,19 +79,21 @@
       <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
         <div class="card-body bg-dark">
           <form method="post">
-            <input type="hidden" name="event-add">
+            <input type="hidden" name="event-settings">
+            <input type="hidden" name="event-id" value="<?=$event['event_id']?>">
         <div class="form-group">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Status</label>
             </div>
-            <select class="custom-select" name="eventGame">
+            <select class="custom-select" name="event-status">
                 <option value="scheduled">Scheduled</option>
                 <option value="live">Live</option>
                 <option value="finished">Finished</option>
             </select>
           </div>
         </div>
+        <!--
         <div class="form-group">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -96,15 +107,15 @@
               <div class="input-group-prepend">
                 <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Bracket format</label>
                 <select class="custom-select" name="eventGame">
-                    <option value="<?= $event['bracket_format'] ?>"><?= $event['bracket_format'] ?></option>
+                    <option value=""></option>
                     <option value="single">Single-elimination</option>
                     <option value="double">Double-elimination</option>
                 </select>
               </div>
             </div>
-
         </div>
         </div>
+      -->
         <div class="modal-footer">
           <button type="submit" class="btn btn-primary">Update</button>
           </form>
@@ -120,8 +131,13 @@
           <span class="bg-danger p-1">Status</span>
           <hr>
           <div class="d-flex justify-content-around">
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
+            <?php if ($event['event_status'] == "live" && !$hasWinner): ?>
+              <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
+              <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
+            <?php endif; ?>
+          <?php if ($event['event_status'] != "live" || $hasWinner): ?>
+            <h3>Event not live/has winner</h3>
+          <?php endif; ?>
           </div>
         </div>
       </div>
