@@ -97,7 +97,7 @@
                 $realTeamIds[] = $ids['team_id'];
               }
               if (!in_array($_POST['team-id'],$realTeamIds)) {
-              if ($numPlayers == $game['game_playerlimitperteam']) {
+              if ($numPlayers >= $game['game_playerlimitperteam']) {
                   if ($team['game_id'] == $_POST['game-id']) {
                     $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
                     $verifiedPlayers = 0;
