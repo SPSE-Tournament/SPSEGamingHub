@@ -42,6 +42,13 @@
         <button class="btn btn-danger ml-2" type="submit" name="button">Remove team</button>
       <?php endif; ?>
     </form>
+    <?php if ($_SESSION['user']['user_id'] != $team['team_captain_id']): ?>
+      <form method="post">
+        <input type="hidden" name="team-leave">
+        <input type="hidden" name="team-id" value="<?=$team['team_id']?>">
+      <button class="btn btn-danger ml-2" type="submit" name="button">Leave team</button>
+      </form>
+    <?php endif; ?>
   </div>
 </div>
 <!-- TeamEnd -->

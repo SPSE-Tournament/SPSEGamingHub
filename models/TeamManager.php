@@ -138,6 +138,10 @@
       }
     }
 
+    public function leaveTeam($teamId, $userId) {
+      Db::query("DELETE from teamparticipation where team_id = ? and user_id = ?", array($teamId,$userId));
+    }
+
     public function removeTeam($teamId):void {
       Db::query("DELETE from teams where team_id = ?", array($teamId));
       Db::query("DELETE from eventparticipation where team_id = ?", array($teamId));
