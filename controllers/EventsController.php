@@ -97,7 +97,7 @@
                 $realTeamIds[] = $ids['team_id'];
               }
               if (!in_array($_POST['team-id'],$realTeamIds)) {
-              if ($numPlayers == $game['game_playerlimitperteam']) {
+              if ($numPlayers >= $game['game_playerlimitperteam']) {
                   if ($team['game_id'] == $_POST['game-id']) {
                     $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
                     $verifiedPlayers = 0;
@@ -106,16 +106,19 @@
                         $verifiedPlayers++;
                       }
                     }
-                  }
-                  if ($verifiedPlayers >= $game['game_playerlimitperteam']) {
-                    foreach ($usersInATeam as $user) {
-                        $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
-                        $this->logDifferentUser($user['user_id'],
-                        'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
-                        ,'event_join');
+                    if ($verifiedPlayers >= $numPlayers) {
+                      foreach ($usersInATeam as $user) {
+                          $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
+                          $this->logDifferentUser($user['user_id'],$user['uname'],
+                          'User has joined an event: ('.$_POST['event-id'].')' . ' ' . $event['event_name'] . ' with a team: (' . $_POST['team-id'] . ')' . ' '. $team['team_name']
+                          ,'event_join');
+                      }
+                      $this->addMessage("Event joined succesfully!");
+                      $this->redir("events/".$_POST['event-url']);
+                    } else {
+                      $this->addMessage("Users in the team not verified!");
+                      $this->redir("events");
                     }
-                    $this->addMessage("Event joined succesfully!");
-                    $this->redir("events/".$_POST['event-url']);
                   } else {
                     $this->addMessage("Wrong game!");
                     $this->redir("events");

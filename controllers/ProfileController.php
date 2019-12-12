@@ -163,6 +163,16 @@
             $this->addMessage($e);
           }
         }
+        if (isset($_POST['team-leave'])) {
+          try {
+            $teamMan->leaveTeam($_POST['team-id'], $_SESSION['user']['user_id']);
+            $this->addMessage("Left the team.");
+            $this->log("Team (".$_POST['team-id'].") left","team_leave");
+            $this->redir("profile");
+          } catch (PDOException $e) {
+            $this->addMessage($e);
+          }
+        }
         }
 
       }

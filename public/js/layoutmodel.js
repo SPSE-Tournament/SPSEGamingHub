@@ -24,7 +24,7 @@ function loadMessages(msgType,page) {
   function toggleMessageNav() {
     if (document.querySelector('.messages-wrapp').style.width == '0px') {
       document.querySelector('.messages-button').style.visibility = "hidden";
-      document.querySelector('.messages-wrapp').style.width = '20vw';
+      document.querySelector('.messages-wrapp').style.width = '28vw';
     } else {
       document.querySelector('.messages-button').style.visibility = "hidden";
       document.querySelector('.messages-wrapp').style.width = '0px';
