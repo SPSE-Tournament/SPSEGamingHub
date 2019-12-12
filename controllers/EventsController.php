@@ -106,7 +106,7 @@
                         $verifiedPlayers++;
                       }
                     }
-                    if ($verifiedPlayers >= $game['game_playerlimitperteam']) {
+                    if ($verifiedPlayers >= $numPlayers) {
                       foreach ($usersInATeam as $user) {
                           $eventManager->insertEventParticipation($user['user_id'], $_POST['event-id'], $_POST['team-id']);
                           $this->logDifferentUser($user['user_id'],$user['uname'],

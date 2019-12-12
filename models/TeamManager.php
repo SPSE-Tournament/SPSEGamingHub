@@ -138,6 +138,10 @@
       }
     }
 
+    public function teamInEvents($teamId):bool {
+      return (Db::query("SELECT team_id from eventparticipation where team_id = ?", array($teamId)) > 0) ? true : false;
+    }
+
     public function leaveTeam($teamId, $userId) {
       Db::query("DELETE from teamparticipation where team_id = ? and user_id = ?", array($teamId,$userId));
     }

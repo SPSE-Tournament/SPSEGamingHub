@@ -44,11 +44,17 @@
         if(isset($_POST['accept-invite'])) {
           try {
             if ($teamMan->returnUserTeamsCount($_SESSION['user']['user_id']) < 5) {
-              $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], $_POST['team-id']);
-              $mesMan->deleteMessageById($_POST['message-id']);
-              $this->addMessage("Team joined.");
-              $this->log("Team joined. Team: " . $_POST['team_name'],'team_join');
-              $this->redir("profile");
+              if (!$teamMan->teamInEvents($_POST['team-id'])) {
+                $teamMan->insertTeamParticipation($_SESSION['user']['user_id'], $_POST['team-id']);
+                $mesMan->deleteMessageById($_POST['message-id']);
+                $this->addMessage("Team joined.");
+                $this->log("Team joined. Team: " . $_POST['team_name'],'team_join');
+                $this->redir("profile");
+              } else {
+                $this->addMessage("Team already in events.");
+                $this->redir("profile");
+              }
+
             } else {
               $this->addMessage("Maximum number of teams reached.");
               $this->redir("profile");
