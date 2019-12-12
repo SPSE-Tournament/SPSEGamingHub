@@ -9,6 +9,9 @@
     <?php if ($event['event_status'] == "finished"): ?>
         <span class="p-1" style="background-color:blue;">Finished</span>
     <?php endif; ?>
+    <?php if ($event['event_status'] == "reglocked"): ?>
+        <span class="p-1" style="background-color:orange;">Registrations Locked</span>
+    <?php endif; ?>
     <h1 class="eventName"><?= $event['event_name'] ?></h1>
     <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
     <h3><a href="<?=$event['game_rules']?>" target="_blank">Rules</a></h3>
@@ -88,6 +91,7 @@
             </div>
             <select class="custom-select" name="event-status">
                 <option value="scheduled">Scheduled</option>
+                <option value="reglocked">Registrations Locked</option>
                 <option value="live">Live</option>
                 <option value="finished">Finished</option>
             </select>
