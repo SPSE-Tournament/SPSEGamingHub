@@ -103,8 +103,8 @@
               foreach ($eventTeamIds as $ids) {
                 $realTeamIds[] = $ids['team_id'];
               }
-            if (true/*!in_array($_POST['team-id'],$realTeamIds)*/) {
-            if (true/*$numPlayers >= $game['game_playerlimitperteam']*/) {
+            if (!in_array($_POST['team-id'],$realTeamIds)) {
+            if ($numPlayers >= $game['game_playerlimitperteam']) {
                   if ($team['game_id'] == $_POST['game-id']) {
                     $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
                     $verifiedPlayers = 0;
