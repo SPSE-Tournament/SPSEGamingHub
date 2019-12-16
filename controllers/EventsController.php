@@ -37,9 +37,6 @@
             $this->header['page_title'] = $event['event_name'];
             $this->view = "event";
           } else if ($params[1] == "bracket") {
-            if (!$_SESSION['logged']) {
-              $this->redir("login");
-            }
             $event = $eventManager->returnEventByUrl($params[0]);
             $this->data['event'] = $event;
             $this->data['hasBrackets'] = true;

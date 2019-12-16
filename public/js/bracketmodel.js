@@ -8,7 +8,7 @@ function getBracket() {
      document.querySelector(".bracket-wrapper").innerHTML=this.responseText.slice(start,end);
   }
   };
-  xhttp.open("GET", "events/getbracket/" + eventId, true);
+  xhttp.open("GET", "events/" + url + "/bracket", true);
   xhttp.send();
 }
 setInterval(function(){getBracket()}, 1000)
