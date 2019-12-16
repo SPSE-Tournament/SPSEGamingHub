@@ -18,23 +18,33 @@
       //Routing
       if (!empty($params[0])) {
         if (in_array($params[0], $eventUrls)) {
-          $event = $eventManager->returnEventByUrl($params[0]);
-          $eventTeamIds = $eventManager->returnTeamIdsInEvent($event['event_id']);
-          $eventTeams = $teamMan->returnTeamsInEvent($eventTeamIds);
-          $this->data['event'] = $event;
-          $this->data['teams'] = $eventTeams;
-          $this->data['eventIds'] = $eventTeamIds;
-          if ($event['bracket_status'] == 'live')
-            $this->data['hasBrackets'] = true;
-          else
-            $this->data['hasBrackets'] = false;
-          if (isset($event['event_winner']))
-            $this->data['hasWinner'] = true;
-          else
-            $this->data['hasWinner'] = false;
+          if (empty($params[1])) {
+            $event = $eventManager->returnEventByUrl($params[0]);
+            $eventTeamIds = $eventManager->returnTeamIdsInEvent($event['event_id']);
+            $eventTeams = $teamMan->returnTeamsInEvent($eventTeamIds);
+            $this->data['event'] = $event;
+            $this->data['teams'] = $eventTeams;
+            $this->data['eventIds'] = $eventTeamIds;
+            if ($event['bracket_status'] == 'live')
+              $this->data['hasBrackets'] = true;
+            else
+              $this->data['hasBrackets'] = false;
+            if (isset($event['event_winner']))
+              $this->data['hasWinner'] = true;
+            else
+              $this->data['hasWinner'] = false;
 
-          $this->header['page_title'] = $event['event_name'];
-          $this->view = "event";
+            $this->header['page_title'] = $event['event_name'];
+            $this->view = "event";
+          } else if ($params[1] == "bracket") {
+            $event = $eventManager->returnEventByUrl($params[0]);
+            $this->data['event'] = $event;
+            $this->data['hasBrackets'] = true;
+            $this->data['matches'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
+            $this->view = "bracketfullscreen";
+
+          }
+
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
               if (!UserManager::authAdmin()) {
                 $this->addMessage("Admin rights needed.");
@@ -60,9 +70,6 @@
             }
         } else if ($params[0] == "getbracket") {
             if (!empty($params[1])) {
-              if (!UserManager::authAdmin()) {
-                $this->redir("events");
-              }
               $event = $eventManager->returnEventById($params[1]);
               $this->data['event'] = $event;
               if ($event['bracket_status'] == 'live') {
@@ -96,8 +103,8 @@
               foreach ($eventTeamIds as $ids) {
                 $realTeamIds[] = $ids['team_id'];
               }
-              if (!in_array($_POST['team-id'],$realTeamIds)) {
-              if ($numPlayers >= $game['game_playerlimitperteam']) {
+            if (true/*!in_array($_POST['team-id'],$realTeamIds)*/) {
+            if (true/*$numPlayers >= $game['game_playerlimitperteam']*/) {
                   if ($team['game_id'] == $_POST['game-id']) {
                     $usersInATeam = $teamMan->returnUsersInATeam($_POST['team-id']);
                     $verifiedPlayers = 0;
