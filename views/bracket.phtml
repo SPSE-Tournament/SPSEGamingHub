@@ -2,28 +2,28 @@
 <?php for($i = 0; $i < count($matches); $i++): ?>
   <div class="each-round col-3">
     <?php if (isset($matches[$i][0]['match_description'])): ?>
-      <h2 class="p-2"><?=$matches[$i][0]['match_description'] ?></h2>
+      <h2 style="color:#adadad;"><?=$matches[$i][0]['match_description'] ?></h2>
     <?php endif; ?>
   <?php foreach ($matches[$i] as $match): ?>
     <?php if ($match['match_status'] == 'finished'): ?>
       <div class="match-finished">
     <?php endif; ?>
         <div class="eachmatch mx-1 my-2 row justify-content-center align-items-center">
-          <div class="col-7 d-flex flex-column">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 d-flex flex-column">
             <p><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
             <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
           </div>
-          <div class="matchScore col-2 d-flex flex-column justify-content-center">
-            <h2 class="col-12"><?= $match['match_first_team_score'] ?></h2>
-            <h2 class="col-12"><?= $match['match_second_team_score'] ?></h2>
+          <div class="matchScore col-2 d-flex justify-content-center">
+            <h2><?= $match['match_first_team_score'] ?></h2>
+            <h2><?= $match['match_second_team_score'] ?></h2>
           </div>
           <?php if ($match['match_status'] == 'finished'): ?>
-            <div class="col-1">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1">
               <img src="public/images/i-ok.png">
             </div>
           <?php endif; ?>
           <?php if (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && ($match['match_status'] == 'live' || $match['match_status'] == 'scheduled') ): ?>
-            <div class="scorewrite col-1">
+            <div class="scorewrite col-xs-12 col-sm-12 col-md-12 col-lg-1">
               <button class="btn btn-warning" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="public/images/i-score.png"></button>
             </div>
           <?php endif; ?>

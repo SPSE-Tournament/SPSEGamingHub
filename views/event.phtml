@@ -1,24 +1,26 @@
-<section class="p-5">
-  <div class="event-title p-5 text-center">
-    <?php if ($event['event_status'] == "live"): ?>
-        <span class="p-1" style="background-color:red;">Live</span>
-    <?php endif; ?>
-    <?php if ($event['event_status'] == "scheduled"): ?>
-        <span class="p-1" style="background-color:orange;">Scheduled</span>
-    <?php endif; ?>
-    <?php if ($event['event_status'] == "finished"): ?>
-        <span class="p-1" style="background-color:blue;">Finished</span>
-    <?php endif; ?>
-    <?php if ($event['event_status'] == "reglocked"): ?>
-        <span class="p-1" style="background-color:orange;">Registrations Locked</span>
-    <?php endif; ?>
-    <h1 class="eventName"><?= $event['event_name'] ?></h1>
-    <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
-    <h3><a href="<?=$event['game_rules']?>" target="_blank">Rules</a></h3>
-    <div class="hodziny py-4">
-      <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"></h2>
+<section class="p-5 text-center">
+    <div class="event-title p-3" style="display:inline-block">
+      <div class="d-flex flex-row justify-content-center align-items-center col-8 mx-auto">
+          <?php if ($event['event_status'] == "live"): ?>
+              <span class="p-1" style="background-color:red;">Live</span>
+          <?php endif; ?>
+          <?php if ($event['event_status'] == "scheduled"): ?>
+              <span class="p-1" style="background-color:orange;">Scheduled</span>
+          <?php endif; ?>
+          <?php if ($event['event_status'] == "finished"): ?>
+              <span class="p-1" style="background-color:blue;">Finished</span>
+          <?php endif; ?>
+          <?php if ($event['event_status'] == "reglocked"): ?>
+              <span class="p-1" style="background-color:orange;">Registrations Locked</span>
+          <?php endif; ?><h1 class="eventName pl-2"><?= $event['event_name'] ?></h1>
+      </div>
+      <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
+      <a class="btn btn-warning btn-sm nav-link mx-auto w-25" href="<?=$event['game_rules']?>" target="_blank"><img src="/public/images/i-rules.png"> Rules</a>
+      <div class="hodziny py-4">
+        <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"></h2>
+      </div>
     </div>
-  </div>
+
 
 <section class="navevent-wrapper py-2 w-90 mx-auto mb-5">
   <nav>
@@ -64,7 +66,7 @@
         <h1 class="fullscreenEventName"></h1>
         <div class="row justify-content-end">
           <button class="btn btn-warning refreshbutton" type="button" name="button" data-eventId="<?=$event['event_id']?>" onclick="refreshMatches()"><img src="public/images/i-refresh.png"></button>
-          <button class="btn btn-warning" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
+          <button class="btn btn-warning d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
         </div>
         <hr>
           <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">

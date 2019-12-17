@@ -6,7 +6,6 @@
       <?php endforeach; ?>
     </div>
   <?php endif; ?>
-
   <?php if (!count($events)): ?>
     <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
       <div>
@@ -16,22 +15,22 @@
   <?php endif; ?>
   <?php foreach($events as $event): ?>
     <article class="event-wrapper pb-5 d-flex justify-content-center align-items-center" id="event-<?=$event['event_id']?>" style="background-image:url(<?=$event['game_background']?>)!important;">
-      <section class="eventcard p-5 mx-auto col-9 text-center">
+      <section class="eventcard p-5 mx-auto col-7 text-center" style="width:10vw;">
         <a href="events/<?=$event['event_url']?>" style="text-decoration: none; color:#fff;">
-          <?php if ($event['event_status'] == "live"): ?>
-              <span class="p-1" style="background-color:red;">Live</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "scheduled"): ?>
-              <span class="p-1" style="background-color:orange;">Scheduled</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "finished"): ?>
-              <span class="p-1" style="background-color:blue;">Finished</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "reglocked"): ?>
-              <span class="p-1" style="background-color:orange;">Registrations Locked</span>
-          <?php endif; ?>
-
-          <h1><?= $event['event_name'] ?></h1>
+          <div class="d-flex flex-row justify-content-center align-items-center">
+              <?php if ($event['event_status'] == "live"): ?>
+                  <span class="p-1" style="background-color:red;">Live</span>
+              <?php endif; ?>
+              <?php if ($event['event_status'] == "scheduled"): ?>
+                  <span class="p-1" style="background-color:orange;">Scheduled</span>
+              <?php endif; ?>
+              <?php if ($event['event_status'] == "finished"): ?>
+                  <span class="p-1" style="background-color:blue;">Finished</span>
+              <?php endif; ?>
+              <?php if ($event['event_status'] == "reglocked"): ?>
+                  <span class="p-1" style="background-color:orange;">Registrations Locked</span>
+              <?php endif; ?><h1 class="eventName pl-2"><?= $event['event_name'] ?></h1>
+          </div>
         <hr style="background-color:#fff">
         <div class="row justify-content-center">
           <h3 class="col-11 m-1"><img src="<?=$event['game_icon']?>" height="50" width="50">  <?= $event['game_name'] ?></h3>

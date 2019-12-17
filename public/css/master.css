@@ -1,11 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap');
 @import url('https://fonts.googleapis.com/css?family=McLaren&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 ::-webkit-scrollbar {
   height: 90vh;
   display: none;
-}
-body {
-  word-wrap: break-word;
 }
 .nav-link {
   text-decoration: none;
@@ -22,10 +20,10 @@ background-image: url("../images/bckg2.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
 color: #fff;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: 600;
+font-family: 'Source Sans Pro', sans-serif;
+font-weight: 600;
+font-size: 1vw;
 }
 .mainnav {
   height: 8vh;
@@ -58,7 +56,6 @@ color: #fff;
   background: #fc4a1a;  /* fallback for old browsers */
   background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
   background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  border-radius: 0 2rem 0 2rem;
 }
 .eventcard:hover {
   opacity: 0.93;
@@ -231,6 +228,7 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
   }
   .modal-body {
     color:rgba(255,255,255,.8);
+    word-wrap: break-word;
   }
   .message-preview-button {
     border-radius: 15px;
@@ -260,8 +258,9 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
     background: linear-gradient(to right, #f7b733, #fc4a1a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     color:#fff !important;
-    border-radius: 0 2rem 0 2rem;
+
   }
+
   .card-header {
     background: #fc4a1a;  /* fallback for old browsers */
     background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);  /* Chrome 10-25, Safari 5.1-6 */
@@ -298,10 +297,9 @@ background: linear-gradient(to right, #605C3C, #3C3B3F); /* W3C, IE 10+/ Edge, F
     }
     .scrollables > a:hover {
       opacity: 0.7;
-      transition: all 0.3s ease-out;
-      color: orange;
+      transition: all 0.2s ease-out;
+      color: gray;
       text-decoration: none;
-      border: 3px solid orange;
       border-radius: 3.5rem;
     }
     .homesign {
@@ -310,4 +308,18 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     }
     html {
       scroll-behavior: smooth;
+    }
+
+    @media only screen and (max-width: 992px) {
+      .matchScore {
+        flex-direction: row !important;
+      }
+      .matchScore > h2 {
+        padding-left: 5px;
+      }
+    }
+    @media only screen and (min-width: 992px) {
+      .matchScore {
+        flex-direction: column !important;
+      }
     }
