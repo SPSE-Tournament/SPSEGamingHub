@@ -314,10 +314,10 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
       .matchScore {
         flex-direction: row !important;
       }
-      .matchScore > h2 {
-        padding-left: 5px;
-      }
+      .matchScore > .scoreLeft::after {
+        content: ":";
     }
+  }
     @media only screen and (min-width: 992px) {
       .matchScore {
         flex-direction: column !important;

@@ -14,8 +14,8 @@
             <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
           </div>
           <div class="matchScore col-2 d-flex justify-content-center">
-            <h2><?= $match['match_first_team_score'] ?></h2>
-            <h2><?= $match['match_second_team_score'] ?></h2>
+            <h2 class="scoreLeft"><?= $match['match_first_team_score'] ?></h2>
+            <h2 class="scoreRight"><?= $match['match_second_team_score'] ?></h2>
           </div>
           <?php if ($match['match_status'] == 'finished'): ?>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1">
