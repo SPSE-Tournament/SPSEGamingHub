@@ -57,4 +57,4 @@ function getBracket() {
 
 $('#nav-tab a[href="#nav-bracket"]').tab('show')
 getBracket();
-setInterval(function(){refreshMatches();getBracket();}, 1000)
+setInterval(function(){refreshMatches();getBracket();}, 10000)
