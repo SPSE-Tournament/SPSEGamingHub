@@ -56,7 +56,7 @@
         } else if ($params[0] == "getmatch") {
           $matchIds = $bracketManager->returnMatchIds();
             if (!empty($params[1]) && in_array($params[1],$matchIds)) {
-              if (!UserManager::authAdmin()) {
+              if (!UserManager::authAdmin() || !UserManager::authWatchman) {
                 $this->addMessage("Admin rights needed.");
                 $this->redir("home");
               }

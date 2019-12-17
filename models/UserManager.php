@@ -165,6 +165,14 @@
               return ($admin['admin'] == 1 or $admin['rootmaster'] == 1) ? true : false;
             }
           }
+          public static function authWatchman() {
+            if (!isset($_SESSION['user'])) {
+              return false;
+            } else {
+              $admin = Db::singleQuery("SELECT admin, watchman, rootmaster from users where user_id = ?", array($_SESSION['user']['user_id']));
+              return ($admin['watchman'] == 1) ? true : false;
+            }
+          }
 
           public function liveSearchUsers($str) {
               $strL = mb_strtolower($str);
