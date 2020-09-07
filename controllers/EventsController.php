@@ -13,7 +13,10 @@
       for ($i=0; $i < count($events); $i++) {
             $eventUrls[] = $events[$i]['event_url'];
       }
-      $this->data['admin'] = $_SESSION['admin'];
+      if ($_SESSION['logged']) {
+        $this->data['admin'] = $_SESSION['admin'];
+      }
+
 
       //Routing
       if (!empty($params[0])) {
@@ -42,7 +45,6 @@
             $this->data['hasBrackets'] = true;
             $this->data['matches'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
             $this->view = "bracketfullscreen";
-
           }
 
         } else if ($params[0] == 'edit' && !empty($params[1]) && in_array($params[1], $eventUrls)) {
@@ -53,17 +55,6 @@
               $this->data['event'] = $eventManager->returnEventByUrl($params[1]);
               $this->data['games'] = $gameManager->returnGames();
               $this->view = "editevent";
-        } else if ($params[0] == "getmatch") {
-          $matchIds = $bracketManager->returnMatchIds();
-            if (!empty($params[1]) && in_array($params[1],$matchIds)) {
-              if (!UserManager::authAdmin() || !UserManager::authWatchman) {
-                $this->addMessage("Admin rights needed.");
-                $this->redir("home");
-              }
-              $match = $bracketManager->returnMatchById($params[1]);
-              $this->data['match'] = $match;
-              $this->view = 'matchpreview';
-            }
         } else if ($params[0] == "refreshmatches") {
             if (!empty($params[1])) {
               $match = $bracketManager->checkMatches($params[1]);
@@ -86,8 +77,13 @@
         }
       } else {
         $this->data['events'] = $events;
-        $this->data['user'] = $_SESSION['user'];
-        $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
+        if ($_SESSION['logged']) {
+          $this->data['user'] = $_SESSION['user'];
+          $this->data['userTeams'] = $teamMan->returnUserTeams($_SESSION['user']['user_id']);
+        } else {
+          $this->data['user'] = ["admin" => false, "rootmaster" => false];
+        }
+
         $this->header['page_title'] = "Events";
         $this->view = "events";
       }

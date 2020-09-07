@@ -1,50 +1,50 @@
 <section class="events-wrapper">
+  <!--
   <?php if (count($events)): ?>
     <div class="scrollables d-flex flex-column bg-dark p-3">
       <?php foreach ($events as $event): ?>
         <a class="p-2" href="events#event-<?=$event['event_id']?>"><?=$event['event_name']?></a>
       <?php endforeach; ?>
     </div>
+  -->
   <?php endif; ?>
   <?php if (!count($events)): ?>
-    <div class="d-flex justify-content-center align-items-center" style="height:100vh;">
+    <div class="d-flex justify-content-center align-items-center h-full">
       <div>
       <img src="public/images/soon.gif" alt="" style="border-radius:2rem;">
       </div>
     </div>
   <?php endif; ?>
   <?php foreach($events as $event): ?>
-    <article class="event-wrapper pb-5 d-flex justify-content-center align-items-center" id="event-<?=$event['event_id']?>" style="background-image:url(<?=$event['game_background']?>)!important;">
-      <section class="eventcard p-5 mx-auto col-7 text-center" style="width:10vw;">
-        <a href="events/<?=$event['event_url']?>" style="text-decoration: none; color:#fff;">
-          <div class="d-flex flex-row justify-content-center align-items-center">
-              <?php if ($event['event_status'] == "live"): ?>
-                  <span class="p-1" style="background-color:red;">Live</span>
-              <?php endif; ?>
-              <?php if ($event['event_status'] == "scheduled"): ?>
-                  <span class="p-1" style="background-color:orange;">Scheduled</span>
-              <?php endif; ?>
-              <?php if ($event['event_status'] == "finished"): ?>
-                  <span class="p-1" style="background-color:blue;">Finished</span>
-              <?php endif; ?>
-              <?php if ($event['event_status'] == "reglocked"): ?>
-                  <span class="p-1" style="background-color:orange;">Registrations Locked</span>
-              <?php endif; ?><h1 class="eventName pl-2"><?= $event['event_name'] ?></h1>
-          </div>
-        <hr style="background-color:#fff">
-        <div class="row justify-content-center">
-          <h3 class="col-11 m-1"><img src="<?=$event['game_icon']?>" height="50" width="50">  <?= $event['game_name'] ?></h3>
-          <h3 class="col-5 m-1"><img src="public/images/i-time.png">  <?= $event['event_parseddate'] ?></h3>
-          <h3 class="col-5 m-1"><img src="public/images/i-players.png">  Players: <?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h3>
+    <article class="event-wrapper d-flex flex-column justify-content-center align-items-center" id="event-<?=$event['event_id']?>" style="background-image:url(<?=$event['game_background']?>)!important;">
+      <div class="eventcard-wrapper d-flex flex-column justify-content-center align-items-center">
+        <div class="event-icon bg-red-main">
+          <img class="m-1" src="<?=$event['game_icon']?>" height="60" width="60">
         </div>
-        </a>
-        <?php if ($event['event_status'] == "scheduled"): ?>
-          <button class="btn btn-success" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">Join with your team</button>
-        <?php endif; ?>
-        <?php if ($user['admin'] || $user['watchman'] || $user['rootmaster']): ?>
-          <a class="btn btn-danger" href="events/edit/<?=$event['event_url']?>" role="button">Edit event</a>
-        <?php endif; ?>
-      </section>
+        <section class="eventcard p-4 text-center bg-blue-gray">
+          <a href="events/<?=$event['event_url']?>" style="text-decoration: none; color:#fff;">
+            <div class="d-flex flex-column justify-content-around align-items-center">
+
+              <h1 class="event-name pl-2"><?= $event['event_name'] ?></h1>
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="row align-items-center">
+                  <img src="/public/images/i-people.png" height="50" width="50" alt=""><h5><?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h5>
+                </div>
+                <div class="row align-items-center">
+                  <img src="/public/images/i-date.png" height="50" width="50" alt=""><h5><?=$event['event_parseddate']?></h5>
+                </div>
+              </div>
+            </div>
+          </a>
+          <?php if ($event['event_status'] == "scheduled"): ?>
+            <button class="btn btn-main text-huge" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">JOIN</button>
+          <?php endif; ?>
+        </section>
+      </div>
+      <div class="event-status bg-red-main p-2 row text-light">
+          <?= mb_strtoupper($event['event_status']) ?>
+      </div>
+
     </article>
 
   <?php endforeach; ?>

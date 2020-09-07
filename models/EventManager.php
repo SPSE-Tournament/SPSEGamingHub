@@ -12,7 +12,7 @@
       public function returnEventByUrl($url) {
         return Db::singleQuery("SELECT event_id, event_name, games.game_name as game_name, games.game_id as game_id,games.game_background as game_background,games.game_rules as game_rules, bracket_status, event_winner,(select team_name from teams where team_id = event_winner)as event_winner_name,
          concat(substr(event_timestamp,9,2), '.', substr(event_timestamp,6,2), '.', substr(event_timestamp,1,4), ' ', substr(event_timestamp,12,5)) as event_parseddate,bracket_format, event_status,
-         event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url
+         event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url, (select count(*) from eventparticipation where eventparticipation.event_id = events.event_id) as player_count
                                 from events
                                 join games on events.game_id = games.game_id
                                 where event_url = ?", array($url));
@@ -21,7 +21,7 @@
       public function returnEventById($eventId) {
         return Db::singleQuery("SELECT event_id, event_name, games.game_name as game_name, games.game_id as game_id,games.game_background as game_background,games.game_rules as game_rules, bracket_status,event_winner,
          concat(substr(event_timestamp,9,2), '.', substr(event_timestamp,6,2), '.', substr(event_timestamp,1,4), ' ', substr(event_timestamp,12,5)) as event_parseddate,bracket_format, event_status,
-         event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url
+         event_playerlimit, games.game_playerlimitperteam as game_plteam, event_timestamp, event_url, (select count(*) from eventparticipation where eventparticipation.event_id = events.event_id) as player_count
                                 from events
                                 join games on events.game_id = games.game_id
                                 where event_id = ?", array($eventId));

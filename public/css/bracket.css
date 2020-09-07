@@ -1,0 +1,16 @@
+.eachmatch {
+min-width: 15vw;
+}
+.match-status,.scorewrite {
+  position: relative;
+  top: -30px;
+  left:0;
+}
+.first-team-name {
+  border-bottom: 1px solid var(--red-main);
+  border-bottom-style: inset;
+}
+.second-team-name {
+  border-top: 1px solid var(--red-main);
+  border-top-style: inset;
+}

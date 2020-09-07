@@ -1,7 +1,7 @@
 <?php
     class FileManager {
       public function uploadFile(array $file,bool $image, array $allowedExtensions, $name):string {
-        $uploads = "/var/www/html/public/uploads/";
+        $uploads = __DIR__."/../public/uploads/";
         $ext = strtolower(pathinfo(basename($file['name']), PATHINFO_EXTENSION));
         $targetFile = $uploads . $name . ".".$ext;
         if ($image) {

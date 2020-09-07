@@ -1,44 +1,47 @@
-<section class="profile-wrapper p-5 text-center">
-  <div class="profile-info col-5 mx-auto p-3">
-    <div class="profile-img">
-      <img class="bg-dark" src="public/images/logo_spse.png" alt="" style="border-radius: 10rem;" height="250">
+<section class="profile-wrapper py-4 px-1 text-center d-flex flex-column m-0 align-items-center justify-content-center">
+  <div class="profile-info bg-blue-gray mx-auto p-2 rounded d-flex flex-wrap justify-content-around" style="position: relative;">
+    <div class="profile-img m-2 d-flex mx-auto">
+      <img class="bg-dark b-2-main mx-auto" src="public/images/haw.jpg" alt="" style="border-radius: 50%;" height="175" width="175">
     </div>
-    <div class="py-3">
-      <h2><?php if ($user['user_verified'] == 1): ?>
-        <img src="public/images/i-verified.png">
-      <?php endif; ?><?= $user['name'] ?><span style="color:rgba(255,255,255,.7);">#<?= $user['user_hexid']; ?></span></h2>
-      <h2><?= $user['email'] ?></h2>
-      <?php if ($user['rootmaster']): ?>
-        <div class="my-3">
-          <span class="admin-tag p-2 ">Rootmaster</span>
-        </div>
-      <?php endif; ?>
-      <?php if ($user['admin']): ?>
-        <div class="my-3">
-          <span class="admin-tag p-2 ">Admin</span>
-        </div>
-      <?php endif; ?>
-      <?php if ($user['watchman']): ?>
-        <div class="my-3">
-          <span class="admin-tag p-2 ">Watchman</span>
-        </div>
-      <?php endif; ?>
+    <div class="pl-2 text-left">
+      <div class="uname">
+        <h2 class="p-0 m-0 c-text-gray profile-info-title">username</h2>
+        <h4 class="text-light"><?php if ($user['user_verified'] == 1): ?>
+          <img src="public/images/i-verified.png">
+        <?php endif; ?>
+        <?= $user['name'] ?><span class="c-gray-light">#<?= $user['user_hexid']; ?></span></h4>
+      </div>
+      <div class="email">
+        <h2 class="p-0 m-0 c-text-gray profile-info-title">email</h2>
+        <h4 class="text-light"><?= $user['email'] ?></h4>
+      </div>
     </div>
+  </div>
+  <div class="profile-rank mx-auto text-center rounded bg-red-main p-2 text-light d-inline-block">
+    <?php if ($user['rootmaster']): ?>
+      ROOTMASTER
+    <?php endif; ?>
+    <?php if ($user['admin']): ?>
+      ADMIN
+    <?php endif; ?>
+    <?php if ($user['watchman']): ?>
+      WATCHMAN
+    <?php endif; ?>
   </div>
 
 
-  <section class="navevent-wrapper py-2 w-90 mx-auto mb-5">
+  <section class="navevent-wrapper p-4 w-90 mr-auto">
     <nav>
       <div class="nav nav-pills" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+        <a class="nav-item nav-link bg-red-main active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
         <!--<a class="nav-item nav-link" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a> -->
       </div>
     </nav>
     <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-teams" role="tabpanel">
+      <div class="tab-pane fade show active text-center" id="nav-teams" role="tabpanel">
         <?php if (!$hasTeams): ?>
-          <p>User has no teams...</p>
-          <button class="btn btn-warning" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+          <p class="text-light">User has no teams...</p>
+          <button class="btn btn-main" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
         <?php endif; ?>
         <?php if ($hasTeams): ?>
           <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">

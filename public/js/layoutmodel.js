@@ -1,3 +1,4 @@
+
 $(function () {
 $('[data-toggle="tooltip"]').tooltip()
 })
@@ -100,12 +101,12 @@ function loadMessages(msgType,page) {
     }
 
 
-    function openNav() {
-      document.getElementById("slide-navigation").style.width = "100%";
-    }
+    function toggleNav() {
+      if (document.querySelector(".overlay").style.width == "100%")
+        document.querySelector(".overlay").style.width = "0%";
+      else
+        document.querySelector(".overlay").style.width = "100%";
 
-    function closeNav() {
-      document.getElementById("slide-navigation").style.width = "0%";
     }
 
 

@@ -1,0 +1,77 @@
+/*
+--breakpoint-xs: 0;
+--breakpoint-sm: 576px;
+--breakpoint-md: 768px;
+--breakpoint-lg: 992px;
+--breakpoint-xl: 1200px;
+*/
+
+@media screen and (max-width: 992px) {
+  .mainnav {
+  bottom: 0;
+  height: 13vh;
+  width: 100vw;
+  flex-direction: row !important;
+  }
+  .banner {
+    width: 150px;
+    height: auto;
+  }
+  .top-menu, .button-menu {
+    display: none !important;
+  }
+  .hero {
+    margin-left: 10px;
+    width: 70px;
+    height: 70px;
+  }
+  .content {
+    min-height: 87vh;
+    padding-left: 0;
+    width: 100vw;
+  }
+  .home-wrapper {
+    min-height: 87vh;
+  }
+  .event-wrapper {
+    height: 100vh;
+    padding-bottom: 13vh;
+  }
+  .social-item img {
+    height: 75px;
+    width: 150px;
+  }
+  #twitch-embed, .profile-menu {
+    display: none !important;
+  }
+  .h-full {
+    height: 87vh !important;
+  }
+  .timer-countdown {
+    font-size: 1.2rem !important;
+  }
+  .profile-info h2 {
+    font-size: 1.4rem !important;
+  }
+  .profile-info h4 {
+    font-size: 1.2rem !important;
+  }
+  .profile-info {
+    border-left: 10px solid var(--red-main);
+  }
+}
+@media screen and (min-width: 992px) {
+  .hamburger {
+    display: none !important;
+  }
+  .hero-top {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .mainnav {
+    width:200px;
+  }
+  .hero {
+    font-size: 1.5rem;
+  }
+ }

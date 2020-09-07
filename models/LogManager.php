@@ -3,7 +3,7 @@
 
     public function returnLogs() {
       return Db::multiQuery("SELECT log_id, logs.user_id as uid, users.name as uname, log_message, log_type, log_timestamp, log_userip from logs
-      join users on logs.user_id = users.user_id order by log_timestamp desc");
+      join users on logs.user_id = users.user_id order by log_timestamp desc limit 30");
     }
 
     public function returnLogById($id) {

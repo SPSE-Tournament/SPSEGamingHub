@@ -1,61 +1,59 @@
-<section class="p-5 text-center">
-    <div class="event-title p-3" style="display:inline-block">
-      <div class="d-flex flex-row justify-content-center align-items-center col-8 mx-auto">
-          <?php if ($event['event_status'] == "live"): ?>
-              <span class="p-1" style="background-color:red;">Live</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "scheduled"): ?>
-              <span class="p-1" style="background-color:orange;">Scheduled</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "finished"): ?>
-              <span class="p-1" style="background-color:blue;">Finished</span>
-          <?php endif; ?>
-          <?php if ($event['event_status'] == "reglocked"): ?>
-              <span class="p-1" style="background-color:orange;">Registrations Locked</span>
-          <?php endif; ?><h1 class="eventName pl-2"><?= $event['event_name'] ?></h1>
-      </div>
-      <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
-      <a class="btn btn-warning btn-sm nav-link mx-auto w-25" href="<?=$event['game_rules']?>" target="_blank"><img src="/public/images/i-rules.png"> Rules</a>
-      <div class="hodziny py-4">
-        <h2 class="timer-countdown"> <img src="public/images/loading.gif" alt="" height="50"></h2>
-      </div>
+<section class="py-5 px-3">
+  <div>
+    <div class="eventcard-wrapper d-flex flex-column justify-content-center align-items-center">
+      <section class="eventcard p-4 text-center bg-blue-gray text-light">
+          <div class="d-flex flex-column justify-content-around align-items-center">
+            <h1 class="event-name pl-2"><?= $event['event_name'] ?></h1>
+            <div class="d-flex flex-column justify-content-center align-items-center">
+              <div class="d-flex flex-wrap align-items-center justify-content-around w-100">
+                <div class="mx-1"><img src="/public/images/i-people.png" height="50" width="50" alt=""><h5><?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h5></div>
+                <a target="blank" href="<?=$event['game_rules']?>" class="btn btn btn-main mx-1"><img src="/public/images/i-rules.png" width="50" height="50"> Rules</a>
+              </div>
+              <div class="hodziny py-4 text-light">
+                <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
+                <h2 class="timer-countdown text-light"><img src="public/images/loading.gif" alt="" height="50"></h2>
+              </div>
+            </div>
+          </div>
+      </section>
     </div>
+  </div>
 
 
-<section class="navevent-wrapper py-2 w-90 mx-auto mb-5">
+
+<section class="navevent-wrapper py-2 mx-auto mb-5">
   <nav>
     <div class="nav nav-pills" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+      <a class="nav-item nav-link bg-red-main active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
       <?php if ($hasBrackets): ?>
-        <a class="nav-item nav-link" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+        <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
       <?php endif; ?>
       <?php if (!$hasBrackets): ?>
-        <a class="nav-item nav-link disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+        <a class="nav-item nav-link bg-red-main disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
       <?php endif; ?>
-      <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
-        <a class="nav-item nav-link" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
+      <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
+        <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
       <?php endif; ?>
     </div>
   </nav>
-  <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
+  <div class="tab-content tab-content-profile p-5 bg-blue-gray text-light  text-center" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
       <?php if (isset($event['event_winner'])): ?>
-        <h1><img src="public/images/i-crown.png"> Event winner: <?=$event['event_winner_name']?></h1>
-        <hr>
+        <h1><img src="public/images/i-crown.png"><?=$event['event_winner_name']?></h1>
+        <hr class="bg-red-main">
       <?php endif; ?>
       <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
-                  <?php foreach ($teams as $team): ?>
-        <div class="col-6 my-2">
-          <section class="each-team col-12 mx-auto p-4">
-          <div>
-            <p><?= $team['name'] ?></p>
-            <hr style="background-color:orange;">
+       <?php foreach ($teams as $team): ?>
+        <div class="col-lg-3 mx-1 col-md-12 my-2 bg-space rounded">
+          <section class="each-team col-12 px-0 mx-auto py-3 text-left">
+          <div class="each-team-top d-flex align-items-center">
+            <p class="pl-2 pb-2 m-0"><?= $team['name'] ?></p>
           </div>
-          <ul>
+          <div class="player-list py-2">
             <?php foreach ($team['players'] as $player): ?>
-              <li><?= $player ?></li>
+              <div><?= $player['uname'] ?><span class="c-gray-light" style="color:#989898">#<?=$player['user_hexid']?></span></div>
             <?php endforeach; ?>
-          </ul>
+          </div>
           </section>
         </div>
       <?php endforeach; ?>
@@ -65,18 +63,17 @@
       <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
         <h1 class="fullscreenEventName"></h1>
         <div class="row justify-content-end">
-          <button class="btn btn-warning refreshbutton" type="button" name="button" data-eventId="<?=$event['event_id']?>" onclick="refreshMatches()"><img src="public/images/i-refresh.png"></button>
-          <button class="btn btn-warning d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
+          <input type="hidden" class="event-id" value="<?=$event['event_id']?>">
+          <button class="btn btn-main d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
         </div>
-        <hr>
           <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
           </section>
       </div>
     <?php endif; ?>
-    <?php if ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin']): ?>
+    <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
       <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="accordion bg-dark" id="accordionExample">
-    <div class="card">
+        <div class="accordion">
+    <div class="card bg-space">
       <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
         <h5 class="mb-0">Settings</h5>
       </div>
@@ -99,6 +96,7 @@
             </select>
           </div>
         </div>
+
         <!--
         <div class="form-group">
           <div class="input-group mb-3">
@@ -154,7 +152,8 @@
     <?php endif; ?>
   </div>
 </section>
-<?php if ($_SESSION['user']['admin'] || $_SESSION['user']['rootmaster'] || $_SESSION['user']['watchman']): ?>
+</section>
+<?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'] || $_SESSION['user']['watchman'])): ?>
 
 <?php endif; ?>
 <div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -206,7 +205,33 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body modal-match-detail-body"></div>
+<div class="modal-body modal-match-detail-body">
+  <form method="post">
+    <input type="hidden" name="match-score-write">
+    <input class="match-id-input" type="hidden" name="match-id" value="">
+    <div class="row justify-content-center p-1 m-1">
+      <h2 class="match-first-name"></h2>
+      <div class="col-2">
+        <input class="form-control match-first-score" type="number" value="" name="first-score" min="0" max="3">
+      </div>
+      <h2>:</h2>
+      <div class="col-2">
+        <input  class="form-control match-second-score" type="number" value="" name="second-score" min="0" max="3">
+      </div>
+      <h2 class="match-second-name"></h2>
+    </div>
+    <div class="p-2 mx-1 my-3">
+      <label for="match-status">Match status</label>
+      <select class="form-control" name="match-status">
+        <option class="match-current-status" value="" selected></option>
+        <option value="scheduled">Scheduled</option>
+        <option value="live">Live</option>
+        <option value="finished">Finished</option>
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit" name="button">Submit</button>
+  </form>
+</div>
     </div>
   </div>
 </div>

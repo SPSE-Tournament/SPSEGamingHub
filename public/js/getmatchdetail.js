@@ -1,15 +1,15 @@
 $('.modal-score-write').on('show.bs.modal', function (event) {
-let button = $(event.relatedTarget)
-let matchId = button.data('matchid')
-let modal = $(this)
-let xhttp = new XMLHttpRequest();
-xhttp.onreadystatechange = function() {
-if (this.readyState == 4 && this.status == 200) {
-  let start = this.responseText.indexOf('<!-- MatchStart -->');
-  let end = this.responseText.indexOf("<!-- MatchEnd -->") + "<!-- MatchEnd -->".length;
-   document.querySelector(".modal-match-detail-body").innerHTML=this.responseText.slice(start,end);
-}
-};
-xhttp.open("GET", "events/getmatch/" + matchId, true);
-xhttp.send();
+  button = event.relatedTarget;
+  fetch('api/get/match/'+button.dataset.matchid)
+    .then(response => response.json())
+    .then(match => {
+      document.querySelector('.match-id-input').value = match.match_id;
+      document.querySelector(".match-first-name").innerHTML = match.match_first_team_name;
+      document.querySelector(".match-second-name").innerHTML = match.match_second_team_name;
+      document.querySelector('.match-first-score').value = match.match_first_team_score;
+      document.querySelector('.match-second-score').value = match.match_second_team_score;
+      document.querySelector('.match-current-status').value = match.match_status;
+      document.querySelector('.match-current-status').innerHTML = match.match_status;
+    })
+    .catch(err => console.error(err));
 });

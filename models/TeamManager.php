@@ -77,7 +77,7 @@
           $usersInATeam = $this->returnUsersInATeam($teamId['team_id']);
           $players = array();
           foreach ($usersInATeam as $user) {
-            $players[] = $user['uname'];
+            $players[] = $user;
           }
           $teams[] = array('id'=>$team['team_id'],'name' => $team['team_name'], 'players' => $players, 'teamCaptain' => $team['team_captain_id']);
         }

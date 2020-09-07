@@ -1,3 +1,7 @@
+document.querySelector("#eventLink").classList.add("nav-links-selected");
+document.querySelector("#homeLink").classList.remove("nav-links-selected");
+//document.querySelector("#adminLink").classList.remove("nav-links-selected");
+
 let countDownDate = new Date(document.querySelector('.event-timestamp').value).getTime();
 setInterval(function() {
   let now = new Date().getTime();
@@ -6,7 +10,7 @@ setInterval(function() {
   let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  let response = "<span class='bg-dark p-2'>" + days + " d : " + hours + " h : " + minutes + " m : " + seconds + " s</span>";
+  let response = "<span class='bg-red-main rounded p-2'>" + days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s</span>";
   document.querySelector(".timer-countdown").innerHTML = response;
   if (distance < 0) {
     clearInterval();
@@ -17,7 +21,7 @@ setInterval(function() {
 function toggleBracketFullscreen() {
   if (!document.fullscreenElement) {
     document.querySelector(".tab-content-profile").requestFullscreen();
-    document.querySelector(".fullscreenEventName").innerHTML = document.querySelector(".eventName").innerHTML;
+    document.querySelector(".fullscreenEventName").innerHTML = document.querySelector(".event-name").innerHTML;
     for (let i of document.querySelectorAll(".scorewrite"))
       i.style.display = "none";
 } else {
@@ -31,7 +35,7 @@ function toggleBracketFullscreen() {
 }
 
 function refreshMatches() {
-  let eventId = document.querySelector(".refreshbutton").dataset.eventid;
+  let eventId = document.querySelector(".event-id").value;
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
@@ -42,7 +46,7 @@ function refreshMatches() {
 }
 
 function getBracket() {
-  let eventId = document.querySelector(".refreshbutton").dataset.eventid;
+  let eventId = document.querySelector(".event-id").value;
   let xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {

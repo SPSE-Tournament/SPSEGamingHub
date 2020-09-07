@@ -1,30 +1,22 @@
-<section class="home d-flex flex-column align-items-center">
-  <section class="d-flex flex-column justify-content-center align-items-center" style="height:90vh;">
-    <div class="pr-5 homesign" style="border-radius: 0 2rem 0 2rem;">
-      <img src="public/images/logo_spse_text.png" alt="" width="600" style="border-radius: 0 2rem 0 2rem">
-    </div>
-    <div class="py-3 d-flex flex-column text-center">
-      <a class="closeSideNav " href="https://discord.gg/Xxcdkqw" target="_blank"><img src="public/images/discord.jfif" alt="Discord" width="250" style="border-radius:.7rem;"></a>
-      <h6 class="my-3">&copy;Dominik Roudný and SPSE Gaming 2019-2020</h6>
-    </div>
-  </section>
+<div class="home-wrapper d-flex flex-column justify-content-around pb-md-5 align-items-center">
+  <div class="news text-light px-3 text-center">
+    <img class="banner mb-1" src="/public/images/spse_gaming_banner.svg" width="250" alt="">
+    <h2 class="m-lg-4 m-md-1">Esportový turnaj s letitou tradicí pořádaný žáky SPŠE Pardubice</h2>
+    <a href="login" class="btn btn-lg btn-main mr-auto mt-1">Přihlásit se</a>
+  </div>
+  <div class="social-media d-flex flex-wrap justify-content-around pb-5 align-items-center w-100">
+      <div class="social-item m-1">
+        <a href="https://discord.gg/yCUmthz"><img src="/public/images/discord.jpg" alt=""></a>
+      </div>
+      <div class="social-item m-1">
+        <a href="twitch.tv/spsegaming"><img src="/public/images/twitch.jpg" alt=""></a>
+      </div>
+  </div>
+</div>
 
-  <section class="d-none d-lg-flex align-items-center my-5" style="height:100vh;">
-    <section id="twitch-embed"></section>
-  </section>
-
-</section>
-
-<script src="https://embed.twitch.tv/embed/v1.js"></script>
 <script type="text/javascript">
-   let embed = new Twitch.Embed("twitch-embed", {
-     width: window.screen.availWidth - 200,
-     height: window.screen.availHeight - 200,
-     channel: "spsegaming",
-     layout: "video"
-   });
-   embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
-  var player = embed.getPlayer();
-  player.play();
-});
+document.querySelector("#eventLink").classList.remove("nav-links-selected");
+document.querySelector("#homeLink").classList.add("nav-links-selected");
+document.querySelector("#adminLink").classList.remove("nav-links-selected");
+  $('.carousel').carousel()
 </script>
