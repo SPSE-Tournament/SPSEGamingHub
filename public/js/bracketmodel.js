@@ -11,4 +11,8 @@ function getBracket() {
   xhttp.open("GET", "events/" + url + "/bracket", true);
   xhttp.send();
 }
+
+function getBracketN() {
+  fetch('/api/get/bracket/');
+}
 setInterval(function(){getBracket()}, 10000)

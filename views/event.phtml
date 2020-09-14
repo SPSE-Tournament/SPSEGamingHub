@@ -78,7 +78,7 @@
         <h5 class="mb-0">Settings</h5>
       </div>
 
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
         <div class="card-body bg-dark">
           <form method="post">
             <input type="hidden" name="event-settings">
@@ -126,27 +126,26 @@
         </div>
       </div>
     </div>
-    <div class="card">
-      <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-        <h5 class="mb-0">Bracket</h5>
-      </div>
-      <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-        <div class="card-body bg-dark">
-          <span class="bg-danger p-1">Status</span>
-          <hr>
-          <div class="d-flex justify-content-around">
-            <?php if ($event['event_status'] == "live" && !$hasWinner): ?>
-              <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
-              <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
-            <?php endif; ?>
-          <?php if ($event['event_status'] != "live" || $hasWinner): ?>
-            <h3>Event not live/has winner</h3>
+  </div>
+  <div class="card bg-space">
+    <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <h5 class="mb-0">Bracket</h5>
+    </div>
+    <div id="collapseTwo" class="" aria-labelledby="headingTwo" data-parent="#accordionExample">
+      <div class="card-body bg-dark">
+        <span class="bg-danger p-1">Status</span>
+        <hr>
+        <div class="d-flex justify-content-around">
+          <?php if ($event['event_status'] == "live" && !$hasWinner): ?>
+            <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
+            <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
           <?php endif; ?>
-          </div>
+        <?php if ($event['event_status'] != "live" || $hasWinner): ?>
+          <h3>Event not live/has winner</h3>
+        <?php endif; ?>
         </div>
       </div>
     </div>
-
   </div>
       </div>
     <?php endif; ?>

@@ -3,6 +3,7 @@
     public function parse($params) {
       $bracketManager = new BracketManager();
       $eventManager = new EventManager();
+      $teamManager = new TeamManager();
 
       if (empty($params[0]) || empty($params[1])) {
         $this->redir("error");
@@ -27,7 +28,14 @@
                 $this->data['hasBrackets'] = true;
                 $this->data['response'] = $bracketManager->returnParsedMatchesInEvent($event['event_id']);
               }
+            } else {
+              return;
             }
+        } else if ($params[1] == "team") {
+          if (!empty($params[2])) {
+            $team = $teamManager->returnTeamById($params[2]);
+            $this->data['response'] = $team;
+          } else { return; }
         }
       }
       $this->view = "raw";

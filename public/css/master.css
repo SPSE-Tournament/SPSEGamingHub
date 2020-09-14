@@ -75,6 +75,7 @@ a:hover {
   position: fixed !important;
   left: 0;
   z-index: 2;
+  box-shadow: 0px 0px 15px 0px rgba(0,0,0,1);
 }
 .news h2 {
   font-weight: 700 !important;

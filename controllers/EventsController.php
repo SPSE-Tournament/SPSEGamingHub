@@ -28,15 +28,8 @@
             $this->data['event'] = $event;
             $this->data['teams'] = $eventTeams;
             $this->data['eventIds'] = $eventTeamIds;
-            if ($event['bracket_status'] == 'live')
-              $this->data['hasBrackets'] = true;
-            else
-              $this->data['hasBrackets'] = false;
-            if (isset($event['event_winner']))
-              $this->data['hasWinner'] = true;
-            else
-              $this->data['hasWinner'] = false;
-
+            $this->data['hasBrackets'] = ($event['bracket_status'] == 'live') ? true : false;
+            $this->data['hasWinner'] = (isset($event['event_winner'])) ? true : false;
             $this->header['page_title'] = $event['event_name'];
             $this->view = "event";
           } else if ($params[1] == "bracket") {

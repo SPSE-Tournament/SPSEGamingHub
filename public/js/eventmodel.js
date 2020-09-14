@@ -60,5 +60,8 @@ function getBracket() {
 }
 
 $('#nav-tab a[href="#nav-bracket"]').tab('show')
+
+refreshMatches();
 getBracket();
+
 setInterval(function(){refreshMatches();getBracket();}, 10000)
