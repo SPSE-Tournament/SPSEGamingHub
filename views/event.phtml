@@ -2,102 +2,106 @@
   <div>
     <div class="eventcard-wrapper d-flex flex-column justify-content-center align-items-center">
       <section class="eventcard p-4 text-center bg-blue-gray text-light">
-          <div class="d-flex flex-column justify-content-around align-items-center">
-            <h1 class="event-name pl-2"><?= $event['event_name'] ?></h1>
-            <div class="d-flex flex-column justify-content-center align-items-center">
-              <div class="d-flex flex-wrap align-items-center justify-content-around w-100">
-                <div class="mx-1"><img src="/public/images/i-people.png" height="50" width="50" alt=""><h5><?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h5></div>
-                <a target="blank" href="<?=$event['game_rules']?>" class="btn btn btn-main mx-1"><img src="/public/images/i-rules.png" width="50" height="50"> Rules</a>
-              </div>
-              <div class="hodziny py-4 text-light">
-                <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
-                <h2 class="timer-countdown text-light"><img src="public/images/loading.gif" alt="" height="50"></h2>
-              </div>
+        <div class="d-flex flex-column justify-content-around align-items-center">
+          <h1 class="event-name pl-2"><?= $event['event_name'] ?></h1>
+          <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="d-flex flex-wrap align-items-center justify-content-around w-100">
+              <div class="mx-1"><img src="/public/images/i-people.png" height="50" width="50" alt="">
+                <h5><?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h5></div>
+              <a target="blank" href="<?=$event['game_rules']?>" class="btn btn btn-main mx-1"><img src="/public/images/i-rules.png" width="50" height="50"> Rules</a>
+            </div>
+            <div class="hodziny py-4 text-light">
+              <input class="event-timestamp" type="hidden" value="<?= $event['event_timestamp'] ?>">
+              <h2 class="timer-countdown text-light"><img src="public/images/loading.gif" alt="" height="50"></h2>
             </div>
           </div>
+        </div>
       </section>
     </div>
   </div>
 
 
 
-<section class="navevent-wrapper py-2 mx-auto mb-5">
-  <nav>
-    <div class="nav nav-pills" id="nav-tab" role="tablist">
-      <a class="nav-item nav-link bg-red-main active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+  <section class="navevent-wrapper py-2 mx-auto mb-5">
+    <nav>
+      <div class="nav nav-pills" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link bg-red-main active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
+        <?php if ($hasBrackets): ?>
+          <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+          <?php endif; ?>
+            <?php if (!$hasBrackets): ?>
+              <a class="nav-item nav-link bg-red-main disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
+              <?php endif; ?>
+                <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
+                  <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
+                  <?php endif; ?>
+      </div>
+    </nav>
+    <div class="tab-content tab-content-profile p-5 bg-blue-gray text-light  text-center" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
+        <?php if (isset($event['event_winner'])): ?>
+          <h1><img src="public/images/i-crown.png"><?=$event['event_winner_name']?></h1>
+          <hr class="bg-red-main">
+          <?php endif; ?>
+            <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
+              <?php foreach ($teams as $team): ?>
+                <div class="col-lg-3 mx-1 col-md-12 my-2 bg-space rounded">
+                  <section class="each-team col-12 px-0 mx-auto py-3 text-left">
+                    <div class="each-team-top d-flex align-items-center">
+                      <p class="pl-2 pb-2 m-0">
+                        <?= $team['name'] ?>
+                      </p>
+                    </div>
+                    <div class="player-list py-2">
+                      <?php foreach ($team['players'] as $player): ?>
+                        <div>
+                          <?= $player['uname'] ?><span class="c-gray-light" style="color:#989898">#<?=$player['user_hexid']?></span></div>
+                        <?php endforeach; ?>
+                    </div>
+                  </section>
+                </div>
+                <?php endforeach; ?>
+            </section>
+      </div>
       <?php if ($hasBrackets): ?>
-        <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
-      <?php endif; ?>
-      <?php if (!$hasBrackets): ?>
-        <a class="nav-item nav-link bg-red-main disabled" data-toggle="tab" href="#nav-bracket" role="tab" aria-controls="nav-profile" aria-selected="false" id="kek">Bracket</a>
-      <?php endif; ?>
-      <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
-        <a class="nav-item nav-link bg-red-main" data-toggle="tab" href="#nav-adminpanel" role="tab" aria-controls="nav-profile" aria-selected="false">Admin</a>
-      <?php endif; ?>
-    </div>
-  </nav>
-  <div class="tab-content tab-content-profile p-5 bg-blue-gray text-light  text-center" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-teams" role="tabpanel" aria-labelledby="nav-home-tab">
-      <?php if (isset($event['event_winner'])): ?>
-        <h1><img src="public/images/i-crown.png"><?=$event['event_winner_name']?></h1>
-        <hr class="bg-red-main">
-      <?php endif; ?>
-      <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
-       <?php foreach ($teams as $team): ?>
-        <div class="col-lg-3 mx-1 col-md-12 my-2 bg-space rounded">
-          <section class="each-team col-12 px-0 mx-auto py-3 text-left">
-          <div class="each-team-top d-flex align-items-center">
-            <p class="pl-2 pb-2 m-0"><?= $team['name'] ?></p>
+        <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
+          <h1 class="fullscreenEventName"></h1>
+          <div class="row justify-content-end">
+            <input type="hidden" class="event-id" value="<?=$event['event_id']?>">
+            <button class="btn btn-main d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
           </div>
-          <div class="player-list py-2">
-            <?php foreach ($team['players'] as $player): ?>
-              <div><?= $player['uname'] ?><span class="c-gray-light" style="color:#989898">#<?=$player['user_hexid']?></span></div>
-            <?php endforeach; ?>
-          </div>
-          </section>
-        </div>
-      <?php endforeach; ?>
-      </section>
-    </div>
-    <?php if ($hasBrackets): ?>
-      <div class="tab-pane fade" id="nav-bracket" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <h1 class="fullscreenEventName"></h1>
-        <div class="row justify-content-end">
-          <input type="hidden" class="event-id" value="<?=$event['event_id']?>">
-          <button class="btn btn-main d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
-        </div>
           <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
           </section>
-      </div>
-    <?php endif; ?>
-    <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
-      <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
-        <div class="accordion">
-    <div class="card bg-space">
-      <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-        <h5 class="mb-0">Settings</h5>
-      </div>
-
-      <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
-        <div class="card-body bg-dark">
-          <form method="post">
-            <input type="hidden" name="event-settings">
-            <input type="hidden" name="event-id" value="<?=$event['event_id']?>">
-        <div class="form-group">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Status</label>
-            </div>
-            <select class="custom-select" name="event-status">
-                <option value="scheduled">Scheduled</option>
-                <option value="reglocked">Registrations Locked</option>
-                <option value="live">Live</option>
-                <option value="finished">Finished</option>
-            </select>
-          </div>
         </div>
+        <?php endif; ?>
+          <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'])): ?>
+            <div class="tab-pane fade" id="nav-adminpanel" role="tabpanel" aria-labelledby="nav-profile-tab">
+              <div class="accordion">
+                <div class="card bg-space">
+                  <div class="card-header" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <h5 class="mb-0">Settings</h5>
+                  </div>
 
-        <!--
+                  <div id="collapseOne" class="collapse show" aria-labelledby="headingOne">
+                    <div class="card-body bg-dark">
+                      <form method="post">
+                        <input type="hidden" name="event-settings">
+                        <input type="hidden" name="event-id" value="<?=$event['event_id']?>">
+                        <div class="form-group">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <label class="input-group-text bg-warning text-dark" style="color:#FFF;" for="inputGroupSelect01">Status</label>
+                            </div>
+                            <select class="custom-select" name="event-status">
+                              <option value="scheduled">Scheduled</option>
+                              <option value="reglocked">Registrations Locked</option>
+                              <option value="live">Live</option>
+                              <option value="finished">Finished</option>
+                            </select>
+                          </div>
+                        </div>
+
+                        <!--
         <div class="form-group">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -120,119 +124,119 @@
         </div>
         </div>
       -->
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-primary">Update</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="card bg-space">
-    <div class="card-header" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-      <h5 class="mb-0">Bracket</h5>
-    </div>
-    <div id="collapseTwo" class="" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body bg-dark">
-        <span class="bg-danger p-1">Status</span>
-        <hr>
-        <div class="d-flex justify-content-around">
-          <?php if ($event['event_status'] == "live" && !$hasWinner): ?>
-            <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
-            <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
-          <?php endif; ?>
-        <?php if ($event['event_status'] != "live" || $hasWinner): ?>
-          <h3>Event not live/has winner</h3>
-        <?php endif; ?>
-        </div>
-      </div>
-    </div>
-  </div>
-      </div>
-    <?php endif; ?>
-  </div>
-</section>
+                        <div class="modal-footer">
+                          <button type="submit" class="btn btn-primary">Update</button>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card bg-space">
+                  <div class="card-header" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <h5 class="mb-0">Bracket</h5>
+                  </div>
+                  <div id="collapseTwo" class="" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body bg-dark">
+                      <span class="bg-danger p-1">Status</span>
+                      <hr>
+                      <div class="d-flex justify-content-around">
+                        <?php if ($event['event_status'] == "live" && !$hasWinner): ?>
+                          <button class="btn btn-primary" type="button" data-toggle="modal" data-target=".generateConfirmationModal">Generate</button>
+                          <button class="btn btn-danger" type="button" data-toggle="modal" data-target=".dropConfirmationModal">Drop</button>
+                          <?php endif; ?>
+                            <?php if ($event['event_status'] != "live" || $hasWinner): ?>
+                              <h3>Event not live/has winner</h3>
+                              <?php endif; ?>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <?php endif; ?>
+            </div>
+  </section>
 </section>
 <?php if ($_SESSION['logged'] && ($_SESSION['user']['rootmaster'] || $_SESSION['user']['admin'] || $_SESSION['user']['watchman'])): ?>
 
-<?php endif; ?>
-<div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-  <h5 class="modal-title">Are you sure you want to drop the bracket?</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body modal-message-detail-body">
-  <form method="post">
-    <input type="hidden" name="bracket-drop">
-    <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
-    <button class="btn btn-danger" type="submit" name="button">Yes</button>
-  </form>
-</div>
-    </div>
-  </div>
-</div>
-<div class="modal generateConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-  <h5 class="modal-title">Are you sure you want to generate the bracket?</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body modal-message-detail-body">
-  <form method="post">
-    <input type="hidden" name="bracket-generate">
-    <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
-    <div class="row justify-content-around">
-      <button class="btn btn-danger" type="submit" name="button">Yes</button>
-    </div>
-  </form>
-</div>
-    </div>
-  </div>
-</div>
-<div class="modal fade modal-score-write" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">
-  <h5 class="modal-title">Write a score</h5>
-  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body modal-match-detail-body">
-  <form method="post">
-    <input type="hidden" name="match-score-write">
-    <input class="match-id-input" type="hidden" name="match-id" value="">
-    <div class="row justify-content-center p-1 m-1">
-      <h2 class="match-first-name"></h2>
-      <div class="col-2">
-        <input class="form-control match-first-score" type="number" value="" name="first-score" min="0" max="3">
+  <?php endif; ?>
+    <div class="modal dropConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Are you sure you want to drop the bracket?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-message-detail-body">
+            <form method="post">
+              <input type="hidden" name="bracket-drop">
+              <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
+              <button class="btn btn-danger" type="submit" name="button">Yes</button>
+            </form>
+          </div>
+        </div>
       </div>
-      <h2>:</h2>
-      <div class="col-2">
-        <input  class="form-control match-second-score" type="number" value="" name="second-score" min="0" max="3">
+    </div>
+    <div class="modal generateConfirmationModal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Are you sure you want to generate the bracket?</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-message-detail-body">
+            <form method="post">
+              <input type="hidden" name="bracket-generate">
+              <input type="hidden" name="event-id" value="<?= $event['event_id']?>">
+              <div class="row justify-content-around">
+                <button class="btn btn-danger" type="submit" name="button">Yes</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-      <h2 class="match-second-name"></h2>
     </div>
-    <div class="p-2 mx-1 my-3">
-      <label for="match-status">Match status</label>
-      <select class="form-control" name="match-status">
-        <option class="match-current-status" value="" selected></option>
-        <option value="scheduled">Scheduled</option>
-        <option value="live">Live</option>
-        <option value="finished">Finished</option>
-      </select>
+    <div class="modal fade modal-score-write" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Write a score</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body modal-match-detail-body">
+            <form method="post">
+              <input type="hidden" name="match-score-write">
+              <input class="match-id-input" type="hidden" name="match-id" value="">
+              <div class="row justify-content-center p-1 m-1">
+                <h2 class="match-first-name"></h2>
+                <div class="col-2">
+                  <input class="form-control match-first-score" type="number" value="" name="first-score" min="0" max="3">
+                </div>
+                <h2>:</h2>
+                <div class="col-2">
+                  <input class="form-control match-second-score" type="number" value="" name="second-score" min="0" max="3">
+                </div>
+                <h2 class="match-second-name"></h2>
+              </div>
+              <div class="p-2 mx-1 my-3">
+                <label for="match-status">Match status</label>
+                <select class="form-control" name="match-status">
+                  <option class="match-current-status" value="" selected></option>
+                  <option value="scheduled">Scheduled</option>
+                  <option value="live">Live</option>
+                  <option value="finished">Finished</option>
+                </select>
+              </div>
+              <button class="btn btn-primary" type="submit" name="button">Submit</button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-    <button class="btn btn-primary" type="submit" name="button">Submit</button>
-  </form>
-</div>
-    </div>
-  </div>
-</div>
-<script src="public/js/eventmodel.js"></script>
-<script src="public/js/getmatchdetail.js"></script>
+    <script src="public/js/eventmodel.js"></script>
+    <script src="public/js/getmatchdetail.js"></script>

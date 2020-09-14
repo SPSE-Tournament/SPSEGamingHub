@@ -1,6 +1,6 @@
 $('.modal-score-write').on('show.bs.modal', function (event) {
   button = event.relatedTarget;
-  fetch('api/get/match/'+button.dataset.matchid)
+  fetch('api/match/'+button.dataset.matchid)
     .then(response => response.json())
     .then(match => {
       document.querySelector('.match-id-input').value = match.match_id;

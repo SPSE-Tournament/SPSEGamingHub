@@ -1,72 +1,76 @@
-<section class="profile-wrapper py-4 px-1 text-center d-flex flex-column m-0 align-items-center justify-content-center">
-  <div class="profile-info bg-blue-gray mx-auto p-2 rounded d-flex flex-wrap justify-content-around" style="position: relative;">
-    <div class="profile-img m-2 d-flex mx-auto">
-      <img class="bg-dark b-2-main mx-auto" src="public/images/haw.jpg" alt="" style="border-radius: 50%;" height="175" width="175">
+<section class="profile-wrapper py-4 px-3">
+  <section class="profile-header d-flex flex-column justify-content-center align-items-center">
+    <div class="profile-info bg-blue-gray mx-auto p-2rounded d-flex flex-wrap justify-content-center" style="position: relative;">
+      <div class="profile-img m-2 d-flex mx-auto">
+        <img class="bg-dark b-2-main mx-auto" src="public/images/haw.jpg" alt="" style="border-radius: 50%;" height="175" width="175">
+      </div>
+      <div class="pl-2 text-left">
+        <div class="uname">
+          <h2 class="p-0 m-0 c-text-gray profile-info-title">username</h2>
+          <h4 class="text-light"><?php if ($user['user_verified'] == 1): ?>
+            <img src="public/images/i-verified.png">
+          <?php endif; ?>
+          <?= $user['name'] ?><span class="c-gray-light">#<?= $user['user_hexid']; ?></span></h4>
+        </div>
+        <div class="email">
+          <h2 class="p-0 m-0 c-text-gray profile-info-title">email</h2>
+          <h4 class="text-light"><?= $user['email'] ?></h4>
+        </div>
+      </div>
     </div>
-    <div class="pl-2 text-left">
-      <div class="uname">
-        <h2 class="p-0 m-0 c-text-gray profile-info-title">username</h2>
-        <h4 class="text-light"><?php if ($user['user_verified'] == 1): ?>
-          <img src="public/images/i-verified.png">
+    <div class="profile-rank mx-auto text-center rounded bg-red-main p-2 text-light d-inline-block">
+      <?php if ($user['rootmaster']): ?>
+        ROOTMASTER
         <?php endif; ?>
-        <?= $user['name'] ?><span class="c-gray-light">#<?= $user['user_hexid']; ?></span></h4>
-      </div>
-      <div class="email">
-        <h2 class="p-0 m-0 c-text-gray profile-info-title">email</h2>
-        <h4 class="text-light"><?= $user['email'] ?></h4>
-      </div>
+          <?php if ($user['admin']): ?>
+            ADMIN
+            <?php endif; ?>
+              <?php if ($user['watchman']): ?>
+                WATCHMAN
+                <?php endif; ?>
     </div>
-  </div>
-  <div class="profile-rank mx-auto text-center rounded bg-red-main p-2 text-light d-inline-block">
-    <?php if ($user['rootmaster']): ?>
-      ROOTMASTER
-    <?php endif; ?>
-    <?php if ($user['admin']): ?>
-      ADMIN
-    <?php endif; ?>
-    <?php if ($user['watchman']): ?>
-      WATCHMAN
-    <?php endif; ?>
-  </div>
+  </section>
 
 
-  <section class="navevent-wrapper p-4 w-90 mr-auto">
+  <section class="navevent-wrapper py-2 mx-auto">
     <nav>
       <div class="nav nav-pills" id="nav-tab" role="tablist">
         <a class="nav-item nav-link bg-red-main active" data-toggle="tab" href="#nav-teams" role="tab" aria-controls="nav-home" aria-selected="true">Teams</a>
-        <!--<a class="nav-item nav-link" data-toggle="tab" href="#nav-friends" role="tab" aria-controls="nav-profile" aria-selected="false">Friends</a> -->
       </div>
     </nav>
-    <div class="tab-content tab-content-profile p-5" id="nav-tabContent">
+    <div class="tab-content tab-content-profile bg-blue-gray text-center p-5" id="nav-tabContent">
       <div class="tab-pane fade show active text-center" id="nav-teams" role="tabpanel">
         <?php if (!$hasTeams): ?>
           <p class="text-light">User has no teams...</p>
           <button class="btn btn-main" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
-        <?php endif; ?>
-        <?php if ($hasTeams): ?>
-          <section class="team-wrapper d-flex flex-wrap justify-content-around mb-3">
-          <?php foreach ($userTeams as $team): ?>
-            <div class="col-4 mb-3">
-              <section class="each-team col-12 mx-auto p-4"data-toggle="modal" data-target=".modal-team-detail" onclick="loadTeamDetail('<?=$team['id']?>')">
-              <div>
-                <p><?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<img class="mx-1" src="<?=$team['game_icon']?>" alt="" height="20">)</span></p>
-                <hr style="background-color:orange;">
-              </div>
-              <ul>
-                <?php for ($i = 0; $i < count($team['players']); $i++): ?>
-                    <li><?= $team['players'][$i]  ?></li>
-                <?php endfor; ?>
-              </ul>
-              </section>
-            </div>
-
-          <?php endforeach; ?>
-          </section>
-          <hr>
-          <?php if (count($userTeams) < 5): ?>
-            <button class="btn btn-warning" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
           <?php endif; ?>
-        <?php endif; ?>
+            <?php if ($hasTeams): ?>
+              <section class="team-wrapper d-flex text-light flex-wrap justify-content-around mb-3">
+                <?php foreach ($userTeams as $team): ?>
+
+                  <div class="col-lg-3 mx-1 col-md-12 my-2 bg-space rounded">
+                    <section class="each-team col-12 px-0 mx-auto py-3 text-left">
+                      <div class="each-team-top d-flex align-items-center">
+                        <p class="pl-2 pb-2 m-0">
+                          <?= $team['name'] ?><span class="game-name ml-2" style="color:#3C3B3F;">(<img class="mx-1" src="<?=$team['game_icon']?>" alt="" height="20">)</span></p>
+                      </div>
+                      <div class="player-list py-2">
+                        <?php foreach ($team['players'] as $player): ?>
+
+                          <div>
+                            <?= $player ?>
+                          </div>
+                          <?php endforeach; ?>
+                      </div>
+                    </section>
+                  </div>
+                  <?php endforeach; ?>
+              </section>
+              <hr>
+              <?php if (count($userTeams) < 5): ?>
+                <button class="btn btn-main" type="button" name="button" data-toggle="modal" data-target=".modal-team-add">Create a team</button>
+                <?php endif; ?>
+                  <?php endif; ?>
       </div>
       <div class="tab-pane fade" id="nav-friends" role="tabpanel">Kamaradi</div>
     </div>
@@ -76,49 +80,51 @@
 <div class="modal modal-team-detail" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content modal-content-team-preview"></div>
+  </div>
+</div>
+
+<?php if (count($userTeams) < 5): ?>
+  <div class="modal modal-team-add fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Create a team</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body p-5">
+          <form method="post">
+            <input type="hidden" name="team-add">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Team name</label>
+              <input type="text" class="form-control" name="teamName" placeholder="Hustaci">
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
+                </div>
+                <select class="custom-select" name="teamGame">
+                  <?php foreach($games as $game): ?>
+                    <option value="<?= $game['game_id']?>">
+                      <?= $game['game_name'] ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-warning">Create a team</button>
+          </form>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
-  <?php if (count($userTeams) < 5): ?>
-    <div class="modal modal-team-add fade" tabindex="-1" role="dialog" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-      <h5 class="modal-title">Create a team</h5>
-      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body p-5">
-      <form method="post">
-        <input type="hidden" name="team-add">
-    <div class="form-group">
-    <label for="exampleInputEmail1">Team name</label>
-    <input type="text" class="form-control" name="teamName" placeholder="Hustaci">
-    </div>
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
-        </div>
-        <select class="custom-select" name="teamGame">
-          <?php foreach($games as $game): ?>
-          <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
-        <?php endforeach; ?>
-        </select>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-warning">Create a team</button>
-      </form>
-    </div>
-        </div>
-        </div>
-      </div>
-    </div>
   <?php endif; ?>
 
 
 
-<script src="public/js/profilemodel.js"></script>
+    <script src="public/js/profilemodel.js"></script>

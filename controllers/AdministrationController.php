@@ -64,20 +64,7 @@
         }
         if (isset($_POST['game-add'])) {
             try {
-              if (!isset($_FILES['file-ruleset']) && !isset($_FILES['file-background'])) {
-                  $gameManager->addGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit']);
-              } else if (isset($_FILES['file-background']) && !isset($_FILES['file-ruleset'])) {
-                  $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-                  $gameManager->addGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'], $fu);
-                  $this->addMessage($res);
-              } else if (!isset($_FILES['file-background']) && isset($_FILES['file-ruleset'])) {
-                  $fu = $fileManager->uploadFile($_FILES['file-background'], false, array('pdf'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-                  $gameManager->addGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fu);
-              } else if (isset($_FILES['file-background']) && isset($_FILES['file-ruleset'])) {
-                  $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-                  $fu2 = $fileManager->uploadFile($_FILES['file-background'], false, array('pdf'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-                  $gameManager->addGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fu,$fu2);
-             }
+  $gameManager->addGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit']);
               $this->log("Game has been added","game_add");
               $this->addMessage("Game has been added");
               $this->redir("administration");
@@ -87,50 +74,15 @@
         }
         if (isset($_POST['game-edit'])) {
             try {
-              if ($_FILES['file-ruleset']['name'] == "" && $_FILES['file-background']['name'] == "" && $_FILES['file-icon']['name'] == "") {
-                $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'], null, null,null, $_POST['edit-game-id']);
+               $ruleset = ($_FILES['file-ruleset']['name'] != "") ? $fileManager->uploadFile($_FILES['file-ruleset'], false, ['pdf'], $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset') : null;
+               $fileIcon = ($_FILES['file-icon']['name'] != "") ? $fileManager->uploadFile($_FILES['file-icon'], true, ['jpg','jpeg','png','bmp','svg'], $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-icon') : null;
+               $fileBackground = ($_FILES['file-background']['name'] != "") ? $fileManager->uploadFile($_FILES['file-background'], true, ['jpg','jpeg','png','bmp','svg'], $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background') : null;
 
-              } else if ($_FILES['file-ruleset']['name'] == "" && $_FILES['file-background']['name'] != "" && $_FILES['file-icon']['name'] == "") {
-                $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp','svg'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-                $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'], $fu,null,null, $_POST['edit-game-id']);
-                $this->addMessage($res);
-
-              } else if ($_FILES['file-ruleset']['name'] != "" && $_FILES['file-background']['name'] == "" && $_FILES['file-icon']['name'] == "") {
-                $fu = $fileManager->uploadFile($_FILES['file-ruleset'], false, array('pdf'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-                $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],null,$fu,null, $_POST['edit-game-id']);
-
-              } else if ($_FILES['file-ruleset']['name'] == "" && $_FILES['file-background']['name'] == "" && $_FILES['file-icon']['name'] != "") {
-                $fu = $fileManager->uploadFile($_FILES['file-icon'], true, array('jpg','jpeg','png','bmp','svg'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-icon');
-                $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],null,null,$fu, $_POST['edit-game-id']);
-              }
-               else if ($_FILES['file-ruleset']['name'] != "" && $_FILES['file-background']['name'] != "" && $_FILES['file-icon']['name'] == "") {
-               $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-               $fu2 = $fileManager->uploadFile($_FILES['file-ruleset'], false, array('pdf'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-               $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fu,$fu2,null, $_POST['edit-game-id']);
-             } else if ($_FILES['file-ruleset']['name'] != "" && $_FILES['file-background']['name'] == "" && $_FILES['file-icon']['name'] != "") {
-
-               $fu = $fileManager->uploadFile($_FILES['file-icon'], true, array('jpg','jpeg','png','bmp','svg'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-icon');
-               $fu2 = $fileManager->uploadFile($_FILES['file-ruleset'], false, array('pdf'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-               $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],null,$fu,$fu2, $_POST['edit-game-id']);
-
-             } else if ($_FILES['file-ruleset']['name'] == "" && $_FILES['file-background']['name'] != "" && $_FILES['file-icon']['name'] != "") {
-
-               $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-               $fu2 = $fileManager->uploadFile($_FILES['file-icon'], true, array('jpg','jpeg','png','bmp','svg'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-icon');
-               $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fu,null,$fu2, $_POST['edit-game-id']);
-
-             } else if ($_FILES['file-ruleset']['name'] == "" && $_FILES['file-background']['name'] == "" && $_FILES['file-icon']['name'] == "") {
-
-               $fu = $fileManager->uploadFile($_FILES['file-background'], true, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-background');
-               $fu3 = $fileManager->uploadFile($_FILES['file-ruleset'], false, array('jpg','jpeg','png','bmp'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-ruleset');
-               $fu2 = $fileManager->uploadFile($_FILES['file-icon'], true, array('jpg','jpeg','png','bmp','svg'), $stringManager->stripSpaces($_POST['mod-gameadd-shortname']).'-icon');
-               $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fu,$fu3,$fu2, $_POST['edit-game-id']);
-             }
-
+               $gameManager->editGame($_POST['mod-gameadd-name'],$_POST['mod-gameadd-shortname'], $_POST['mod-gameadd-playerlimit'],$fileBackground,$ruleset,$fileIcon, $_POST['edit-game-id']);
               $this->log("Game has been edited","game_edit");
               $this->addMessage("Game has been edited");
               $this->redir("administration");
-            } catch (PDOException $e) {
+            } catch (Exception $e) {
               $this->addMessage($e);
             }
         }
