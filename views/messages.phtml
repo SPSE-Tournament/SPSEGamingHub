@@ -1,40 +1,17 @@
-<!-- MessagesStart -->
-<header class="content-messages" id="msgContent">
-<div class="tab-content">
-  <div class="tab-pane fade show active" role="tabpanel">
-    <article class="d-flex justify-content-center align-items-center">
-      <section class="messages-wrapper mx-auto text-center d-flex justify-content-center flex-wrap" style="margin-bottom:10%;">
-            <?php foreach($messages as $msg): ?>
-              <section class="eachMessage py-2 col-10" style="font-size:0.8rem;">
-                <div class="row col-12 justify-content-center align-items-center">
-                  <?php if ($msg['message_status'] == "unread"): ?>
-                  <img class="mb-2" src="public/images/i-unread.png">
-                  <?php endif; ?>
-                  <p class="" style="color:rgba(255,255,255,.5)"><img src="public/images/i-time-small.png"><?= $msg['time_ago']?></p>
-                </div>
-                <div class="row col-12 justify-content-center align-items-center">
-                  <button type="button" class="btn btn-sm message-preview-button mb-2 d-flex justify-content-center" data-toggle="modal" data-target=".modal-message-detail" data-messageid="<?=$msg['message_id']?>" data-sender="<?=$msg['user_sendername']?>"><img src="public/images/i-mespw.png"></button>
-                  <p class="" style="color:rgba(255,255,255,.8)"><?= $msg['user_sendername'] ?></p>
-                </div>
-                <div class="col-12 d-flex flex-row justify-content-center">
-                  <p class="d-none d-lg-inline"><?= $msg['message_perex'] ?></p>
-                </div>
-              </section>
-          <?php endforeach; ?>
-          <nav>
-            <ul class="pagination pagination my-2">
-              <?php for($i = 0; $i < $numOfPages; $i++): ?>
-              <li class="page-item text-dark" style="cursor:pointer;"><a class="page-link" onclick="loadMessages('message','<?=$i+1?>')"><?=$i+1?></a></li>
-            <?php endfor; ?>
-            </ul>
-          </nav>
+<section class="messages-wrapper text-light p-5">
 
-          <section class="messages-footer p-3 bg-dark mx-auto" style="width:19vw; border: 2px solid orange">
-              <button type="button" class="btn newMessage" onclick='showNewMessage("#new_message")' id="newMessage" name="button"><img src="public/images/i-newmes.png"></button>
-          </section>
-      </section>
-    </article>
-  </div>
-</div>
-</header>
-<!-- MessagesEnd -->
+</section>
+
+<script>
+fetch('api/messages/')
+  .then(response => response.json())
+  .then(messages => {
+    messages.forEach(m=>{
+      let el = document.createElement("div");
+      el.classList.add("bg-blue-gray","p-1", "m-1")
+      el.innerHTML = m.message;
+      document.querySelector(".messages-wrapper").append(el);
+    })
+  })
+  .catch(err => console.error(err));
+</script>

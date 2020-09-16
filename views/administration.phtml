@@ -109,7 +109,7 @@
         <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
       </div>
       <select class="custom-select" name="eventGame" required>
-        <?php foreach($games as $game): ?>
+        <?php foreach ($games as $game): ?>
         <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
       <?php endforeach; ?>
       </select>

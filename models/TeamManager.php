@@ -54,9 +54,13 @@
     }
 
     public function returnTeamById($teamId){
-      return Db::singleQuery("SELECT team_id, team_name, team_captain_id, teams.game_id as game_id, games.game_name as game_name from teams
+      $q = Db::singleQuery("SELECT team_id, team_name, team_captain_id, teams.game_id as game_id, games.game_name as game_name from teams
         join games on games.game_id = teams.game_id
       where team_id = ?", array($teamId));
+      if (!$q) {
+        $q = ["message" => "team not found"];
+      }
+      return $q;
     }
 
     public function teamExists($teamId):int {
