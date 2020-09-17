@@ -40,7 +40,7 @@
                           if (strlen($_POST['pw']) > 4) {
                             $userManager = new UserManager();
                             $userManager->requestRegister($_POST['usrname'], $_POST['email'], $_POST['pw'], $_POST['pwA'], $_POST['antispam']);
-                            $this->addMessage("Your request noted, we have sent you a verification email just to really know it's you.");
+                            $this->addMessage("Your request noted, we have sent you a verification email just to verify it's you.");
                             $this->redir('register/verify');
                           } else {
                             $this->addMessage("Password must be atleast 5 characters long");
