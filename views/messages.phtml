@@ -3,6 +3,10 @@
 </section>
 
 <script>
+document.querySelector("#eventLink").classList.remove("nav-links-selected");
+document.querySelector("#adminLink").classList.remove("nav-links-selected");
+document.querySelector("#homeLink").classList.remove("nav-links-selected");
+document.querySelector("#messagesLink").classList.add("nav-links-selected");
 fetch('/api/messages/')
   .then(response => response.json())
   .then(messages => {

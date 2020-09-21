@@ -15,8 +15,11 @@
               HTTP::status(403);
               $this->redir("status/403");
             }
-          } else {
+          } else if ($userManager->returnUser()) {
             $this->view = "messages";
+          } else {
+            HTTP::status(403);
+            $this->redir("status/403");
           }
 
       }

@@ -61,6 +61,9 @@
       <div class="top-menu d-flex flex-column justify-content-around align-items-center">
         <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="homeLink" href="home"><img src="/public/images/i-home.png" width="28" height="28" alt=""><h4>Home</h4></a>
         <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="eventLink" href="events"><img src="/public/images/i-events.png" width="28" height="28" alt=""><h4>Events</h4></a>
+        <?php if ($logged): ?>
+          <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="messagesLink" href="messages"><img src="/public/images/i-messages.png" width="28" height="28" alt=""><h4>Messages</h4></a>
+        <?php endif; ?>
         <?php if($logged && ($user['admin'] || $user['rootmaster'])): ?>
           <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="adminLink" href="administration"><img src="/public/images/i-admin.png" width="28" height="28" alt=""><h4>Admin</h4></a>
         <?php endif; ?>

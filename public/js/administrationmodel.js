@@ -1,6 +1,7 @@
 document.querySelector("#adminLink").classList.add("nav-links-selected");
 document.querySelector("#homeLink").classList.remove("nav-links-selected");
 document.querySelector("#eventLink").classList.remove("nav-links-selected");
+document.querySelector("#messagesLink").classList.remove("nav-links-selected");
 $('.modal-log-detail').on('show.bs.modal', function (event) {
 let button = $(event.relatedTarget)
 let logId = button.data('logid')

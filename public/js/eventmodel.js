@@ -1,5 +1,6 @@
 document.querySelector("#eventLink").classList.add("nav-links-selected");
 document.querySelector("#homeLink").classList.remove("nav-links-selected");
+document.querySelector("#messagesLink").classList.remove("nav-links-selected");
 //document.querySelector("#adminLink").classList.remove("nav-links-selected");
 
 let countDownDate = new Date(document.querySelector('.event-timestamp').value).getTime();
