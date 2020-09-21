@@ -9,11 +9,12 @@
           $messageManager = new MessageManager();
           $userManager = new UserManager();
 
-          if (empty($params[0])) {
-              $this->redir("error");
-          }
+          if (!empty($params)) {
 
           switch ($params[0]) {
+        default:
+        $this->data['response'] = ['error' => "Bad endpoint"];
+        break;
         case "match":
         $matchIds = $bracketManager->returnMatchIds();
           if (!empty($params[1]) && in_array($params[1], $matchIds)) {
@@ -81,7 +82,9 @@
         }
         break;
       }
-
+    } else {
+      $this->redir("error");
+      }
           $this->view = "raw";
       }
   }

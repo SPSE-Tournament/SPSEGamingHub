@@ -19,7 +19,7 @@
           }
 
           //Routing
-          if (!empty($params[0]) && $params[0] == 'getlog') {
+          if (!empty($params[0]) && $this->isParam($params,0,'getlog')) {
               $logs = $logManager->returnLogs();
               $logIds = array();
               for ($i=0; $i < count($logs); $i++) {
@@ -29,7 +29,7 @@
                   $this->data['log'] = $logManager->returnLogById($params[1]);
                   $this->view = 'logpreview';
               }
-          } elseif (!empty($params[0]) && $params[0] == 'getgameform') {
+          } elseif (!empty($params[0]) && $this->isParam($params,0,'getgameform')) {
               if (in_array($params[1], $gameManager->getGameIds())) {
                   $this->data['gameCur'] = $gameManager->returnGameById($params[1]);
                   $this->addMessage($params[1]);
