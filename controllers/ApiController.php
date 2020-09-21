@@ -18,11 +18,16 @@
         case "match":
         $matchIds = $bracketManager->returnMatchIds();
           if (!empty($params[1]) && in_array($params[1], $matchIds)) {
+
               if (!UserManager::authAdmin() && !UserManager::authWatchman() && $_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
                   HTTP::status(403);
+                  $this->redir("status/403");
               }
               $match = $bracketManager->returnMatchById($params[1]);
               $this->data['response'] = $match;
+          } else {
+            HTTP::status(400);
+            $this->redir("status/400");
           }
           break;
         case "bracket":
@@ -48,6 +53,7 @@
         case "messages":
         if ($userManager->returnUser() == null) {
             HTTP::status(403);
+            $this->redir("status/403");
         }
 
         $this->data['response'] = $messageManager->returnMessages($_SESSION['user']['user_id']);
@@ -66,6 +72,7 @@
         case "teams":
         if ($userManager->returnUser() == null) {
             HTTP::status(403);
+            $this->redir("status/403");
         }
 
         $this->data['response'] = $teamManager->returnTeams();

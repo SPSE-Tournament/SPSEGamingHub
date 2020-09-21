@@ -1,15 +1,3 @@
-function loadTeamDetail(str) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      let start = this.responseText.indexOf('<!-- TeamStart -->');
-      let end = this.responseText.indexOf('<!-- TeamEnd -->') + '<!-- TeamEnd -->'.length;
-       document.querySelector(".modal-content-team-preview").innerHTML = this.responseText.slice(start,end);
-    }
-  };
-  xhttp.open("GET", "profile/getteam/"+str, true);
-  xhttp.send();
-}
 
 function showInvitePlayerBox() {
   if (document.querySelector('.invite-player').style.display == 'none') {
@@ -27,8 +15,6 @@ $(".modal-team-detail").on("show.bs.modal", (event) =>{
   fetch('api/teams/id/'+button.dataset.teamid)
     .then(response => response.json())
     .then(team => {
-      console.log(document.querySelector(".modal-team-userlist")
-        .childNodes)
       document.querySelector('.modal-team-title').innerHTML = team.team_name;
       team.players.forEach(p=>{
         let li = document.createElement("li")

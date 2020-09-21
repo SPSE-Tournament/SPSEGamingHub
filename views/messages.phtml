@@ -3,14 +3,18 @@
 </section>
 
 <script>
-fetch('api/messages/')
+fetch('/api/messages/')
   .then(response => response.json())
   .then(messages => {
     messages.forEach(m=>{
+      let a = document.createElement("a");
+      a.setAttribute("href", `messages/${m.message_id}`);
       let el = document.createElement("div");
-      el.classList.add("bg-blue-gray","p-1", "m-1")
-      el.innerHTML = m.message;
-      document.querySelector(".messages-wrapper").append(el);
+      el.classList.add("bg-blue-gray","p-2", "m-1")
+      el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
+      document.querySelector(".messages-wrapper").append(a);
+      a.append(el);
+      console.log(m)
     })
   })
   .catch(err => console.error(err));

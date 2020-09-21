@@ -1,14 +1,6 @@
-<!-- MessageStart -->
-  <?php if ($message['user_receiverid'] == $_SESSION['user']['user_id']): ?>
     <article class="message-wrapper p-1 text-center justify-content-center align-items-center">
-      <?php if ($message['message_type'] == "invite"): ?>
           <p><?= $_message['message'] ?></p>
-      <?php endif; ?>
-      <?php if ($message['message_type'] == "message" || $message['message_type'] == "trash"): ?>
-          <p><?= $message['message'] ?></p>
-      <?php endif; ?>
-
-      <section class="row justify-content-center align-items-center">
+      <section class="justify-content-center align-items-center">
         <?php if ($message['message_type'] == "message"): ?>
           <?php if ($message['message_status'] == "unread"): ?>
             <form method="post">
@@ -45,5 +37,3 @@
         <?php endif; ?>
       </section>
     </article>
-  <?php endif; ?>
-<!-- MessageEnd -->

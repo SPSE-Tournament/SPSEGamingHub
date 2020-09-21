@@ -25,7 +25,7 @@
                 <img src="public/images/i-ok.png" height="40">
               </div>
             <?php endif; ?>
-            <?php if ($_SESSION['logged'] && (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']) && ($match['match_status'] == 'live' || $match['match_status'] == 'scheduled'))): ?>
+            <?php if ($_SESSION['logged'] && (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']))): ?>
               <div class="scorewrite">
                 <button class="btn btn-main" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="public/images/i-score.png"></button>
               </div>

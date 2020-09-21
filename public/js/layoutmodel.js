@@ -1,53 +1,4 @@
 
-$(function () {
-$('[data-toggle="tooltip"]').tooltip()
-})
-let curPageMes;
-function loadMessages(msgType,page) {
-      showInbox(msgType,page);
-        curPageMes = parseInt(page);
-}
-
-  function showInbox(msgType,page) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        let start = this.responseText.indexOf('<!-- MessagesStart -->');
-        let end = this.responseText.indexOf("<!-- MessagesEnd -->") + "<!-- MessagesEnd -->".length;
-        let response = this.responseText.slice(start,end);
-          document.querySelector('.messages-content').innerHTML = response;
-      }
-    };
-    xhttp.open("GET", "profile/messages/"+msgType+"/"+page, true);
-    xhttp.send();
-  }
-
-  function toggleMessageNav() {
-    if (document.querySelector('.messages-wrapp').style.width == '0px') {
-      document.querySelector('.messages-button').style.visibility = "hidden";
-      document.querySelector('.messages-wrapp').style.width = '28vw';
-    } else {
-      document.querySelector('.messages-button').style.visibility = "hidden";
-      document.querySelector('.messages-wrapp').style.width = '0px';
-    }
-
-    document.querySelector('.messages-button').style.right = document.querySelector('.messages-wrapp').style.width;
-    setTimeout(function() {
-      document.querySelector('.messages-button').style.visibility = "visible";
-    }, 500)
-    }
-
-    function showNewMessage(id) {
-      if (document.querySelector(id).style.display == "none") {
-        document.querySelector(id).style.display = "block";
-      } else {
-        document.querySelector(id).style.display = "none";
-      }
-    }
-    function closeNewMessage(id) {
-      document.querySelector(id).style.display = "none";
-    }
-
     function loadUserLiveText(str, livesearchelem, hintelem) {
       if (str.length < 3) {
         document.querySelector("."+hintelem).innerHTML ="";
@@ -77,21 +28,16 @@ function loadMessages(msgType,page) {
         document.querySelector('.'+livesearchelem).style.display = "none";
         return;
       }
-      if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-      } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-          let start = this.responseText.indexOf('<!-- TeamLiveTextStart -->');
-          let end = this.responseText.indexOf("<!-- TeamLiveTextEnd -->") + "<!-- TeamLiveTextEnd -->".length;
-          document.querySelector("."+hintelem).innerHTML = this.responseText.slice(start,end);
-          document.querySelector('.'+livesearchelem).style.display = "block";
+      fetch(`/api/teams/livesearch/${str}`)
+      .then(res=>res.json())
+      .then(hint => {
+        console.log(hint);
+        for (let i of hint) {
+          document.querySelector("."+hintelem).innerHTML += i.name;
         }
-      }
-      xmlhttp.open("GET","profile/getteamhint/"+str,true);
-      xmlhttp.send();
+        document.querySelector('.'+livesearchelem).style.display = "block";
+      })
+      .catch(err => console.error(err));
     }
 
     function selectUser(elem,str) {
@@ -108,7 +54,5 @@ function loadMessages(msgType,page) {
         document.querySelector(".overlay").style.width = "100%";
 
     }
-
-
 
     $('.toast').toast('show');
