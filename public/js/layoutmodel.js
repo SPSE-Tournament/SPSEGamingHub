@@ -5,21 +5,17 @@
         document.querySelector('.'+livesearchelem).style.display = "none";
         return;
       }
-      if (window.XMLHttpRequest) {
-        xmlhttp=new XMLHttpRequest();
-      } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange=function() {
-        if (this.readyState==4 && this.status==200) {
-          let start = this.responseText.indexOf('<!-- UserLiveTextStart -->');
-          let end = this.responseText.indexOf("<!-- UserLiveTextEnd -->") + "<!-- UserLiveTextEnd -->".length;
-          document.querySelector("."+hintelem).innerHTML = this.responseText.slice(start,end);
-          document.querySelector('.'+livesearchelem).style.display = "block";
+      fetch(`/api/users/livesearch/${str}`)
+      .then(res=>res.json())
+      .then(hint => {
+        console.log(hint);
+        document.querySelector("."+hintelem).innerHTML ="";
+        for (let i of hint) {
+          document.querySelector("."+hintelem).innerHTML += `<p class="hint rounded p-2" onclick="selectUser('newMessage_username', '${i.name+"#"+i.hexid}')">${i.name}</p>`;
         }
-      }
-      xmlhttp.open("GET","profile/getusers/"+str,true);
-      xmlhttp.send();
+        document.querySelector('.'+livesearchelem).style.display = "block";
+      })
+      .catch(err => console.error(err));
     }
 
     function loadTeamLiveText(str, livesearchelem, hintelem) {
@@ -32,8 +28,9 @@
       .then(res=>res.json())
       .then(hint => {
         console.log(hint);
+        document.querySelector("."+hintelem).innerHTML ="";
         for (let i of hint) {
-          document.querySelector("."+hintelem).innerHTML += i.name;
+          document.querySelector("."+hintelem).innerHTML += `<p class="hint rounded p-2" onclick="selectUser('newMessage_username', '${i.name}')">${i.name}</p>`;
         }
         document.querySelector('.'+livesearchelem).style.display = "block";
       })

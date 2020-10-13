@@ -136,12 +136,12 @@
                           } else {
                               $this->addMessage("Field empty");
                           }
-                      }
-                      if (isset($_POST['verification_teamname'])) {
+                      } else if (isset($_POST['verification_teamname'])) {
                           if (strlen($_POST['verification_teamname']) > 0) {
-                              $fullName = $userManager->parseHexname($_POST['verification_teamname']);
+
                               try {
-                                  $teamManager->verifyTeam($fullName['hexid']);
+                                  $team = $teamManager->returnTeamByName($_POST['verification_teamname']);
+                                  $teamManager->verifyTeam($team['team_id']);
                               } catch (PDOException $e) {
                                   $this->addMessage($e);
                               }

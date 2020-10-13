@@ -1,9 +1,7 @@
 <section class="administration-wrapper p-5">
   <section class="row justify-content-center align-items-start">
     <div class="col-lg-5 col-md-10 bg-blue-gray text-light px-5 py-2 b-2-main" style="height:80vh;">
-      <h2><img class="" src="public/images/i-dashboard.png" height="50">Dashboard</h2>
-      <h3>Server time: <?php $time = new DateTime("now");
-      echo $time->format("H:i:s");?></h3>
+      <h2><img class="" src="public/images/i-dashboard.png" height="50">Dashboard <?=$_SERVER['REMOTE_ADDR']?></h2>
       <div class="accordion bg-dark" id="accordionExample">
   <div class="card">
     <div class="card-header bg-space" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -217,7 +215,7 @@
         <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
       </div>
       <select class="custom-select" name="edit-game-id" onchange="getGameForm(this.value)">
-        <option selected>Choose a game...</option>
+        <option selected value="">Choose a game...</option>
         <?php foreach ($games as $game): ?>
           <option value="<?=$game['game_id']?>"><?=$game['game_name']?></option>
         <?php endforeach; ?>
@@ -225,7 +223,69 @@
 
     </div>
   </div>
-        <div class="live-form-game-update"></div>
+        <div class="live-form-game-update">
+          <input type="hidden" name="game-id" id="game-edit-id" value="">
+          <div class="form-group">
+          <label for="exampleInputEmail1">Game name</label>
+          <input type="text" class="form-control" placeholder="Enter name" id="game-edit-name"  name="mod-gameadd-name" value="">
+          </div>
+          <div class="form-group">
+          <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
+          <input type="text" class="form-control" placeholder="Enter name" id="game-edit-shortname"  name="mod-gameadd-shortname" value="">
+          </div>
+          <div class="form-group">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-success" style="color:#Fff;">Ruleset</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file-ruleset">
+            <label class="custom-file-label">Choose file</label>
+          </div>
+          </div>
+          </div>
+          <div class="form-group">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-success" style="color:#Fff;">Game background</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file-background">
+            <label class="custom-file-label">Choose file</label>
+          </div>
+          </div>
+          </div>
+          <div class="form-group">
+          <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text bg-success" style="color:#Fff;">Game icon</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="file-icon">
+            <label class="custom-file-label">Choose file</label>
+          </div>
+          </div>
+          </div>
+          <div class="form-group">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
+            </div>
+            <select class="custom-select" name="mod-gameadd-playerlimit" id="game-edit-playerlimit">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          </div>
+        </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

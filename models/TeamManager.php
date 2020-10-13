@@ -63,6 +63,16 @@
       return $q;
     }
 
+    public function returnTeamByName(string $teamName) {
+      $q = Db::singleQuery("SELECT team_id, team_name, team_captain_id, teams.game_id as game_id, games.game_name as game_name from teams
+        join games on games.game_id = teams.game_id
+      where team_name = ?", array($teamName));
+      if (!$q) {
+        $q = ["message" => "team not found"];
+      }
+      return $q;
+    }
+
     public function teamExists($teamId):int {
       if (Db::query("SELECT team_id, team_name, team_captain_id, game_id from teams
       where team_name = ?", array($teamId)))
@@ -95,7 +105,7 @@
             $teamsToReturn = array();
             foreach ($teams as $team) {
               if (mb_strtolower(substr($team['team_name'], 0, strlen($strL))) == $strL)
-                  $teamsToReturn[] = array("name"=>$team['team_name'], "id"=>$team['team_id']);
+                  $teamsToReturn[] = array("name"=>$team['team_name']);
             }
             if (count($teamsToReturn) > 0)
               return $teamsToReturn;

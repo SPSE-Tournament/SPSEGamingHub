@@ -204,3 +204,9 @@ a:hover {
   font-weight: 700;
   font-size: 1.5rem;
 }
+.hint:hover {
+  cursor: pointer;
+  background-color: var(--gray-light);
+  transition: all .3s ease;
+  
+}

@@ -1,7 +1,0 @@
-<!-- TeamLiveTextStart -->
-<section>
-  <?php for($i = 0;$i < count($response);$i++): ?>
-    <p class="user-livetext" <?php if (isset($response[$i]['id'])) :?> onclick='selectUser("newMessage_username","<?=$response[$i]['name']?><?= "#".$response[$i]['id'] ?>")' <?php endif;?>><?= $response[$i]['name'] ?><?php if (isset($response[$i]['id'])) :?><?="(" .$response[$i]['id']. ")";?><?php endif; ?></p>
-  <?php endfor; ?>
-</section>
-<!-- TeamLiveTextEnd -->

@@ -1,4 +1,10 @@
-    <article class="message-wrapper p-1 text-center justify-content-center align-items-center">
+    <article class="message-wrapper p-5 text-center text-light justify-content-center align-items-center">
+        <div>
+          <h3><?= $message['user_sendername'] ?></h3>
+          <h4 class="c-text-gray"><?= $message['message_timestamp'] ?></h4>
+          <hr class="bg-red-main">
+        </div>
+
           <p><?= $_message['message'] ?></p>
       <section class="justify-content-center align-items-center">
         <?php if ($message['message_type'] == "message"): ?>

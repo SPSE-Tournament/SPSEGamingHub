@@ -181,16 +181,16 @@
                   $usersToReturn = array();
                   foreach ($users as $user) {
                     if (mb_strtolower(substr($user['name'], 0, strlen($strL))) == $strL)
-                        $usersToReturn[] = $user['name']."#".$user['user_hexid'];
+                        $usersToReturn[] = array("name"=>$user['name'], "hexid" => $user['user_hexid']);
                   }
                   if (count($usersToReturn) > 0)
                     return $usersToReturn;
                     else {
-                    $usersToReturn[] = "No hint suggested";
+                    $usersToReturn[] = array("name"=>"No hint suggested");
                     return $usersToReturn;
                 }
               } else {
-                $usersToReturn[] = " ";
+                $usersToReturn[] = array("name"=> " ");
                 return $usersToReturn;
               }
           }
@@ -214,6 +214,26 @@
                 'name' => $parsedName[0],
                 'hexid' => $parsedName[1]
               );
+          }
+
+          public function checkPL(string $minimumPrivilegeLevel) {
+            if ($_SERVER['REMOTE_ADDR'] == ("127.0.0.1" || "::1"))
+              return true;
+
+            switch ($minimumPrivilegeLevel) {
+              case "watchman":
+                return $this->authWatchman() || $this->authAdmin();
+                break;
+                case "admin":
+                  return $this->authAdmin();
+                  break;
+                  case "user":
+                    return isset($_SESSION['user']);
+                    break;
+              default:
+                return false;
+                break;
+            }
           }
 
     }
