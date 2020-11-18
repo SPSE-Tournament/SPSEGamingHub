@@ -68,9 +68,11 @@
           <h1 class="fullscreenEventName"></h1>
           <div class="row justify-content-end">
             <input type="hidden" class="event-id" value="<?=$event['event_id']?>">
+            <input type="hidden" class="user-id" value="<?=$_SESSION['user']['user_id']?>">
             <button class="btn btn-main d-none d-lg-block" type="button" name="button" onclick="toggleBracketFullscreen()"><img src="public/images/i-fs.png"></button>
           </div>
           <section class="bracket-wrapper text-center d-flex flex-row justify-content-around align-items-center">
+            <div class="d-flex flex-wrap justify-content-around bracket"></div>
           </section>
         </div>
         <?php endif; ?>

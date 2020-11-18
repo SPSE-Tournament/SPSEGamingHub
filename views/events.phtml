@@ -1,13 +1,4 @@
 <section class="events-wrapper">
-  <!--
-  <?php if (count($events)): ?>
-    <div class="scrollables d-flex flex-column bg-dark p-3">
-      <?php foreach ($events as $event): ?>
-        <a class="p-2" href="events#event-<?=$event['event_id']?>"><?=$event['event_name']?></a>
-      <?php endforeach; ?>
-    </div>
-  -->
-  <?php endif; ?>
   <?php if (!count($events)): ?>
     <div class="d-flex justify-content-center align-items-center h-full">
       <div>
@@ -119,7 +110,7 @@
   <div class="form-group">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Available teams</label>
+        <label class="input-group-text bg-red-main" style="color:#FFF;">Available teams</label>
       </div>
       <select class="custom-select" name="team-id">
         <?php foreach($userTeams as $team): ?>
@@ -130,7 +121,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-warning">Join an event</button>
+    <button type="submit" class="btn btn-main">Join an event</button>
     </form>
   </div>
       </div>

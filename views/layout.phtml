@@ -24,7 +24,7 @@
         <link rel="stylesheet" href="/public/css/atom.css">
         <link rel="stylesheet" href="/public/css/slide.css">
         <link rel="stylesheet" href="/public/css/media.css">
-        <link rel="icon" href="/public/images/spsegaming_logo.png">
+        <link rel="icon" href="/public/images/favicon.png">
         <script src="/public/js/jquery.js"></script>
          <script src="/public/js/popper.min.js"></script>
          <script src="/public/js/bootstrap.min.js"></script>
@@ -49,23 +49,20 @@
       </div>
     </div>
   <?php endforeach ?>
-
     </div>
 
     <nav class="mainnav bg-blue-gray d-flex flex-lg-column flex-md-row justify-content-start">
       <a class="d-flex justify-content-center align-items-center" href="/">
-      <div class="text-light hero-top">
-        <img class="hero" src="/public/images/logo.svg" alt="">
-      </div>
+      <div class="text-light hero-top"><img class="hero" src="/public/images/logo2_notext.svg" alt=""></div>
     </a>
       <div class="top-menu d-flex flex-column justify-content-around align-items-center">
-        <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="homeLink" href="home"><img src="/public/images/i-home.png" width="28" height="28" alt=""><h4>Home</h4></a>
-        <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="eventLink" href="events"><img src="/public/images/i-events.png" width="28" height="28" alt=""><h4>Events</h4></a>
+        <a class="nav-links p-2 my-1 row justify-content-center align-items-center" id="homeLink" href="home"><img class="mr-1" src="/public/images/i-home.png" width="28" height="28" alt=""><h4>Home</h4></a>
+        <a class="nav-links p-2 my-1 row justify-content-center align-items-center" id="eventLink" href="events"><img class="mr-1" src="/public/images/i-events.png" width="28" height="28" alt=""><h4>Events</h4></a>
         <?php if ($logged): ?>
-          <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="messagesLink" href="messages"><img src="/public/images/i-messages.png" width="28" height="28" alt=""><h4>Messages</h4></a>
+          <a class="nav-links p-2 my-1 row justify-content-center align-items-center" id="messagesLink" href="messages"><img class="mr-1" src="/public/images/i-messages.png" width="28" height="28" alt=""><h4>Messages</h4></a>
         <?php endif; ?>
         <?php if($logged && ($user['admin'] || $user['rootmaster'])): ?>
-          <a class="nav-links p-2 m-1 row justify-content-center align-items-center" id="adminLink" href="administration"><img src="/public/images/i-admin.png" width="28" height="28" alt=""><h4>Admin</h4></a>
+          <a class="nav-links p-2 my-1 row justify-content-center align-items-center" id="adminLink" href="administration"><img class="mr-1" src="/public/images/i-admin.png" width="28" height="28" alt=""><h4>Admin</h4></a>
         <?php endif; ?>
       </div>
 

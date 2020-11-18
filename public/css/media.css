@@ -13,6 +13,9 @@
   width: 100vw;
   flex-direction: row !important;
   }
+  body::-webkit-scrollbar {
+
+  }
   .banner {
     width: 150px;
     height: auto;
@@ -22,13 +25,13 @@
   }
   .hero {
     margin-left: 10px;
-    width: 70px;
-    height: 70px;
+    width: 100px;
+    height: 100px;
   }
   .content {
     min-height: 87vh;
     padding-left: 0;
-    width: 100vw;
+    width: 100%;
   }
   .home-wrapper {
     min-height: 87vh;
@@ -63,10 +66,6 @@
 @media screen and (min-width: 992px) {
   .hamburger {
     display: none !important;
-  }
-  .hero-top {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
   }
   .mainnav {
     width:200px;

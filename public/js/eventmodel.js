@@ -37,32 +37,90 @@ function toggleBracketFullscreen() {
 
 function refreshMatches() {
   let eventId = document.querySelector(".event-id").value;
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-  }
-  };
-  xhttp.open("GET", "events/refreshmatches/" + eventId, true);
-  xhttp.send();
+  fetch("events/refreshmatches/" + eventId)
+  .then(()=> {
+    getBracket()
+  })
+  .catch(err => console.error(err))
 }
 
 function getBracket() {
   let eventId = document.querySelector(".event-id").value;
-  let xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-  if (this.readyState == 4 && this.status == 200) {
-    let start = this.responseText.indexOf('<!-- BracketStart -->');
-    let end = this.responseText.indexOf("<!-- BracketEnd -->") + "<!-- BracketEnd -->".length;
-     document.querySelector(".bracket-wrapper").innerHTML=this.responseText.slice(start,end);
-  }
-  };
-  xhttp.open("GET", "events/getbracket/" + eventId, true);
-  xhttp.send();
+  fetch("/api/users/checkpl/x")
+  .then(res => res.json())
+  .then(pl => {
+    fetch(`/api/bracket/${eventId}`)
+    .then(res=>res.json())
+    .then(res=>{
+      const bracketEl = document.querySelector('.bracket');
+      bracketEl.innerHTML = "";
+      res.forEach(round => {
+        const divEachRound = document.createElement("divEachRound");
+        divEachRound.setAttribute("class", "each-round");
+        const h2 = document.createElement("h2");
+        h2.setAttribute("class", "text-light");
+        h2.innerHTML = round[0].match_description;
+        divEachRound.append(h2);
+        bracketEl.append(divEachRound);
+        round.forEach(match => {
+          const divEachMatch = document.createElement("div");
+          divEachMatch.setAttribute("class", "eachmatch m-3 bg-space rounded d-inline-flex flex-row justify-content-end align-items-center")
+          divEachRound.append(divEachMatch)
+          const divNames = document.createElement("div");
+          divNames.setAttribute("class", "d-flex flex-column flex-fill p-3 mr-auto")
+          const divScores = document.createElement("div");
+          divScores.setAttribute("class", "d-flex align-items-center justify-content-center flex-column text-center p-2 bg-red-main rounded")
+          divEachMatch.append(divNames, divScores)
+          const divNamesInner1 = document.createElement("div");
+          divNamesInner1.setAttribute("class", "d-flex flex-row align-items-center first-team-name text-center")
+          const divNamesInner2 = document.createElement("div");
+          divNamesInner2.setAttribute("class", "d-flex flex-row align-items-center second-team-name text-center")
+          divNames.append(divNamesInner1, divNamesInner2)
+          const name1 = document.createElement("h5")
+          name1.innerHTML = match.match_first_team_name;
+          const name2 = document.createElement("h5")
+          name2.innerHTML = match.match_second_team_name;
+          divNamesInner1.append(name1)
+          divNamesInner2.append(name2)
+          const score1 = document.createElement("h5")
+          score1.innerHTML = match.match_first_team_score;
+          const score2 = document.createElement("h5")
+          score2.innerHTML = match.match_second_team_score;
+          divScores.append(score1,score2)
+          if (match.match_status == "finished") {
+            const divStatus = document.createElement("div")
+            divStatus.setAttribute("class", "match-status")
+            const statusImg = document.createElement("img")
+            statusImg.setAttribute("src", "/public/images/i-ok.png")
+            statusImg.setAttribute("height", "40")
+            divStatus.append(statusImg)
+            divEachRound.append(divStatus)
+          }
+          if (pl.response) {
+            const divScoreWrite = document.createElement("div")
+            divScoreWrite.setAttribute("class", "scorewrite")
+            const scoreWriteButton = document.createElement("button")
+            scoreWriteButton.setAttribute("class", "btn btn-main");
+            scoreWriteButton.setAttribute("type", "button");
+            scoreWriteButton.setAttribute("data-toggle", "modal");
+            scoreWriteButton.setAttribute("data-target", ".modal-score-write");
+            scoreWriteButton.setAttribute("data-matchid", match.match_id);
+            const imgScore = document.createElement("img")
+            imgScore.setAttribute("src", "/public/images/i-score.png")
+            scoreWriteButton.append(imgScore)
+            divScoreWrite.append(scoreWriteButton)
+            divEachRound.append(divScoreWrite)
+          }
+        })
+      })
+    })
+    .catch(err => console.error(err))
+  })
+
+
 }
 
 $('#nav-tab a[href="#nav-bracket"]').tab('show')
 
 refreshMatches();
-getBracket();
-
-setInterval(function(){refreshMatches();getBracket();}, 10000)
+setInterval(function(){refreshMatches();}, 10000)
