@@ -33,7 +33,7 @@
             if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
               $emails = $userMan->returnEmails();
               $unames = $userMan->returnUsernames();
-                  if ($_POST['agreement-tos']) {
+                  if (isset($_POST['agreement-tos']) && $_POST['agreement-tos']) {
                     if (!in_array($_POST['usrname'], $unames) && !in_array($_POST['email'], $emails)) {
                       if (preg_match("/^[a-zA-Z0-9]{4,30}$/", $_POST['usrname'])) {
                         if (strlen($_POST['usrname']) > 3) {
@@ -64,6 +64,7 @@
 
           } catch (UserError $e) {
             $this->addMessage($e->getMessage());
+            $this->redir("register");
           }
       }
     }

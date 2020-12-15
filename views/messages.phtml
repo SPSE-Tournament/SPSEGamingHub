@@ -3,23 +3,28 @@
 </section>
 
 <script>
-document.querySelector("#eventLink").classList.remove("nav-links-selected");
-document.querySelector("#adminLink").classList.remove("nav-links-selected");
-document.querySelector("#homeLink").classList.remove("nav-links-selected");
-document.querySelector("#messagesLink").classList.add("nav-links-selected");
+// document.querySelector("#eventLink").classList.remove("nav-links-selected");
+// document.querySelector("#adminLink").classList.remove("nav-links-selected");
+// document.querySelector("#homeLink").classList.remove("nav-links-selected");
+// document.querySelector("#messagesLink").classList.add("nav-links-selected");
 fetch('/api/messages/')
   .then(response => response.json())
   .then(messages => {
-    messages.forEach(m=>{
-      let a = document.createElement("a");
-      a.setAttribute("href", `messages/${m.message_id}`);
-      let el = document.createElement("div");
-      el.classList.add("bg-blue-gray","p-3", "m-1", "rounded")
-      el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
-      document.querySelector(".messages-wrapper").append(a);
-      a.append(el);
-      console.log(m)
-    })
+    if (messages.length > 0) {
+      messages.forEach(m=>{
+        let a = document.createElement("a");
+        a.setAttribute("href", `messages/${m.message_id}`);
+        let el = document.createElement("div");
+        el.classList.add("bg-blue-gray","p-3", "m-1", "rounded")
+        el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
+        document.querySelector(".messages-wrapper").append(a);
+        a.append(el);
+        console.log(m)
+      })
+    } else {
+      document.querySelector(".messages-wrapper").innerHTML = "<p>No messages</p>"
+    }
+
   })
   .catch(err => console.error(err));
 </script>

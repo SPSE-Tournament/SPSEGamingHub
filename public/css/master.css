@@ -184,6 +184,11 @@ font-family: 'Open Sans', sans-serif !important;
 .each-team-top {
   border-bottom: 1px solid var(--red-main);
 }
+.each-team:hover  {
+  opacity: .7;
+  cursor: pointer;
+  transition: all .3s ease;
+}
 .toast-header {
   border-bottom: 1px solid var(--red-main) !important;
 }

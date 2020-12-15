@@ -89,14 +89,14 @@
                 Db::insert('registrations', $user);
                 $mail = new PHPMailer(true);
                 $mail->isSMTP(); // Send using SMTP
-                $mail->Host       = 'smtp.office365.com'; // Set the SMTP server to send through
+                $mail->Host       = $_ENV['MAIL_SMTP_HOST']; // Set the SMTP server to send through
                 $mail->SMTPAuth   = true; // Enable SMTP authentication
-                $mail->Username   = 'roudnydo@zaci.spse.cz'; // SMTP username
-                $mail->Password   = '0Pice123';  // SMTP password
+                $mail->Username   = $_ENV['MAIL_USERNAME']; // SMTP username
+                $mail->Password   = $_ENV['MAIL_PW'];  // SMTP password
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
                 $mail->Port       = 587; // TCP port to connect to
                 //Recipients
-                $mail->setFrom('roudnydo@zaci.spse.cz');
+                $mail->setFrom($_ENV['MAIL_USERNAME']);
                 $mail->addAddress($email);
                 // Content
                 $mail->isHTML(true); // Set email format to HTML
@@ -105,7 +105,7 @@
                 $mail->AltBody = $html;
                 $mail->send();
               } catch (Exception $e) {
-                throw new UserError("Username already exists.");
+                throw new UserError($e->getMessage());
               }
           }
 
@@ -193,6 +193,10 @@
                 $usersToReturn[] = array("name"=> " ");
                 return $usersToReturn;
               }
+          }
+
+          public function changePassword($uId, $pw) {
+            Db::edit("users", ["password"=>$this->returnHash($pw)], "where user_hexid = ?", [$uId]);
           }
 
           public function verifyUser($hexId):void {

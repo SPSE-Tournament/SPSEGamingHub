@@ -66,7 +66,7 @@
                      $logMan = new LogManager();
                      $date = new DateTime();
                      $logMan->log($_SESSION['user']['user_id'], $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
-                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
+                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1" && $_SERVER['REMOTE_ADDR'] != $_ENV['ADMIN_IP']) {
                        $this->logDiscord($_SESSION['user']['user_id'],$_SESSION['user']['name'],$msg,$type);
                      }
                    }
@@ -75,7 +75,7 @@
                      $logMan = new LogManager();
                      $date = new DateTime();
                      $logMan->log($userId, $msg, $type, $date->format('Y-m-d H:i:s'), $_SERVER['REMOTE_ADDR']);
-                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1") {
+                     if ($_SERVER['REMOTE_ADDR'] != "127.0.0.1" && $_SERVER['REMOTE_ADDR'] != $_ENV['ADMIN_IP']) {
                        $this->logDiscord($userId,$usrname,$msg,$type);
                      }
                    }
@@ -126,7 +126,7 @@
 
                    public function isParam($params, $paramIndex, $paramQuery) {
                      return (!empty($params) && $params[$paramIndex] == $paramQuery) ? true : false;
-  
+
                    }
 
   }

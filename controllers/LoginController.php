@@ -18,14 +18,14 @@
             $this->addMessage("Fields can't be empty!");
             $this->redir("login");
           }
-
         } catch (UserError $e) {
           $this->addMessage($e->getMessage());
+          $this->redir("login");
         }
 
       }
     $this->view = 'login';
   }
   }
-  
+
 ?>

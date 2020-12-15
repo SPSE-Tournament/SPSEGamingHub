@@ -18,30 +18,12 @@
               $this->redir("home");
           }
 
-          //Routing
-          if (!empty($params[0]) && $this->isParam($params,0,'getlog')) {
-              $logs = $logManager->returnLogs();
-              $logIds = array();
-              for ($i=0; $i < count($logs); $i++) {
-                  $logIds[] = $logs[$i]['log_id'];
-              }
-              if (!empty($params[1]) && in_array($params[1], $logIds)) {
-                  $this->data['log'] = $logManager->returnLogById($params[1]);
-                  $this->view = 'logpreview';
-              }
-          } elseif (!empty($params[0]) && $this->isParam($params,0,'getgameform')) {
-              if (in_array($params[1], $gameManager->getGameIds())) {
-                  $this->data['gameCur'] = $gameManager->returnGameById($params[1]);
-                  $this->addMessage($params[1]);
-                  $this->view = 'gameform';
-              }
-          } else {
-              $this->data['logs'] = $logManager->returnLogs();
-              $this->data['games'] = $gameManager->returnGames();
-              $this->data['events'] = $eventManager->returnEvents();
-              $this->header['page_title'] = "Admin Dashboard";
-              $this->view = "administration";
-          }
+          $this->data['logs'] = $logManager->returnLogs();
+          $this->data['games'] = $gameManager->returnGames();
+          $this->data['events'] = $eventManager->returnEvents();
+          $this->header['page_title'] = "Admin Dashboard";
+          $this->view = "administration";
+
 
           //Handling POST requests
           if ($_POST) {
@@ -136,9 +118,8 @@
                           } else {
                               $this->addMessage("Field empty");
                           }
-                      } else if (isset($_POST['verification_teamname'])) {
+                      } elseif (isset($_POST['verification_teamname'])) {
                           if (strlen($_POST['verification_teamname']) > 0) {
-
                               try {
                                   $team = $teamManager->returnTeamByName($_POST['verification_teamname']);
                                   $teamManager->verifyTeam($team['team_id']);
@@ -171,6 +152,25 @@
                       }
                   } else {
                       $this->addMessage("Field empty");
+                  }
+              }
+              if (isset($_POST['password-change'])) {
+                  if (strlen($_POST['pw']) > 4) {
+                      if (preg_match("/^[a-zA-Z0-9]+#[a-fA-F0-9]{4}$/", $_POST['user']) || preg_match("/^#[a-fA-F0-9]{4}$/", $_POST['user'])) {
+                          try {
+                              $fullName = $userManager->parseHexname($_POST['user']);
+                              $userManager->changePassword($fullName['hexid'], $_POST['pw']);
+                              $this->addMessage("Password changed");
+                              $this->log("User password changed"."//".$_POST['user'], "user_admin");
+                              $this->redir("administration");
+                          } catch (PDOException $e) {
+                              $this->addMessage($e->getMessage());
+                              $this->redir("administration");
+                          }
+                      }
+                  } else {
+                      $this->addMessage("Username in wrong format. (Username#hexid)");
+                      $this->redir("administration");
                   }
               }
           }
