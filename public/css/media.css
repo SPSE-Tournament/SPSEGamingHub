@@ -65,6 +65,27 @@
   .news img {
     width: 250px;
   }
+  .new-message {
+    bottom: 13vh;
+  }
+  .btn-msg {
+    bottom: 14vh;
+    z-index: 2;
+  }
+  .profile-wrapper {
+    padding-bottom: 13vh !important;
+  }
+  .administration-wrapper {
+    padding: 2rem 15px 13vh 15px !important;
+  }
+  table {
+    overflow-x: scroll;
+  }
+  .loggers {
+    margin-top: .5rem;
+    margin-bottom: 3rem;
+  }
+
 }
 @media screen and (min-width: 992px) {
   .hamburger {

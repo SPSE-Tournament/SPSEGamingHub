@@ -72,12 +72,17 @@ a:hover {
   border-radius: 10px;
 }
 
-.rounded {
-  border-radius: 12px;
-}
-.btn-main:hover {
+.btn-main:hover, .btn-blue-gray:hover {
   opacity: .8;
   transition: all .3s ease-out;
+}
+.btn-blue-gray {
+  background-color: var(--blue-gray) !important;
+  color: #fff !important;
+  border-radius: 10px;
+}
+.full-round{
+  border-radius: 50% !important;
 }
 .mainnav {
   height: 100vh;
@@ -88,6 +93,13 @@ a:hover {
 }
 .news h1 {
   font-weight: 700 !important;
+}
+.btn-msg {
+  width: 65px;
+  height: 65px;
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
 }
 .content {
   padding-left: 200px;
@@ -238,4 +250,11 @@ font-family: 'Open Sans', sans-serif !important;
 }
 .card {
   border: 1px solid var(--red-main) !important;
+}
+.new-message {
+  position: fixed;
+  bottom: 0;
+}
+.newMsgTxtAr {
+  resize: none;
 }

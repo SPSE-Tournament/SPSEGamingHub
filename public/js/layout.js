@@ -1,4 +1,8 @@
 
+    for (let i of document.querySelectorAll(".nav-links-selected")) {
+      i.classList.remove("nav-links-selected");
+    }
+
     function loadUserLiveText(str, livesearchelem, hintelem) {
       if (str.length < 3) {
         document.querySelector("."+hintelem).innerHTML ="";
@@ -40,15 +44,14 @@
     function selectUser(elem,str) {
       document.getElementById(elem).value = str;
       document.querySelector('.livesearch').style.display = "none";
-      document.querySelector('.livesearch-verify').style.display = "none";
     }
 
 
     function toggleNav() {
-      if (document.querySelector(".overlay").style.width == "100%")
-        document.querySelector(".overlay").style.width = "0%";
+      if (document.querySelector(".overlay").style.height == "87vh")
+        document.querySelector(".overlay").style.height = "0";
       else
-        document.querySelector(".overlay").style.width = "100%";
+        document.querySelector(".overlay").style.height = "87vh";
 
     }
 

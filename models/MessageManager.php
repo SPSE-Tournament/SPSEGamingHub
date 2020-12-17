@@ -68,19 +68,23 @@
           Db::query("DELETE from messages where message_id = ?", array($messId));
       }
 
-      public function sendMessage($message, $messageType, $timestamp, $senderId, $senderName, $receiverId, $receiverName, $teamId = null)
+      public function sendMessage($message, $messageType, $senderId, $receiverId, $teamId = null)
       {
+          $date = new DateTime("now");
           $messagePerex = substr($message, 0, 15) . "...";
+          $uM = new UserManager();
           try {
+            $sender = $uM->returnUserById($senderId);
+            $receiver = $uM->returnUserById($receiverId);
               $message = array(
           'message' => $message,
           'message_perex' => $messagePerex,
           'message_type' => $messageType,
-          'message_timestamp' => $timestamp,
+          'message_timestamp' => $date->format('Y-m-d H:i:s'),
           'user_senderid' => $senderId,
-          'user_sendername' => $senderName,
+          'user_sendername' => $sender['name'],
           'user_receiverid' => $receiverId,
-          'user_receivername' => $receiverName,
+          'user_receivername' => $receiver['name'],
           'invite_team_id' => $teamId
         );
               Db::insert('messages', $message);

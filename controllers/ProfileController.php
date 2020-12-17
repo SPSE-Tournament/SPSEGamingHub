@@ -7,7 +7,6 @@
           $mesMan = new MessageManager();
           $teamMan = new TeamManager();
           $gameMan = new GameManager();
-          $date = new DateTime("now");
           $messageTypes = array('message','invite','trash');
           if (!$_SESSION['logged']) {
               $this->redir("login");
@@ -93,11 +92,8 @@
                                           $mesMan->sendMessage(
                                               $inviteMessage,
                                               'invite',
-                                              $date->format('Y-m-d H:i:s'),
                                               $_SESSION['user']['user_id'],
-                                              $_SESSION['user']['name'],
                                               $receiverId['user_id'],
-                                              $parsedHexName['name'],
                                               $_POST['team-id']
                                           );
                                           $this->addMessage("Your invite has been sent.");

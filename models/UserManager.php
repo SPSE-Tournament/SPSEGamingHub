@@ -2,7 +2,13 @@
     class UserManager {
 
           public function returnUsers() {
-            return Db::multiQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid, user_verified from users");
+            return Db::multiQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid, user_verified
+               from users");
+          }
+
+          public function returnUserById($id) {
+            return Db::singleQuery("SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, user_hexid, user_verified
+               from users WHERE user_id = ?", [$id]);
           }
 
           public function returnEmails(){
@@ -58,6 +64,7 @@
 
           public function requestRegister($name, $email, $pw, $pwA, $yr) {
               $hash = strtoupper(bin2hex(random_bytes(64)));
+              $base = $_ENV['BASE'];
               if ($name == "" or $name == " ") {
                 throw new UserError("Username empty!");
               }
@@ -81,7 +88,7 @@
               <body>
               <p>Hello fellow gamer! To verify your account created on
               our website,
-              <a href='https://www.game.spse.cz/register/verify/".$hash."'>Click here</a>
+              <a href='https://$base/register/verify/".$hash."'>Click here</a>
               </p>
               </body>
               </html>";
@@ -213,16 +220,19 @@
           }
 
           public function parseHexname($hexName):array {
-              $parsedName = explode("#", $hexName);
-              return array(
-                'name' => $parsedName[0],
-                'hexid' => $parsedName[1]
-              );
+              if (!empty($hexName)) {
+                $parsedName = explode("#", $hexName);
+                return array(
+                  'name' => $parsedName[0],
+                  'hexid' => $parsedName[1]
+                );
+              }
+
           }
 
           public function checkPL(string $minimumPrivilegeLevel) {
-            if ($_SERVER['REMOTE_ADDR'] == ("127.0.0.1" || "::1"))
-              return true;
+            // if ($_SERVER['REMOTE_ADDR'] == ("127.0.0.1" || "::1"))
+            //   return true;
 
             switch ($minimumPrivilegeLevel) {
               case "watchman":

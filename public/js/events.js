@@ -10,5 +10,3 @@ modal.find('.event-url-input').val(eventUrl)
 });
 
 document.querySelector("#eventLink").classList.add("nav-links-selected");
-document.querySelector("#homeLink").classList.remove("nav-links-selected");
-document.querySelector("#adminLink").classList.remove("nav-links-selected");

@@ -1,30 +1,73 @@
-<section class="messages-wrapper text-light p-5">
-
+<section class="text-light px-5 pt-5 d-flex flex-column justify-content-center align-items-center">
+  <div class="messages-wrapper pb-3" style="filter: blur(0px)"></div>
+  <button class="btn btn-main btn-msg full-round" type="button" name="button"><h1 class="m-0">+</h1></button>
+  <div class="new-message bg-blue-gray p-3 rounded" style="display: none;">
+    <form method="POST">
+      <input type="hidden" name="send-msg" value="">
+        <div class="mb-3">
+            <label for="">Recipient</label>
+            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch","hint")'
+             type="text" name="recipient" placeholder="Username#HexId" autocomplete="off" >
+          <div class="livesearch livehint-newmsg col-10 p-3 my-2 text-center mx-auto" style="display: none;">
+            <p>Hint:</p>
+            <hr>
+            <div class="hint">
+            </div>
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Message</label>
+          <textarea class="form-control newMsgTxtAr" name="message" rows="8" cols="40" ></textarea>
+        </div>
+        <button type="submit" class="btn btn-main">Send</button>
+      </form>
+  </div>
 </section>
 
 <script>
-// document.querySelector("#eventLink").classList.remove("nav-links-selected");
-// document.querySelector("#adminLink").classList.remove("nav-links-selected");
-// document.querySelector("#homeLink").classList.remove("nav-links-selected");
-// document.querySelector("#messagesLink").classList.add("nav-links-selected");
-fetch('/api/messages/')
-  .then(response => response.json())
-  .then(messages => {
-    if (messages.length > 0) {
-      messages.forEach(m=>{
-        let a = document.createElement("a");
-        a.setAttribute("href", `messages/${m.message_id}`);
-        let el = document.createElement("div");
-        el.classList.add("bg-blue-gray","p-3", "m-1", "rounded")
-        el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
-        document.querySelector(".messages-wrapper").append(a);
-        a.append(el);
-        console.log(m)
-      })
-    } else {
-      document.querySelector(".messages-wrapper").innerHTML = "<p>No messages</p>"
-    }
+document.querySelector("#messagesLink").classList.add("nav-links-selected");
 
-  })
-  .catch(err => console.error(err));
+function fetchMessages() {
+  const msgWrp = document.querySelector(".messages-wrapper");
+
+  fetch('/api/messages/')
+    .then(response => response.json())
+    .then(messages => {
+      if (messages.length > 0) {
+        msgWrp.innerHTML = "";
+        messages.forEach(m=>{
+          let a = document.createElement("a");
+          a.setAttribute("href", `messages/${m.message_id}`);
+          let el = document.createElement("div");
+          el.classList.add("bg-blue-gray","p-3", "m-1", "rounded")
+          el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
+          msgWrp.append(a);
+          a.append(el);
+        })
+        console.log("Fetch:messages")
+      } else {
+        document.querySelector(".messages-wrapper").innerHTML = "<p>No messages</p>"
+      }
+    })
+    .catch(err => console.error(err));
+}
+
+  fetchMessages();
+  setInterval(fetchMessages,5000)
+
+
+  document.querySelector(".btn-msg").addEventListener("click", e=> {
+    const msgDiv = document.querySelector(".new-message");
+    const btnDiv = document.querySelector(".btn-msg");
+    const msgWrp = document.querySelector(".messages-wrapper");
+    if (msgDiv.style.display == "none") {
+      msgDiv.style.display = "block";
+      btnDiv.innerHTML = "<h1 class='m-0'>&times;</h1>";
+      msgWrp.style.filter = "blur(5px)";
+    } else {
+      msgDiv.style.display = "none";
+      btnDiv.innerHTML = "<h1 class='m-0'>+</h1>";
+      msgWrp.style.filter = "blur(0px)";
+    }
+  });
 </script>

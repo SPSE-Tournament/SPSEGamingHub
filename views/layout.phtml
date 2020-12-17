@@ -81,7 +81,11 @@
             <span class="sr-only">Toggle Dropdown</span>
           </button>
           <div class="dropdown-menu bg-space p-3">
-            <a href="profile/logout" class="btn btn-sm btn-main">Logout</a>
+            <div class="d-flex flex-column justify-content-center">
+              <a href="profile/logout" class="btn my-1 btn-sm btn-main"><img class="pb-1 pr-1" src="https://img.icons8.com/android/20/000000/logout-rounded-left.png"/>Logout</a>
+              <a href="profile/logout" class="btn my-1 btn-sm btn-main"><img class="pb-1 pr-1" src="https://img.icons8.com/fluent-systems-filled/24/000000/settings.png"/>Settings</a>
+            </div>
+
           </div>
         </div>
       <?php endif; ?>
@@ -94,17 +98,18 @@
     <div id="myNav" class="overlay">
       <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
       <div class="overlay-content text-light">
-        <a href="home">Home</a>
-        <a href="events">Events</a>
+        <a class="btn m-1 btn-blue-gray w-75 mx-auto" href="home">Home</a>
+        <a class="btn m-1 btn-blue-gray w-75 mx-auto" href="events">Events</a>
         <?php if($logged && ($user['admin'] || $user['rootmaster'])): ?>
-        <a href="administration">Admin</a>
+        <a class="btn m-1 btn-blue-gray w-75 mx-auto" href="administration">Admin</a>
         <?php endif;?>
-        <hr class="bg-light">
+        <hr class="bg-blue-gray">
         <?php if($logged): ?>
-        <a href="profile"><?=$user['name']?></a>
+        <a class="btn m-1 btn-blue-gray w-75 mx-auto"  href="profile"><?=$user['name']?></a>
+        <a class="btn m-1 btn-blue-gray w-75 mx-auto" href="profile/logout"><img class="pb-1 pr-1" src="https://img.icons8.com/android/40/000000/logout-rounded-left.png"/>logout</a>
         <?php endif;?>
         <?php if(!$logged): ?>
-          <a href="login">Sign in</a>
+          <a class="btn m-1 btn-blue-gray w-75 mx-auto" href="login">Sign in</a>
         <?php endif;?>
       </div>
     </div>
@@ -114,32 +119,6 @@
       <?php $this->controller->showView(); ?>
     </article>
 
-
-  <div class="new-message p-5 w-50 mx-auto" id='new_message' style="display:none;opacity:.97;">
-      <button class="close" type="button" name="button" onclick='closeNewMessage("#new_message")'>
-        <span>&times;</span>
-      </button>
-      <form method="post">
-        <input type="hidden" name="message-add">
-        <div class="form-group w-50">
-          <div class="input-group mb-3">
-              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hint")' type="text" name="receiver" value="" placeholder="Username#HexId" autocomplete="off">
-          </div>
-        </div>
-        <div class="livesearch livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-          <p>Hint:</p>
-          <hr>
-          <div class="hint"></div>
-        </div>
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <textarea class="form-control" id="textA" name="message" rows="8" cols="80"></textarea>
-      </div>
-    </div>
-    <button type="submit" class="btn btn-secondary" name="button">Send</button>
-  </form>
-    </div>
-
-  <script type="text/javascript" src="public/js/layoutmodel.js"></script>
+  <script type="text/javascript" src="public/js/layout.js"></script>
   </body>
 </html>

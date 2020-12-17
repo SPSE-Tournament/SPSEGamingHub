@@ -1,7 +1,4 @@
 document.querySelector("#adminLink").classList.add("nav-links-selected");
-document.querySelector("#homeLink").classList.remove("nav-links-selected");
-document.querySelector("#eventLink").classList.remove("nav-links-selected");
-document.querySelector("#messagesLink").classList.remove("nav-links-selected");
 document.querySelector(".live-form-game-update").style.display = "none";
 
 loadLogs().then(logs => {
@@ -72,7 +69,6 @@ function loadLogsOrderBy(order, direction = "") {
 }
 
 function getGameForm(value) {
-  console.log(value)
   if (value)
   document.querySelector(".live-form-game-update").style.display = "block";
   else
