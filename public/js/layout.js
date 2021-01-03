@@ -3,6 +3,12 @@
       i.classList.remove("nav-links-selected");
     }
 
+    function setMultAttributes(el, attrs) {
+      for (let i in attrs) {
+        el.setAttribute(i, attrs[i]);
+      }
+    }
+
     function loadUserLiveText(str, livesearchelem, hintelem) {
       if (str.length < 3) {
         document.querySelector("."+hintelem).innerHTML ="";
@@ -15,9 +21,9 @@
         console.log(hint);
         document.querySelector("."+hintelem).innerHTML ="";
         for (let i of hint) {
-          document.querySelector("."+hintelem).innerHTML += `<p class="hint rounded p-2" onclick="selectUser('newMessage_username', '${i.name+"#"+i.hexid}')">${i.name}</p>`;
+          document.querySelector("."+hintelem).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('newMessage_username', '${i.name+"#"+i.hexid}')">${i.name}</p>`;
         }
-        document.querySelector('.'+livesearchelem).style.display = "block";
+        document.querySelector('.'+livesearchelem).style.display = "flex";
       })
       .catch(err => console.error(err));
     }
@@ -34,14 +40,14 @@
         console.log(hint);
         document.querySelector("."+hintelem).innerHTML ="";
         for (let i of hint) {
-          document.querySelector("."+hintelem).innerHTML += `<p class="hint rounded p-2" onclick="selectUser('newMessage_username', '${i.name}')">${i.name}</p>`;
+          document.querySelector("."+hintelem).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('newMessage_username', '${i.name}')">${i.name}</p>`;
         }
-        document.querySelector('.'+livesearchelem).style.display = "block";
+        document.querySelector('.'+livesearchelem).style.display = "flex";
       })
       .catch(err => console.error(err));
     }
 
-    function selectUser(elem,str) {
+    function selectUser(elem, str) {
       document.getElementById(elem).value = str;
       document.querySelector('.livesearch').style.display = "none";
     }

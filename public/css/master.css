@@ -30,6 +30,11 @@ body::-webkit-scrollbar-thumb {
   background-color: var(--red-main);
   border-radius: 15px;
 }
+input, select, textarea {
+  background-color: var(--space) !important;
+  border: 2px solid var(--red-main)!important;
+  color: #fff !important;
+}
 form label {
   color: gray;
 }
@@ -142,12 +147,13 @@ font-family: 'Open Sans', sans-serif !important;
   height: 185px;
   width: 328px;
 }
-.social-item img {
+.social-item, .social-item img {
   border-radius: 10px;
 }
 .social-item:hover {
+  box-shadow: 4px 4px 0px var(--red-main);
+  filter: brightness(.9);
   transition: all .3s ease-out;
-  opacity: .8;
 }
 .home-wrapper {
   min-height: 100vh;
@@ -213,6 +219,8 @@ font-family: 'Open Sans', sans-serif !important;
   transition: all .3s ease-out;
 }
 .toast {
+  border: none !important;
+  border-radius: 0px !important;
   position: absolute;
   z-index: 10;
   right: 1%;
@@ -238,9 +246,14 @@ font-family: 'Open Sans', sans-serif !important;
   font-weight: bold;
   font-size: 2.3rem !important;
 }
-.hint:hover {
+.livesearch {
+  border: 1px solid var(--red-main);
+  border-radius: 5px;
+}
+.hint-p:hover {
   cursor: pointer;
   background-color: var(--gray-light);
+  color:#fff;
   transition: all .3s ease;
 }
 .profile-img:hover {
@@ -249,7 +262,11 @@ font-family: 'Open Sans', sans-serif !important;
   cursor: pointer;
 }
 .card {
+  background-color: transparent!important;
   border: 1px solid var(--red-main) !important;
+}
+.card-header {
+  border: none !important;
 }
 .new-message {
   position: fixed;

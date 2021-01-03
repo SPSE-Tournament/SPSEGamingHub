@@ -32,7 +32,7 @@
 
           break;
 
-        case "bracket": {
+        case "bracket": 
 
         if (!empty($params[1])) {
             $event = $eventManager->returnEventById($params[1]);
@@ -46,7 +46,7 @@
         }
 
 
-      }break;
+      break;
         case "messages":
 
         if (!$userManager->checkPL("user")) {

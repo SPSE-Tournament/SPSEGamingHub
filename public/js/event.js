@@ -88,8 +88,10 @@ function getBracket() {
             const divStatus = document.createElement("div")
             divStatus.setAttribute("class", "match-status")
             const statusImg = document.createElement("img")
-            statusImg.setAttribute("src", "/public/images/i-ok.png")
-            statusImg.setAttribute("height", "40")
+            setMultAttributes(statusImg, {
+              "src":"/public/images/i-ok.png",
+              "height":"40"
+            })
             divStatus.append(statusImg)
             divEachRound.append(divStatus)
           }
@@ -97,11 +99,13 @@ function getBracket() {
             const divScoreWrite = document.createElement("div")
             divScoreWrite.setAttribute("class", "scorewrite")
             const scoreWriteButton = document.createElement("button")
-            scoreWriteButton.setAttribute("class", "btn btn-main mt-1");
-            scoreWriteButton.setAttribute("type", "button");
-            scoreWriteButton.setAttribute("data-toggle", "modal");
-            scoreWriteButton.setAttribute("data-target", ".modal-score-write");
-            scoreWriteButton.setAttribute("data-matchid", match.match_id);
+            setMultAttributes(scoreWriteButton, {
+              "class": "btn btn-main mt-1",
+              "type": "button",
+              "data-toggle": "modal",
+              "data-target": ".modal-score-write",
+              "data-matchid": match.match_id
+            });
             const imgScore = document.createElement("img")
             imgScore.setAttribute("src", "/public/images/i-score.png")
             scoreWriteButton.append(imgScore)

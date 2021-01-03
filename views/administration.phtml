@@ -1,6 +1,6 @@
-<section class="administration-wrapper p-5">
-  <section class="row m-0 justify-content-center align-items-start">
-    <div class="col-lg-5 col-md-10 bg-blue-gray text-light px-5 py-2 rounded" style="height:80vh;">
+<section class="administration-wrapper p-3">
+  <section class="row m-0 justify-content-around align-items-start">
+    <div class="col-lg-4 col-md-10 bg-blue-gray text-light px-5 py-2 rounded" style="height:80vh;">
       <h2><img class="" src="public/images/i-dashboard.png" height="50">Dashboard</h2>
       <small><?=$_SERVER['REMOTE_ADDR']?></small>
       <hr class="bg-red-main">
@@ -53,6 +53,7 @@
   </div>
 </div>
     </div>
+
     <div class="col-lg-7 loggers p-0 col-md-10 m-lg-0">
       <div class="log-wrapper rounded bg-blue-gray">
         <div class="d-flex w-80 p-2 ml-2 text-light">
@@ -70,8 +71,6 @@
             </select>
           </div>
         </div>
-
-
 
         <table class="table table-dark table-bordered table-sm table-striped table-responsive table-hover">
     <thead>
@@ -441,10 +440,9 @@
         <option value="team">Team</option>
       </select>
       <div class="form-group w-50 mx-auto">
-        <div class="user-input-group p-1 mb-3"></div>
-        <div class="livesearch-verify livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-          <p>Hint:</p><hr>
-          <div class="hint-verify"></div>
+        <div class="user-input-group p-1"></div>
+        <div class="livesearch livesearch-verify livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
+          <div class="hint hint-verify"></div>
         </div>
       </div>
   <button type="submit" class="btn btn-warning" name="button">Verify</button>
@@ -469,16 +467,14 @@
         <input type="hidden" name="password-change">
         <div class="form-group">
           <div class="input-group mb-3">
-              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hint")' type="text" name="user" value="" placeholder="Username#HexId" autocomplete="off">
+              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hintPw")' type="text" name="user" value="" placeholder="Username#HexId" autocomplete="off">
           </div>
         </div>
         <div class="form-group">
           <input class="form-control" placeholder="New password" type="password" name="pw" value="">
         </div>
         <div class="livesearch livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-          <p>Hint:</p>
-          <hr>
-          <div class="hint"></div>
+          <div class="hintPw"></div>
         </div>
     <button type="submit" class="btn btn-warning" name="button">Change password</button>
   </form>
