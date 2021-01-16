@@ -1,62 +1,61 @@
 <section class="text-light px-5 pt-5 d-flex flex-column justify-content-center align-items-center">
   <div class="messages-wrapper pb-3" style="filter: blur(0px)"></div>
-  <button class="btn btn-main btn-msg full-round" type="button" name="button"><h1 class="m-0">+</h1></button>
+  <button class="btn btn-main btn-msg full-round" type="button" name="button">
+    <h1 class="m-0">+</h1>
+  </button>
   <div class="new-message bg-blue-gray p-3 rounded" style="display: none;">
     <form method="POST">
       <input type="hidden" name="send-msg" value="">
-        <div class="mb-3">
-            <label for="">Recipient</label>
-            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch","hint")'
-             type="text" name="recipient" placeholder="Username#HexId" autocomplete="off" >
-          <div class="livesearch livehint-newmsg col-10 p-3 my-2 text-center mx-auto" style="display: none;">
-            <p>Hint:</p>
-            <hr>
-            <div class="hint">
-            </div>
+      <div class="mb-3">
+        <label for="">Recipient</label>
+        <input class="form-control" id="hintable-msg" onkeyup='loadUserLiveText(this.value,"livesearch","hint", this.id)' type="text" name="recipient" placeholder="Username#HexId" autocomplete="off">
+        <div class="livesearch livehint-newmsg col-10 p-2 my-2 justify-content-center mx-auto" style="display: none;">
+          <div class="hint">
           </div>
         </div>
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Message</label>
-          <textarea class="form-control newMsgTxtAr" name="message" rows="8" cols="40" ></textarea>
-        </div>
-        <button type="submit" class="btn btn-main">Send</button>
-      </form>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Message</label>
+        <textarea class="form-control newMsgTxtAr" name="message" rows="8" cols="40"></textarea>
+      </div>
+      <button type="submit" class="btn btn-main">Send</button>
+    </form>
   </div>
 </section>
 
 <script>
-document.querySelector("#messagesLink").classList.add("nav-links-selected");
+  document.querySelector("#messagesLink").classList.add("nav-links-selected");
 
-function fetchMessages() {
-  const msgWrp = document.querySelector(".messages-wrapper");
+  function fetchMessages() {
+    const msgWrp = document.querySelector(".messages-wrapper");
 
-  fetch('/api/messages/')
-    .then(response => response.json())
-    .then(messages => {
-      if (messages.length > 0) {
-        msgWrp.innerHTML = "";
-        messages.forEach(m=>{
-          let a = document.createElement("a");
-          a.setAttribute("href", `messages/${m.message_id}`);
-          let el = document.createElement("div");
-          el.classList.add("bg-blue-gray","p-3", "m-1", "rounded")
-          el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
-          msgWrp.append(a);
-          a.append(el);
-        })
-        console.log("Fetch:messages")
-      } else {
-        document.querySelector(".messages-wrapper").innerHTML = "<p>No messages</p>"
-      }
-    })
-    .catch(err => console.error(err));
-}
+    fetch('/api/messages/')
+      .then(response => response.json())
+      .then(messages => {
+        if (messages.length > 0) {
+          msgWrp.innerHTML = "";
+          messages.forEach(m => {
+            let a = document.createElement("a");
+            a.setAttribute("href", `messages/${m.message_id}`);
+            let el = document.createElement("div");
+            el.classList.add("bg-blue-gray", "p-3", "m-1", "rounded")
+            el.innerHTML = `From: ${m.user_sendername} ${m.message}`;
+            msgWrp.append(a);
+            a.append(el);
+          })
+          console.log("Fetch:messages")
+        } else {
+          document.querySelector(".messages-wrapper").innerHTML = "<p>No messages</p>"
+        }
+      })
+      .catch(err => console.error(err));
+  }
 
   fetchMessages();
-  setInterval(fetchMessages,5000)
+  setInterval(fetchMessages, 5000)
 
 
-  document.querySelector(".btn-msg").addEventListener("click", e=> {
+  document.querySelector(".btn-msg").addEventListener("click", e => {
     const msgDiv = document.querySelector(".new-message");
     const btnDiv = document.querySelector(".btn-msg");
     const msgWrp = document.querySelector(".messages-wrapper");

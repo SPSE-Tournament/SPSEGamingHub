@@ -2,56 +2,56 @@
   <section class="row m-0 justify-content-around align-items-start">
     <div class="col-lg-4 col-md-10 bg-blue-gray text-light px-5 py-2 rounded" style="height:80vh;">
       <h2><img class="" src="public/images/i-dashboard.png" height="50">Dashboard</h2>
-      <small><?=$_SERVER['REMOTE_ADDR']?></small>
+      <small><?= $_SERVER['REMOTE_ADDR'] ?></small>
       <hr class="bg-red-main">
       <div class="accordion bg-dark" id="accordionExample">
-  <div class="card">
-    <div class="card-header bg-space" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-      <h5 class="mb-0">Add</h5>
-    </div>
-    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body bg-dark d-flex flex-row justify-content-around">
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-events">Add event</button>
-        <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-games">Add games</button>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header bg-space" id="headingOne" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
-      <h5 class="mb-0">Edit</h5>
-    </div>
-    <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-      <div class="card-body bg-dark row justify-content-around">
-        <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modal-edit-games">Edit games</button>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header bg-space" id="headingTwo"  data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-      <h5 class="mb-0">Remove</h5>
-    </div>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body bg-dark row justify-content-around">
-        <button type="button" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Remove event</button>
-        <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-game">Remove game</button>
-        <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-bracket">Remove bracket</button>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header bg-space" id="headingTwo"  data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
-      <h5 class="mb-0">Tools</h5>
-    </div>
-    <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-      <div class="card-body bg-dark row justify-content-around">
-        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-verification">Verification tool</button>
-        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-admin-tool">Admin tool</button>
-        <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-pwchange">Change password</button>
+        <div class="card">
+          <div class="card-header bg-space" id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <h5 class="mb-0">Add</h5>
+          </div>
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body bg-dark d-flex flex-row justify-content-around">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-events">Add event</button>
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target=".modal-games">Add games</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header bg-space" id="headingOne" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseOne">
+            <h5 class="mb-0">Edit</h5>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body bg-dark row justify-content-around">
+              <button type="button" class="btn btn-warning" data-toggle="modal" data-target=".modal-edit-games">Edit games</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header bg-space" id="headingTwo" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+            <h5 class="mb-0">Remove</h5>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body bg-dark row justify-content-around">
+              <button type="button" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-event">Remove event</button>
+              <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-game">Remove game</button>
+              <button type="submit" class="btn btn-danger col-5 m-1" data-toggle="modal" data-target=".modal-remove-bracket">Remove bracket</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header bg-space" id="headingTwo" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseTwo">
+            <h5 class="mb-0">Tools</h5>
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body bg-dark row justify-content-around">
+              <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-verification">Verification tool</button>
+              <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-admin-tool">Admin tool</button>
+              <button type="button" class="btn btn-warning col-5 m-1" data-toggle="modal" data-target=".modal-pwchange">Change password</button>
 
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
     </div>
 
     <div class="col-lg-7 loggers p-0 col-md-10 m-lg-0">
@@ -73,21 +73,21 @@
         </div>
 
         <table class="table table-dark table-bordered table-sm table-striped table-responsive table-hover">
-    <thead>
-      <tr>
-        <th onclick="loadLogsOrderBy('log_id')" scope="col">Log_id &and;</th>
-        <th onclick="loadLogsOrderBy('uid')" scope="col">User_id</th>
-        <th onclick="loadLogsOrderBy('uname')" scope="col">Username</th>
-        <th onclick="loadLogsOrderBy('log_type')" scope="col">Type</th>
-        <th onclick="loadLogsOrderBy('log_timestamp')" scope="col">Timestamp</th>
-        <th onclick="loadLogsOrderBy('log_userip')" scope="col">User_ip</th>
-      </tr>
-    </thead>
-    <tbody class="logs-body">
-    </tbody>
-  </table>
+          <thead>
+            <tr>
+              <th onclick="loadLogsOrderBy('log_id')" scope="col">Log_id &and;</th>
+              <th onclick="loadLogsOrderBy('uid')" scope="col">User_id</th>
+              <th onclick="loadLogsOrderBy('uname')" scope="col">Username</th>
+              <th onclick="loadLogsOrderBy('log_type')" scope="col">Type</th>
+              <th onclick="loadLogsOrderBy('log_timestamp')" scope="col">Timestamp</th>
+              <th onclick="loadLogsOrderBy('log_userip')" scope="col">User_ip</th>
+            </tr>
+          </thead>
+          <tbody class="logs-body">
+          </tbody>
+        </table>
       </div>
-        </div>
+    </div>
   </section>
 
 
@@ -96,60 +96,60 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Add an Esport event</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post">
-      <input type="hidden" name="event-add">
-  <div class="form-group">
-  <label for="exampleInputEmail1">Event name</label>
-  <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name" required>
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
-      </div>
-      <select class="custom-select" name="eventGame" required>
-        <?php foreach ($games as $game): ?>
-        <option value="<?= $game['game_id']?>"><?= $game['game_name'] ?></option>
-      <?php endforeach; ?>
-      </select>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
-        <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date..." required>
-        <input class="form-control" type="time" name="eventTime" value="" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
-          <input class="form-control" type="text" name="eventPL" value="" required>
+          <h5 class="modal-title">Add an Esport event</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Url</label>
-        <input class="form-control" type="text" name="eventUrl" value="" required>
-      </div>
-    </div>
-</div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Add event</button>
-    </form>
-  </div>
+        <div class="modal-body">
+          <form method="post">
+            <input type="hidden" name="event-add">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Event name</label>
+              <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name" required>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
+                </div>
+                <select class="custom-select" name="eventGame" required>
+                  <?php foreach ($games as $game) : ?>
+                    <option value="<?= $game['game_id'] ?>"><?= $game['game_name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
+                  <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date..." required>
+                  <input class="form-control" type="time" name="eventTime" value="" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
+                    <input class="form-control" type="text" name="eventPL" value="" required>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Url</label>
+                    <input class="form-control" type="text" name="eventUrl" value="" required>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Add event</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -159,47 +159,47 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Add an official event game</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="game-add">
-  <div class="form-group">
-  <label for="exampleInputEmail1">Game name</label>
-  <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" name="mod-gameadd-name">
-  </div>
-  <div class="form-group">
-  <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
-  <input type="text" class="form-control" placeholder="Enter name" name="mod-gameadd-shortname">
-  </div>
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
-      </div>
-      <select class="custom-select" name="mod-gameadd-playerlimit">
-        <option selected value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-    </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Add event</button>
-    </form>
-  </div>
+          <h5 class="modal-title">Add an official event game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="game-add">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Game name</label>
+              <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Enter name" name="mod-gameadd-name">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
+              <input type="text" class="form-control" placeholder="Enter name" name="mod-gameadd-shortname">
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
+                </div>
+                <select class="custom-select" name="mod-gameadd-playerlimit">
+                  <option selected value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                  <option value="9">9</option>
+                  <option value="10">10</option>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Add event</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -208,97 +208,97 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Edit a game</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="game-edit">
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
-      </div>
-      <select class="custom-select" name="edit-game-id" onchange="getGameForm(this.value)">
-        <option selected value="">Choose a game...</option>
-        <?php foreach ($games as $game): ?>
-          <option value="<?=$game['game_id']?>"><?=$game['game_name']?></option>
-        <?php endforeach; ?>
-      </select>
-
-    </div>
-  </div>
-        <div class="live-form-game-update">
-          <input type="hidden" name="game-id" id="game-edit-id" value="">
-          <div class="form-group">
-          <label for="exampleInputEmail1">Game name</label>
-          <input type="text" class="form-control" placeholder="Enter name" id="game-edit-name"  name="mod-gameadd-name" value="">
-          </div>
-          <div class="form-group">
-          <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
-          <input type="text" class="form-control" placeholder="Enter name" id="game-edit-shortname"  name="mod-gameadd-shortname" value="">
-          </div>
-          <div class="form-group">
-          <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text bg-success" style="color:#Fff;">Ruleset</span>
-          </div>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file-ruleset">
-            <label class="custom-file-label">Choose file</label>
-          </div>
-          </div>
-          </div>
-          <div class="form-group">
-          <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text bg-success" style="color:#Fff;">Game background</span>
-          </div>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file-background">
-            <label class="custom-file-label">Choose file</label>
-          </div>
-          </div>
-          </div>
-          <div class="form-group">
-          <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <span class="input-group-text bg-success" style="color:#Fff;">Game icon</span>
-          </div>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file-icon">
-            <label class="custom-file-label">Choose file</label>
-          </div>
-          </div>
-          </div>
-          <div class="form-group">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
-            </div>
-            <select class="custom-select" name="mod-gameadd-playerlimit" id="game-edit-playerlimit">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-          </div>
+          <h5 class="modal-title">Edit a game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-primary">Edit game</button>
-    </form>
-  </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="game-edit">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;">Game</label>
+                </div>
+                <select class="custom-select" name="edit-game-id" onchange="getGameForm(this.value)">
+                  <option selected value="">Choose a game...</option>
+                  <?php foreach ($games as $game) : ?>
+                    <option value="<?= $game['game_id'] ?>"><?= $game['game_name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+
+              </div>
+            </div>
+            <div class="live-form-game-update">
+              <input type="hidden" name="game-id" id="game-edit-id" value="">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Game name</label>
+                <input type="text" class="form-control" placeholder="Enter name" id="game-edit-name" name="mod-gameadd-name" value="">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputEmail1">Game short name (no tabs, spaces, special characters)</label>
+                <input type="text" class="form-control" placeholder="Enter name" id="game-edit-shortname" name="mod-gameadd-shortname" value="">
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-success" style="color:#Fff;">Ruleset</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file-ruleset">
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-success" style="color:#Fff;">Game background</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file-background">
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text bg-success" style="color:#Fff;">Game icon</span>
+                  </div>
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="file-icon">
+                    <label class="custom-file-label">Choose file</label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <label class="input-group-text bg-success" style="color:#FFF;">Team limit</label>
+                  </div>
+                  <select class="custom-select" name="mod-gameadd-playerlimit" id="game-edit-playerlimit">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Edit game</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -307,33 +307,33 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Remove event</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="event-remove">
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Event</label>
-      </div>
-      <select class="custom-select" name="remove-event-id">
-        <option selected>Choose an event...</option>
-        <?php foreach ($events as $event): ?>
-          <option value="<?=$event['event_id']?>"><?=$event['event_name']?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-danger">Remove event</button>
-    </form>
-  </div>
+          <h5 class="modal-title">Remove event</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="event-remove">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;">Event</label>
+                </div>
+                <select class="custom-select" name="remove-event-id">
+                  <option selected>Choose an event...</option>
+                  <?php foreach ($events as $event) : ?>
+                    <option value="<?= $event['event_id'] ?>"><?= $event['event_name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Remove event</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -342,33 +342,33 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Remove event</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="bracket-remove">
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;">Event</label>
-      </div>
-      <select class="custom-select" name="remove-event-id">
-        <option selected>Choose an event...</option>
-        <?php foreach ($events as $event): ?>
-          <option value="<?=$event['event_id']?>"><?=$event['event_name']?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-danger">Remove event bracket</button>
-    </form>
-  </div>
+          <h5 class="modal-title">Remove bracket</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="bracket-remove">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success" style="color:#FFF;">Event</label>
+                </div>
+                <select class="custom-select" name="remove-event-id">
+                  <option selected>Choose a bracket...</option>
+                  <?php foreach ($events as $event) : ?>
+                    <option value="<?= $event['event_id'] ?>"><?= $event['event_name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Remove event bracket</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -377,33 +377,33 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Remove game</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post" enctype="multipart/form-data">
-      <input type="hidden" name="game-remove">
-  <div class="form-group">
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <label class="input-group-text bg-success">Game</label>
-      </div>
-      <select class="custom-select" name="remove-game-id">
-        <option selected>Choose a game...</option>
-        <?php foreach ($games as $game): ?>
-          <option value="<?=$game['game_id']?>"><?=$game['game_name']?></option>
-        <?php endforeach; ?>
-      </select>
-    </div>
-  </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-    <button type="submit" class="btn btn-danger">Remove game</button>
-    </form>
-  </div>
+          <h5 class="modal-title">Remove game</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data">
+            <input type="hidden" name="game-remove">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text bg-success">Game</label>
+                </div>
+                <select class="custom-select" name="remove-game-id">
+                  <option selected>Choose a game...</option>
+                  <?php foreach ($games as $game) : ?>
+                    <option value="<?= $game['game_id'] ?>"><?= $game['game_name'] ?></option>
+                  <?php endforeach; ?>
+                </select>
+              </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-danger">Remove game</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -412,12 +412,12 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Log</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body modal-log-detail-body"></div>
+          <h5 class="modal-title">Log</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body modal-log-detail-body"></div>
       </div>
     </div>
   </div>
@@ -426,28 +426,28 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Verification tool</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post">
-      <input type="hidden" name="user-verification">
-      <select class="form-control" name="UserOrTeam" onchange="changeVerificationSelect(this.value)">
-        <option selected>Choose format...</option>
-        <option value="usr">User</option>
-        <option value="team">Team</option>
-      </select>
-      <div class="form-group w-50 mx-auto">
-        <div class="user-input-group p-1"></div>
-        <div class="livesearch livesearch-verify livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-          <div class="hint hint-verify"></div>
+          <h5 class="modal-title">Verification tool</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-  <button type="submit" class="btn btn-warning" name="button">Verify</button>
-</form>
-  </div>
+        <div class="modal-body">
+          <form method="post">
+            <input type="hidden" name="user-verification">
+            <select class="form-control" name="UserOrTeam" onchange="changeVerificationSelect(this.value)">
+              <option selected>Choose format...</option>
+              <option value="usr">User</option>
+              <option value="team">Team</option>
+            </select>
+            <div class="form-group w-50 mx-auto">
+              <div class="user-input-group p-1"></div>
+              <div class="livesearch livesearch-verify livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
+                <div class="hint hint-verify"></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-warning" name="button">Verify</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -456,31 +456,32 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Change user's password</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <div>
-      <form method="post">
-        <input type="hidden" name="password-change">
-        <div class="form-group">
-          <div class="input-group mb-3">
-              <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hintPw")' type="text" name="user" value="" placeholder="Username#HexId" autocomplete="off">
-          </div>
+          <h5 class="modal-title">Change user's password</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <div class="form-group">
-          <input class="form-control" placeholder="New password" type="password" name="pw" value="">
-        </div>
-        <div class="livesearch livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-          <div class="hintPw"></div>
-        </div>
-    <button type="submit" class="btn btn-warning" name="button">Change password</button>
-  </form>
-    </div>
+        <div class="modal-body">
+          <div>
+            <form method="post">
+              <input type="hidden" name="password-change">
+              <div class="form-group">
+                <div class="input-group mb-3">
+                  <input class="form-control hintable" id="hintable-pw" onkeyup='loadUserLiveText(this.value,"livesearch-changepw", "hintPw", this.id)' type="text" name="user" value="" placeholder="Username#HexId" autocomplete="off">
+                </div>
+              </div>
+              <div class="livesearch livesearch-changepw p-1 mb-3 text-center justify-content-center align-items-center" style="display: none;">
+                <div class="hintPw"></div>
+              </div>
+              <div class="form-group">
+                <input class="form-control" placeholder="New password" type="password" name="pw" value="">
+              </div>
 
-  </div>
+              <button type="submit" class="btn btn-warning" name="button">Change password</button>
+            </form>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>
@@ -489,33 +490,32 @@
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-    <h5 class="modal-title">Admin tool</h5>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    <form method="post">
-      <input type="hidden" name="user-admin-tool">
-      <div class="form-group">
-        <div class="input-group mb-3">
-            <input class="form-control" id="newMessage_username" onkeyup='loadUserLiveText(this.value,"livesearch", "hint")' type="text" name="user-to-admin" value="" placeholder="Username#HexId" autocomplete="off">
+          <h5 class="modal-title">Admin tool</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-      </div>
-      <div class="form-group">
-        <select class="form-control" name="admin-type">
-          <option value="admin">Admin</option>
-          <option value="watchman">Watchman</option>
-        </select>
-      </div>
-      <div class="livesearch livehint-invite p-1 my-1 text-center justify-content-center align-items-center" style="display: none;">
-        <p>Hint:</p>
-        <hr>
-        <div class="hint"></div>
-      </div>
-  <button type="submit" class="btn btn-warning" name="button">Admin this lad</button>
-</form>
-  </div>
+        <div class="modal-body">
+          <form method="post">
+            <input type="hidden" name="user-admin-tool">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <input class="form-control hintable" id="hintable-adm" onkeyup='loadUserLiveText(this.value,"livesearch-adm", "hintAdm", this.id)' type="text" name="user-to-admin" value="" placeholder="Username#HexId" autocomplete="off">
+              </div>
+            </div>
+            <div class="livesearch mb-3 livesearch-adm p-1 text-center justify-content-center align-items-center" style="display: none;">
+              <div class="hintAdm"></div>
+            </div>
+            <div class="form-group">
+              <select class="form-control" name="admin-type">
+                <option value="admin">Admin</option>
+                <option value="watchman">Watchman</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-warning" name="button">Admin this lad</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

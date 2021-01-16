@@ -1,64 +1,66 @@
+for (let i of document.querySelectorAll(".nav-links-selected")) {
+  i.classList.remove("nav-links-selected");
+}
 
-    for (let i of document.querySelectorAll(".nav-links-selected")) {
-      i.classList.remove("nav-links-selected");
-    }
+function setMultAttributes(el, attrs) {
+  for (let i in attrs) {
+    el.setAttribute(i, attrs[i]);
+  }
+}
 
-    function setMultAttributes(el, attrs) {
-      for (let i in attrs) {
-        el.setAttribute(i, attrs[i]);
+function loadUserLiveText(str, livesearchelem, hintelem, inputId) {
+  if (str.length < 3) {
+    document.querySelector(`.${hintelem}`).innerHTML = "";
+    document.querySelector(`.${livesearchelem}`).style.display = "none";
+    return;
+  }
+  fetch(`/api/users/livesearch/${str}`)
+    .then((res) => res.json())
+    .then((hint) => {
+      console.log(hint);
+      document.querySelector(`.${hintelem}`).innerHTML = "";
+      for (let i of hint) {
+        document.querySelector(
+          `.${hintelem}`
+        ).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('${inputId}', '${
+          i.name + "#" + i.hexid
+        }', '${livesearchelem}')">${i.name}</p>`;
       }
-    }
+      document.querySelector(`.${livesearchelem}`).style.display = "flex";
+    })
+    .catch((err) => console.error(err));
+}
 
-    function loadUserLiveText(str, livesearchelem, hintelem) {
-      if (str.length < 3) {
-        document.querySelector("."+hintelem).innerHTML ="";
-        document.querySelector('.'+livesearchelem).style.display = "none";
-        return;
+function loadTeamLiveText(str, livesearchelem, hintelem) {
+  if (str.length < 3) {
+    document.querySelector("." + hintelem).innerHTML = "";
+    document.querySelector("." + livesearchelem).style.display = "none";
+    return;
+  }
+  fetch(`/api/teams/livesearch/${str}`)
+    .then((res) => res.json())
+    .then((hint) => {
+      console.log(hint);
+      document.querySelector("." + hintelem).innerHTML = "";
+      for (let i of hint) {
+        document.querySelector(
+          "." + hintelem
+        ).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('hintable-team', '${i.name}', '${livesearchelem}')">${i.name}</p>`;
       }
-      fetch(`/api/users/livesearch/${str}`)
-      .then(res=>res.json())
-      .then(hint => {
-        console.log(hint);
-        document.querySelector("."+hintelem).innerHTML ="";
-        for (let i of hint) {
-          document.querySelector("."+hintelem).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('newMessage_username', '${i.name+"#"+i.hexid}')">${i.name}</p>`;
-        }
-        document.querySelector('.'+livesearchelem).style.display = "flex";
-      })
-      .catch(err => console.error(err));
-    }
+      document.querySelector("." + livesearchelem).style.display = "flex";
+    })
+    .catch((err) => console.error(err));
+}
 
-    function loadTeamLiveText(str, livesearchelem, hintelem) {
-      if (str.length < 3) {
-        document.querySelector("."+hintelem).innerHTML ="";
-        document.querySelector('.'+livesearchelem).style.display = "none";
-        return;
-      }
-      fetch(`/api/teams/livesearch/${str}`)
-      .then(res=>res.json())
-      .then(hint => {
-        console.log(hint);
-        document.querySelector("."+hintelem).innerHTML ="";
-        for (let i of hint) {
-          document.querySelector("."+hintelem).innerHTML += `<p class="hint-p mb-0 rounded p-2" onclick="selectUser('newMessage_username', '${i.name}')">${i.name}</p>`;
-        }
-        document.querySelector('.'+livesearchelem).style.display = "flex";
-      })
-      .catch(err => console.error(err));
-    }
+function selectUser(elem, str, livesearchelem) {
+  document.querySelector(`#${elem}`).value = str;
+  document.querySelector(`.${livesearchelem}`).style.display = "none";
+}
 
-    function selectUser(elem, str) {
-      document.getElementById(elem).value = str;
-      document.querySelector('.livesearch').style.display = "none";
-    }
+function toggleNav() {
+  if (document.querySelector(".overlay").style.height == "87vh")
+    document.querySelector(".overlay").style.height = "0";
+  else document.querySelector(".overlay").style.height = "87vh";
+}
 
-
-    function toggleNav() {
-      if (document.querySelector(".overlay").style.height == "87vh")
-        document.querySelector(".overlay").style.height = "0";
-      else
-        document.querySelector(".overlay").style.height = "87vh";
-
-    }
-
-    $('.toast').toast('show');
+$(".toast").toast("show");
