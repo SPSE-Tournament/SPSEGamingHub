@@ -101,8 +101,8 @@ abstract class Controller
 
   protected function logDiscord($userId, $usrName, $msg, $type)
   {
-    $disCid = "518187176941453361";
-    $disToken = "_JnUkmYNdw-IAif1GNhsujRSKobCgnWljdcJH2_uE5ygHVR4PdwFK5K_DxFiKlvOOrql";
+    $disCid = $_ENV['DISCORD_CID'];
+    $disToken = $_ENV['DISCORD_TOKEN'];
     $disUsername = "WebLog";
     $URL = "https://discordapp.com/api/webhooks/" . $disCid . "/" . $disToken;
     $PD = array();
