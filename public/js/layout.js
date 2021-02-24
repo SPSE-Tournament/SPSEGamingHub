@@ -58,9 +58,14 @@ function selectUser(elem, str, livesearchelem) {
 }
 
 function toggleNav() {
-  if (document.querySelector(".overlay").style.height == "87vh")
+  const hambImg = document.querySelector(".hamburger img");
+  if (document.querySelector(".overlay").style.height == "87vh") {
     document.querySelector(".overlay").style.height = "0";
-  else document.querySelector(".overlay").style.height = "87vh";
+    hambImg.setAttribute("src", "/public/images/hamburger.svg");
+  } else {
+    document.querySelector(".overlay").style.height = "87vh";
+    hambImg.setAttribute("src", "/public/images/hamburger-opened.svg");
+  }
 }
 
 $(".toast").toast("show");

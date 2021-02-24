@@ -7,12 +7,12 @@
     </div>
   <?php endif; ?>
   <?php foreach ($events as $event) : ?>
-    <article class="event-wrapper d-flex flex-column justify-content-center align-items-center" id="event-<?= $event['event_id'] ?>" style="background-image:url(<?= $event['game_background'] ?>)!important;">
+    <article class="event-wrapper d-flex flex-column justify-content-center  align-items-center" id="event-<?= $event['event_id'] ?>" style="background-image:url(<?= $event['game_background'] ?>)!important;">
       <div class="eventcard-wrapper d-flex flex-column justify-content-center align-items-center">
         <div class="event-icon bg-red-main">
           <img class="m-1" src="<?= $event['game_icon'] ?>" height="60" width="60">
         </div>
-        <section class="eventcard p-4 text-center bg-blue-gray">
+        <section class="eventcard py-4 px-5 text-center bg-blue-gray">
           <a href="events/<?= $event['event_url'] ?>" style="text-decoration: none; color:#fff;">
             <div class="d-flex flex-column justify-content-around align-items-center">
 

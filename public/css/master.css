@@ -50,6 +50,9 @@ textarea {
 form label {
   color: gray;
 }
+.heighter {
+  min-height: 100vh;
+}
 a:hover {
   text-decoration: none !important;
 }
@@ -79,6 +82,9 @@ a:hover {
 }
 .c-text-gray {
   color: var(--text-gray) !important;
+}
+.c-bold {
+  font-weight: 700 !important;
 }
 .b-2-main {
   border: 2px solid var(--red-main);
@@ -184,8 +190,10 @@ a:hover {
 .eventcard {
   border-radius: 10px;
 }
-.eventcard-wrapper:hover {
-  opacity: 0.9;
+.eventcard:hover,
+.event-header:hover {
+  cursor: pointer;
+  box-shadow: 4px 4px 0px var(--red-main);
   transition: all 0.3s ease-out;
 }
 .eventcard h1 {
@@ -273,10 +281,23 @@ a:hover {
   color: #fff;
   transition: all 0.3s ease;
 }
+.hamburger img:hover {
+  cursor: pointer;
+}
 .profile-img:hover {
   opacity: 0.4;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+.first-team-name h5,
+.second-team-name h5 {
+  margin: 0 !important;
+}
+.first-team-name {
+  padding-bottom: 5px;
+}
+.second-team-name {
+  padding-top: 5px;
 }
 .card {
   background-color: transparent !important;
@@ -291,4 +312,13 @@ a:hover {
 }
 .newMsgTxtAr {
   resize: none;
+}
+.input-group-text {
+  border: 1px solid var(--red-main) !important;
+}
+.modal-footer {
+  border-top: 1px solid var(--red-main) !important;
+}
+.modal-header {
+  border-bottom: 1px solid var(--red-main) !important;
 }

@@ -9,10 +9,20 @@ $(".modal-log-detail").on("show.bs.modal", function (event) {
   let logId = $(event.relatedTarget).data("logid");
   fetch(`/api/logs/id/${logId}`)
     .then((res) => res.json())
-    .then((res) => {
+    .then((log) => {
+      const logFormatted = {
+        id: log.log_id,
+        userId: log.uid,
+        userName: log.uname,
+        message: log.log_message,
+        type: log.log_type,
+        timestamp: log.log_timestamp,
+        ip: log.log_userip,
+      };
+
       document.querySelector(
         ".modal-log-detail-body"
-      ).innerHTML = syntaxHighlight(res);
+      ).innerHTML = syntaxHighlight(logFormatted);
     })
     .catch((err) => console.error(err));
 });
@@ -36,7 +46,6 @@ function loadLogsOrderBy(order, direction = "") {
 }
 
 function refreshLogs(logs) {
-  console.log(logs);
   if (logs) {
     const tbody = document.querySelector(".logs-body");
     tbody.innerHTML = "";
