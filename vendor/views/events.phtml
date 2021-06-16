@@ -1,0 +1,134 @@
+<section class="events-wrapper">
+  <?php if (!count($events)): ?>
+    <div class="d-flex justify-content-center align-items-center h-full">
+      <div>
+      <img class="coming-soon" src="public/images/soon.gif" width="350" alt="" style="border-radius:2rem;">
+      </div>
+    </div>
+  <?php endif; ?>
+  <?php foreach($events as $event): ?>
+    <article class="event-wrapper d-flex flex-column justify-content-center align-items-center" id="event-<?=$event['event_id']?>" style="background-image:url(<?=$event['game_background']?>)!important;">
+      <div class="eventcard-wrapper d-flex flex-column justify-content-center align-items-center">
+        <div class="event-icon bg-red-main">
+          <img class="m-1" src="<?=$event['game_icon']?>" height="60" width="60">
+        </div>
+        <section class="eventcard p-4 text-center bg-blue-gray">
+          <a href="events/<?=$event['event_url']?>" style="text-decoration: none; color:#fff;">
+            <div class="d-flex flex-column justify-content-around align-items-center">
+
+              <h1 class="event-name pl-2"><?= $event['event_name'] ?></h1>
+              <div class="d-flex flex-column justify-content-center align-items-center">
+                <div class="row align-items-center">
+                  <img src="/public/images/i-people.png" height="50" width="50" alt=""><h5><?=$event['player_count']?> / <?= $event['event_playerlimit'] ?></h5>
+                </div>
+                <div class="row align-items-center">
+                  <img src="/public/images/i-date.png" height="50" width="50" alt=""><h5><?=$event['event_parseddate']?></h5>
+                </div>
+              </div>
+            </div>
+          </a>
+          <?php if ($event['event_status'] == "scheduled"): ?>
+            <button class="btn btn-main text-huge" type="button" name="button" data-toggle="modal" data-target=".modal-event-join" data-eventid="<?=$event['event_id']?>" data-gameid="<?=$event['game_id']?>" data-eventurl="<?=$event['event_url']?>">JOIN</button>
+          <?php endif; ?>
+        </section>
+      </div>
+      <div class="event-status bg-red-main p-2 row text-light">
+          <?= mb_strtoupper($event['event_status']) ?>
+      </div>
+
+    </article>
+
+  <?php endforeach; ?>
+
+  <div class="modal fade modal-editevent" tabindex="-1" role="dialog" aria-labelledby="..." aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title" style="color:#000;" id="exampleModalCenterTitle">Edit an event</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form method="post">
+      <input type="hidden" name="event-add">
+  <div class="form-group">
+  <label for="exampleInputEmail1">Event name</label>
+  <input type="text" class="form-control" name="eventName" aria-describedby="emailHelp" placeholder="Enter name">
+  </div>
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
+      </div>
+      <select class="custom-select" name="eventGame">
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
+        <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date...">
+        <input class="form-control" type="time" name="eventTime">
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
+          <input class="form-control" type="text" name="eventPL" value="">
+        </div>
+      </div>
+  </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-primary">Add event</button>
+    </form>
+  </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal fade modal-event-join" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+    <h5 class="modal-title">Join an event</h5>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body p-5">
+    <form method="post">
+      <input type="hidden" name="event-join">
+      <input class="event-id-input" type="hidden" name="event-id">
+      <input class="game-id-input" type="hidden" name="game-id">
+      <input class="event-url-input" type="hidden" name="event-url">
+  <div class="form-group">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <label class="input-group-text bg-red-main" style="color:#FFF;">Available teams</label>
+      </div>
+      <select class="custom-select" name="team-id">
+        <?php foreach($userTeams as $team): ?>
+        <option value="<?= $team['team_id']?>"><?= $team['team_name'] ?></option>
+      <?php endforeach; ?>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    <button type="submit" class="btn btn-main">Join an event</button>
+    </form>
+  </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<script src="public/js/eventsmodel.js"></script>

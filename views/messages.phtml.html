@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>
+      /mnt/c/Users/roudnas/Documents/projects/php/spsegaminghub/views/messages.phtml.html
+    </title>
+    <meta name="Generator" content="Vim/8.0" />
+    <meta name="plugin-version" content="vim8.1_v1" />
+    <meta name="syntax" content="php" />
+    <meta
+      name="settings"
+      content="use_css,no_foldcolumn,expand_tabs,prevent_copy="
+    />
+    <meta name="colorscheme" content="onedark" />
+    <style type="text/css">
+      <!--
+      pre { font-family: monospace; color: #000; background-color: #fff; }
+      body { font-family: monospace; color: #000; background-color: #fff; }
+      * { font-size: 1em; }
+      .jsGlobalObjects { color: #d7af87; }
+      .jsOperator { color: #d75fd7; }
+      .jsStorageClass { color: #d75fd7; }
+      .htmlArg { color: #d7875f; }
+      .htmlEndTag { color: #afafaf; }
+      .htmlH1 { color: #ff5f87; }
+      .Conditional { color: #d75fd7; }
+      .jsArrowFunction { color: #d75fd7; }
+      .htmlSpecialTagName { color: #ff5f87; }
+      .Function { color: #00afff; }
+      .jsFuncCall { color: #00afff; }
+      .jsFunction { color: #d75fd7; }
+      .Number { color: #d7875f; }
+      .htmlTag { color: #afafaf; }
+      .htmlTagName { color: #ff5f87; }
+      .String { color: #87d787; }
+      .jsTemplateBraces { color: #ff0000; }
+      -->
+    </style>
+  </head>
+  <body>
+    <pre id="vimCodeElement">
+<span class="htmlTag">&lt;</span><span class="htmlTagName">section</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;text-light px-5 pt-5 d-flex flex-column justify-content-center align-items-center&quot;</span><span class="htmlTag">&gt;</span>
+  <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;messages-wrapper pb-3&quot;</span><span class="htmlTag"> </span><span class="htmlArg">style</span><span class="htmlTag">=</span><span class="String">&quot;filter: blur(0px)&quot;</span><span class="htmlTag">&gt;</span><span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+  <span class="htmlTag">&lt;</span><span class="htmlTagName">button</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;btn btn-main btn-msg full-round&quot;</span><span class="htmlTag"> </span><span class="htmlArg">type</span><span class="htmlTag">=</span><span class="String">&quot;button&quot;</span><span class="htmlTag"> </span><span class="htmlArg">name</span><span class="htmlTag">=</span><span class="String">&quot;button&quot;</span><span class="htmlTag">&gt;</span>
+    <span class="htmlTag">&lt;</span><span class="htmlTagName">h1</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;m-0&quot;</span><span class="htmlTag">&gt;</span><span class="htmlH1">+</span><span class="htmlEndTag">&lt;/</span><span class="htmlTagName">h1</span><span class="htmlEndTag">&gt;</span>
+  <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">button</span><span class="htmlEndTag">&gt;</span>
+  <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;new-message bg-blue-gray p-3 rounded&quot;</span><span class="htmlTag"> </span><span class="htmlArg">style</span><span class="htmlTag">=</span><span class="String">&quot;display: none;&quot;</span><span class="htmlTag">&gt;</span>
+    <span class="htmlTag">&lt;</span><span class="htmlTagName">form</span><span class="htmlTag"> </span><span class="htmlArg">method</span><span class="htmlTag">=</span><span class="String">&quot;POST&quot;</span><span class="htmlTag">&gt;</span>
+      <span class="htmlTag">&lt;</span><span class="htmlTagName">input</span><span class="htmlTag"> </span><span class="htmlArg">type</span><span class="htmlTag">=</span><span class="String">&quot;hidden&quot;</span><span class="htmlTag"> </span><span class="htmlArg">name</span><span class="htmlTag">=</span><span class="String">&quot;send-msg&quot;</span><span class="htmlTag"> </span><span class="htmlArg">value</span><span class="htmlTag">=</span><span class="String">&quot;&quot;</span><span class="htmlTag">&gt;</span>
+      <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;mb-3&quot;</span><span class="htmlTag">&gt;</span>
+        <span class="htmlTag">&lt;</span><span class="htmlTagName">label</span><span class="htmlTag"> </span><span class="htmlArg">for</span><span class="htmlTag">=</span><span class="String">&quot;&quot;</span><span class="htmlTag">&gt;</span>Recipient<span class="htmlEndTag">&lt;/</span><span class="htmlTagName">label</span><span class="htmlEndTag">&gt;</span>
+        <span class="htmlTag">&lt;</span><span class="htmlTagName">input</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;form-control&quot;</span><span class="htmlTag"> </span><span class="htmlArg">id</span><span class="htmlTag">=</span><span class="String">&quot;hintable-msg&quot;</span><span class="htmlTag"> </span><span class="htmlArg">onkeyup</span><span class="htmlTag">=</span><span class="String">'loadUserLiveText(this.value,&quot;livesearch&quot;,&quot;hint&quot;, this.id)'</span><span class="htmlTag"> </span><span class="htmlArg">type</span><span class="htmlTag">=</span><span class="String">&quot;text&quot;</span><span class="htmlTag"> </span><span class="htmlArg">name</span><span class="htmlTag">=</span><span class="String">&quot;recipient&quot;</span><span class="htmlTag"> </span><span class="htmlArg">placeholder</span><span class="htmlTag">=</span><span class="String">&quot;Username#HexId&quot;</span><span class="htmlTag"> </span><span class="htmlArg">autocomplete</span><span class="htmlTag">=</span><span class="String">&quot;off&quot;</span><span class="htmlTag">&gt;</span>
+        <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;livesearch livehint-newmsg col-10 p-2 my-2 justify-content-center mx-auto&quot;</span><span class="htmlTag"> </span><span class="htmlArg">style</span><span class="htmlTag">=</span><span class="String">&quot;display: none;&quot;</span><span class="htmlTag">&gt;</span>
+          <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;hint&quot;</span><span class="htmlTag">&gt;</span>
+          <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+        <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+      <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+      <span class="htmlTag">&lt;</span><span class="htmlTagName">div</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;mb-3&quot;</span><span class="htmlTag">&gt;</span>
+        <span class="htmlTag">&lt;</span><span class="htmlTagName">label</span><span class="htmlTag"> </span><span class="htmlArg">for</span><span class="htmlTag">=</span><span class="String">&quot;exampleInputPassword1&quot;</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;form-label&quot;</span><span class="htmlTag">&gt;</span>Message<span class="htmlEndTag">&lt;/</span><span class="htmlTagName">label</span><span class="htmlEndTag">&gt;</span>
+        <span class="htmlTag">&lt;</span><span class="htmlTagName">textarea</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;form-control newMsgTxtAr&quot;</span><span class="htmlTag"> </span><span class="htmlArg">name</span><span class="htmlTag">=</span><span class="String">&quot;message&quot;</span><span class="htmlTag"> </span><span class="htmlArg">rows</span><span class="htmlTag">=</span><span class="String">&quot;8&quot;</span><span class="htmlTag"> </span><span class="htmlArg">cols</span><span class="htmlTag">=</span><span class="String">&quot;40&quot;</span><span class="htmlTag">&gt;</span><span class="htmlEndTag">&lt;/</span><span class="htmlTagName">textarea</span><span class="htmlEndTag">&gt;</span>
+      <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+      <span class="htmlTag">&lt;</span><span class="htmlTagName">button</span><span class="htmlTag"> </span><span class="htmlArg">type</span><span class="htmlTag">=</span><span class="String">&quot;submit&quot;</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;btn btn-main&quot;</span><span class="htmlTag">&gt;&lt;</span><span class="htmlTagName">img</span><span class="htmlTag"> </span><span class="htmlArg">class</span><span class="htmlTag">=</span><span class="String">&quot;mr-1&quot;</span><span class="htmlTag"> </span><span class="htmlArg">src</span><span class="htmlTag">=</span><span class="String">&quot;<a href="https://img.icons8.com/ios-filled/20/000000/send-letter--v2.png">https://img.icons8.com/ios-filled/20/000000/send-letter--v2.png</a>&quot;</span><span class="htmlTag"> /&gt;</span>SEND<span class="htmlEndTag">&lt;/</span><span class="htmlTagName">button</span><span class="htmlEndTag">&gt;</span>
+    <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">form</span><span class="htmlEndTag">&gt;</span>
+  <span class="htmlEndTag">&lt;/</span><span class="htmlTagName">div</span><span class="htmlEndTag">&gt;</span>
+<span class="htmlEndTag">&lt;/</span><span class="htmlTagName">section</span><span class="htmlEndTag">&gt;</span>
+
+<span class="htmlTag">&lt;</span><span class="htmlSpecialTagName">script</span><span class="htmlTag">&gt;</span>
+  <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;#messagesLink&quot;</span>).classList.<span class="jsFuncCall">add</span>(<span class="String">&quot;nav-links-selected&quot;</span>);
+
+  <span class="jsFunction">function</span> <span class="Function">fetchMessages</span>() {
+    <span class="jsStorageClass">const</span> msgWrp <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.messages-wrapper&quot;</span>);
+
+    <span class="jsGlobalObjects">fetch</span>(<span class="String">'/api/messages/'</span>)
+      .<span class="jsFuncCall">then</span>(response <span class="jsArrowFunction">=&gt;</span> response.<span class="jsFuncCall">json</span>())
+      .<span class="jsFuncCall">then</span>(messages <span class="jsArrowFunction">=&gt;</span> {
+        <span class="Conditional">if</span> (messages.length <span class="jsOperator">&gt;</span> <span class="Number">0</span>) {
+          msgWrp.innerHTML <span class="jsOperator">=</span> <span class="String">&quot;&quot;</span>;
+          messages.<span class="jsFuncCall">forEach</span>(m <span class="jsArrowFunction">=&gt;</span> {
+            <span class="jsStorageClass">let</span> a <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">createElement</span>(<span class="String">&quot;a&quot;</span>);
+            a.<span class="jsFuncCall">setAttribute</span>(<span class="String">&quot;href&quot;</span>, <span class="String">`messages/</span><span class="jsTemplateBraces">${</span>m.message_id<span class="jsTemplateBraces">}</span><span class="String">`</span>);
+            <span class="jsStorageClass">let</span> el <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">createElement</span>(<span class="String">&quot;div&quot;</span>);
+            el.classList.<span class="jsFuncCall">add</span>(<span class="String">&quot;bg-blue-gray&quot;</span>, <span class="String">&quot;p-3&quot;</span>, <span class="String">&quot;m-1&quot;</span>, <span class="String">&quot;rounded&quot;</span>)
+            el.innerHTML <span class="jsOperator">=</span> <span class="String">`From: </span><span class="jsTemplateBraces">${</span>m.user_sendername<span class="jsTemplateBraces">}</span><span class="String"> </span><span class="jsTemplateBraces">${</span>m.message<span class="jsTemplateBraces">}</span><span class="String">`</span>;
+            msgWrp.<span class="jsFuncCall">append</span>(a);
+            a.<span class="jsFuncCall">append</span>(el);
+          })
+          <span class="jsGlobalObjects">console</span>.<span class="jsFuncCall">log</span>(<span class="String">&quot;Fetch:messages&quot;</span>)
+        } <span class="Conditional">else</span> {
+          <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.messages-wrapper&quot;</span>).innerHTML <span class="jsOperator">=</span> <span class="String">&quot;&lt;p&gt;No messages&lt;/p&gt;&quot;</span>
+        }
+      })
+      .<span class="jsFuncCall">catch</span>(err <span class="jsArrowFunction">=&gt;</span> <span class="jsGlobalObjects">console</span>.<span class="jsFuncCall">error</span>(err));
+  }
+
+  <span class="jsFuncCall">fetchMessages</span>();
+  <span class="jsFuncCall">setInterval</span>(fetchMessages, <span class="Number">5000</span>)
+
+
+  <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.btn-msg&quot;</span>).<span class="jsFuncCall">addEventListener</span>(<span class="String">&quot;click&quot;</span>, e <span class="jsArrowFunction">=&gt;</span> {
+    <span class="jsStorageClass">const</span> msgDiv <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.new-message&quot;</span>);
+    <span class="jsStorageClass">const</span> btnDiv <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.btn-msg&quot;</span>);
+    <span class="jsStorageClass">const</span> msgWrp <span class="jsOperator">=</span> <span class="jsGlobalObjects">document</span>.<span class="jsFuncCall">querySelector</span>(<span class="String">&quot;.messages-wrapper&quot;</span>);
+    <span class="Conditional">if</span> (msgDiv.style.display <span class="jsOperator">==</span> <span class="String">&quot;none&quot;</span>) {
+      msgDiv.style.display <span class="jsOperator">=</span> <span class="String">&quot;block&quot;</span>;
+      btnDiv.innerHTML <span class="jsOperator">=</span> <span class="String">&quot;&lt;h1 class='m-0'&gt;&amp;times;&lt;/h1&gt;&quot;</span>;
+      msgWrp.style.filter <span class="jsOperator">=</span> <span class="String">&quot;blur(5px)&quot;</span>;
+    } <span class="Conditional">else</span> {
+      msgDiv.style.display <span class="jsOperator">=</span> <span class="String">&quot;none&quot;</span>;
+      btnDiv.innerHTML <span class="jsOperator">=</span> <span class="String">&quot;&lt;h1 class='m-0'&gt;+&lt;/h1&gt;&quot;</span>;
+      msgWrp.style.filter <span class="jsOperator">=</span> <span class="String">&quot;blur(0px)&quot;</span>;
+    }
+  });
+<span class="htmlEndTag">&lt;/</span><span class="htmlSpecialTagName">script</span><span class="htmlEndTag">&gt;</span>
+</pre>
+  </body>
+</html>
+<!-- vim: set foldmethod=manual : -->

@@ -1,0 +1,90 @@
+  <section class="loginform d-flex justify-content-center align-items-center h-full w-75 mx-auto">
+    <form method="POST">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input type="email" name="email" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter email" value="<?php if(isset($_POST['email'])) : ?><?=$_POST['email']?><?php endif; ?>">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Username</label>
+        <input type="text" name="usrname" class="form-control login-input" aria-describedby="emailHelp" placeholder="Enter username (no special characters)" value="<?php if(isset($_POST['usrname'])) : ?><?=$_POST['usrname']?><?php endif; ?>">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" name="pw" class="form-control login-input" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password again</label>
+        <input type="password" name="pwA" class="form-control login-input" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Enter the current year</label>
+        <input type="text" name="antispam" class="form-control login-input" placeholder="2035">
+      </div>
+      <div class="form-group form-check">
+        <input type="checkbox" class="form-check-input" name="agreement-tos">
+        <label class="form-check-label">I agree with the <a href="" data-toggle="modal" data-target=".tos-modal">terms of service.</a></label>
+        <label for="">Already have an account? <a href="login">Login</a>.</label>
+      </div>
+      <button type="submit" class="btn btn-main">Submit</button>
+    </form>
+  </section>
+
+<div class="modal tos-modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+    <h1 class="modal-title">Website Terms and Conditions of Use</h1>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+<h2>1. Terms</h2>
+
+<p>By accessing this Website, accessible from game.spse.cz, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site. The materials contained in this Website are protected by copyright and trade mark law.</p>
+
+<h2>2. Use License</h2>
+
+<p>Permission is granted to temporarily download one copy of the materials on game.spse.cz's Website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+
+<ul>
+    <li>modify or copy the materials;</li>
+    <li>use the materials for any commercial purpose or for any public display;</li>
+    <li>attempt to reverse engineer any software contained on game.spse.cz's Website;</li>
+    <li>remove any copyright or other proprietary notations from the materials; or</li>
+    <li>transferring the materials to another person or "mirror" the materials on any other server.</li>
+</ul>
+
+<p>This will let game.spse.cz to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.</p>
+
+<h2>3. Disclaimer</h2>
+
+<p>All the materials on game.spse.cz’s Website are provided "as is". game.spse.cz makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, game.spse.cz does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
+
+<h2>4. Limitations</h2>
+
+<p>game.spse.cz or its suppliers will not be hold accountable for any damages that will arise with the use or inability to use the materials on game.spse.cz’s Website, even if game.spse.cz or an authorize representative of this Website has been notified, orally or written, of the possibility of such damage. Some jurisdiction does not allow limitations on implied warranties or limitations of liability for incidental damages, these limitations may not apply to you.</p>
+
+<h2>5. Revisions and Errata</h2>
+
+<p>The materials appearing on game.spse.cz’s Website may include technical, typographical, or photographic errors. game.spse.cz will not promise that any of the materials in this Website are accurate, complete, or current. game.spse.cz may change the materials contained on its Website at any time without notice. game.spse.cz does not make any commitment to update the materials.</p>
+
+<h2>6. Links</h2>
+
+<p>game.spse.cz has not reviewed all of the sites linked to its Website and is not responsible for the contents of any such linked site. The presence of any link does not imply endorsement by game.spse.cz of the site. The use of any linked website is at the user’s own risk.</p>
+
+<h2>7. Site Terms of Use Modifications</h2>
+
+<p>game.spse.cz may revise these Terms of Use for its Website at any time without prior notice. By using this Website, you are agreeing to be bound by the current version of these Terms and Conditions of Use.</p>
+
+<h2>8. Your Privacy</h2>
+
+<p>At the moment game.spse.cz is not using any kind of cookies and the only kind of personal data stored is users' email adress and users' ip adress. By using the site you agree to let us handle this data, game.spse.cz is bound not to sell any private data to a third-party company.</p>
+
+<h2>9. Governing Law</h2>
+
+<p>Any claim related to game.spse.cz's Website shall be governed by the laws of cz without regards to its conflict of law provisions.</p>
+</div>
+    </div>
+  </div>
+</div>

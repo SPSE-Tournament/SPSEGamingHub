@@ -121,7 +121,7 @@
 
 
     public function insertTeam($teamName, $captainId, $gameId):void {
-      $team = array(
+      $team = array( 
         'team_name' => $teamName,
         'team_captain_id' => $captainId,
         'game_id' => $gameId

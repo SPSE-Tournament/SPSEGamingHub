@@ -1,40 +1,40 @@
 <!-- BracketStart -->
 
-  <div class="d-flex flex-wrap justify-content-around bracket">
-    <?php for($i = 0; $i < count($matches); $i++): ?>
-      <div class="each-round">
-        <?php if (isset($matches[$i][0]['match_description'])): ?>
-          <h2 style="color:#adadad;"><?=$matches[$i][0]['match_description'] ?></h2>
-        <?php endif; ?>
-      <?php foreach ($matches[$i] as $match): ?>
-            <div class="eachmatch m-3 bg-space rounded d-inline-flex flex-row justify-content-end align-items-center">
-              <div class="d-flex flex-column flex-fill p-3 mr-auto">
-                <div class="d-flex flex-row align-items-center first-team-name text-center">
-                  <h5><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></h5>
-                </div>
-                <div class="d-flex flex-row align-items-center second-team-name text-center">
-                  <h5><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></h5>
-                </div>
-              </div>
-              <div class="d-flex align-items-center justify-content-center flex-column text-center p-2 bg-red-main rounded">
-                <h2 class="scoreLeft"><?= $match['match_first_team_score'] ?></h2>
-                <h2 class="scoreRight"><?= $match['match_second_team_score'] ?></h2>
-              </div>
+<div class="d-flex flex-wrap justify-content-around bracket">
+  <?php for ($i = 0; $i < count($matches); $i++) : ?>
+    <div class="each-round">
+      <?php if (isset($matches[$i][0]['match_description'])) : ?>
+        <h2 style="color:#adadad;"><?= $matches[$i][0]['match_description'] ?></h2>
+      <?php endif; ?>
+      <?php foreach ($matches[$i] as $match) : ?>
+        <div class="eachmatch m-3 bg-space rounded d-inline-flex flex-row justify-content-end align-items-center">
+          <div class="d-flex flex-column flex-fill p-3 mr-auto">
+            <div class="d-flex flex-row align-items-center first-team-name text-center">
+              <h5><?php if (isset($match['match_first_team_name'])) : ?><?= $match['match_first_team_name'] ?> <?php endif; ?><?php if (!isset($match['match_first_team_name'])) : ?><?= 'freewin/TBD' ?> <?php endif; ?></h5>
             </div>
-            <?php if ($match['match_status'] == 'finished'): ?>
-              <div class="match-status">
-                <img src="public/images/i-ok.png" height="40">
-              </div>
-            <?php endif; ?>
-            <?php if ($_SESSION['logged'] && (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']))): ?>
-              <div class="scorewrite">
-                <button class="btn btn-main" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="public/images/i-score.png"></button>
-              </div>
-            <?php endif; ?>
+            <div class="d-flex flex-row align-items-center second-team-name text-center">
+              <h5><?php if (!isset($match['match_second_team_name'])) : ?><?= 'freewin/TBD' ?> <?php endif; ?><?php if (isset($match['match_second_team_name'])) : ?><?= $match['match_second_team_name'] ?> <?php endif; ?></h5>
+            </div>
+          </div>
+          <div class="d-flex align-items-center justify-content-center flex-column text-center p-2 bg-red-main rounded">
+            <h2 class="scoreLeft"><?= $match['match_first_team_score'] ?></h2>
+            <h2 class="scoreRight"><?= $match['match_second_team_score'] ?></h2>
+          </div>
+        </div>
+        <?php if ($match['match_status'] == 'finished') : ?>
+          <div class="match-status">
+            <img src="public/images/i-ok.png" height="40">
+          </div>
+        <?php endif; ?>
+        <?php if ($_SESSION['logged'] && (($_SESSION['user']['watchman'] || $_SESSION['user']['admin'] || $_SESSION['user']['rootmaster']))) : ?>
+          <div class="scorewrite">
+            <button class="btn btn-main" type="button" data-toggle="modal" data-target=".modal-score-write" data-matchid="<?= $match['match_id'] ?>"><img src="public/images/i-score.png"></button>
+          </div>
+        <?php endif; ?>
       <?php endforeach; ?>
     </div>
-    <?php endfor; ?>
-  </div>
+  <?php endfor; ?>
+</div>
 
 
 

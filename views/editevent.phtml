@@ -8,7 +8,7 @@
   <div class="form-group">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Game</label>
+      <label class="input-group-text bg-red-main" style="color:#FFF;" for="inputGroupSelect01">Game</label>
     </div>
     <select class="custom-select" name="eventGame" required>
       <option value="<?=$event['game_id']?>" selected><?= $event['game_name'] ?></option>
@@ -21,7 +21,7 @@
   <div class="form-group">
   <div class="input-group mb-3">
     <div class="input-group-prepend">
-      <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
+      <label class="input-group-text bg-red-main" style="color:#FFF;" for="inputGroupSelect01">Event Date & Time</label>
       <input class="form-control date-picker mx-1" type="datetime-local" name="eventDate" placeholder="Enter date..." value="<?= $event['event_timestamp'] ?>" required>
       <input class="form-control" type="time" name="eventTime" value="" required>
     </div>
@@ -29,7 +29,7 @@
   <div class="form-group">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
+        <label class="input-group-text bg-red-main" style="color:#FFF;" for="inputGroupSelect01">Event Playerlimit</label>
         <input class="form-control" type="text" name="eventPL" value="<?= $event['event_playerlimit'] ?>" required>
       </div>
     </div>
@@ -37,13 +37,13 @@
   <div class="form-group">
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text bg-success" style="color:#FFF;" for="inputGroupSelect01">Event Url</label>
+        <label class="input-group-text bg-red-main" style="color:#FFF;" for="inputGroupSelect01">Event Url</label>
         <input class="form-control" type="text" name="eventUrl" value="<?= $event['event_url'] ?>" required>
       </div>
     </div>
   </div>
   </div>
-  <button type="submit" class="btn btn-danger">Submit</button>
+  <button type="submit" class="btn btn-main">Submit</button>
   </form>
 
 </section>

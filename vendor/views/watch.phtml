@@ -1,0 +1,22 @@
+<div class="twitch-stream">
+  <div id="twitch-embed"></div>
+</div>
+
+<!-- Load the Twitch embed script -->
+<script src="https://embed.twitch.tv/embed/v1.js"></script>
+
+<!-- Create a Twitch.Embed object that will render within the "twitch-embed" root element. -->
+  <script type="text/javascript">
+   let embed = new Twitch.Embed("twitch-embed", {
+     width: window.innerWidth*.88,
+     height: window.innerHeight*.98,
+     channel: "spsegaming",
+     layout: "video-with-chat",
+     parent: ["spsegamehub.local"]
+   });
+   embed.addEventListener(Twitch.Embed.VIDEO_READY, () => {
+  var player = embed.getPlayer();
+  player.play();
+});
+</script>
+</script>

@@ -1,1 +1,14 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90.19824 89.75771"><defs><style>.cls-1{fill:#fff;}</style></defs><title>hamburger</title><rect class="cls-1" width="90.19824" height="23.56828" rx="11.78413"/><rect class="cls-1" x="20.53965" y="33.09471" width="69.65859" height="23.56828" rx="11.78413"/><rect class="cls-1" x="8.09471" y="66.18943" width="82.10352" height="23.56828" rx="11.78413"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 90.2 89.8" style="enable-background:new 0 0 90.2 89.8;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#E74C3C;}
+</style>
+<path class="st0" d="M11.8,0h66.6c6.5,0,11.8,5.3,11.8,11.8v0c0,6.5-5.3,11.8-11.8,11.8H11.8C5.3,23.6,0,18.3,0,11.8v0
+	C0,5.3,5.3,0,11.8,0z"/>
+<path class="st0" d="M32.3,33.1h46.1c6.5,0,11.8,5.3,11.8,11.8v0c0,6.5-5.3,11.8-11.8,11.8H32.3c-6.5,0-11.8-5.3-11.8-11.8v0
+	C20.5,38.4,25.8,33.1,32.3,33.1z"/>
+<path class="st0" d="M19.9,66.2h58.5c6.5,0,11.8,5.3,11.8,11.8v0c0,6.5-5.3,11.8-11.8,11.8H19.9c-6.5,0-11.8-5.3-11.8-11.8v0
+	C8.1,71.5,13.4,66.2,19.9,66.2z"/>
+</svg>

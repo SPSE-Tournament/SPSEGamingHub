@@ -1,0 +1,42 @@
+<!-- BracketStart -->
+<section>
+  <div class="pl-5 py-1 bg-dark text-center d-flex align-items-center justify-content-center" style="height:10vh;">
+    <h1><?=$event['event_name']?></h1>
+    <input class="event-id-butt" type="hidden" value="<?=$event['event_id']?>">
+  </div>
+  <div class="py-5 bracket-wrapper tab-content-profile text-center d-flex flex-row justify-content-around align-items-center" style="height:90vh;">
+    <?php for($i = 0; $i < count($matches); $i++): ?>
+      <div class="each-round col-3">
+        <?php if (isset($matches[$i][0]['match_description'])): ?>
+          <h2 style="color:#adadad;"><?=$matches[$i][0]['match_description'] ?></h2>
+        <?php endif; ?>
+      <?php foreach ($matches[$i] as $match): ?>
+        <?php if ($match['match_status'] == 'finished'): ?>
+          <div class="match-finished">
+        <?php endif; ?>
+        <div class="eachmatch mx-1 my-2 row justify-content-center align-items-center">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6 d-flex flex-column">
+            <p><?php if (isset($match['match_first_team_name'])): ?><?=$match['match_first_team_name']?> <?php endif;?><?php if (!isset($match['match_first_team_name'])): ?><?='freewin/TBD'?> <?php endif;?></p>
+            <p><?php if (!isset($match['match_second_team_name'])): ?><?='freewin/TBD'?> <?php endif;?><?php if (isset($match['match_second_team_name'])): ?><?=$match['match_second_team_name']?> <?php endif;?></p>
+          </div>
+          <div class="matchScore col-2 d-flex justify-content-center">
+            <h2 class="scoreLeft"><?= $match['match_first_team_score'] ?></h2>
+            <h2 class="scoreRight"><?= $match['match_second_team_score'] ?></h2>
+          </div>
+          <?php if ($match['match_status'] == 'finished'): ?>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-1">
+              <img src="public/images/i-ok.png">
+            </div>
+          <?php endif; ?>
+        </div>
+            <?php if ($match['match_status'] == 'finished'): ?>
+            </div>
+            <?php endif; ?>
+      <?php endforeach; ?>
+    </div>
+    <?php endfor; ?>
+  </div>
+</section>
+
+<script src="/public/js/bracketmodel.js"></script>
+<!-- BracketEnd -->

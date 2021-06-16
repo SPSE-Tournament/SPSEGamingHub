@@ -62,6 +62,16 @@
               }
           }
 
+          public function registerDummyUser() {
+              $this->register(
+                bin2hex(random_bytes(7)),
+                "karel@vomacka.cz",
+                password_hash(bin2hex(random_bytes(10)), PASSWORD_DEFAULT),
+                $this->generateHexId(),
+                1);
+              return Db::getLastId();
+          }
+
           public function requestRegister($name, $email, $pw, $pwA, $yr) {
               $hash = strtoupper(bin2hex(random_bytes(64)));
               $base = $_ENV['BASE'];
