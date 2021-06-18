@@ -35,6 +35,6 @@
     MAIL_USERNAME=mailusername
     MAIL_PW=mailpassword
     ADMIN_IP=11.12.13.14
-    BASE=mydomain.com/
+    BASE=mydomain.com
     DISCORD_CID=
     DISCORD_TOKEN=
