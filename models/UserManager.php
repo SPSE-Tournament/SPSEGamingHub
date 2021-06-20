@@ -143,7 +143,7 @@
           }
 
           public function selectUser($name) {
-            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ?', array($name));
+            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ? OR email = ?', array($name, $name));
           }
 
           public function selectUserHex($hex) {
