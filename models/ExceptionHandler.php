@@ -9,7 +9,7 @@ class ExceptionHandler
 				return $e->getMessage();
 				break;
 			case "UserError":
-				return "UserError";
+				return "UserError: ". $e->getMessage();
 				break;
 			case "PDOException":
 				return "Oops, něco se pokazilo";

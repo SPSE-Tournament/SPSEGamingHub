@@ -58,7 +58,7 @@
               try {
                 Db::insert('users', $user);
               } catch (PDOException $e) {
-                throw new UserError("Uživatel s tímto jménem již existuje.");
+                throw new UserError("Uživatel s tímto jménem již nejspíše existuje.");
               }
           }
 
@@ -133,7 +133,7 @@
           public function login($name, $password) {
             $user = $this->selectUser($name);
             if (!$user || !password_verify($password, $user['password'])) {
-              throw new UserError("Invalid combination.");
+              throw new UserError("Invalid username or password.");
             }
             $_SESSION['user'] = $user;
           }
@@ -143,7 +143,7 @@
           }
 
           public function selectUser($name) {
-            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ? OR email = ?', array($name, $name));
+            return Db::singleQuery('SELECT user_id, name, email, name_r, surname, admin, watchman, rootmaster, password, user_hexid, user_verified FROM users where name = ? or email = ?', array($name, $name));
           }
 
           public function selectUserHex($hex) {
