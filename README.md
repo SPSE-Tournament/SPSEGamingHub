@@ -1,8 +1,30 @@
-# <img style="" src="https://roudnas.cz/assets/logo_100_60.svg" height="60"> SPSEGamingHub
+SPSEGamingHub
 
 #### PHP Based web application made specifically for SPSE Lan Gaming Tournament. @Roudnas
 
 #### Has since been made into a graduation project.
+
+## Docker usage
+
+### SPSEGamingHub
+
+#### Production image
+
+```
+docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/html/.env ghcr.io/spse-tournament/spsegaminghub:master
+```
+
+#### Staging image
+
+```
+docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/html/.env ghcr.io/spse-tournament/spsegaminghub:staging
+```
+
+### Watchtower (optional, for automatic updates)
+
+```
+docker run -d --name watchtower -v /var/run/docker.sock:/var/run/docker.sock --env TZ=Europe/Prague containrrr/watchtower --interval 3600 --cleanup --rolling-restart
+```
 
 ## Stack
 
