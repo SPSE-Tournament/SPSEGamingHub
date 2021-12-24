@@ -11,13 +11,13 @@ SPSEGamingHub
 #### Production image
 
 ```
-docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/html/.env ghcr.io/spse-tournament/spsegaminghub:master
+docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/.env ghcr.io/spse-tournament/spsegaminghub:master
 ```
 
 #### Staging image
 
 ```
-docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/html/.env ghcr.io/spse-tournament/spsegaminghub:staging
+docker run -d --name SPSEGamingHub -p 127.0.0.1:8080:80 -v /path/to/.env:/var/www/.env ghcr.io/spse-tournament/spsegaminghub:staging
 ```
 
 ### Watchtower (optional, for automatic updates)

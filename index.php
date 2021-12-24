@@ -10,7 +10,7 @@ function autoLoad($cls) {
   }
 }
 spl_autoload_register("autoLoad");
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__, 1));
 $dotenv->load();
 Db::connect($_ENV['DB_HOST'], $_ENV['DB_USER'], $_ENV['DB_PW'], $_ENV['DB_DBNAME']);
 $router = new RouterController();
